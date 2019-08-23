@@ -1,0 +1,13 @@
+__pycache__
+*.pyc
+
+*.aux  
+*.log  
+*.out
+*.dvi
+*.fdb_latexmk
+*.fls
+
+*.swp
+*.swo
+
