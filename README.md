@@ -61,10 +61,10 @@ If you have extenuating circumstances, contact me in advance of the due date and
 | 1  | Tues, 3 Sept  | <p>Introduction</p> Examples:<ol><li>[/r/dataisbeautiful](https://www.reddit.com/r/dataisbeautiful/top/)<li>okcupid [pictures](https://theblog.okcupid.com/dont-be-ugly-by-accident-b378f261dea4), [messages](https://theblog.okcupid.com/exactly-what-to-say-in-a-first-message-2bf680806c72), and [lies](https://theblog.okcupid.com/the-big-lies-people-tell-in-online-dating-a9e3990d6ae2)<li>[NLP analysis of net neutrality comments](https://medium.com/hackernoon/more-than-a-million-pro-repeal-net-neutrality-comments-were-likely-faked-e9f0e3ed36a6)<li>[sattelite images of cars affect stock prices](https://theoutline.com/post/1169/jc-penney-satellite-imaging?zd=1&zi=qmayberw)<li>[digitalnk: gender and North Korean posters](https://digitalnk.com/blog/2017/09/30/gender-distribution-in-north-korean-posters/); [posters](https://www.businessinsider.com/kim-jong-il-kim-jong-un-north-korea-propoganda-2011-12)</ol>Ethics:<ol><li>[Target and pregnancy](https://www.nytimes.com/2012/02/19/magazine/shopping-habits.html?pagewanted=1&_r=1&hp)<li>[Data mining algorithms determine prison time](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)<li>[Google Gorilla mistake](https://twitter.com/jackyalcine/status/615329515909156865)</ol> | HW 0 |
 | 1  | Thur, 5 Sept  | Bishop 1.2: Probability Theory Review | |
 | 2  | Tues, 10 Sept | Bishop 1.3-1.6: Introduction to Machine Learning | |
-| 2  | Thur, 12 Sept | Bishop 1.3-1.6: Introduction to Machine Learning | Project (proposal) |
+| 2  | Thur, 12 Sept | Bishop 1.3-1.6: Introduction to Machine Learning | Project (proposal)<br/>HW 1 |
 | 3  | Tues, 17 Sept | **NO CLASS** (Mike at [ECML-PKDD](http://ecmlpkdd2019.org/)) | |
 | 3  | Thur, 19 Sept | **NO CLASS** (Mike at [ECML-PKDD](http://ecmlpkdd2019.org/)) |  |
-| 4  | Tues, 24 Sept | Bishop 3.1: Regression: Linear Regression | HW 1 |
+| 4  | Tues, 24 Sept | Bishop 3.1: Regression: Linear Regression | |
 | 4  | Thur, 26 Sept | Bishop 3.2: Regression: The Bias-Variance Trade-off | Quiz 1 |
 | 5  | Tues, 1 Oct   | Bishop 4.1: Classification: Discriminant Functions | |
 | 5  | Thur, 3 Oct   | Bishop 4.2: Classification: Generative Models | HW 2  |

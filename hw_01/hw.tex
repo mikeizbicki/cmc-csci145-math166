@@ -1,0 +1,282 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\mle}[1]{\hat{#1}_{\textit{mle}}}
+\newcommand{\map}[1]{\hat{#1}_{\textit{map}}}
+\newcommand{\normal}{\mathcal{N}}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\ltwo}[1]{\lVert {#1} \rVert}
+
+%Problem ideas:
+%second derivative of the log-loss
+%calculate the minimum of the OLS objective
+%definition of strictly convex equivalent to second derivative positive semidefinite, first derivative condition
+%jensen's inequality: arithemetic mean never less than geometric mean
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+    {
+\Large
+Homework 1: parameter estimation
+}
+
+    \vspace{0.1in}
+CSCI145/MATH166, Mike Izbicki
+
+    \vspace{0.1in}
+    \textbf{DUE: Thursday, 26 September at the beginning of class}
+
+    \vspace{0.1in}
+\end{center}
+
+\vspace{0.25in}
+\noindent
+Name: 
+
+\noindent
+\rule{\textwidth}{0.1pt}
+\vspace{0.05in}
+
+\noindent
+If you complete this assignment in \LaTeX, then you will receive +2 pts extra credit.
+
+\begin{problem}
+    (10pts) 
+    In class, we computed the maximum likelihood estimator for the mean of a normal distribution.
+    For this problem, you will compute the maximum likelihood estimator for the standard deviation.
+
+    Let $X=\{x_1,...,x_n\}$ be a set of i.i.d.\ normally distributed random variables with mean $\mu$ and standard deviation $\sigma$.
+    Recall that the maximum likelihood estimator of $\mu$ and $\sigma$ is the solution to
+    \begin{equation}
+        \mle\mu, \mle\sigma = \argmax_{\mu,\sigma} p(X | \mu, \sigma^2).
+    \end{equation}
+    Derive a formula for $\mle\sigma$.
+    In your derivation, you may use the fact that $\mle\mu = \tfrac1n\sum_{i=1}^n x_i$ that we proved in class.
+\end{problem}
+
+\newpage
+\begin{problem}
+    \label{prob:poisson}
+    (10pts) 
+    The poisson distribution has density
+    \begin{equation}
+        p(x|\lambda) = \frac{\lambda^x \mathrm{e}^{-\lambda}}{x!}
+        ,
+    \end{equation}
+    where $x$ is a non-negative integer.
+    Let $X=\{x_1,...,x_n\}$ be a set of i.i.d.\ poisson random variables,
+    and calculate the maximum likelihood estimate of $\lambda$.
+\end{problem}
+
+\newpage
+\begin{problem}
+    (10pts) 
+    The exponential distribution has density
+    \begin{equation}
+        p(x|\lambda) =
+        \begin{cases}
+            \lambda \exp(-\lambda x) & \text{if $x\ge0$} \\
+            0 & \text{otherwise}
+        \end{cases}
+        .
+    \end{equation}
+    Let $X=\{x_1,...,x_n\}$ be a set of i.i.d.\ exponentially distributed random variables,
+    and calculate the maximum likelihood estimate of $\lambda$.
+\end{problem}
+
+\newpage
+\noindent
+\textbf{HINT:}
+The following problems are a bit different than the previous problems.
+The normal, poisson, and exponential distributions are all members of the so-called \emph{exponential family} of distributions.
+This family of distributions is called the \emph{exponential} family because the exponential function appears in each of their densities in a special way.
+Section 2.4 of Bishop provides details,
+but the most important property of these distributions is that their maximum likelihood parameter estimates can be entirely characterized by the arithmetic mean of the samples.
+(Hopefully you saw that pattern in your solutions to the previous problems.)
+
+The laplace and power distributions, however, are not a member of the exponential family.
+(The densities contain exponentials, but not in the right way.)
+The maximum likelihood parameter estimate is therefore not related to the arithmetic mean of the samples.
+Instead, it is related to one of the following ``generalized means'': either the geometric mean, harmonic mean, median, or mode.
+Your solution two the next two problems should be related to one of these ``generalized means,''
+and knowing this fact may help perform some of the calculations.
+
+\begin{problem}
+    (10pts) 
+    The power distribution has density
+    \begin{equation}
+        p(x|\theta) = \theta x^{\theta-1}
+        .
+    \end{equation}
+    Calculate the maximum likelihood estimator of $\theta$.
+\end{problem}
+
+\newpage
+\begin{problem}
+    (20pts) 
+    The laplace distribution has density
+    \begin{equation}
+        p(x|\mu,b) = \frac1b \exp\bigg(-\frac{|x-\mu|}{b}\bigg)
+        .
+    \end{equation}
+    Calculate the maximum likelihood estimator of $\mu$ and $b$.
+\end{problem}
+
+\newpage
+\begin{problem}
+    (25pts)
+    We now switch gears to consider \emph{maximum a posteriori} (MAP) estimation.
+
+    Let $X=\{x_1,...,x_n\}$ be i.i.d.\ normally distributed random variables with mean $\mu$ and variance 1, and
+    let the prior distribution over $\mu$ be $\normal(\mu|\mu_0,\sigma_0)$.
+    Recall that the MAP estimate of $\mu$ is 
+    \begin{equation}
+        \map\mu = \argmax_\mu p(\mu|X)
+        .
+    \end{equation}
+    \begin{enumerate}[(a)]
+        \item Derive a formula for $\map\mu$.
+        \vspace{5in}
+        \item Calculate $\displaystyle\lim_{\sigma_0\to\infty}\map\mu$.
+        \vspace{1in}
+        \item Calculate $\displaystyle\lim_{\sigma_0\to0}\map\mu$.
+    \end{enumerate}
+\end{problem}
+
+%\newpage
+%\begin{problem}
+    %(15pts)
+    %Recall that in lecture we discussed that there is a 1-1 correspondence between regularized risk minimization and maximum a posteriori estimation.
+    %Given the following likelihood and prior functions,
+    %calculate the corresponding risk and regularization functions.
+    %\begin{enumerate}[(a)]
+        %\item
+    %\end{enumerate}
+%\end{problem}
+
+\newpage
+\begin{problem}
+    (15pts) 
+    The purpose of this problem is to begin connecting the theoretical frameworks we're developing to a real world application.
+
+    %We have a collection $Y=\{y_1,...,y_m\}$ of newspapers,
+    %and a collection $T=\{t_1,...,t_n\}$ of topics.
+    We have a collection $Y$ of newspapers,
+    and a collection $T$ of topics.
+    For example, the newspapers might be the \emph{Scripps Voice}, the \emph{CMC Forum}, the \emph{Student Life}, and the \emph{Claremont Independent};
+    and the topics might be ``women,'' ``stags,'' ``academics,'' and ``politics.'' 
+    The goal of our analysis is to see which newspapers are most likely to publish stories about which topics.
+    %To perform this analysis, we gather a collection $A$ of articles written by each newspaper.
+
+    Formally, our goal is to calculate
+    \begin{equation}
+        \argmax_y p(Y=y|T=t)
+        \label{eq:argmax}
+    \end{equation}
+    for any topic $t$.
+    For example, we might expect that all four newspapers will write about the topic of ``women'' occasionally,
+    but that the \emph{Scripps Voice} will write about women the most.
+    If this is true, we would have 
+    \begin{equation}
+        \argmax_y p(Y=y|T=\text{women}) = \textit{Scripps Voice}
+        .
+    \end{equation}
+
+    In order to compute \eqref{eq:argmax} for a particular topic,
+    we need to make assumptions about the form of the probability distribution $P(Y|T)$.
+    One possible assumption is that $P(Y|T)$ has what Bishop calls a multinomial distribution.
+    (Other books call this a categorical distribution.)
+    Under this assumption, we have that for each $y\in Y$ and $t\in T$,
+    \begin{equation}
+        p(Y=y|T=t,\mu) = \mu_{y,t},
+        \label{eq:multinomial}
+    \end{equation}
+    where $\mu$ is a $|Y| \times |T|$ dimensional matrix satisfying $\mu_{y,t}\ge0$ for all $y$ and $t$, and $\sum_{y\in Y}^m\mu_{y,t}=1$ for all $t$.
+    \textbf{Note:} Equation \eqref{eq:multinomial} above is equivalent to Equation (2.26) in Bishop,
+    and to complete the rest of this problem you will need to understand why.
+
+    \begin{enumerate}[(a)]
+        \item 
+            We are given a set of $n$ documents.
+            Each document $i$ has been labeled with its topic $t_i$ and its newspaper $y_i$,
+            and we assume these values are sampled i.i.d.\ from $P(Y|T,\mu)$ defined above.
+            What is the maximum likelihood estimator for $\mu$?
+
+            Solving for this maximum likelihood estimator requires a relatively advanced technique called Lagrange multipliers.
+            You may lookup the solution in Bishop section 2.2 and simply report the answer here.
+
+        \newpage
+        \item 
+            Suppose we have a dirichlet prior over $\mu$.
+            Then what is the MAP estimate for $\mu$?
+            As before, this solution requires Lagrange multipliers, 
+            and so you may simply report the solution from Bishop here.
+
+        \vspace{4in}
+        \item
+            There are several other ways we could model the distribution $p(Y|T)$.
+            One other possibility is to use Bayes theorem to show that $p(Y|T)\propto p(T|Y)p(Y)$,
+            and model both $p(T|Y)$ and $p(Y)$ as multinomial distributions. 
+            These are two models are closely related, 
+            but can give different answers to the solution of \eqref{eq:argmax}.
+            Which  of these two models makes the most sense for this problem, and why?
+    \end{enumerate}
+
+\end{problem}
+
+%\newpage
+%\begin{problem}
+    %(15pts)
+    %The editor for a school newspaper wants to predict the number of readers $x$ who will ``like'' a given article on facebook.
+    %The poisson distribution is often used to model the number of times an event occurs,
+    %and so the editor chooses to model $x$ as a poisson distributed random variable.
+    %That is, 
+    %\begin{equation}
+        %p(x|\lambda) = \frac{\lambda^x \mathrm{e}^{-\lambda}}{x!}
+        %,
+    %\end{equation}
+    %In problem \ref{prob:poisson}, you calculated the maximum likelihood estimator for $\lambda$.
+    %The editor, however, is not satisfied with maximum likelihood estimation;
+    %she wants to place a gamma prior on $\lambda$ and perform the MAP estimate.
+    %The gamma distribution has density
+    %\begin{equation}
+        %p(\lambda|\alpha,\beta) = \frac{\beta^\alpha \lambda^{\alpha-1}\exp(-\beta\lambda)}{\Gamma(\alpha)}
+        %,
+    %\end{equation}
+    %where $\Gamma$ is the gamma function.
+%\end{problem}
+
+\end{document}
+
