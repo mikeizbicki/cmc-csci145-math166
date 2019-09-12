@@ -1,8 +1,9 @@
 # Project
 
 **Overview:** 
-You will apply data mining to a dataset of your choice.
-You will write up your results and share them with the world on social media.
+You will apply data mining to a dataset of your choice,
+write up your results,
+and share them with the world on social media.
 This project will teach you about data mining and technical writing,
 and you can add it to your "portfolio" to show future potential employers.
 
@@ -14,7 +15,8 @@ The project is divided into three stages: proposal, checkup, and final submissio
 
 The proposal is due **Tuesday, 1 Oct** at the beginning of class.
 
-The proposal should be no longer than 1 page and contain the following sections:
+The proposal has a written and an oral component.
+The written component should be no longer than 1 page and contain the following sections:
 
 1. Working title
 
@@ -27,6 +29,10 @@ The proposal should be no longer than 1 page and contain the following sections:
 1. Dataset: A 1-2 paragraph description of the dataset you will use.  Be sure to include information about how you will collect the data, and why the dataset will be appropriate for answering your research question.
 
 1. Publication venues: A list of at least 5 social media communities that you believe will be interested in the results of your project, along with a 1 sentence description about why.  Examples include subreddits, websites like hacker news, and communities on twitter.
+
+For the oral component,
+each team will explain to the rest of the class the goals of their project.
+This explanation should be about 1 minute.
 
 ### Checkup
 
