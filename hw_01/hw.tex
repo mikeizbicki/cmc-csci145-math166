@@ -90,14 +90,14 @@ If you complete this assignment in \LaTeX, then you will receive +2 pts extra cr
 \begin{problem}
     \label{prob:poisson}
     (10pts) 
-    The poisson distribution has density
+    If the log of $x$ has a normal distribution,
+    then we say that $x$ has a log-normal distribution.
+    The density is given by
     \begin{equation}
-        p(x|\lambda) = \frac{\lambda^x \mathrm{e}^{-\lambda}}{x!}
-        ,
+        p(x|\mu,\sigma^2) = \frac{1}{x\sigma\sqrt{2\pi}}\exp\bigg(-\frac{(\log x - \mu)^2}{2\sigma^2}\bigg).
     \end{equation}
-    where $x$ is a non-negative integer.
-    Let $X=\{x_1,...,x_n\}$ be a set of i.i.d.\ poisson random variables,
-    and calculate the maximum likelihood estimate of $\lambda$.
+    What is the maximum likelihood estimate of $\mu$?
+    (You do not have to calculate the maximum likelihood estimate of $\sigma$.)
 \end{problem}
 
 \newpage
@@ -117,22 +117,6 @@ If you complete this assignment in \LaTeX, then you will receive +2 pts extra cr
 \end{problem}
 
 \newpage
-\noindent
-\textbf{HINT:}
-The following problems are a bit different than the previous problems.
-The normal, poisson, and exponential distributions are all members of the so-called \emph{exponential family} of distributions.
-This family of distributions is called the \emph{exponential} family because the exponential function appears in each of their densities in a special way.
-Section 2.4 of Bishop provides details,
-but the most important property of these distributions is that their maximum likelihood parameter estimates can be entirely characterized by the arithmetic mean of the samples.
-(Hopefully you saw that pattern in your solutions to the previous problems.)
-
-The laplace and power distributions, however, are not a member of the exponential family.
-(The densities contain exponentials, but not in the right way.)
-The maximum likelihood parameter estimate is therefore not related to the arithmetic mean of the samples.
-Instead, it is related to one of the following ``generalized means'': either the geometric mean, harmonic mean, median, or mode.
-Your solution two the next two problems should be related to one of these ``generalized means,''
-and knowing this fact may help perform some of the calculations.
-
 \begin{problem}
     (10pts) 
     The power distribution has density
@@ -152,6 +136,12 @@ and knowing this fact may help perform some of the calculations.
         .
     \end{equation}
     Calculate the maximum likelihood estimator of $\mu$ and $b$.
+
+    \vspace{0.15in}
+    \noindent
+    \textbf{HINT:}
+    The previous solutions all contained some type of ``average'' of the $x_i$.
+    This one will too, but it's a different type of average than used in the previous solutions.
 \end{problem}
 
 \newpage
@@ -257,6 +247,19 @@ and knowing this fact may help perform some of the calculations.
 \end{problem}
 
 %\newpage
+%\begin{problem}
+    %\label{prob:poisson}
+    %(10pts) 
+    %The poisson distribution has density
+    %\begin{equation}
+        %p(x|\lambda) = \frac{\lambda^x \mathrm{e}^{-\lambda}}{x!}
+        %,
+    %\end{equation}
+    %where $x$ is a non-negative integer.
+    %Let $X=\{x_1,...,x_n\}$ be a set of i.i.d.\ poisson random variables,
+    %and calculate the maximum likelihood estimate of $\lambda$.
+%\end{problem}
+%
 %\begin{problem}
     %(15pts)
     %The editor for a school newspaper wants to predict the number of readers $x$ who will ``like'' a given article on facebook.
