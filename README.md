@@ -67,10 +67,10 @@ If you have extenuating circumstances, contact me in advance of the due date and
 | 4  | Tues, 24 Sept | Bishop 3.1: Regression: Linear Regression | |
 | 4  | Thur, 26 Sept | Bishop 3.2: Regression: The Bias-Variance Trade-off | Quiz 1 |
 | 5  | Tues, 1 Oct   | Bishop 4.1: Classification: Discriminant Functions | |
-| 5  | Thur, 3 Oct   | Bishop 4.2: Classification: Generative Models | HW 2  |
-| 6  | Tues, 8 Oct   | Bishop 4.3: Classification: Discriminative Models | |
-| 6  | Thur, 10 Oct  | Andrew Ng and Michael Jordan's<br/>[On Descriminitive vs Generative Classifiers](https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf) | Quiz 2 |
-| 7  | Tues, 15 Oct  | Text Processing: bag of words, n-gram features, hashing trick | Project (checkup) |
+| 5  | Thur, 3 Oct   | Bishop 4.2: Classification: Generative Models | |
+| 6  | Tues, 8 Oct   | Bishop 4.3: Classification: Discriminative Models | HW 2 |
+| 6  | Thur, 10 Oct  | [Leon Bottou's SGD paper](https://datajobs.com/data-science-repo/Stochastic-Gradient-Descent-[Leon-Bottou].pdf) | |
+| 7  | Tues, 15 Oct  | Text Processing: bag of words, n-gram features, hashing trick | Quiz 2<br/>Project (checkup) |
 | 7  | Thur, 17 Oct  | Text Processing: word2vec | HW 3 |
 | 8  | Tues, 22 Oct  | **NO CLASS** (Fall Break) | |
 | 8  | Thur, 24 Oct  | Text Processing: doc2vec | |
