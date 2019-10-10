@@ -1,0 +1,159 @@
+\documentclass[10pt,fleqn]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{colortbl}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usepackage{tikz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{problem}{Problem}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator*{\E}{\mathbb E}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\wstar}{\w^*}
+\newcommand{\mle}[1]{\hat{#1}_{\textit{mle}}}
+\newcommand{\map}[1]{\hat{#1}_{\textit{map}}}
+\newcommand{\normal}{\mathcal{N}}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\ltwo}[1]{\lVert {#1} \rVert}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+    {
+\Large
+Quiz 2
+}
+
+    \vspace{0.1in}
+CSCI145/MATH166, Mike Izbicki
+
+    \vspace{0.1in}
+\end{center}
+
+\renewcommand{\arraystretch}{3}
+\addtolength{\jot}{1em}
+
+\subsection*{Definitions}
+\begin{align*}
+    z = (x,y) & \sim P(z) \\
+    \hat y &= f_w (x) = f(x;w) \\
+    \mathcal F &= \text{a set of possible functions/models/hypotheses} \\
+    \ell(\hat y, y) &= \text{loss function/cost of choosing wrong model} \\
+    E(f) &= \mathbb E_z \ell(f(x),y) \\
+    E_n(f) &= \frac1n \sum_{i=1}^n \ell(f(x),y) \\
+    f^* &= \argmin_f E(f) \\
+    f^*_{\mathcal F} &= \argmin_{f\in\mathcal F} E(f) \\
+    %f_n &= f_{\hat w_{ML}}, \text{where} \hat w_{ML} = \argmin_w E_n(f) \\
+    f_n &= \argmin_{f\in\mathcal F} E_n(f) \\
+    \tilde f_n &= f_{w_n} \text{where $w_n$ is given by one of the optimization formulas below} \\
+    \gamma_t &= \text{step size of an optimization algorithm at iteration $t$} 
+\end{align*}
+
+\subsection*{Formulas}
+
+Formula for gradient descent (GD):
+\vspace{0.2in}
+\begin{align*}
+    w_{t+1} = \hspace{4in}
+\end{align*}
+\vspace{0.2in}
+
+\noindent
+Formula for stochastic gradient descent (SGD):
+\vspace{0.2in}
+\begin{align*}
+    w_{t+1} = \hspace{4in}
+\end{align*}
+\vspace{0.2in}
+
+\subsection*{The different types of errors}
+\begin{tabular}{
+        !{\color{lightgray}\vrule}l
+        !{\color{lightgray}\vrule}
+        C{1.5in}!{\color{lightgray}\vrule}
+        C{0.75in}!{\color{lightgray}\vrule}
+        C{0.75in}!{\color{lightgray}\vrule}
+        C{0.75in}!{\color{lightgray}\vrule}
+        C{0.75in}!{\color{lightgray}\vrule}
+    }
+    \multicolumn{1}{c}{error type} & 
+    \multicolumn{1}{c}{definition} & 
+    \multicolumn{1}{c}{$n\uparrow$} & 
+    \multicolumn{1}{c}{$d\uparrow$} & 
+    \multicolumn{1}{c}{$|\mathcal F|\uparrow$} & 
+    \multicolumn{1}{c}{compute$\uparrow$} \\
+    \hline
+    bayes error &&&&&\\% & $\downarrow$ & $\downarrow$ & - \\
+    \arrayrulecolor{lightgray}
+    \hline
+    approximation error &&&&&\\% & $\downarrow$ & $\uparrow$ & - \\
+    \hline
+    estimation error &&&&&\\% & $\uparrow$ & $\downarrow$ & - \\
+    \hline
+    optimization error &&&&&\\% & $\uparrow$ & $\uparrow$ & $\downarrow$ \\ 
+    \hline
+    generalization error &&&&&\\% & $\uparrow$ & $\uparrow$ & $\downarrow$ \\ 
+    \hline
+\end{tabular}
+
+\subsection*{Rate of the optimization error}
+\noindent
+You may assume that the estimation error grows as $O(n^{-1/2})$.
+
+\noindent
+\begin{tabular}{!{\color{lightgray}\vrule}l!{\color{lightgray}\vrule}C{1.25in}!{\color{lightgray}\vrule}C{1.25in}!{\color{lightgray}\vrule}C{1.25in}!{\color{lightgray}\vrule}}
+    \multicolumn{1}{c}{Action} & \multicolumn{1}{c}{SGD} & \multicolumn{1}{c}{GD} & \multicolumn{1}{c}{2GD} \\
+    \hline
+    iterations to accuracy $\rho$ & $\frac 1 \rho$ & $\log\frac 1 \rho$& $\log\log\frac 1 \rho$\\% & $\downarrow$ & $\downarrow$ & - \\
+    \arrayrulecolor{lightgray}
+    \hline
+    time per iteration &&&\\% & $\downarrow$ & $\uparrow$ & - \\
+    \hline
+    time to accuracy $\rho$ &&&\\% & $\uparrow$ & $\downarrow$ & - \\
+    \hline
+    time to est.\ error = opt.\ error = $\mathcal E$ &&&\\% & $\uparrow$ & $\uparrow$ & $\downarrow$ \\ 
+    \hline
+\end{tabular}
+
+\vspace{0.25in}
+\noindent
+Which algorithm is typically fastest in small scale learning?
+
+\vspace{0.75in}
+\noindent
+Which algorithm is typically fastest in large scale learning?
+\end{document}
+
+
