@@ -8,7 +8,7 @@
 | Email | mizbicki@cmc.edu |
 | Webpage | [izbicki.me](https://izbicki.me) |
 | Research | Machine Learning (see [izbicki.me/research.html](https://izbicki.me/research.html) for some past projects) |
-| Office | Adams 216 | 
+| Office | Adams 216 |
 | Office Hours | Tuesday/Thursday 2:40-4:10 or by appointment ([see my schedule](https://outlook.office365.com/owa/calendar/45eb28fd4e4f45f4b0d120d17676d937@ClaremontMcKenna.edu/a46ebec5e46b4328abcb964af38795935165582125062542146/calendar.html)) |
 | Fun Facts | grew up in San Clemente, 7 years in the navy, phd/postdoc at UC Riverside, taught in DPRK |
 
@@ -19,7 +19,7 @@ If you want to get lunch, use [my bookings page](https://outlook.office365.com/o
 
 **Learning Objectives:**
 
-1. Understand basic machine learning theory 
+1. Understand basic machine learning theory
     1. algorithms for regression/classification/clustering
     1. the bias/variance trade-off
 1. Understand feature generation methods, especially for analyzing text and social media
@@ -70,10 +70,10 @@ If you have extenuating circumstances, contact me in advance of the due date and
 | 5  | Thur, 3 Oct   | Bishop 4.2: Classification: Generative Models | |
 | 6  | Tues, 8 Oct   | Bishop 4.3: Classification: Discriminative Models | HW 2 |
 | 6  | Thur, 10 Oct  | [Leon Bottou's SGD paper](https://datajobs.com/data-science-repo/Stochastic-Gradient-Descent-[Leon-Bottou].pdf) | |
-| 7  | Tues, 15 Oct  | Text Processing: bag of words, n-gram features, hashing trick | Quiz 2<br/>Project (checkup) |
-| 7  | Thur, 17 Oct  | Text Processing: word2vec | HW 3 |
+| 7  | Tues, 15 Oct  | Text Processing: bag of words, n-gram features, hashing trick<br/>Python NLP libraries: [TextBlob](https://textblob.readthedocs.io/en/dev/), [spacy](https://spacy.io/), [neuralcoref](https://github.com/huggingface/neuralcoref), [NLTK](https://www.nltk.org/), [textstat](https://pypi.org/project/textstat/) | Quiz 2<br/>Project (checkup) |
+| 7  | Thur, 17 Oct  | Text Processing: word2vec | |
 | 8  | Tues, 22 Oct  | **NO CLASS** (Fall Break) | |
-| 8  | Thur, 24 Oct  | Text Processing: doc2vec | |
+| 8  | Thur, 24 Oct  | Text Processing: doc2vec | HW 3 |
 | 9  | Tues, 29 Oct  | Text Processing: exploiting Twitter metadata | |
 | 9  | Thur, 31 Oct  | Text Processing: ??? |  |
 | 10 | Tues, 5 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) | |
