@@ -1,0 +1,159 @@
+<!doctype html>
+<meta charset="utf-8">
+<script src="template.js"></script>
+<script type="text/javascript" async src=img/"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['\\(','\\)']]}
+});
+</script>
+
+<script type="text/front-matter">
+  title: "Article Title"
+  description: "Description of the post"
+  authors:
+  - Mike Izbicki: https://izbicki.me
+  affiliations:
+  - Mathematical Sciences, Claremont McKenna College: https://cmc.edu/math
+</script>
+
+<dt-article>
+<h1>Consortium News Analysis</h1>
+<h2>These are notes about analyzing the student newspapers from the Claremont Colleges</h2>
+<dt-byline></dt-byline>
+
+<h3>The Data</h3>
+<p>The dataset consists of all news articles published online by any of the five Claremont College student newspapers.
+TSL by far publishes the most articles.
+The data was gathered using the <a href='https://github.com/mikeizbicki/NovichenkoBot'>NovichenkoBot</a> web scraper and includes all articles published before 01 October, 2019.
+</p>
+<img class=l-body src=img/num_articles.png >
+<p>
+The following plot shows the number of articles published per year by each of the papers.
+<dt-fn>The Scripps Voice is not included below because they do not include the publication date of articles on their webpage.</dt-fn>
+</p>
+<img class=l-body src=img/articles_per_year.png >
+<p>
+Most of the papers are maintaining a relatively constant publication rate,
+but the CMC Forum appears to be publishing increasingly less.
+The Claremont Independent was founded at about the time the CMC Forum began its publication decline,
+and so likely explanation for the decline is that many of the writers who would have otherwise contributed to the Forum are contributing to the Independent instead.
+</p>
+
+<h3>Writing Style Analysis</h3>
+<p>Compared with TSL, the Claremont Independent uses fewer words in their titles but has longer stories.
+</p>
+<img class=l-body src=img/articles_stats_title_words.png >
+<img class=l-body src=img/articles_stats_body_words.png  >
+<p>
+The Independent also uses a more "academic" and less "journalistic" 'writing style---
+the articles are written at a grade level 2 grades higher than the other newspapers using the Coleman-Liau Index.<dt-fn>
+We measured the articles' writing levels using Python's textstat library.
+The library includes many other measures of readability.
+These measures of readability essentially all agree with the Coleman-Liau Index listed in the main body of the paper,
+but they are slightly more difficult to interpret.
+For completeness, they are reported below.
+<img width=600px src=img/articles_stats_automated_readability_index.png>
+<img width=600px src=img/articles_stats_dale_chall_readability_score.png>
+<img width=600px src=img/articles_stats_flesch_kincaid_grade.png>
+<img width=600px src=img/articles_stats_flesch_reading_ease.png>
+<img width=600px src=img/articles_stats_gunning_fog.png>
+<img width=600px src=img/articles_stats_linsear_write_formula.png>
+<img width=600px src=img/articles_stats_smog_index.png>
+<img width=600px src=img/articles_stats_text_standard.png>
+</dt-fn>
+</p>
+<img class=l-body src=img/articles_stats_coleman_liau_index.png >
+<p>
+This advanced reading level is not due to longer or more complex sentence structures.
+As seen below, the Independent and TSL have similar sentence lengths (TSL is actually slightly longer).
+</p>
+<img class=l-body src=img/articles_stats_body_words_per_body_sentence_count.png >
+<p>
+Instead, it is due to the use of larger, more difficult words.
+he words in the independent average 0.25 more syllables.<dt-fn>This average is calculated after removing stop words, which are words like `a` and `the` which occur commonly in English and have little semantic meaning.</dt-fn> 
+</p>
+<img class=l-body src=img/articles_stats_difficult_words.png >
+<img class=l-body src=img/articles_stats_body_syllable_count_per_(1.0*body_words+0.01).png >
+<!--<p>This is the first paragraph of the article.</p>-->
+<!--<p>We can also cite <dt-cite key="gregor2015draw"></dt-cite> external publications. <dt-fn>This will become a hoverable footnote.</dt-fn></p>-->
+<!--<p>You can include inline math using the dollar sign to get \(x=2\) or the double dollar to get full equations-->
+<!--$$-->
+<!--\ell(\mathbb x;\mathbb w) = \log(1+\exp(\mathbb x^T \mathbb w))-->
+<!--$$-->
+<!--<p>This is a code block, but you should use them very sparingly.</p>-->
+<!--<dt-code block language="javascript">-->
+<!--var x = 25;-->
+<!--function(x){-->
+<!--return x * x;-->
+<!--}-->
+<!--</dt-code>-->
+
+<p>
+Polarity
+</p>
+<img class=l-body src=img/articles_stats_body_polarity.png >
+<img class=l-body src=img/articles_stats_title_polarity.png >
+
+<p>
+The three mosts positive posts from The Golden Antlers:
+<ol>
+    <li><a href='https://www.thegoldenantlers.com/cmc-the-best-god-damn-campus-in-america/'>CMC: The Best God-Damn Campus in America</a></li>
+    <li><a href='https://www.thegoldenantlers.com/impressive-first-year-pomona-class-includes-jesus-christ-himself'>Impressive First-Year Pomona Class Includes Jesus Christ himself</a></li>
+    <li><a href='https://www.thegoldenantlers.com/princeton-review-rates-claremont-mckenna-2-in-best-sat-scandal'>Princeton Review Rates Claremont McKenna “#2” in “Best SAT Scandal”</a></li>
+</ol>
+</p>
+<p>
+And the three most negative:
+<ol>
+    <li><a href='https://www.thegoldenantlers.com/the-honnold-mudd-library-staff-will-no-longer-be-answering-stupid-ass-questions'>The Honnold-Mudd Library Staff Will No Longer be Answering Stupid Ass Questions</a></li>
+    <li><a href='https://www.thegoldenantlers.com/california-faces-worst-drought-in-500-years'>California Faces Worst Drought in 500 Years</a></li>
+    <li><a href='https://www.thegoldenantlers.com/tea-time-turns-violent/?snax_login_popup'>Tea Time turns Violent</a></li>
+</ol>
+</p>
+<p>
+Subjectivity
+</p>
+<img class=l-body src=img/articles_stats_body_subjectivity.png >
+<img class=l-body src=img/articles_stats_title_subjectivity.png >
+
+<h3>Topic Analysis</h3>
+
+<p>Mentions</p>
+<img class=l-body src=img/keywords_rate_claremontindependent.com.png >
+<img class=l-body src=img/keywords_rate_cmcforum.com.png >
+<img class=l-body src=img/keywords_rate_scrippsvoice.com.png >
+<img class=l-body src=img/keywords_rate_thegoldenantlers.com.png >
+<img class=l-body src=img/keywords_rate_tsl.news.png >
+
+<p>Polarities</p>
+<img class=l-body src=img/polarities_claremontindependent.com.png >
+<img class=l-body src=img/polarities_cmcforum.com.png >
+<img class=l-body src=img/polarities_scrippsvoice.com.png >
+<img class=l-body src=img/polarities_thegoldenantlers.com.png >
+<img class=l-body src=img/polarities_tsl.news.png >
+
+<p>Subjectivities</p>
+
+<img class=l-body src=img/subjectivities_claremontindependent.com.png >
+<img class=l-body src=img/subjectivities_cmcforum.com.png >
+<img class=l-body src=img/subjectivities_scrippsvoice.com.png >
+<img class=l-body src=img/subjectivities_thegoldenantlers.com.png >
+<img class=l-body src=img/subjectivities_tsl.news.png >
+
+</dt-article>
+
+<dt-appendix>
+<h3>Appendix Section Title</h3>
+<p>section content<p>
+</dt-appendix>
+
+<script type="text/bibliography">
+  @article{gregor2015draw,
+    title={DRAW: A recurrent neural network for image generation},
+    author={Gregor, Karol and Danihelka, Ivo and Graves, Alex and Rezende, Danilo Jimenez and Wierstra, Daan},
+    journal={arXivreprint arXiv:1502.04623},
+    year={2015},
+    url={https://arxiv.org/pdf/1502.04623.pdf}
+  }
+</script>
