@@ -1,0 +1,294 @@
+Script started on 2019-10-15 13:24:37-0700
+[0;32mlambda-server[0;31m:[0;32m~[0;35m (master=) [0;32m$[0m python3
+Python 3.6.8 (default, Aug 20 2019, 17:12:48) 
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import textblob[1P textblob[1P textblob[1P textblob[C[C[C[C[C[C[C[1P textblob[C[C[C[C[C[C[1P textblob[C[C[C[C[C[1P textblob[C[C[C[Cf textblob[C[C[C[C[Cr textblob[C[C[C[C[C[Co textblob[C[C[C[C[C[C[Cm textblob[C[C[C[C[C[C[C[C[C impoort [K[K[K[Krt TextBlob
+>>> blob=TextBlob()')')I') ')a')m') ')i')n') ')d')a')t')a') ')m')i')n')i')n')g') ')c')l')a')s')s')!')[C[C
+>>> lbo[K[K[Kblob
+TextBlob("I am in data mining class!")
+>>> blob.translate(to='es')
+TextBlob("Estoy en la clase de minería de datos!")
+>>> blob.translate(to='es')[1P')[1P')l')a')
+TextBlob("Dixi ego in notitia metalla genus!")
+>>> blob.translate(to='la').translate('es')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/textblob/blob.py", line 547, in translate
+    from_lang=from_lang, to_lang=to))
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/textblob/translate.py", line 61, in translate
+    self._validate_translation(source, result)
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/textblob/translate.py", line 85, in _validate_translation
+    raise NotTranslated('Translation API returned the input string unchanged.')
+textblob.exceptions.NotTranslated: Translation API returned the input string unchanged.
+>>> blob.translate(to='la').translate('es')[C[C[C[C[Kblob.translate(to='la').translate('es')[C[C[C[C[Kblob.sentiment
+Sentiment(polarity=0.0, subjectivity=0.0)
+>>> blob
+TextBlob("I am in data mining class!")
+>>> blob.sentiment[C[C[C[C[C[C[C[C[K[K[K[K[KTextBlob('Data mining class is the best!')
+TextBlob("Data mining class is the best!")
+>>> TextBlob('Data mining class is the best!')[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+KeyboardInterrupt
+>>> TextBlob('Data mining class is the best!').sentm[Kiment
+Sentiment(polarity=1.0, subjectivity=0.3)
+>>> TextBlob('Data mining class is the best!').sentiment(arg: 1) TextBlob('Data mining class is the best!').sentimment[A[1P>>> TextBlob('Data mining class is the best!').sentiment
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C(arg: 5) TextBlob('Data mining class is the best!').sentimment[A[1P>>> TextBlob('Data mining class is the best!').sentiment
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K(arg: 1) TextBlob('Data mining class is the best!').sentimmen[A[2P>>> TextBlob('Data mining class is the best!').sentimen
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C(arg: 5) TextBlob('Data mining class is the best!').sentimmen[A[2P>>> TextBlob('Data mining class is the best!').sentimen
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+KeyboardInterrupt
+>>> TextBlob('MSFT is my favorite').sentiment
+Sentiment(polarity=0.5, subjectivity=1.0)
+>>> TextBlob('Microsoft is my[K[Kthe best').sentiment
+Sentiment(polarity=1.0, subjectivity=0.3)
+>>> TextBlob('M$S[KFT sucks').sentiment
+Sentiment(polarity=-0.3, subjectivity=0.3)
+>>> TextBlob('M$FT sucks').sentiment[C[1P').sentiment[1P').sentiment[1P').sentiment[1P').sentiment[1P').sentiment[1P').sentiment[1P').sentiment[1P').sentiment[1P').sentiment[1P').sentimentC').sentimentM').sentimentC').sentiment ').sentimentr').sentimenta').sentimentn').sentimentk').sentimente').sentimentd').sentiment ').sentimentb').sentimente').sentiments').sentimentt').sentiment ').sentimentS').sentimentA').sentimentT').sentiment ').sentiments').sentimentc').sentimenta').sentimentn').sentimentd').sentimenta').sentimentl').sentiment
+Sentiment(polarity=1.0, subjectivity=0.3)
+>>> Text[K[K[K[Kfo[Krom textblob import Word
+>>> Word('speling')
+'speling'
+>>> 
+>>> Word('speling').correct()
+'spelling'
+>>> Word('speling').correct()[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[5@(arg: 1)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5@(arg: 5)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5P>>>[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+KeyboardInterrupt
+>>> Word('cat').pluralize()
+'cats'
+>>> Word(oc[K[K'octopus').pluralize()
+'octopodes'
+>>> Word('cat[Kctus').pluralize()
+'cactuss'
+>>> Word('cactus').pluralize().spelling()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Word' object has no attribute 'spelling'
+>>> Word('cactus').pluralize().spelling()[1P()[1P()[1P()[1P()[1P()[1P()[1P()[1P()c()o()r()r()e()c()t()
+'cactus'
+>>> # percent of tweets ht[K[Kthat mention companies that also  mention microsoft
+... 
+>>> Word('companies').singular()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Word' object has no attribute 'singular'
+>>> Word('companies').singular()i()z()e()
+'company'
+>>> Word('companies').singularize()[C[C[C[C[KTextBlob('I am in d[K[K[K[K[K[K[K[K[KStudents are taking data mining.')
+TextBlob("Students are taking data mining.")
+>>> TextBlob('Students are taking data mining.').sentene[Kce s()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'list' object is not callable
+>>> TextBlob('Students are taking data mining.').sentencess()[C[C[K[K
+[Sentence("Students are taking data mining.")]
+>>> TextBlob('Students are taking data mining.').sentencess.singularize()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'singularize'
+>>> TextBlob('Students are taking data mining.').sentencess.singularize()[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+KeyboardInterrupt
+>>> Word('running').lemmative()[C[1P()[1P()[1P()[1P()t()i()v()e()[1P()[1P()z()e()[C
+'running'
+>>> Word('running').lemmatize()')v)')
+'run'
+>>> Word('running').lemmatize('v')[1P').lemmatize('v')[1P').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[C[C[Cs').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+'run'
+>>> Word('runs').lemmatize('v')[1P').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[C[C[C[1P').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[C[C[1P').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[Ca').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[C[Cn').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[C[C[C
+'run'
+>>> Word('ran').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[Cuns').lemmatize('v')[C[C[C[C[C[C[C[C[C[C[C[C[Cning').lemmatize('v'))[K[C[C[C[CTextBlob('Students are taking data mining.').sentencess.singularize()[C[K()[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[13PWord('companies').singularize()[3P()[C[C[C[C# percent of tweets that mention companies that also mmention microsoft[A[C[C[C[C[17PWord('cactus').pluralize().correct()
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cspelling()[K[C[C[C[C[C[C[C[C[C[Coctopus').pluralize()[C[C[C[C[C[C[C[C[C[C[4Pcat').pluralize()[C[C[C[C[C[C[C[C[C[Cspeling').correct()[K[C[C[C[Cfrom textblob import Word[C[C[C[CTextBlob('CMC ranked best SAT scandal').sentiment[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17PM$FT sucks').sentiment[C[C[C[C[C[C[C[C[C[C[C[C[C[CCMC ranked best SAT scandal').sentiment[C[C[C[C[C[C[C[C[C[C[C[C[C[C[17PM$FT sucks').sentiment[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cicrosoft is the best').sentiment[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2PSFT is my favorite').sentiment[C[C[C[C[C[C[C[C[C[C[C[C[C[CData mining class is the best!').sentiment[C[C[C[C[C[C[C[C[C[C[C[C[C[C[11PMSFT is my favorite').sentiment[K[K[K[K[K[K[K[K[K.[Knu[Koun_phrases
+
+**********************************************************************
+  Resource [93mbrown[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('brown')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mcorpora/brown[0m
+
+  Searched in:
+    - '/home/mizbicki/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+Traceback (most recent call last):
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/nltk/corpus/util.py", line 86, in __load
+    root = nltk.data.find('{}/{}'.format(self.subdir, zip_name))
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/nltk/data.py", line 701, in find
+    raise LookupError(resource_not_found)
+LookupError: 
+**********************************************************************
+  Resource [93mbrown[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('brown')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mcorpora/brown.zip/brown/[0m
+
+  Searched in:
+    - '/home/mizbicki/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/textblob/decorators.py", line 35, in decorated
+    return func(*args, **kwargs)
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/textblob/en/np_extractors.py", line 109, in train
+    train_data = nltk.corpus.brown.tagged_sents(categories='news')
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/nltk/corpus/util.py", line 123, in __getattr__
+    self.__load()
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/nltk/corpus/util.py", line 88, in __load
+    raise e
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/nltk/corpus/util.py", line 83, in __load
+    root = nltk.data.find('{}/{}'.format(self.subdir, self.__name))
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/nltk/data.py", line 701, in find
+    raise LookupError(resource_not_found)
+LookupError: 
+**********************************************************************
+  Resource [93mbrown[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('brown')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mcorpora/brown[0m
+
+  Searched in:
+    - '/home/mizbicki/nltk_data'
+    - '/usr/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/textblob/decorators.py", line 24, in __get__
+    value = obj.__dict__[self.func.__name__] = self.func(obj)
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/textblob/blob.py", line 468, in noun_phrases
+    for phrase in self.np_extractor.extract(self.raw)
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/textblob/en/np_extractors.py", line 138, in extract
+    self.train()
+  File "/home/mizbicki/.local/lib/python3.6/site-packages/textblob/decorators.py", line 38, in decorated
+    raise MissingCorpusError()
+textblob.exceptions.MissingCorpusError: 
+Looks like you are missing some required data for this feature.
+
+To download the necessary data, simply run
+
+    python -m textblob.download_corpora
+
+or use the NLTK downloader to download the missing data: http://nltk.org/data.html
+If this doesn't fix the problem, file an issue at https://github.com/sloria/TextBlob/issues.
+
+>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> import nltk
+>>> nltk.download('brown')
+nltk.download('brown')
+
+[nltk_data] Downloading package brown to /home/mizbicki/nltk_data...
+[nltk_data]   Unzipping corpora/brown.zip.
+True
+>>> nltk.download('brown')
+[nltk_data] Downloading package brown to /home/mizbicki/nltk_data...
+[nltk_data]   Package brown is already up-to-date!
+True
+>>> 
+>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> [K>>> nltk.download('brown')[C[C[C[C[11Pimport nltk[C[C[C[CTextBlob('MSFT is my favorite').noun_phrases[C[C[C[Cimport nltk[K[C[C[C[Cnltk.download('brown')[C[C[C[C[11Pimport nltk[C[C[C[CTextBlob('MSFT is my favorite').noun_phrases
+WordList(['msft'])
+>>> TextBlob('MSFT is my favorite').noun_phrases ').noun_phrasesc').noun_phraseso').noun_phrasesm').noun_phrasesp').noun_phrasesa').noun_phrasesn').noun_phrasesy').noun_phrases ').noun_phrases [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci').noun_phrasess[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cn').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C ').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CR').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ce').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cd').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cm').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Co').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cn').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cd').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C,').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C ').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CA').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C').n[1Poun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CW').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CA').noun_phrases[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+WordList(['msft', 'favorite company', 'redmond', 'wa'])
+>>> [K>>> [K>>> import spacy
+>>> nlp=space.load('en_core_web_lg')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'space' is not defined
+>>> nlp=space.load('en_core_web_lg')[1P.load('en_core_web_lg')[C[C[C[C[C[C[C[C[C[C[C[Cy.load('en_core_web_lg')[C[C[C[C[C[C[C[C[C[C[C[C[C
+>>> doc('')D')a')t')a') ')m')i')n')i')n')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')M')i')c')r')o')s')o')f')t') ')i')s') ')t')h')e') ')b')s')[1P')[1P')b')e')s')t') ')c')o')m')p')a')n')y') ')i')n') ')R')e')d')m')o')n')d'),') ')W')A')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'doc' is not defined
+>>> doc('Microsoft is the best company in Redmond, WA')[C=('Microsoft is the best company in Redmond, WA') [A[C[C[C[C[C[C[Cn('Microsoft is the best company in Redmond, WA'))[A[C[C[C[C[C[C[C[Cl('Microsoft is the best company in Redmond, WA')[A[C[C[C[C[C[C[C[Cp('Microsoft is the best company in Redmond, WA')[A[C[C[C[C[C[C[C[C
+
+>>> doc
+Microsoft is the best company in Redmond, WA
+>>> doc.ents
+(Microsoft, Redmond, WA)
+>>> doc.ents[0]
+Microsoft
+>>> doc.ents[0][1P]1]
+Redmond
+>>> doc.ents[1][1P]2]
+WA
+>>> doc.ents[2].label_
+'GPE'
+>>> doc.ents[2].label_[C[1P].label_0].label_
+'ORG'
+>>> doc.ents[0].label_2].label_[K1]0][K[K=nlp('Microsoft is the best company in Redmond, WAA')[1P')[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C')[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C') [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P')
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P'),') ')A')p')p')l')e'),') ')a')n')d') ')F')a')c')e')b')o')o')k') ')m')a')k')e') ')b')u')t')t') ') [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl'))[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Co')a')d')s') ')o')f') ')c')a')s')h').')
+>>> doc.ents
+(Microsoft, Apple, Facebook)
+>>> doc.ents[0].label_
+'ORG'
+>>> doc.ents[0].label_[1P].label_1].label_
+'ORG'
+>>> doc.ents[1].label_[1P].label_2].label_
+'ORG'
+>>> doc.ents[2].label_1].label_0].label_[K=nlp('Microsoft, Apple, and Facebook make butt loaads of cash.')[A(arg: 1) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[C[C[C[C[C[A(arg: 5) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[C[C[C[C[C[K[A(arg: 1) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[C[C[C[C[A(arg: 5) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[C[C[C[C[K[A(arg: 1) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[C[C[C[A(arg: 5) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[C[C[C[K[A(arg: 1) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[C[C[A(arg: 5) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[C[C[K[A(arg: 1) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[C[A(arg: 5) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[C[K[A(arg: 1) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[A(arg: 5) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[C[K[A(arg: 1) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[A(arg: 5) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[C[K[A(arg: 1) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[A(arg: 5) doc=nlp('Microsoft, Apple, and Facebook make but[5@t loa[C[C[C[C[C[A>>> doc=nlp('Microsoft, Apple, and Facebook make butt loa[5P[C[C[C[C[C[K
+KeyboardInterrupt
+>>> doc.ents[2].label_[C[C[C[C[Kdoc.ents[2].label_1].label_0].label_[K=nlp('Microsoft, Apple, and Facebook make butt loaads of cash.')[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cpple, and Facebook make butt load[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Capple, and Facebook make butt loa[1@d[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+>>> doc=nlp('Microsoft, apple, and Facebook make butt loaads of cash.')[A.ents[2].label_[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K
+(Microsoft, apple, Facebook)
+>>> doc.ents=nlp('Microsoft, apple, and Facebook make butt loaads of cash.')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C')[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C') [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P')
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')[1P')M')y') ')s')i')s')t')e')r') ')a')t')e') ')a')n') ')a')p')p')l')e').')
+>>> doc.ents
+()
+>>> doc.ents=nlp('My sister ate an apple.') .')w.')h.')i.')l.')e.') .')w.')o.')r.')k.')i.')n.')g.') .')a.')t.') .') [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CM.'))[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci.')[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cc.')r.')[Co.')s.')o.')f.')t.')
+>>> doc=nlp('My sister ate an apple while working at Micrrosoft.')[A.ents[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C
+(Microsoft,)
+>>> doc.ents=nlp('My sister ate an apple while working at Micrrosoft.') .')a.')n.')d.') .')A.')p.')p.')l.')e.')
+>>> doc=nlp('My sister ate an apple while working at Micrrosoft and Apple.')[A[C[C[C[C[C[C[C.ents[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C
+(Microsoft, Apple)
+>>> doc.ents=nlp('My sister ate an apple while working at Micrrosoft and Apple.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[C[1P.')[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.'[1P)[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.')[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.') [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P.')
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')[1P.')p.')i.')c.')k.')e.')d.') .')a.')p.')p.')l.')e.')
+>>> doc.ents
+()
+>>> doc.ents=nlp('My sister picked apple.')[1Ppple.')Apple.')
+>>> doc=nlp('My sister picked Apple.')[C[C[C[C[C[C[C.ents[K
+(Apple,)
+>>> ip[Kmport neuralcoef[K[Kref
+/usr/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: spacy.morphology.Morphology size changed, may indicate binary 
