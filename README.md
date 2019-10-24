@@ -73,9 +73,9 @@ If you have extenuating circumstances, contact me in advance of the due date and
 | 7  | Tues, 15 Oct  | Text Processing: [bag of words](https://en.wikipedia.org/wiki/Bag-of-words_model#Example_usage:_spam_filtering), [tf-idf](https://skymind.ai/wiki/bagofwords-tf-idf), [n-grams](https://en.wikipedia.org/wiki/N-gram),[hashing trick](https://booking.ai/dont-be-tricked-by-the-hashing-trick-192a6aae3087), [zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law) <br/>Python NLP libraries: [TextBlob](https://textblob.readthedocs.io/en/dev/), [spacy](https://spacy.io/), [neuralcoref](https://github.com/huggingface/neuralcoref), [NLTK](https://www.nltk.org/), [textstat](https://pypi.org/project/textstat/) | Quiz 2<br/>Project (checkup) |
 | 7  | Thur, 17 Oct  | Text Processing: word2vec [high level overview](https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/), [details with math](http://arxiv.org/pdf/1402.3722v1.pdf) | |
 | 8  | Tues, 22 Oct  | **NO CLASS** (Fall Break) | |
-| 8  | Thur, 24 Oct  | Text Processing: doc2vec | HW 3 |
-| 9  | Tues, 29 Oct  | Text Processing: exploiting Twitter metadata | |
-| 9  | Thur, 31 Oct  | Text Processing: ??? |  |
+| 8  | Thur, 24 Oct  | Text Processing: more word2vec | |
+| 9  | Tues, 29 Oct  | Text Processing: doc2vec | HW 3 |
+| 9  | Thur, 31 Oct  | Text Processing: exploiting Twitter metadata |  |
 | 10 | Tues, 5 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) | |
 | 10 | Thur, 7 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) |  |
 | 11 | Tues, 12 Nov  | Bishop 5.1: Feed Forward Neural Networks | HW 4 |

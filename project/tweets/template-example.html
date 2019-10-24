@@ -1,0 +1,79 @@
+<!doctype html>
+<meta charset="utf-8">
+<script src="template.js"></script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['\\(','\\)']]}
+});
+</script>
+
+<script type="text/front-matter">
+  title: "Article Title"
+  description: "Description of the post"
+  authors:
+  - Mike Izbicki: https://izbicki.me
+  affiliations:
+  - Mathematical Sciences, Claremont McKenna College: https://cmc.edu/math
+</script>
+
+<dt-article>
+<h1>Exploring Twitter Data</h1>
+<!--<h2>Place a description of your article here</h2>-->
+<dt-byline></dt-byline>
+<p>
+The folder /data/twitter_claremont on lambda-server contains some example code for working with the twitter data.
+The code filters out all tweets within 1mi of my office. 
+In total, 5306 geolocated tweets were sent from this region last year.
+Since approximately 1% of tweets are geolocated, we estimate that about 500,000 tweets were sent from the Claremont area last year.
+</p>
+<p>
+Here's a plot of the filtered data.
+</p>
+<img class=l-body src=tweets.map.orig.png>
+<p>
+This is nice, but it could be a lot better.
+</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<img class=l-body src=tweets.map.png>
+<p>
+This plot clearly shows the boundaries of the region we're looking at,
+and highlights two important subregions.
+It becomes immediately obvious that most tweets in Claremont are sent from the Village.
+Not shown is that most of the tweets not sent from the village or the colleges are also from other shopping centers;
+very few tweets are sent from residential areas.
+</p>
+<p>
+One tweet was sent only 2.3m from my office chair!
+Here it is:
+<div class=l-body>
+    <center>
+    <blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/flowers?src=hash&amp;ref_src=twsrc%5Etfw">#flowers</a> @ Davidson Lecture Hall <a href="https://t.co/Xusp1ZlKqU">https://t.co/Xusp1ZlKqU</a><img src=flowers.jpg class=l-body></p>&mdash; Leeza (@idybidyladybug) <a href="https://twitter.com/idybidyladybug/status/1108826749356380169?ref_src=twsrc%5Etfw">March 21, 2019</a></blockquote> 
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+    </center>
+</div>
+
+</dt-article>
+
+<dt-appendix>
+</dt-appendix>
+
+<script type="text/bibliography">
+  @article{gregor2015draw,
+    title={DRAW: A recurrent neural network for image generation},
+    author={Gregor, Karol and Danihelka, Ivo and Graves, Alex and Rezende, Danilo Jimenez and Wierstra, Daan},
+    journal={arXivreprint arXiv:1502.04623},
+    year={2015},
+    url={https://arxiv.org/pdf/1502.04623.pdf}
+  }
+</script>
