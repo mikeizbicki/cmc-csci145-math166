@@ -10,6 +10,7 @@ You may complete this assignment in teams of two.
 
 The assignment is divided into several parts,
 and you can choose to complete whichever parts you want depending on the final grade you want.
+The assignment is worth 100 points, and you can earn up to 110.
 
 **Part 1 (60pts):**
 Load a pretrained word2vec model into gensim.
