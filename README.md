@@ -74,7 +74,7 @@ If you have extenuating circumstances, contact me in advance of the due date and
 | 7  | Thur, 17 Oct  | Text Processing: word2vec [high level overview](https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/), [details with math](http://arxiv.org/pdf/1402.3722v1.pdf) | |
 | 8  | Tues, 22 Oct  | **NO CLASS** (Fall Break) | |
 | 8  | Thur, 24 Oct  | Text Processing: more word2vec | |
-| 9  | Tues, 29 Oct  | Text Processing: doc2vec | HW 3 |
+| 9  | Tues, 29 Oct  | Text Processing: [translating with word2vec](https://arxiv.org/abs/1309.4168), [doc2vec](https://arxiv.org/abs/1405.4053), [fastText](https://fasttext.cc) | HW 3 |
 | 9  | Thur, 31 Oct  | Text Processing: exploiting Twitter metadata |  |
 | 10 | Tues, 5 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) | |
 | 10 | Thur, 7 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) |  |
