@@ -2,10 +2,15 @@
 
 The goal of this assignment is to use the word2vec model to learn word embeddings,
 and use those word embeddings to calculate word analogies.
+You may complete this assignment in teams of two.
+
+**Due date:** Tuesday, 12 Nov
+
+### Instructions
+
 The assignment is divided into several parts,
 and you can choose to complete whichever parts you want depending on the final grade you want.
-
-You may complete this assignment in teams of two.
+The assignment is worth 100 points, and you can earn up to 110.
 
 **Part 1 (60pts):**
 Load a pretrained word2vec model into gensim.
