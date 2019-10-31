@@ -75,7 +75,7 @@ If you have extenuating circumstances, contact me in advance of the due date and
 | 8  | Tues, 22 Oct  | **NO CLASS** (Fall Break) | |
 | 8  | Thur, 24 Oct  | Text Processing: more word2vec | |
 | 9  | Tues, 29 Oct  | Text Processing: [translating with word2vec](https://arxiv.org/abs/1309.4168), [doc2vec](https://arxiv.org/abs/1405.4053), [fastText](https://fasttext.cc) | HW 3 |
-| 9  | Thur, 31 Oct  | Text Processing: exploiting Twitter metadata |  |
+| 9  | Thur, 31 Oct  | more word2vec examples: [gender bias](http://wordbias.umiacs.umd.edu/), [racial bias](https://www.pnas.org/content/115/16/E3635/tab-figures-data), [histwords](https://nlp.stanford.edu/projects/histwords/), [temporal word analogies](https://www.aclweb.org/anthology/P17-2071/) [political words](https://arxiv.org/abs/1711.05603)<br/>exploiting Twitter metadata: [trump tweets](http://varianceexplained.org/r/trump-tweets/) |  |
 | 10 | Tues, 5 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) | |
 | 10 | Thur, 7 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) |  |
 | 11 | Tues, 12 Nov  | Bishop 5.1: Feed Forward Neural Networks | HW 4 |
