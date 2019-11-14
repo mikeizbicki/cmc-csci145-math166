@@ -78,16 +78,29 @@ If you have extenuating circumstances, contact me in advance of the due date and
 | 9  | Thur, 31 Oct  | more word2vec examples: [gender bias](http://wordbias.umiacs.umd.edu/), [racial bias](https://www.pnas.org/content/115/16/E3635/tab-figures-data), [histwords](https://nlp.stanford.edu/projects/histwords/), [temporal word analogies](https://www.aclweb.org/anthology/P17-2071/) [political words](https://arxiv.org/abs/1711.05603)<br/>exploiting Twitter metadata: [trump tweets](http://varianceexplained.org/r/trump-tweets/) |  |
 | 10 | Tues, 5 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) | |
 | 10 | Thur, 7 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) |  |
-| 11 | Tues, 12 Nov  | Bishop 5.1: Feed Forward Neural Networks | HW 4 |
-| 11 | Thur, 14 Nov  | Bishop 6.1,6.2: Kernel Methods | Quiz 3 |
-| 12 | Tues, 19 Nov  | Bishop 6.4.1-6.4.3: Gaussian Processes |  |
-| 12 | Thur, 21 Nov  | Bishop 7.1: Support Vector Machines | |
-| 13 | Tues, 26 Nov  | Bishop 9.1: K-Means Clustering | HW 5 |
+| 11 | Tues, 12 Nov  | Linear algebra review | |
+| 11 | Thur, 14 Nov  | Bishop 12.1: The multivariate gaussian / PCA<br>[Lecture Notes from Berkeley](https://people.eecs.berkeley.edu/~jrs/189/lec/08.pdf) | |
+| 12 | Tues, 19 Nov  | Bishop 9.2: Mixtures of Gaussians / k-means clustering | |
+| 12 | Thur, 21 Nov  | Other clustering methods | |
+| 13 | Tues, 26 Nov  | The hashing trick revisited | |
 | 13 | Thur, 28 Nov  | **NO CLASS** (Thanksgiving) |  |
-| 14 | Tues, 3 Dec   | Bishop 9.2: Mixtures of Gaussians |  |
-| 14 | Thur, 5 Dec   | Hierarchical clustering | |
-| 15 | Tues, 10 Dec  | Bishop 12.1: Principle Component Analysis |  |
-| 15 | Thur, 12 Dec  | The hashing trick (revisited) | Quiz 4 |
+| 14 | Tues, 3 Dec   | Bishop 7.1: SVMs | |
+| 14 | Thur, 5 Dec   | Bishop 6.1,6.2: Kernel methods | |
+| 15 | Tues, 10 Dec  | Bishop 5.1: Neural networks | |
+| 15 | Thur, 12 Dec  | Project Presentations | |
+
+<!--
+Bishop 5.1: Feed Forward Neural Networks | HW 4 |
+Bishop 6.1,6.2: Kernel Methods | Quiz 3 |
+Bishop 6.4.1-6.4.3: Gaussian Processes |  |
+Bishop 7.1: Support Vector Machines | |
+Bishop 9.1: K-Means Clustering | HW 5 |
+**NO CLASS** (Thanksgiving) |  |
+Bishop 9.2: Mixtures of Gaussians |  |
+Hierarchical clustering | |
+Bishop 12.1: Principle Component Analysis |  |
+The hashing trick (revisited) | Quiz 4 |
+-->
 
 <!--
 Possible topics:
