@@ -80,9 +80,9 @@ If you have extenuating circumstances, contact me in advance of the due date and
 | 10 | Thur, 7 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) |  |
 | 11 | Tues, 12 Nov  | Linear algebra review | |
 | 11 | Thur, 14 Nov  | Bishop 12.1: The multivariate gaussian / PCA<br>[Lecture Notes from Berkeley](https://people.eecs.berkeley.edu/~jrs/189/lec/08.pdf) | |
-| 12 | Tues, 19 Nov  | Bishop 9.2: Mixtures of Gaussians / k-means clustering | |
-| 12 | Thur, 21 Nov  | Other clustering methods | |
-| 13 | Tues, 26 Nov  | The hashing trick revisited | |
+| 12 | Tues, 19 Nov  | Bishop 12.1: The multivariate gaussian / PCA | |
+| 12 | Thur, 21 Nov  | Bishop 12.1: The multivariate gaussian / PCA | |
+| 13 | Tues, 26 Nov  | Bishop 9.2: Mixtures of Gaussians / k-means clustering | |
 | 13 | Thur, 28 Nov  | **NO CLASS** (Thanksgiving) |  |
 | 14 | Tues, 3 Dec   | Bishop 7.1: SVMs | |
 | 14 | Thur, 5 Dec   | Bishop 6.1,6.2: Kernel methods | |
