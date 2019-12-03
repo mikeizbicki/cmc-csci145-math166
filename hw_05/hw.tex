@@ -1,0 +1,170 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{claim}{Claim}
+\newtheorem{problem}{Problem}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\vv}{\mathbf v}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\ltwo}[1]{\lVert {#1} \rVert}
+
+%Problem ideas:
+%second derivative of the log-loss
+%calculate the minimum of the OLS objective
+%definition of strictly convex equivalent to second derivative positive semidefinite, first derivative condition
+%jensen's inequality: arithemetic mean never less than geometric mean
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+    {
+\Large
+Homework 5: kernels
+}
+
+    \vspace{0.1in}
+CSCI145/MATH166, Mike Izbicki
+
+    \vspace{0.1in}
+    \textbf{DUE: Friday, 20 Dec}
+
+    \vspace{0.1in}
+\end{center}
+
+\vspace{0.25in}
+\noindent
+Name:
+
+\noindent
+\rule{\textwidth}{0.1pt}
+\vspace{0.25in}
+
+\noindent
+If you complete this assignment in \LaTeX, then you will receive +2 pts extra credit.
+
+\vspace{0.25in}
+
+\begin{problem}
+    Prove or provide a counter example for the following claims:
+    \begin{enumerate}
+        \item
+        (5 pts)
+        There exists a matrix that has all positive eigenvalues but has a negative element.
+            \vspace{3in}
+        \item
+        (5 pts)
+        Every matrix with positive entries has positive eigenvalues.
+            \vspace{3in}
+    \end{enumerate}
+\end{problem}
+
+%\begin{problem}
+    %(10 pts)
+    %Let $\x$ be a multivariate random variable with gaussian density $N(x|\mu,\Sigma)$,
+    %where $\Sigma$ is a positive definite matrix with determinant 1.
+    %Let $\vv$ be an eigenvector of $\Sigma$ with corresponding eigenvalue $\lambda$.
+    %Calculate the density and standard deviation of the random variable $\trans{\x}\vv$.
+%\end{problem}
+
+\begin{problem}
+    Prove or disprove each claim:
+    \begin{enumerate}
+        \item (5pts) If $k$ is a kernel function, then $ck$ is also a kernel function for all $c\in\R$.
+            \vspace{2.5in}
+        \item (5pts) If $k_1,k_2$ are kernel functions, then $k_1 + k_2$ is also a kernel function.
+            \vspace{2.5in}
+        \item (5pts) If $k_1,k_2$ are kernel functions, then $k_1 \cdot k_2$ is also a kernel function.
+    \end{enumerate}
+\end{problem}
+\newpage
+
+\begin{problem}
+    (20 pts)
+    Recall that a function $k : \mathcal X^2 \to \R$ is a \emph{kernel function} if there exists a function $\phi : \mathcal X \to \R^{d}$ such that $k(\x_1,\x_2) = \trans{\phi(\x_1)}\phi(\x_2)$.
+    Prove that if $\mathcal X = \R^c$, then $k$ being a kernel function is equivalent to $k$ being positive semi-definite (i.e. $k(\x,\x) \ge 0$ for all $\x\in\mathcal X$).
+    Don't forget to show that the implication goes both ways.
+
+    HINT: We basically proved this in class when we showed that every Gram matrix is positive semi-definite, and every positive semi-definite matrix is a Gram matrix.
+    The proof for this problem follows the exact same structure.
+\end{problem}
+\newpage
+
+%\begin{problem}
+    %(10 pts)
+    %Prove or provide a counter example:
+    %Every positive definite kernel function $k(x,x')$ satisfies the Cauchy-Swartz Inequality
+    %\begin{equation}
+        %k(x_1,x_2)^2 \le k(x_1,x_1) k(x_2,x_2)
+        %.
+    %\end{equation}
+%\end{problem}
+
+\begin{problem}
+    Let $\mathcal H_k$ be the set of kernelized linear classifiers with kernel $k$.
+    That is,
+    \begin{equation}
+        \mathcal H_k = \left\{ \x \mapsto \sign\left( \sum_{i=1}^n \alpha_i k(\x,\x_i) \right) : \alpha \in \R^n \right\}
+    \end{equation}
+    Let $k_d$ denote the polynomial kernel of dimension $d$.
+    That is,
+    \begin{equation}
+        k_d (\x_1,\x_2) = (\trans{\x_1}{\x_2} + c)^d
+        .
+    \end{equation}
+    \begin{enumerate}
+        \item (15 pts)
+            Explain why the approximation error of $\mathcal H_{k_i}$ is less then or equal to the approximation error of $\mathcal H_{k_j}$ for all $i \le j$.
+            \vspace{4in}
+        \item (10 pts)
+            How does increasing the dimension of the polynomial kernel affect the Bayes, estimation, approximation, and generalization errors?
+    \end{enumerate}
+\end{problem}
+\newpage
+
+\begin{problem}
+    You are given a two class classification problem.
+    All data points $\x_i$ with class label $y_i=1$ satisfy $\lVert\x_i\lVert_1 = 1$,
+    and all data points $\x_i$ with class label $y_i=0$ satisfy $\lVert\x_i\lVert_1 = 1-\epsilon$ for some small value of $\epsilon>0$.
+    \begin{enumerate}
+        \item (5pts) Calculate the Bayes error for this problem.
+            \vspace{1in}
+        \item (5pts) Explain why kernelized logistic regression with the polynomial kernel of degree 2 has non-zero approximation error.
+            (A picture explanation is acceptable, you do not need a formal proof.)
+            \vspace{2in}
+        \item (10pts) Design a finite dimensional kernel so that a kernelized logistic regression model will have zero approximation error.
+            \vspace{2in}
+        \item (10pts) The Gaussian kernel also has zero approximation error on this problem.  Which kernel would be better suited to solving this problem, and why?
+    \end{enumerate}
+\end{problem}
+
+\end{document}
+

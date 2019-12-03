@@ -79,12 +79,12 @@ If you have extenuating circumstances, contact me in advance of the due date and
 | 10 | Tues, 5 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) | |
 | 10 | Thur, 7 Nov   | **NO CLASS** (Mike at [CIKM 2019](http://www.cikm2019.net/)) |  |
 | 11 | Tues, 12 Nov  | Linear algebra review | |
-| 11 | Thur, 14 Nov  | Bishop 12.1: The multivariate gaussian / PCA<br>[Lecture Notes from Berkeley](https://people.eecs.berkeley.edu/~jrs/189/lec/08.pdf) | |
+| 11 | Thur, 14 Nov  | Bishop 12.1: The multivariate gaussian / PCA<br>[Lecture Notes from Berkeley](https://people.eecs.berkeley.edu/~jrs/189/lec/08.pdf) | ~~HW 4~~ |
 | 12 | Tues, 19 Nov  | Bishop 12.1: The multivariate gaussian / PCA | |
 | 12 | Thur, 21 Nov  | Bishop 12.1: The multivariate gaussian / PCA<br/><a href='https://colah.github.io/posts/2014-10-Visualizing-MNIST/'>Colah's Visualizing MNIST</a> | |
-| 13 | Tues, 26 Nov  | Bishop 9.2: Mixtures of Gaussians / k-means clustering<br/>Scikit learn <a href='https://scikit-learn.org/stable/auto_examples/linear_model/plot_sparse_logistic_regression_mnist.html'>1</a>, <a href='https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_assumptions.html#sphx-glr-auto-examples-cluster-plot-kmeans-assumptions-py'>2</a>, <a href='https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm_covariances.html#sphx-glr-auto-examples-mixture-plot-gmm-covariances-py'>3</a>, <a href='https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm.html#sphx-glr-auto-examples-mixture-plot-gmm-py'>4</a>, <a href='https://www.naftaliharris.com/blog/visualizing-k-means-clustering/'>visualizing k-means</a> | |
+| 13 | Tues, 26 Nov  | Bishop 9.2: Mixtures of Gaussians / k-means clustering<br/>Scikit learn <a href='https://scikit-learn.org/stable/auto_examples/linear_model/plot_sparse_logistic_regression_mnist.html'>1</a>, <a href='https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_assumptions.html#sphx-glr-auto-examples-cluster-plot-kmeans-assumptions-py'>2</a>, <a href='https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm_covariances.html#sphx-glr-auto-examples-mixture-plot-gmm-covariances-py'>3</a>, <a href='https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm.html#sphx-glr-auto-examples-mixture-plot-gmm-py'>4</a>, <a href='https://www.naftaliharris.com/blog/visualizing-k-means-clustering/'>visualizing k-means</a> | ~~Quiz 3~~ |
 | 13 | Thur, 28 Nov  | **NO CLASS** (Thanksgiving) |  |
-| 14 | Tues, 3 Dec   | Bishop 7.1: SVMs | |
+| 14 | Tues, 3 Dec   | Bishop 7.1: SVMs<br/>[youtube](https://www.youtube.com/watch?v=3liCbRZPrZA), [youtube](https://www.youtube.com/watch?v=ndNE8he7Nnk), [scikit-learn](https://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html) | HW 5 |
 | 14 | Thur, 5 Dec   | Bishop 6.1,6.2: Kernel methods | |
 | 15 | Tues, 10 Dec  | Bishop 5.1: Neural networks | |
 | 15 | Thur, 12 Dec  | Project Presentations | |
