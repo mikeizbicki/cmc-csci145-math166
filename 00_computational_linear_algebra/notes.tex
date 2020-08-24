@@ -65,7 +65,8 @@ Notes: Computational Linear Algebra
 \end{center}
 
 \begin{center}
-\includegraphics[width=0.3\textwidth]{comic}
+\includegraphics[height=1.8in]{comic}
+\includegraphics[height=1.8in]{matrix_transform}
 \end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -312,25 +313,17 @@ This is often referred to as a ``cubic'' runtime because when the multiplied mat
 and thus $m=n=o$,
 the runtime is $O(n^3)$.
 There are good algorithms that take potentially much less time than this,
-and you should read the wikipedia entry:
-%with the best known taking time $O(n^{2.3728639})$.
-%%And yes, that many significant figures is actually necessary,
-%No BLAS implementation that I know of actually implements this algorithm,
-%and Strassen's algorithm with runtime $\Theta(n^{\log_2 7})$ is the most commonly used algorithm.
-%Currently, we know that matrix multiplication takes at least time $\Omega(m^2\log m)$,
-%and it is an open problem what the optimal runtime for matrix multiplication is.
+%and you should read the wikipedia entry:
+with the best known taking time $O(n^{2.373})$.
+%And yes, that many significant figures is actually necessary,
+No BLAS implementation that I know of actually implements this algorithm,
+and Strassen's algorithm with runtime $\Theta(n^{\log_2 7})\approx\Theta(n^{2.807})$ is the most commonly used algorithm.
+Currently, we know that matrix multiplication takes at least time $\Omega(m^2\log m)$,
+and it is an open problem what the optimal runtime for matrix multiplication is.
+The following wikipedia link has more details:
 \begin{quote}
 \url{https://en.wikipedia.org/wiki/Matrix_multiplication#Computational_complexity}
 \end{quote}
-
-\begin{problem}
-    (Optional)
-    Strassen's algorithm is a famous divide and conquer algorithm for fast matrix multiplication.
-    It is the most commonly implemented algorithm in BLAS libraries because it has both good constant factors and good asymptotic performance.
-    Lookup this algorithm and understand why it works.
-    This is a problem that every computer science undergrad should do at some point in their undergrad career.
-    \vspace{4in}
-\end{problem}
 
 For sparse matrices, PyTorch has only limited support for BLAS Level 2/3.
 In particular, PyTorch allows the first matrix to be either sparse or dense,
@@ -338,26 +331,10 @@ but the second matrix must be dense.
 The runtime in the sparse case is $O(\nnz(A)no)$.
 The output is always a dense tensor.
 
-\begin{problem}
-    Many systems that implement sparse matrices offer only limited support in the same way that PyTorch does.
-    The reason is that the sparsity of the matrix product $AB$ is impossible to predict from the sparsity of just $A$ and $B$.
-    In this problem, you will prove this fact by example.
-    Your task is to construct matrices $A$ and $B$ such that
-    \begin{equation}
-        \nnz(AB) = O(1)
-        \qquad
-        \text{and}
-        \qquad
-        \nnz(\trans B \trans A) = O(mno)
-        .
-    \end{equation}
-    \vspace{3in}
-\end{problem}
-
 For both sparse and dense matrices,
 the runtime of computing the transpose is $\Theta(1)$.
-The library does not actually compute the transpose,
-but just stores a flag that the matrix has been transposed.
+%The library does not actually compute the transpose,
+%but just stores a flag that the matrix has been transposed.
 
 \begin{problem}
     What is the runtime of the following expressions?
@@ -390,6 +367,32 @@ but just stores a flag that the matrix has been transposed.
             \vspace{1in}
     \end{enumerate}
 \end{problem}
+
+\begin{problem}
+    Many systems that implement sparse matrices offer only limited support in the same way that PyTorch does.
+    The reason is that the sparsity of the matrix product $AB$ is impossible to predict from the sparsity of just $A$ and $B$.
+    In this problem, you will prove this fact by example.
+    Your task is to construct matrices $A$ and $B$ such that
+    \begin{equation}
+        \nnz(AB) = O(1)
+        \qquad
+        \text{and}
+        \qquad
+        \nnz(\trans B \trans A) = O(mno)
+        .
+    \end{equation}
+    \vspace{3in}
+\end{problem}
+
+\begin{problem}
+    (Optional)
+    Strassen's algorithm is a famous divide and conquer algorithm for fast matrix multiplication.
+    It is the most commonly implemented algorithm in BLAS libraries because it has both good constant factors and good asymptotic performance.
+    Lookup this algorithm and understand why it works.
+    This is a problem that every computer science undergrad should do at some point in their undergrad career.
+    \vspace{4in}
+\end{problem}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -505,6 +508,7 @@ The runtime of computing the top $k$ eigenvectors and eigenvalues is $O(n^2k)$.
     and that's why I didn't ask you to provide that runtime.
 \end{problem}
 
+\newpage
 \begin{problem}
     Let $A : \R^{m \times n}$, $\x : \R^n$, and $\lambda : \R$.
     What is the runtime for computing the following matrix expressions assuming $A$ and $\x$ are dense?
