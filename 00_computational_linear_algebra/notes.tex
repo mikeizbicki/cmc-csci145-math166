@@ -157,13 +157,13 @@ Notes: Computational Linear Algebra
 \begin{tabular}{c c c c c c}
     & f(a,b,c) &~\hspace{0.5in}~$ $~\hspace{0.5in}~& g(a,b,c) &\\
     \hline
-    & $a^2b$ & ~\hspace{0.5in}~$\ne$~\hspace{0.5in}~  & $ab^2$ &  &\\
+    & $ab$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $\Omega(b)$ &  &\\
+    \arrayrulecolor{gray}\hline
+    & $a^2b$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $ab^2$ &  &\\
     \arrayrulecolor{gray}\hline
     & $a\log b$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $a^b$ &  &\\
     \arrayrulecolor{gray}\hline
     & $a^2bc^3$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $a^2b^2c^3$ &  &\\
-    \arrayrulecolor{gray}\hline
-    & $ab$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $b$ &  &\\
     \arrayrulecolor{gray}\hline
     & $\frac ab$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $\frac a {b^2}$ &  &\\
     \arrayrulecolor{gray}\hline
@@ -195,16 +195,20 @@ Notes: Computational Linear Algebra
     Simplify the following expressions:
 
 \begin{enumerate}
-    \item $O\bigg((n^2 + n\log n)(n^3 + \log n)\bigg)$
+    \item $O\bigg(n^3 + 5n^2\log n + \log n \bigg)$
     \vspace{1.5in}
-\item $\Omega\bigg((3.45n + n)(\log n^2)\bigg)$
+\item $O\bigg(ab^2 + 3a^2b + ab + 10b\bigg)$
     \vspace{1.5in}
-\item $\Theta\bigg(n(1 + \log n) + n^{3.2} + \log 2^n\bigg)$
+\item $O\bigg(a + b + c + ab + bc + abc\bigg)$
     \vspace{1.5in}
-\item $O(ab^2 + 3a^2b + ab + 10b)$
+\item $O\bigg(\frac 1 n + \frac 1 {n^2}\bigg)$
     \vspace{1.5in}
-\item $O(a + b + c + ab + bc + abc)$
+\item $O\bigg(\frac 1 n + \frac 1 {nm} + \frac 1 m \bigg)$
     \vspace{1.5in}
+%\item $\Omega\bigg((3.45n + n)(\log n^2)\bigg)$
+    %\vspace{1.5in}
+%\item $\Theta\bigg(n(1 + \log n) + n^{3.2} + \log 2^n\bigg)$
+    %\vspace{1.5in}
 \end{enumerate}
 \end{problem}
 
@@ -244,14 +248,14 @@ the memory usage is $\Theta(mn)$.
     Prove or provide a counter example.
     For both sparse and dense matrices,
     the storage requirements are $O(mn)$.
-    \vspace{1in}
+    \vspace{2in}
 \end{problem}
 
 \begin{problem}
     A computer has 8GB of RAM.
     What is the largest dense vector of 64bit floating point numbers that can fit in memory?
     What about 32bit?
-    \vspace{1in}
+    \vspace{2in}
 \end{problem}
 
 \subsection{BLAS Level 1}
@@ -368,6 +372,7 @@ the runtime of computing the transpose is $\Theta(1)$.
     \end{enumerate}
 \end{problem}
 
+\newpage
 \begin{problem}
     Many systems that implement sparse matrices offer only limited support in the same way that PyTorch does.
     The reason is that the sparsity of the matrix product $AB$ is impossible to predict from the sparsity of just $A$ and $B$.
@@ -396,7 +401,36 @@ the runtime of computing the transpose is $\Theta(1)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{MCOP}
+\subsection{Matrix Chain Ordering Problem (MCOP)}
+
+Matrix multiplication is famously not commutative, but it is associative.
+That is, no matter where you place the parentheses,
+you will get the same answer.
+Computationally, however, some choices of parentheses can be much better than others.
+
+\begin{problem}
+    Let $A : \R^{m\times n}$, $B : \R^{n\times o}$, $C : \R^{o\times p}$.
+
+    \begin{enumerate}
+        \item What is the runtime of computing $(AB)C$?
+            \vspace{2in}
+        \item What is the runtime of computing $A(BC)$?
+            \vspace{2in}
+        \item Under what conditions would you choose the former parenthesization over the latter?
+            \vspace{2in}
+        \newpage
+        \item
+            Recall that in PyTorch, only the first matrix in a matrix multiplication can be sparse,
+            and the second must be dense.
+            It is still possible to compute the product $ABC$ if one of the matrices is dense and the other two are sparse.
+            For example, if $A$ and $B$ are sparse, then the parenthesization $A(BC)$ can be computed in PyTorch.
+            How should you rewrite the multiplication $ABC$ so that it can be computed when both $A$ and $C$ are sparse?
+
+            \noindent
+            Hint: You can swap the order of matrix multiplications by using the fact that for any two matrices $X$ and $Y$, $XY = \trans{(\trans Y \trans X)}$.
+            \vspace{2in}
+    \end{enumerate}
+\end{problem}
 
 The \emph{Matrix Chain Ordering Problem} (MCOP) is the problem of finding the optimal ordering of parentheses for a given sequence of $n$ matrices.
 There is a classic dynamic programming solution to this problem that takes time $\Theta(n^3)$.
@@ -417,31 +451,6 @@ If it's not obvious to you, you should ask and get this clarified.
     \vspace{4in}
 \end{problem}
 
-\begin{problem}
-    Matrix multiplication is famously not commutative, but it is associative.
-    In this problem, we investigate the computational consequences of exploiting this associativity.
-    Let $A : \R^{m\times n}$, $B : \R^{n\times o}$, $C : \R^{o\times p}$.
-
-    \begin{enumerate}
-        \item What is the runtime of computing $(AB)C$?
-            \vspace{1in}
-        \item What is the runtime of computing $A(BC)$?
-            \vspace{1in}
-        \item Under what conditions would you choose the former parenthesization over the latter?
-            \vspace{1in}
-        \item
-            Recall that in PyTorch, only the first matrix in a matrix multiplication can be sparse,
-            and the second must be dense.
-            It is still possible to compute the product $ABC$ if one of the matrices is dense and the other two are sparse.
-            For example, if $A$ and $B$ are sparse, then the parenthesization $A(BC)$ can be computed in PyTorch.
-            How should you rewrite the multiplication $ABC$ so that it can be computed when both $A$ and $C$ are sparse?
-
-            \noindent
-            Hint: You can swap the order of matrix multiplications by using the fact that for any two matrices $X$ and $Y$, $XY = \trans{(\trans Y \trans X)}$.
-            \vspace{2in}
-    \end{enumerate}
-\end{problem}
-
 \newpage
 \begin{problem}
     \label{prob:8}
@@ -450,10 +459,10 @@ If it's not obvious to you, you should ask and get this clarified.
     \begin{enumerate}
         \item
             $\trans \x \x \trans \x \x$?
-            \vspace{1in}
+            \vspace{2in}
         \item
             $\x \trans \x \x \trans \x$?
-            \vspace{1in}
+            \vspace{2in}
     \end{enumerate}
 \end{problem}
 
@@ -468,6 +477,7 @@ If it's not obvious to you, you should ask and get this clarified.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newpage
 \subsection{LAPACK}
 
 LAPACK provides more complex matrix operations than BLAS,
@@ -488,27 +498,27 @@ The runtime of computing the top $k$ eigenvectors and eigenvalues is $O(n^2k)$.
     (Note that the $\ltwo{\cdot}$ and $\lp{\cdot}$ norms are defined differently for matrices than vectors.)
     \begin{enumerate}
         \item $\ltwo{A}$
-            \vspace{1in}
+            \vspace{2in}
         \item $\lp{A}$
-            \vspace{1in}
+            \vspace{2in}
         \item $\lF{A}$
-            \vspace{1in}
+            \vspace{2in}
     \end{enumerate}
 \end{problem}
 
+\newpage
 \begin{problem}
     Use the formulas above to calculate the runtime of computing the following matrix norms.
     \begin{enumerate}
         \item $\ltwo{A}$
-            \vspace{1in}
+            \vspace{2in}
         \item $\lF{A}$
-            \vspace{1in}
+            \vspace{2in}
     \end{enumerate}
     We do not have enough tools yet for calculating the runtime of generic $\lp{\cdot}$ norms,
     and that's why I didn't ask you to provide that runtime.
 \end{problem}
 
-\newpage
 \begin{problem}
     Let $A : \R^{m \times n}$, $\x : \R^n$, and $\lambda : \R$.
     What is the runtime for computing the following matrix expressions assuming $A$ and $\x$ are dense?
