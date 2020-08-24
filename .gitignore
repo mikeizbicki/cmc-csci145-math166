@@ -1,15 +1,10 @@
-__pycache__
-notes
-*.pyc
-
-*.aux  
-*.log  
+*.bbl
+*.log
+*.aux
+*.blg
 *.out
-*.dvi
-*.fdb_latexmk
 *.fls
+*.fdb_latexmk
 
-*.swp
 *.swo
-
-.ipynb_checkpoints
+*.swp

@@ -1,0 +1,361 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{defn}{Definition}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+\Huge
+Notes: Pagerank
+\end{center}
+
+\begin{center}
+\includegraphics[width=\textwidth]{dilbert}
+\end{center}
+
+\section{Pre-lecture Work}
+
+\begin{problem}
+    Matt Cutts was formerly the head of Google's web spam team,
+    and now runs the United States Digital Service (a recently created branch of the US government).
+    Watch his video on ``How Google Search Works.''
+    \begin{quote}
+    \url{https://www.youtube.com/watch?v=KyCYyoGusqs}
+    \end{quote}
+\end{problem}
+
+\begin{problem}
+    Our primary text for this week is \emph{Deeper Inside Pagerank} by Langville and Meyers.
+    Read sections 1, 2, 3, 5.1, 6.1, 6.2, 9, 10.
+    \begin{quote}
+    \url{https://galton.uchicago.edu/~lekheng/meetings/mathofranking/ref/langville.pdf}
+    \end{quote}
+    Based on the reading, define the following terms:
+    \begin{enumerate}
+        \item markov chain
+            \vspace{1in}
+        \item stationary vector
+            \vspace{1in}
+        \item stochastic matrix
+            \vspace{1in}
+        \item irreducible matrix
+            \vspace{1in}
+        \item primitive matrix
+            \vspace{1in}
+        \item aperiodic markov chain
+            \vspace{1in}
+        \item $\p$
+            \vspace{1in}
+        \item $\pb$
+            \vspace{1in}
+        \item $\pbb$
+            \vspace{1in}
+        \item $\pr$
+            \vspace{1in}
+        \item dangling nodes
+            \vspace{1in}
+        \item personalization vector
+            \vspace{1in}
+    \end{enumerate}
+\end{problem}
+
+
+%\begin{problem}
+    %(optional)
+    %Pagerank has many applications outside of web search,
+    %and this problem gives you some additional reading that explores these problems at a high level.
+%
+    %Read the case study on Twitter's WTF system.
+    %And yes, that's it's real name.
+    %\begin{quote}
+    %\url{https://dl.acm.org/doi/10.1145/2488388.2488433}
+    %\end{quote}
+    %For more applications of pagerank outside of web search, read section 4 of ``Pagerank Beyond the Web.''
+    %\begin{quote}
+    %\url{https://arxiv.org/abs/1407.5107}
+    %\end{quote}
+%\end{problem}
+
+\begin{problem}
+    Answer the following questions.
+    \begin{enumerate}
+        \item 
+            Is the matrix $\p$ stochastic? irriducible? primitive?
+            \vspace{2in}
+        \item 
+            Is the matrix $\pb$ stochastic? irriducible? primitive?
+            \vspace{2in}
+        \item 
+            Is the matrix $\pbb$ stochastic? irriducible? primitive?
+            \vspace{2in}
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+    Either prove or give a counterexample to the following claims.
+    \begin{enumerate}
+        \item
+            $\rank(\pbb) = 1$.
+            \vspace{4.5in}
+        \item
+            $\rank(\pbb) = n$.
+            \vspace{4.5in}
+
+        \item
+            The smallest eigenvalue of $\pbb$ is exactly 0.
+            \vspace{3in}
+        \item
+            The largest eigenvalue of $\pbb$ is exactly 1.
+            \vspace{3in}
+        \item
+            The largest eigenvalue of $\p$ is exactly 1.
+            \vspace{3in}
+
+        \item
+            The largest eigenvector of $\p$ is simple.
+            Recall that a simple eigenvalue has multiplicity 1.
+            That is, there is exactly 1 eigenvector with the same eigenvalue.
+            \vspace{3in}
+
+        \item
+            The largest eigenvector of $\pb$ is simple.
+            \vspace{3in}
+
+        \item
+            The largest eigenvector of $\pbb$ is simple.
+            \vspace{3in}
+
+        \item
+            The eigenvectors of $\pbb$ are orthogonal.
+            \vspace{3in}
+
+        \item
+            The eigenvectors of $\pbb\trans\pbb$ are orthogonal.
+            \vspace{3in}
+
+        \item
+            The eigenvectors of $\trans\pbb\pbb$ are orthogonal.
+            \vspace{3in}
+    \end{enumerate}
+\end{problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{Lecture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{problem}
+    The purpose of the pagerank vector $\pr$ is to provide a ranking of of how important a node is.
+    There are many alternative ways to provide such a ranking.
+    One simple alternative is to rank nodes by their in-degree.
+    For ``typical'' graphs, the in-degree ranking and the pagerank ranking will be similar,
+    but there are graphs for which the two rankings can be arbitrarily different from each other.
+
+    Draw a graph such that the top ranked node according to pagerank is the bottom ranked node according to in-degree.
+\end{problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\begin{problem}
+    The beginning of Section 5 shows the following equivalent definitions for the pagerank vector $\pr$:
+    \begin{equation}
+        \trans \pr \pbb = \trans \pr
+        \qquad
+        \text{and}
+        \qquad
+        \trans \pr (\I - \pbb) = \trans{\bm 0}
+        .
+    \end{equation}
+    It should be obvious why these definitions of $\pr$ are equivalent. 
+    Less obvious (and not shown in the paper) is that
+    the following definition is also equivalent.
+    Prove this equivalence.
+
+    \begin{equation}
+        \pr = \argmax_{\w \in \R^d, \ltwo{\w} \le 1} \ltwo{\trans \w \pbb}
+    \end{equation}
+\end{problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\begin{problem}
+    In this question you will calculate the runtime of the power method for computing pagerank.
+    Assume that $P$ is a sparse matrix and that $\pr$ is dense.
+
+    \begin{enumerate}
+        \item
+            Equation 5.1 shows the power method iteration for solving for $\pr$.
+            It is reproduced below
+            \begin{equation}
+                \x^{(k)T}
+                =
+                \alpha \x^{(k-1)T} \p + (\alpha \x^{(k-1)T} \mathbf a + (1-\alpha)) \mathbf v^T
+                .
+                \label{eq:xk}
+            \end{equation}
+            What is the runtime of computing $x^{(k)}$ from $x^{(k-1)}$? % using Equation \eqref{eq:xk} if $\pr$ is stored as a sparse matrix in COO format?
+            \vspace{4in}
+
+        \item 
+            \label{item:2}
+            Given only $\x^{(0)}$, what is the runtime of computing $\x^{(K)}$ by iterating Equation $\eqref{eq:xk}$ $K$ times?
+            \vspace{4in}
+
+        \item
+            \label{item:3}
+            When computing pagerank,
+            we typically do not know the final number of iterations $K$ in advance.
+            Instead, we continue our computation until the following condition is met:
+            \begin{equation}
+                \ltwo { \x^{(k)} - \x^{(k-1)} } \le \epsilon,
+            \end{equation}
+            where $\epsilon$ is a ``small'' number that controls how accurate we want our solution to be.
+            Compute a formula for $K$ as a function of $\epsilon$.
+            \vspace{4in}
+
+        \item
+            Substitute your answer for part \ref{item:3} into your answer for part \ref{item:2} to get a formula for the overall runtime in terms of the final desired accuracy $\epsilon$.
+            \vspace{4in}
+
+        \item
+            Now assume that $\pbb$ is stored as a dense matrix.
+            Repeat the calculations for the runtime of the power method in terms of the desired accuracy $\epsilon$.
+            \vspace{4in}
+
+        \item
+            We say that an algorithm for computing the pagerank \emph{converges} if in the limit as the number of iterations goes to infinity, the algorithm returns the correct pagerank vector.
+            Have we shown that the power method converges?
+            Or are there conditions in which is will \emph{diverge} (i.e.\ not converge)?
+            \vspace{2in}
+
+        \item
+            Why does it never make sense to store $\pr$ as a sparse vector?
+            \vspace{2in}
+
+    \end{enumerate}
+\end{problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{problem}
+    There are many alternative algorithms for computing pagerank vectors.
+    In this problem, we will investigate an algorithm that I call the \emph{exponentially accelerated power method},
+    although it does not have a commonly accepted name.
+    This is a divide and conquer algorithm that can achieve the same accuracy $\epsilon$ as the power method with only a logarithmic number of iterations.
+
+    The estimated pagerank vector is given by
+    \begin{equation}
+        \y^{(K)} = \x^{(0)} \Q_K
+        ,
+    \end{equation}
+    where
+    \begin{equation}
+        \Q_k = 
+        \begin{cases}
+            \pbb & \text{if}~k=0 \\
+            \Q_{k-1} \Q_{k-1} & \text{otherwise} \\
+        \end{cases}
+        .
+    \end{equation}
+    In the standard power method, the matrix $\pbb$ is not stored explicitly,
+    but is calculated from the $\p$ matrix.
+    In this problem, you can assume for simplicity that the $\pbb$ matrix is stored explicitly as a dense matrix,
+    and that $\Q_k$ is also stored as a dense matrix.
+
+    \begin{enumerate}
+        \item
+            Show that $\y^{(K)} = \x^{(2^K)}$.
+            This equivalence is why the algorithm is ``exponentially accelerated.''
+            \vspace{3in}
+
+        \item
+            What is the runtime of calculating $\Q_k$ given $\Q_{k-1}$? 
+            \vspace{4in}
+
+        \item 
+            What is the runtime of computing $\y^{(K)}$ in terms of $K$?
+            \vspace{4.5in}
+
+        \item
+            What is the runtime of computing $\y^{(K)}$ in terms of $\epsilon$.
+            \vspace{4.5in}
+
+        \item
+            Under what conditions is the exponentially accelerated power method faster than the standard power method?
+            \vspace{3in}
+
+        \item
+            Under what conditions is it slower?
+            \vspace{3in}
+
+        \item
+            What bad thing would happen if $\p$ was stored as a sparse matrix and $\pbb$ was calculated from $\p$ as in the standard power method?
+            \vspace{4in}
+
+    \end{enumerate}
+\end{problem}
+
+\end{document}
+
+
