@@ -152,10 +152,15 @@ Notes: Pagerank
     \begin{enumerate}
         \item
             $\rank(\pbb) = 1$.
-            \vspace{4.5in}
+            \vspace{3in}
         \item
             $\rank(\pbb) = n$.
-            \vspace{4.5in}
+            \vspace{3in}
+
+        \item
+            Let $\x$ be an eigenvector of $\p$ with eigenvalue $\lambda$.
+            Then $\frac 1 2 \x$ is also an eigenvector of $\p$ with eigenvalue $\frac 1 2 \lambda$.
+            \vspace{3in}
 
         \item
             The smallest eigenvalue of $\pbb$ is exactly 0.
@@ -293,11 +298,24 @@ Notes: Pagerank
             Why does it never make sense to store $\pr$ as a sparse vector?
             \vspace{2in}
 
+        \item
+            \label{prob:comp:k}
+            Prove the following statement or provide a counterexample.
+            \begin{equation}
+                \ltwo{\x^{(k)}} < \ltwo{\x^{(k-1)}}
+                .
+            \end{equation}
+            \vspace{4in}
+        \item
+            Based on the results of part \ref{prob:comp:k} above,
+            how should we adjust our implementation of the power method?
+
     \end{enumerate}
 \end{problem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newpage
 \begin{problem}
     There are many alternative algorithms for computing pagerank vectors.
     In this problem, we will investigate an algorithm that I call the \emph{exponentially accelerated power method},
