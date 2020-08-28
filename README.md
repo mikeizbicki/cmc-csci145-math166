@@ -27,7 +27,7 @@ https://mixedname.com/english_klingon_feminine_names
 | Name | Mike Izbicki (call me Mike) |
 | Email | mizbicki@cmc.edu |
 | Office | Adams 216 |
-| Office Hours | MW 3:45-4:00 or by appointment ([see my schedule](https://outlook.office365.com/owa/calendar/45eb28fd4e4f45f4b0d120d17676d937@ClaremontMcKenna.edu/a46ebec5e46b4328abcb964af38795935165582125062542146/calendar.html)) |
+| Office Hours | MW 3:45-5:00 or by appointment ([see my schedule](https://outlook.office365.com/owa/calendar/45eb28fd4e4f45f4b0d120d17676d937@ClaremontMcKenna.edu/a46ebec5e46b4328abcb964af38795935165582125062542146/calendar.html)) |
 | Webpage | https://izbicki.me |
 | Research | Machine Learning (see [izbicki.me/research.html](https://izbicki.me/research.html) for some past projects) |
 | Fun Facts | grew up in San Clemente, CA (1 hr south of Claremont)<br/>7 years in the navy, worked on nuclear submarines and at NSA<br/>left Navy as a [conscientious objector](https://www.nytimes.com/2011/02/23/nyregion/23objector.html)<br/>phd/postdoc at UC Riverside<br/>taught in DPRK |
