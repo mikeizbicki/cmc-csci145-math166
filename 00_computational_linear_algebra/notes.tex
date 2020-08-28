@@ -388,7 +388,8 @@ the runtime of computing the transpose is $\Theta(1)$.
         \qquad
         \text{and}
         \qquad
-        \nnz(\trans B \trans A) = O(mno)
+        %\nnz(\trans B \trans A) = O(mno)
+        \nnz(\trans B \trans A) = \Omega(mo)
         .
     \end{equation}
     \vspace{3in}
@@ -530,11 +531,13 @@ The runtime of computing the top $k$ eigenvectors and eigenvalues is $O(n^2k)$.
     \begin{enumerate}
         \item $(A \trans A)^{-1} A \x$
             \vspace{2in}
-        \item $\trans x \trans A (\trans A A)^{-1}$
+        \item $A (\trans A A)^{-1}$
             \vspace{2in}
-        \item $A \trans A A \x + \lambda \ltwo{\x}^2$
+        \item $\ltwo{A \trans A A \x + \lambda \x}^2$
             \vspace{2in}
         \item $\lF{(\lambda I + A) \x \trans \x}$
+
+            Note that for the expression above to be well defined, $m$ must be equal to $n$.
             \vspace{2in}
     \end{enumerate}
 \end{problem}
