@@ -15,6 +15,9 @@ fairness tutorial
 https://www.youtube.com/watch?v=jIXIuYdnyyk
 
 AUC/ROC curves https://www.youtube.com/watch?v=4jRBRDbJemM
+
+Fasttext application:
+https://mixedname.com/english_klingon_feminine_names
 -->
 
 ## About the Instructor
