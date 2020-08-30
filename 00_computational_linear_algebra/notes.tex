@@ -382,14 +382,14 @@ the runtime of computing the transpose is $\Theta(1)$.
     Many systems that implement sparse matrices offer only limited support in the same way that PyTorch does.
     The reason is that the sparsity of the matrix product $AB$ is impossible to predict from the sparsity of just $A$ and $B$.
     In this problem, you will prove this fact by example.
-    Your task is to construct matrices $A$ and $B$ such that
+    Your task is to construct $m\times m$ matrices $A$ and $B$ such that
     \begin{equation}
         \nnz(AB) = O(1)
         \qquad
         \text{and}
         \qquad
         %\nnz(\trans B \trans A) = O(mno)
-        \nnz(\trans B \trans A) = \Omega(mo)
+        \nnz(BA) = \Omega(m^2)
         .
     \end{equation}
     \vspace{3in}
