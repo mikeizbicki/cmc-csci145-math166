@@ -3,6 +3,8 @@
 In this project, you will create a simple search engine for the website https://www.lawfareblog.com .
 This website provides legal analysis on US national security issues.
 
+**Due date:** Sunday, 13 September at midnight
+
 ## Task 1: the power method
 
 Implement the `WebGraph.power_method` function in `pagerank.py` for computing the pagerank vector.
@@ -310,7 +312,7 @@ Your goal should be to discover what topics that www.lawfareblog.com considers t
    Recruiters are using data mining to find out who the best people to recruit are,
    and we are hacking their data mining algorithms by making those algorithms select you instead of someone else.
 
-   If you're interested in exploring this idea further, here's a python tutorial for extracting GitHub's social graph: https://www.oreilly.com/library/view/mining-the-social/9781449368180/ch07.html
+   If you're interested in exploring this idea further, here's a python tutorial for extracting GitHub's social graph: https://www.oreilly.com/library/view/mining-the-social/9781449368180/ch07.html ; if you're interested in learning more about how recruiters use github profiles, read this Hacker News post: https://news.ycombinator.com/item?id=19413348
 
 1. Submit the url of your repo to sakai.
 
