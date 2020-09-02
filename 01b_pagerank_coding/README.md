@@ -3,12 +3,13 @@
 In this project, you will create a simple search engine for the website https://www.lawfareblog.com .
 This website provides legal analysis on US national security issues.
 
+**Due date:** Sunday, 13 September at midnight
+
 ## Task 1: the power method
 
 Implement the `WebGraph.power_method` function in `pagerank.py` for computing the pagerank vector.
 
 **Part 1:**
-
 To check that your implementation is working,
 you should run the program on the `small.csv.gz` graph which is the example graph from the *Deeper Inside Pagerank* paper.
 For my implementation, I get the following output.
@@ -205,6 +206,8 @@ INFO:root:rank=9 pagerank=1.6020e-02 url=www.lawfareblog.com/water-wars-sinking-
 
 Which of these rankings is better is entirely subjective,
 and the only way to know if you have the "best" alpha for your application is to try several variations and see what is best.
+If large alphas are good for your application, you can see that there is a tradeoff between quality answers and algorithmic runtime.
+We'll be exploring this tradeoff more formally in class when we incorporate statistics into our discussion.
 
 ## Task 2: the personalization vector
 
@@ -310,7 +313,7 @@ Your goal should be to discover what topics that www.lawfareblog.com considers t
    Recruiters are using data mining to find out who the best people to recruit are,
    and we are hacking their data mining algorithms by making those algorithms select you instead of someone else.
 
-   If you're interested in exploring this idea further, here's a python tutorial for extracting GitHub's social graph: https://www.oreilly.com/library/view/mining-the-social/9781449368180/ch07.html
+   If you're interested in exploring this idea further, here's a python tutorial for extracting GitHub's social graph: https://www.oreilly.com/library/view/mining-the-social/9781449368180/ch07.html ; if you're interested in learning more about how recruiters use github profiles, read this Hacker News post: https://news.ycombinator.com/item?id=19413348
 
 1. Submit the url of your repo to sakai.
 
