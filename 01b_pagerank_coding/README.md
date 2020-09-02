@@ -310,6 +310,8 @@ Your goal should be to discover what topics that www.lawfareblog.com considers t
    Recruiters are using data mining to find out who the best people to recruit are,
    and we are hacking their data mining algorithms by making those algorithms select you instead of someone else.
 
+   If you're interested in exploring this idea further, here's a python tutorial for extracting GitHub's social graph: https://www.oreilly.com/library/view/mining-the-social/9781449368180/ch07.html
+
 1. Submit the url of your repo to sakai.
 
 1. In the sakai submission, state which tasks you were able to complete.
