@@ -206,6 +206,8 @@ INFO:root:rank=9 pagerank=1.6020e-02 url=www.lawfareblog.com/water-wars-sinking-
 
 Which of these rankings is better is entirely subjective,
 and the only way to know if you have the "best" alpha for your application is to try several variations and see what is best.
+If large alphas are good for your application, you can see that there is a tradeoff between quality answers and algorithmic runtime.
+We'll be exploring this tradeoff more formally in class when we incorporate statistics into our discussion.
 
 ## Task 2: the personalization vector
 
