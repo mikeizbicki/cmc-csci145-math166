@@ -1,11 +1,11 @@
 # Pagerank Project
 
 In this project, you will create a simple search engine for the website https://www.lawfareblog.com .
-This website provides legal analysis on US national security problems.
+This website provides legal analysis on US national security issues.
 
-## Task 1
+## Task 1: the power method
 
-Implement the `WebGraph.power_method` function for computing the pagerank vector.
+Implement the `WebGraph.power_method` function in `pagerank.py` for computing the pagerank vector.
 
 **Part 1:**
 
@@ -50,6 +50,9 @@ INFO:root:rank=5 pagerank=1.6917e-01 url=1
 Yours likely won't be identical, but it should be similar.
 In particular, the ranking of the urls should be the same order.
 
+The `--verbose` flag causes all of the lines beginning with `DEBUG` to be printed.
+By default, only lines beginning with `INFO` are printed.
+
 **Part 2:**
 The `pagerank.py` file has an option `--search_query`, which takes a string as a parameter.
 If this argument is used, then program returns all urls that match the query string sorted according to their pagerank.
@@ -72,7 +75,8 @@ INFO:root:rank=7 pagerank=6.3620e-04 url=www.lawfareblog.com/paper-hearing-exper
 INFO:root:rank=8 pagerank=6.1248e-04 url=www.lawfareblog.com/house-subcommittee-voices-concerns-over-us-management-coronavirus
 INFO:root:rank=9 pagerank=6.0187e-04 url=www.lawfareblog.com/livestream-house-oversight-committee-holds-hearing-government-coronavirus-response
 
-$ python3 pagerank.py --data=./lawfareblog.csv.gz --search_query='trump'INFO:root:rank=0 pagerank=5.7826e-03 url=www.lawfareblog.com/trump-asks-supreme-court-stay-congressional-subpeona-tax-returns
+$ python3 pagerank.py --data=./lawfareblog.csv.gz --search_query='trump'
+INFO:root:rank=0 pagerank=5.7826e-03 url=www.lawfareblog.com/trump-asks-supreme-court-stay-congressional-subpeona-tax-returns
 INFO:root:rank=1 pagerank=5.2338e-03 url=www.lawfareblog.com/document-trump-revokes-obama-executive-order-counterterrorism-strike-casualty-reporting
 INFO:root:rank=2 pagerank=5.1297e-03 url=www.lawfareblog.com/trump-administrations-worrying-new-policy-israeli-settlements
 INFO:root:rank=3 pagerank=4.6599e-03 url=www.lawfareblog.com/dc-circuit-overrules-district-courts-due-process-ruling-qasim-v-trump
@@ -147,6 +151,12 @@ When Google calculates their P matrix for the web,
 they use a similar process to modify the P matrix in order to reduce spam results.
 The exact formula they use, however, is a jealously guarded secret.
 
+In the case above, notice that we have removed the blog's most popular article (www.lawfareblog.com/snowden-revelations).
+The blog editors believe that Snowden's revelations about NSA spying are so important that they link to the article on every single webpage in the domain,
+and out "anti-spam" `--filter-ratio` argument removed this article from the list.
+In general, it is a challenging open problem to remove spam from pagerank results,
+and all current solutions rely on careful human tuning and still have lots of false positives and false negatives.
+
 **Part 4:**
 Recall from the reading that the runtime of pagerank depends heavily on the eigengap of the $\bar\bar P$ matrix,
 and that this eigengap is bounded by the alpha parameter.
@@ -159,12 +169,44 @@ $ python3 pagerank.py --data=./lawfareblog.csv.gz --verbose --filter_ratio=0.2
 $ python3 pagerank.py --data=./lawfareblog.csv.gz --verbose --filter_ratio=0.2 --alpha=0.99999
 ```
 You should notice that the last command takes considerably more iterations to compute the pagerank vector.
+(My code takes 685 iterations for this call, and about 10 iterations for all the others.)
 
 This begs the question does the second command (with the `--alpha` option but without the `--filter_ratio`) option not take a long time to run?
 The answer is that the P graph for www.lawfareblog.com naturally has a large eigengap and so is fast to compute for all alpha values,
 but the modified graph does not have a large eigengap and so requires a small alpha for fast convergence.
 
-## Task 2
+Changing the value of alpha also gives us very different pagerank rankings.
+For example, 
+```
+$ python3 pagerank_solution.py --data=./lawfareblog.csv.gz --verbose --filter_ratio=0.2
+INFO:root:rank=0 pagerank=3.4696e-01 url=www.lawfareblog.com/trump-asks-supreme-court-stay-congressional-subpeona-tax-returns
+INFO:root:rank=1 pagerank=2.9521e-01 url=www.lawfareblog.com/livestream-nov-21-impeachment-hearings-0
+INFO:root:rank=2 pagerank=2.9040e-01 url=www.lawfareblog.com/opening-statement-david-holmes
+INFO:root:rank=3 pagerank=1.5179e-01 url=www.lawfareblog.com/lawfare-podcast-ben-nimmo-whack-mole-game-disinformation
+INFO:root:rank=4 pagerank=1.5099e-01 url=www.lawfareblog.com/todays-headlines-and-commentary-1963
+INFO:root:rank=5 pagerank=1.5099e-01 url=www.lawfareblog.com/todays-headlines-and-commentary-1964
+INFO:root:rank=6 pagerank=1.5071e-01 url=www.lawfareblog.com/lawfare-podcast-week-was-impeachment
+INFO:root:rank=7 pagerank=1.4957e-01 url=www.lawfareblog.com/todays-headlines-and-commentary-1962
+INFO:root:rank=8 pagerank=1.4367e-01 url=www.lawfareblog.com/cyberlaw-podcast-mistrusting-google
+INFO:root:rank=9 pagerank=1.4240e-01 url=www.lawfareblog.com/lawfare-podcast-bonus-edition-gordon-sondland-vs-committee-no-bull
+
+$ python3 pagerank_solution.py --data=./lawfareblog.csv.gz --verbose --filter_ratio=0.2 --alpha=0.99999
+INFO:root:rank=0 pagerank=7.0149e-01 url=www.lawfareblog.com/covid-19-speech-and-surveillance-response
+INFO:root:rank=1 pagerank=7.0149e-01 url=www.lawfareblog.com/lawfare-live-covid-19-speech-and-surveillance
+INFO:root:rank=2 pagerank=1.0552e-01 url=www.lawfareblog.com/cost-using-zero-days
+INFO:root:rank=3 pagerank=3.1755e-02 url=www.lawfareblog.com/lawfare-podcast-former-congressman-brian-baird-and-daniel-schuman-how-congress-can-continue-function
+INFO:root:rank=4 pagerank=2.2040e-02 url=www.lawfareblog.com/events
+INFO:root:rank=5 pagerank=1.6027e-02 url=www.lawfareblog.com/water-wars-increased-us-focus-indo-pacific
+INFO:root:rank=6 pagerank=1.6026e-02 url=www.lawfareblog.com/water-wars-drill-maybe-drill
+INFO:root:rank=7 pagerank=1.6023e-02 url=www.lawfareblog.com/water-wars-disjointed-operations-south-china-sea
+INFO:root:rank=8 pagerank=1.6020e-02 url=www.lawfareblog.com/water-wars-song-oil-and-fire
+INFO:root:rank=9 pagerank=1.6020e-02 url=www.lawfareblog.com/water-wars-sinking-feeling-philippine-china-relations
+```
+
+Which of these rankings is better is entirely subjective,
+and the only way to know if you have the "best" alpha for your application is to try several variations and see what is best.
+
+## Task 2: the personalization vector
 
 The most interesting applications of pagerank involve the personalization vector.
 
@@ -218,11 +260,11 @@ Google engineers spend TONs of time fine-tuning their pagerank personalization v
 Exactly how they do this is another one of their secrets that they don't publicly talk about.
 
 **Part 2:**
+Another use of the `--personalization_vector_query` option is that we can find out what webpages are related to the coronavirus but don't directly mention the coronavirus.
+This can be used to map out what types of topics are similar to the coronavirus.
 
-Another use of the `--personalization_vector_query` option is that we can find out what webpages are related to the coronavirus without actually mentioning coronavirus.
-
-For example, the following query ranks all webpages by their coronavirus importance,
-but removes webpages mentioning coronavirus from the results.
+For example, the following query ranks all webpages by their `corona` importance,
+but removes webpages mentioning `corona` from the results.
 ```
 $ python3 pagerank.py --data=./lawfareblog.csv.gz --filter_ratio=0.2 --personalization_vector_query='corona' --search_query='-corona'
 INFO:root:rank=0 pagerank=6.3127e-01 url=www.lawfareblog.com/covid-19-speech-and-surveillance-response
@@ -237,22 +279,34 @@ INFO:root:rank=8 pagerank=5.1245e-02 url=www.lawfareblog.com/us-moves-dismiss-ca
 INFO:root:rank=9 pagerank=5.1245e-02 url=www.lawfareblog.com/livestream-house-armed-services-holds-hearing-national-security-challenges-north-and-south-america
 ```
 You can see that there are many urls about concepts that are obviously related like "covid", "clinical trials", and "quarantine",
-but this algorithm also finds a link about Chinese propaganda and Trump's policy decisions.
+but this algorithm also finds articles about Chinese propaganda and Trump's policy decisions.
 Both of these articles are highly relevant to coronavirus discussions,
 but a simple keyword search for corona or related terms would not find these articles.
 
+**Part 3:**
+You should experiment with a national security topic other than the coronavirus.
+For example, find out what articles are important to the `iran` topic but do not contain the word `iran`.
+Your goal should be to discover what topics that www.lawfareblog.com considers to be related to the national security topic you choose.
+
 ## Submission
 
-1. Create a new repo on github.
+1. Create a new repo on github (not a fork of this repo).
 
 1. Push your changes to the `pagerank.py` file into your repo.
 
 1. Create a `README.md` file that contains the output of your program for each of the parts above.
-   You may format the file however you like.
+   You may format the file however you like,
+   and I recommend you choose something that recruiters will be impressed by.
 
 1. Get at least 5 stars on your repo.
+   (You made trade stars with other students in the class.)
+
+   Recruiters use github profiles to determine who to hire,
+   and pagerank is used to rank user profiles.
+   Links in this graph correspond to who has starred/followed who's repo.
+   By getting more stars on your repo, you'll be increasing your github pagerank, which increases the likelihood that recruiters will hire you.
 
 1. Submit the url of your repo to sakai.
 
 1. In the sakai submission, state which tasks you were able to complete.
-   Each task is worth 2 points, and the homework is worth 12 points overall.
+   Each task is worth 2 points, and the homework is worth 14 points overall.

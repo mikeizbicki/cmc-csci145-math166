@@ -136,7 +136,7 @@ class WebGraph():
 
             # main loop
             # FIXME: your code goes here
-            x = x0
+            x = x0.squeeze()
 
             return x
 
@@ -147,7 +147,6 @@ class WebGraph():
         Results are displayed in sorted order according to the pagerank vector pi.
         '''
         n = self.P.shape[0]
-        k = min(max_results,n)
         vals,indices = torch.topk(pi,n)
 
         matches = 0
@@ -210,7 +209,7 @@ if __name__=='__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--data', required=True)
-    parser.add_argument('--personalization_vector_query', default='')
+    parser.add_argument('--personalization_vector_query')
     parser.add_argument('--search_query', default='')
     parser.add_argument('--filter_ratio', type=float, default=None)
     parser.add_argument('--alpha', type=float, default=0.85)
