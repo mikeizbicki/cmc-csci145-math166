@@ -10,7 +10,6 @@ This website provides legal analysis on US national security issues.
 Implement the `WebGraph.power_method` function in `pagerank.py` for computing the pagerank vector.
 
 **Part 1:**
-
 To check that your implementation is working,
 you should run the program on the `small.csv.gz` graph which is the example graph from the *Deeper Inside Pagerank* paper.
 For my implementation, I get the following output.
