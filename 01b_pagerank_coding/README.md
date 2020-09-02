@@ -306,6 +306,10 @@ Your goal should be to discover what topics that www.lawfareblog.com considers t
    Links in this graph correspond to who has starred/followed who's repo.
    By getting more stars on your repo, you'll be increasing your github pagerank, which increases the likelihood that recruiters will hire you.
 
+   In some sense, we are doing a "dual problem" to data mining by getting these stars.
+   Recruiters are using data mining to find out who the best people to recruit are,
+   and we are hacking their data mining algorithms by making those algorithms select you instead of someone else.
+
 1. Submit the url of your repo to sakai.
 
 1. In the sakai submission, state which tasks you were able to complete.
