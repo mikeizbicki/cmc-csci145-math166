@@ -1,0 +1,490 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{defn}{Definition}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\E}{\mathbb E}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+% Shalev-Swartz and Ben-David
+
+\newcommand{\h}{\mathcal H}
+\newcommand{\D}{\mathcal D}
+\DeclareMathOperator*{\erm}{ERM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+\Huge
+Notes: Statistical Learning Theory I
+\end{center}
+
+\begin{center}
+%\includegraphics[width=\textwidth]{dilbert}
+%
+    %\vspace{0.2in}
+\includegraphics[width=\textwidth]{dt000105}
+
+\end{center}
+
+\section{Pre-lecture Work}
+
+Data mining has a different philosophical approach to statistics than you were probably taught in your stats class.
+In particular, we do not try to falsify hypotheses;
+there are no p-values;
+and we do not try to find out how the world ``really works.''
+Instead, we're trying to find models that are ``good enough'' in the sense that they predict the future well.
+Data miners embrace the maxim that:
+\begin{quote}
+    \emph{All models are wrong, but some models are useful.}%
+    \footnote{\url{https://en.wikipedia.org/wiki/All_models_are_wrong}}
+\end{quote}
+In this section on Statistical Learning Theory,
+we are going to formalize what it means for a model to be ``useful'' and how you select the useful models from the non-useful ones.
+In particular, we are going to formalize the following claim:
+\begin{quote}
+    \emph{Complex models require more data to train than simple models in order to predict the future well.}
+\end{quote}
+There are many ways to formalize what it means for a model to be ``more'' and ``less'' complex,
+and in this class we will cover a simple complexity measure known as the \emph{VC dimension}.
+In order to define the VC dimension, we must first introduce quite a bit of notation this week,
+and it's perfectly okay if this does not seem simple to you.
+Next week we will actually introduce the VC dimension and its applications.
+
+\begin{problem}
+    (optional)
+    The following two youtube videos review some basic statistics/machine learning terms.
+    \begin{quote}
+    \url{https://www.youtube.com/watch?v=Gv9_4yMHFhI}
+
+    \url{https://www.youtube.com/watch?v=EuBBz3bI-aA}
+    \end{quote}
+    Define the following terms as presented in the videos.
+    \begin{enumerate}
+        \item training data
+            \vspace{1.5in}
+        \item testing data
+            \vspace{1in}
+        \item bias-variance tradeoff
+            \vspace{1in}
+        \item bias
+            \vspace{1in}
+        \item variance
+            \vspace{1in}
+        \item overfit
+            \vspace{1in}
+        \item underfit
+            \vspace{1in}
+    \end{enumerate}
+    What is the purpose of the techniques \emph{regularization}, \emph{boosting}, and \emph{bagging}?
+    \vspace{1in}
+\end{problem}
+
+\newpage
+\begin{problem}
+    (optional)
+    The following youtube video reviews ordinary least squares (OLS) regression.
+    \begin{quote}
+        \url{https://www.youtube.com/watch?v=nk2CQITm_eo}
+    \end{quote}
+    During lecture, we will be using OLS as an example,
+    and so being familiar with the technique will help you understand lecture.
+    %Define the following terms as presented in the video.
+    %\begin{enumerate}
+        %\item residual
+        %\item $R^2$
+    %\end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Read Chapter 2 of Shalev-Shwartz and Ben-David.
+    Complete the following notes as you read.
+    \begin{enumerate}
+        \item
+            Reproduce equations 2.1, 2.2 below.
+
+            \textbf{Note:}
+            Whenever I ask you to reproduce an equation/definition/theorem from the book, you should also provide definitions of all of the variables used in these equations.
+            \vspace{5in}
+
+        \item
+            Reproduce the definition of the realizability assumption (Definition 2.1).
+            \vspace{3in}
+
+        \item
+            Reproduce Corollary 2.3 below.
+            \vspace{3in}
+    \end{enumerate}
+
+    %\begin{enumerate}
+        %%\item prediction rule (also called: predictor, hypothesis, classifier)
+        %\item error of a classifier (also called: generalization error, risk, true error) $L_{\mathcal D,f}$
+        %\item training error, empirical error, empirical risk, $L_S$
+        %\item the emperical risk minimizer $\erm_\h$
+        %\item inductive bias
+        %\item realizability assumption
+            %\vspace{2in}
+        %\item Corollary 2.3
+            %\vspace{2in}
+    %\end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Read Chapter 3.
+    Define the following terms:
+    \begin{enumerate}
+        \item PAC Learnability (Definition 3.1)
+            \vspace{3in}
+        \item Corollary 3.2
+
+            Notice that this is equivalent to Corollary 2.3,
+            but we have ``refactored'' the corollary to rely on PAC learnability.
+            \vspace{2in}
+        \item Equation 3.1 
+
+            Specifically highlight the difference between 3.1 and 2.1
+            \vspace{2in}
+
+        \item Bayes optimal predictor $f_{\mathcal D}$
+            \vspace{2in}
+
+        \item Agnostic PAC Learnability (Definition 3.3)
+
+            Highlight the difference between the definition of agnostic PAC and plain PAC learnabillity.
+            \vspace{2in}
+
+        \item Equation 3.3
+            \vspace{2in}
+        \item Equation 3.4
+            \vspace{2in}
+
+        \item 0-1 loss
+            \vspace{2in}
+        \item square loss
+            \vspace{2in}
+
+        \item Agnostic PAC Learnability for General Loss Functions (Definition 3.4)
+
+            Again, highlight the difference between the definition of agnostic PAC learnability and agnostic PAC learnability for general loss functions.
+            \vspace{3in}
+    \end{enumerate}
+    \vspace{3in}
+\end{problem}
+
+\begin{problem}
+    Let $\mathcal H$ be a finite hypothesis class with $|\mathcal H| = 1000$.
+    Use corollary 2.3 to calculate the number of data points needed to ensure that the empirical risk minimizer $h_S$ has true risk less than $0.1$ with $99\%$ probability.
+    That is,
+    \begin{equation}
+        L_{(\mathcal D,f)}(h_S) \le 0.1
+        .
+    \end{equation}
+    \vspace{3in}
+\end{problem}
+
+\begin{problem}
+    For each statement below, indicate whether the statement is true or false.
+    If it is true, prove it; if false, explain why or provide a counter example.
+    \begin{enumerate}
+
+        \item
+            It is possible for $L_S(h_S)$ to be less than $L_\mathcal D(h_S)$.
+            \vspace{5in}
+
+        \item
+            Let $S'$ be a ``test set'' of $m'$ data points sampled from $\mathcal D^{m'}$
+            and let $h_S$ be a hypothesis trained on dataset $S$ using any learning algorithm
+            (e.g.\ possibly one other than the empirical risk minimizer).
+            Then,
+            \begin{equation}
+                \E_{S'} L_{S'}(h_S) = L_\mathcal D(h_S)
+                .
+            \end{equation}
+            The function $L_{S'}$ is defined analogously to the function $L_S$ in Equation 2.2.
+            \vspace{4in}
+
+        \item All finite hypothesis classes are PAC learnable.
+            \vspace{4in}
+
+        %\item Let $\mathcal H$ be a finite hypothesis class.
+            %Then there exists a learning algorithm such that for all $\epsilon,\delta\in(0,1)$,
+            %for every distribution $\mathcal D$ over $\mathcal X$,
+            %and every labeling function $f : \mathcal X \to \{0,1\}$,
+            %if the realizable assumption holds with respect to $\mathcal H, \mathcal D, f$,
+            %then the error of the learning algorithm is bounded by
+            %\begin{equation}
+                %L_{\mathcal D,f}(h) = O\bigg( \frac{\log{(|\mathcal H|/\delta)}} m \bigg)
+            %\end{equation}
+
+        \item
+            There exists a hypothesis $h$ that has lower error than the Bayes Optimal Predictor $f_\mathcal D$.
+            \vspace{3in}
+
+        \item
+            If the hypothesis class $\mathcal H$ satisfies the realizability assumption,
+            then the Bayes Optimal Predictor $f_\mathcal D$ must be contained in $\mathcal H$.
+            \vspace{3in}
+
+        \item
+            If the Bayes Optimal Predictor $f_\mathcal D$ is contained in the hypothesis class $\mathcal H$,
+            then $\mathcal H$ must satisfy the realizability assumption,
+            \vspace{3in}
+
+        \item
+            If the hypothesis class $\mathcal H$ satisfies the realizability assumption,
+            then the Bayes Optimal Predictor $f_\mathcal D$ must have a true risk of zero.
+            That is,
+            \begin{equation}
+                L_\mathcal D(f_\mathcal D) = 0.
+            \end{equation}
+            \vspace{4in}
+
+        \item
+            If the Bayes Optimal Predictor $f_\mathcal D$ has a true risk of zero,
+            then the hypothesis class $\mathcal H$ must satisfy the realizability assumption,
+            \vspace{4in}
+
+        \item If there exists a hypothesis $h$ in hypothesis class $\mathcal H$ such that
+            \begin{equation}
+                \min_{h\in\mathcal H} L_\mathcal D (h) = 0
+                ,
+            \end{equation}
+            then $\mathcal H$ is PAC learnable.
+            \vspace{4in}
+
+        \item If there exists a hypothesis $h$ in hypothesis class $\mathcal H$ such that
+            \begin{equation}
+                \min_{h\in\mathcal H} L_S (h) = 0
+                ,
+            \end{equation}
+            then $\mathcal H$ is PAC learnable.
+            \vspace{4in}
+
+        \item Every hypothesis class that is agnostic PAC learnable is necessarily also PAC learnable.
+            \vspace{4in}
+
+        \item Every hypothesis class that is PAC learnable is necessarily also agnostic PAC learnable.
+            \vspace{4in}
+
+        \newpage
+        \item 
+            Let $S$ be a dataset sampled from $\mathcal D^m$.
+            Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes,
+            with $\mathcal H_1 \supset \mathcal H_2$.
+            Let $\hat h_1$ and $\hat h_2$ be corresponding empirical risk minimizers trained on $S$.
+            That is,
+            \begin{equation}
+                \hat h_1 = \argmin_{h \in \mathcal H_1} L_S(h)
+                \qquad\text{and}\qquad
+                \hat h_2 = \argmin_{h \in \mathcal H_2} L_S(h)
+                .
+            \end{equation}
+            \begin{enumerate}
+                \item The emperical risk of $\hat h_1$ is guaranteed to be less than the emperical risk of $\hat h_2$.
+                    That is,
+                    \begin{equation}
+                        L_S(\hat h_1) \le L_S(\hat h_2)
+                        .
+                    \end{equation}
+                    \vspace{3in}
+
+                \item The true risk of $\hat h_1$ is guaranteed to be less than the true risk of $\hat h_2$.
+                    \begin{equation}
+                        L_\mathcal D(\hat h_1) \le L_\mathcal D(\hat h_2)
+                        .
+                    \end{equation}
+                    \vspace{3in}
+            \end{enumerate}
+
+        \newpage
+        \item
+            Let hypothesis class $\mathcal H$ be PAC learnable with sample complexity
+            \begin{equation}
+                m_\mathcal H = \frac{10^{1000} + \log(1/\delta)}{\epsilon}
+                .
+            \end{equation}
+            Then there does not exist a distribution $\mathcal D$ such that if $S\sim\mathcal D^m$ and $h_S$ is the empirical risk minimizer trained on $S$,
+            then the generalization error is
+            \begin{equation}
+                L_\mathcal D (h_S) \le \frac {\log (1/\delta)} {m_\mathcal H}
+                .
+            \end{equation}
+            %FIXME: probabilities
+
+
+
+        %\item If the realizability assumption holds, then a model can never overfit.
+            %\vspace{3in}
+        %\item $\displaystyle \E_{S\sim \mathcal D^m} L_S (h) = $
+            %\vspace{3in}
+    \end{enumerate}
+\end{problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{Lecture}
+
+\begin{problem}
+    % Corollary 3.2
+    % talk about epsilon, delta in asymptotic notation
+    Prove or disprove the following claims.
+    Let $\mathcal H$ be a finite hypothesis class.
+    Then the sample complexity of $\mathcal H$ is bounded by
+    \begin{equation}
+        m_\mathcal H = \Omega(1)
+        \qquad\text{and}\qquad
+        m_\mathcal H = O\bigg(\log(|\mathcal H|)\bigg)
+        .
+    \end{equation}
+    \vspace{3in}
+\end{problem}
+
+\newpage
+\begin{problem}
+    Let $\mathcal H$ be a hypothesis class for a binary classification task.
+    Suppose that $\mathcal H$ is PAC learnable and its sample complexity is given by $m_\mathcal H(\cdot,\cdot)$.
+    \begin{enumerate}
+        \item
+        Show that $m_\mathcal H$ is monotonically nonincreasing in $\epsilon$.
+        That is, show that given $\delta\in(0,1)$, and given $0 < \epsilon_1 \le \epsilon_2 < 1$,
+        we have that $m_\mathcal H(\epsilon_1, \delta) \ge m_\mathcal H(\epsilon_2,\delta)$.
+            \vspace{4in}
+
+        \item
+        Show that $m_\mathcal H$ is monotonically nonincreasing in $\delta$.
+        That is, show that given $\epsilon\in(0,1)$, and given $0 < \delta_1 \le \delta_2 < 1$,
+        we have that $m_\mathcal H(\delta_1, \epsilon) \ge m_\mathcal H(\delta_2,\epsilon)$.
+    \end{enumerate}
+    \vspace{3in}
+\end{problem}
+
+\newpage
+\begin{problem}
+    This problem concerns ordinary least squares (OLS) regression.
+    \begin{enumerate}
+        \item Define the OLS model.
+            \vspace{2in}
+        \item Define the hypothesis class.
+            \vspace{2in}
+        \item Which loss function does OLS regression use?
+            \vspace{3in}
+        \item Which PAC Learning definition(s) make sense for the OLS problem.
+            \vspace{1in}
+
+        %\item Assume that for any data point $\x \in \R^d$, the data label $y$ is given by
+            %\begin{equation}
+                %y = \trans\x\w + \epsilon
+                %\qquad\text{where}\qquad
+                %%\x\sim N(0, \Sigma)
+                %%\qquad\text{and}\qquad
+                %\epsilon\sim N(0, \sigma)
+                %,
+            %\end{equation}
+            %and that the hypothesis class is
+            %\begin{equation}
+                %\mathcal H = \bigg\{ f(\x) \mapsto \trans\x\w : \w\in\R^d \bigg\}
+            %\end{equation}
+            %Is the realizability assumption satisfied?
+%
+            %\vspace{1in}
+
+        \newpage
+        \item Provide a closed form solution for the ERM.
+
+            Hint: for calculating matrix derivatives, you can use \url{http://www.matrixcalculus.org/}
+            \vspace{5in}
+        \item What is the runtime of computing the ERM for OLS?
+            \vspace{4in}
+
+        \newpage
+        \item Assume that each parameter is implemented using a 64-bit floating point number.
+            Bound the sample complexity of OLS.
+            \label{prob:bound1}
+            \vspace{3in}
+        \item Assume that each parameter is implemented using an $b$-bit floating point number.
+            Bound the sample complexity of OLS.
+            \label{prob:bound2}
+            \vspace{3in}
+
+        \newpage
+        \item A $d$ dimensional OLS model is trained on a dataset $S$.
+            The training error is $3.5$ and the testing error is $12.4$.
+            Is the model over-fitting or under-fitting?
+            \vspace{0.5in}
+
+            How should we adjust the dimensionality $d$ of the model in order to improve performance on the test set?
+            \vspace{3.5in}
+
+        \item A $d$ dimensional OLS model is trained on a dataset $S$.
+            The training error is $12.4$ and the testing error is $3.5$.
+            Is the model over-fitting or under-fitting?
+            \vspace{0.5in}
+
+            How should we adjust the dimensionality $d$ of the model in order to improve performance on the test set?
+            \vspace{3.5in}
+
+        %\item The Bayes error for the OLS model is always 0.
+
+    \end{enumerate}
+\end{problem}
+
+%\begin{problem}
+    %Assume realizability.
+    %Then there exists a 
+%\end{problem}
+
+\end{document}
+
+
