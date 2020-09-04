@@ -329,6 +329,7 @@ Due: Sunday, 6 Sep 2020 at midnight
 
     The estimated pagerank vector is given by
     \begin{equation}
+        \label{eq:exp:y}
         \y^{(K)} = \x^{(0)} \Q_K
         ,
     \end{equation}
@@ -350,6 +351,10 @@ Due: Sunday, 6 Sep 2020 at midnight
         \item
             Show that $\y^{(K)} = \x^{(2^K)}$.
             This equivalence is why the algorithm is ``exponentially accelerated.''
+
+            HINT: 
+            Use induction to show that $Q_{K} = \pbb^{2^{K}}$.
+            The result follows by combining this fact with \eqref{eq:exp:y} and Equation (5.1) in the paper.
             \vspace{3in}
 
         \item
@@ -358,10 +363,52 @@ Due: Sunday, 6 Sep 2020 at midnight
 
         \item 
             What is the runtime of computing $\y^{(K)}$ in terms of $K$?
-            \vspace{4.5in}
+            \vspace{3in}
 
         \item
-            What is the runtime of computing $\y^{(K)}$ in terms of $\epsilon$.
+            As with the standard power method, we do not know the total number of iterations of the exponential power method in advance.
+            Instead, we iterate until
+            \begin{equation}
+                \label{eq:exp:eps}
+                \ltwo{\y^{(K)}-\y^{(K-1)}} \le \epsilon,
+            \end{equation}
+            where $\epsilon$ is a predetermined small constant value.
+            Bounding the number of iterations $K$ required to satisfy \eqref{eq:exp:eps} is quite a bit more technical than in the previous problem.
+            You do not have to compute this solution yourself;
+            you may assume in subsequent problems that
+            \begin{equation}
+                \label{eq:exp:2}
+                K = O\bigg( \log \frac{\log \epsilon}{\log \alpha} \bigg)
+            \end{equation}
+            satisfies \eqref{eq:exp:eps}.
+            Notice that this number of iterations is logrithmic compared to the number of iterations in the standard power method,
+            and this is where the name exponentially accelerated comes from.
+            %You do not need to understand the technical details of the proof of \eqref{eq:exp:2},
+            %but it is reproduced below for the curious.
+            %\begin{align}
+                %\ltwo{\y^{(k)} - \y^{(k-1)}}
+                %&= \ltwo{\x^{(2^k)} - \x^{2^{k-1}}} \\
+                %&= \ltwo{\sum_{i=2^{k-1}}^{2^k - 1} (\x^{(i+1)} - \x^{(i)})} \\
+                %&\le \sum_{i=2^{k-1}}^{2^k - 1} \ltwo{(\x^{(i+1)} - \x^{(i)})} \\
+                %&\le \sum_{i=2^{k-1}}^{2^k - 1} \alpha^i \\
+                %&\le 2^{k-1} \alpha^{2^{k-1}} \\
+                %%&\le \alpha^{2^{k-2}}
+                %&= O\bigg(\alpha^{2^{k-2}} \bigg)
+                %\label{eq:exp:align}
+            %\end{align}
+            %Next, we set the right hand side of \eqref{eq:exp:align} less than $\epsilon$,
+            %and solve for $k$.
+            %\begin{align}
+                %\alpha^{2^{k-2}} &\le \epsilon \\
+                %{2^{k-2}}\log \alpha &\le \log \epsilon \\
+                %{2^{k-2}} &\ge \frac{\log \epsilon}{\log \alpha} \\
+                %k-2 & \ge \log_2\frac{\log \epsilon}{\log \alpha} \\
+                %k & \ge 2 + \log_2\frac{\log \epsilon}{\log \alpha} \\
+                %k & = O\bigg(\log \frac{\log\epsilon}{\log \alpha} \bigg) 
+            %\end{align}
+
+        \item
+            What is the runtime of computing $\y^{(K)}$ in terms of $\epsilon$?
             \vspace{4.5in}
 
         \item
