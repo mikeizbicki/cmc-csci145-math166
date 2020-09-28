@@ -31,10 +31,12 @@ tree3 = DecisionTreeClassifier(
         min_samples_leaf = 10,
         )
 tree5 = DecisionTreeClassifier(
-        max_depth = 5,              # k = 5, VCdim <= 2**5 = 32
-        min_samples_split = 2,
-        min_samples_leaf = 1,
+        max_depth = 7,              # k = 7, VCdim <= 2**7 = 128
+        min_samples_split = 15
+        min_samples_leaf = 10,
         )
+
+# the larger value for min_samples_*, the more pruning will happen, so the fewer leaf nodes
 
 from sklearn.ensemble import AdaBoostClassifier
 boosted_mlp1 = AdaBoostClassifier(
