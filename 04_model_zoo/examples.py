@@ -7,6 +7,7 @@ X = data.data   # shape = (569, 30)
 Y = data.target # shape = (569,)
 
 # import classifiers
+# MLP = Multilayer Perceptron = neural network
 from sklearn.neural_network import MLPClassifier
 mlp1 = MLPClassifier(
         hidden_layer_sizes = [100]
@@ -20,17 +21,17 @@ mlp3 = MLPClassifier(
 
 from sklearn.tree import DecisionTreeClassifier
 stump = DecisionTreeClassifier(
-        max_depth = 1,
+        max_depth = 1,              # k = 1, VCdim <= 2**1 = 2
         min_samples_split = 2,
         min_samples_leaf = 1,
         )
 tree3 = DecisionTreeClassifier(
-        max_depth = 3,
+        max_depth = 3,              # k = 3, VCdim <= 2**3 = 8
         min_samples_split = 25,
         min_samples_leaf = 10,
         )
 tree5 = DecisionTreeClassifier(
-        max_depth = 5,
+        max_depth = 5,              # k = 5, VCdim <= 2**5 = 32
         min_samples_split = 2,
         min_samples_leaf = 1,
         )
@@ -66,7 +67,7 @@ from sklearn.neighbors import KNeighborsClassifier
 knn = KNeighborsClassifier()
 
 # train model
-model = knn
+model = mlp3
 model.fit(X,Y)
 
 # get training error
