@@ -1,5 +1,9 @@
 # Project
 
+<center>
+<img src='calvin.jpg' />
+</center>
+
 **Goal:**
 Write something about data mining *that other people want to read*.
 
@@ -44,9 +48,14 @@ Possible topics include:
 
     1. https://izbicki.me/blog/how-to-create-an-unfair-coin-and-prove-it-with-math.html
 
+    1. redo the SLT homework for neural networks/ensembles/decision trees
+
 1. Write a tutorial for a data mining library
 
 1. Contributing to the documentation of a data mining library
+
+I encourage you to pick a topic that's related to something else you are also working on
+(another class, research, senior thesis, etc.).
 
 **Publishing:**
 You may publish your writeup anywhere online that is convenient for you,
@@ -77,7 +86,7 @@ that's what your grade will be.
 | 5  / 20       | B                | >500      | >25            | >25                | >25      | >25            |
 | 2  / 20       | B-               |           |                |                    |          |                |
 
-(*) This is the grade you'd get in the course if you've completed all the other
+(*) This is the grade you'd get in the course if your grade on the non-project portion of the course is 90%.
 
 *I may choose to raise your grade if I feel that it was better than the social media engagement indicates.*
 
