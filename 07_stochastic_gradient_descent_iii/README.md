@@ -10,6 +10,8 @@ In class, we will be going over the material from the official PyTorch tutorial:
 
 ## Assignment
 
+**Due:** Sunday, 25 October at midnight
+
 The goal of this first assignment is to ensure that you have pytorch and tensorboard working correctly together,
 and to start getting a feel for how the learning rate effects your prediction results.
 
