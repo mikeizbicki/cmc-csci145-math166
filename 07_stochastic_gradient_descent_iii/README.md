@@ -1,5 +1,7 @@
 # SGD III: Implementation in PyTorch
 
+<img width=80% src=tensorboard-scalars.png />
+
 There are no notes this week for you to complete :)
 
 Instead, we will be transition to more coding based work.
