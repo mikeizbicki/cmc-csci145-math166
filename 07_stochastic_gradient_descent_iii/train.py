@@ -22,6 +22,7 @@ args = parser.parse_args()
 
 # load libraries
 import os
+import random
 import sys
 import logging
 logging.basicConfig(
@@ -84,8 +85,11 @@ reg = lambda w: torch.norm(w)**2
 
 mean = lambda xs: sum(xs)/len(xs)
 
-L_S = lambda w: mean([ logistic_loss(Y_train[i] * X_train[i,:].t() @ w_t) for i in range(args.m) ])
-L_D = lambda w: mean([ logistic_loss(Y_test [i] * X_test [i,:].t() @ w_t) for i in range(args.m_test) ])
+L_S = lambda w: mean([ logistic_loss(Y_train[i] * X_train[i,:].t() @ w) for i in range(args.m) ])
+L_D = lambda w: mean([ logistic_loss(Y_test [i] * X_test [i,:].t() @ w) for i in range(args.m_test) ])
+
+err_S = lambda w: mean([ 1 if Y_train[i] * X_train[i,:].t() @ w < 0 else 0 for i in range(args.m) ])
+err_D = lambda w: mean([ 1 if Y_test [i] * X_test [i,:].t() @ w < 0 else 0 for i in range(args.m_test) ])
 
 # training loop
 for t in range(args.T):
@@ -96,22 +100,28 @@ for t in range(args.T):
     if args.algorithm=='gd':
         loss = L_S(w_t) + args.lambda_*reg(w_t)
     elif args.algorithm=='sgd':
+        i = random.randint(0,args.m)
+        loss = logistic_loss(Y[i] * X[i].t() @ w_t) + args.lambda_*reg(w_t)
+        '''
         loss = logistic_loss(Y[t%args.m] * X[t%args.m,:].t() @ w_t) + args.lambda_*reg(w_t)
+        '''
     loss.backward()
 
     # panic on nan
+    '''
     if torch.isnan(loss).any():
         logging.error('loss is nan')
         sys.exit(1)
+    '''
 
     with torch.no_grad():
 
         # perform the gradient update steps
         v_t = w_t.grad
         w_t = w_t - args.eta * v_t
+        ws.append(w_t)
 
         # compute wbar
-        ws.append(w_t)
         wbar = (1/len(ws)) * sum(ws)
         loss_wbar = L_S(wbar)
 
@@ -119,7 +129,12 @@ for t in range(args.T):
         writer.add_scalar('optimization/norm(v_t)', torch.norm(v_t), t)
         writer.add_scalar('optimization/loss', loss, t)
 
-        writer.add_scalar('results/L_S(w_t)' , L_S(w_t) , t)
-        writer.add_scalar('results/L_S(wbar)', L_S(wbar), t)
-        writer.add_scalar('results/L_D(w_t)' , L_D(w_t) , t)
-        writer.add_scalar('results/L_D(wbar)', L_D(wbar), t)
+        writer.add_scalar('L_/L_S(w_t)' , L_S(w_t) , t)
+        writer.add_scalar('L_/L_S(wbar)', L_S(wbar), t)
+        writer.add_scalar('L_/L_D(w_t)' , L_D(w_t) , t)
+        writer.add_scalar('L_/L_D(wbar)', L_D(wbar), t)
+
+        writer.add_scalar('err_/err_S(w_t)' , err_S(w_t) , t)
+        writer.add_scalar('err_/err_S(wbar)', err_S(wbar), t)
+        writer.add_scalar('err_/err_D(w_t)' , err_D(w_t) , t)
+        writer.add_scalar('err_/err_D(wbar)', err_D(wbar), t)
