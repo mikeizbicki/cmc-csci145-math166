@@ -45,6 +45,7 @@ except FileExistsError:
     sys.exit(1)
 
 # load tensorboard
+# NOTE:
 # tensorboard is part of the tensorflow library, not pytorch;
 # tensorflow has an annoying habbit of printing tons of debugging information;
 # the os.environ line disables printing this information before performing the import
@@ -126,6 +127,8 @@ for t in range(args.T):
         loss_wbar = L_S(wbar)
 
         # log to tensorboard
+        # FIXME:
+        # why is this so slow?
         writer.add_scalar('optimization/norm(v_t)', torch.norm(v_t), t)
         writer.add_scalar('optimization/loss', loss, t)
 

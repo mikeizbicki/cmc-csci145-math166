@@ -1,23 +1,8 @@
 #!/usr/bin/python3
 
-print('test')
-
 import torch
 
 x = torch.Tensor([1,2,3])
-
-print("x=",x)
-print("x.shape=",x.shape)
-
-M = torch.Tensor([[1,2,3],[3,4,5]])
-print("M.shape=",M.shape)
-
-print("M @ x=",M @ x)
-#print("x @ M=",x @ M)
-
-
-# pytorch provides automatic differentiation
-# different than symbolic differentiation and numeric differentiation
 
 def f(x):
     r = 1
