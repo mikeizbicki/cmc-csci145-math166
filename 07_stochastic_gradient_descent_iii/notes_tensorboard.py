@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+'''
+Tensorboard is a library for generating plots that can be used to debug data mining algorithms.
+This short note demonstrates how to create plots with tensorboard.
+'''
 
 import math
 
