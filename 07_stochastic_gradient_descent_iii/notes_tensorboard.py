@@ -2,22 +2,22 @@
 
 import math
 
-# disables excessive warning messages caused by tensorflow
+# disable excessive warning messages caused by tensorflow
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 # load pytorch's interface into the tensorboard library
-from torch.utils.tensorboard import SummaryWriter
-
 # NOTE:
 # tensorboard is technically part of the tensorflow library,
 # which is Google's version of the pytorch library
-
-# creates the object that we can draw graphs with
-# the parameter is a directory path,
-# and it must have exactly two folders inside of it
+# NOTE:
+# create the object that we can draw graphs with;
+# the parameter is a path, and it must have exactly two folders inside of it
+from torch.utils.tensorboard import SummaryWriter
 writer = SummaryWriter('set_of_experiments/experiment_name')
 
+# create an example plot
+# NOTE:
 # writer.add_scalar is the main method for creating plots
 # parameter 1: plot name
 # parameter 2: x value
@@ -27,7 +27,7 @@ writer.add_scalar('category/plot', 1, 1)
 writer.add_scalar('category/plot', 1, 2)
 writer.add_scalar('category/plot', 1, 3)
 
-# more example plots below
+# create more example plots
 for i in range(10):
     writer.add_scalar('category/plot2', -i, i)
 
