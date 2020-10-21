@@ -3,6 +3,7 @@
 import math
 
 # disable excessive warning messages caused by tensorflow
+# see: https://stackoverflow.com/questions/35911252/disable-tensorflow-debugging-information
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -11,8 +12,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 # tensorboard is technically part of the tensorflow library,
 # which is Google's version of the pytorch library
 # NOTE:
-# create the object that we can draw graphs with;
-# the parameter is a path, and it must have exactly two folders inside of it
+# the parameter to SummaryWriter is a path,
+# and it must have exactly two folders inside of it
 from torch.utils.tensorboard import SummaryWriter
 writer = SummaryWriter('set_of_experiments/experiment_name')
 
