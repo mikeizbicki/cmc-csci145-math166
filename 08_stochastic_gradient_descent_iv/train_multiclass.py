@@ -99,7 +99,8 @@ class LinearModel(torch.nn.Module):
     # that is, it defines everything to the "left of the colon"
     # (but traditionally does not include the loss function)
     def forward(self, x):
-        return x @ self.w
+        out = x @ self.w
+        return out
 
     # NOTE:
     # the torch.nn.Module class contains the following definition
@@ -117,7 +118,7 @@ logging.info('param_size='+str(param_sizes))
 # linear models are a fundamental data mining tool,
 # and so the hypothesis class of linear models is built-in to pytorch
 '''
-h = torch.nn.Linear(in_features=[args.d], out_features=[1], bias=False)
+h = torch.nn.Linear(in_features=[args.d], out_features=[args.k], bias=False)
 '''
 
 # define our loss functions
@@ -133,8 +134,25 @@ reg = lambda h: sum([torch.norm(w)**2 for w in h.parameters()])
 # recall that both of these optimizers have the same update equations,
 # they just use a different value for the gradient;
 # by choosing our loss function below, we choose which algorithm will be employed;
-# there are many other optimizers implemented in torch as well
 optimizer = torch.optim.SGD(h.parameters(), lr=args.eta)
+
+# NOTE:
+# there are many other optimizers implemented in torch as well;
+# for a full list, see: https://pytorch.org/docs/stable/optim.html
+# uncommenting the line below will enable the Adam optimizer;
+# Adam and SGD are the two most popular optimizers used in practice;
+# for details of the adam optimizer, see: https://arxiv.org/abs/1412.6980
+'''
+optimizer = torch.optim.Adam(h.parameters(), lr=args.eta)
+'''
+
+# NOTE:
+# What's the difference between SGD and the other optimizers?
+# SGD has proofs bounding both the *generalization error* L_S(w_t) - L_D(w_t)
+# and the training error L_S(w_t) - L_S(w^*);
+# the other optimizers have proofs bounding only the training error L_S(w_t) - L_S(w^*),
+# and the generalization error can be arbitrarily bad
+# See: https://arxiv.org/abs/1705.08292
 
 # training loop
 for t in range(args.T):

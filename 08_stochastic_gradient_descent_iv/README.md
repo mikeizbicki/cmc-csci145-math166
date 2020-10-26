@@ -1,6 +1,6 @@
 # SGD IV: Implementation in PyTorch
 
-<img width=80% src=20080316.gif />
+<img src=20080316.gif />
 
 We will continue with implementing pytorch models using a more "torchy" style.
 

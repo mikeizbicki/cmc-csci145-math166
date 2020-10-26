@@ -100,7 +100,8 @@ class LinearModel(torch.nn.Module):
     # that is, it defines everything to the "left of the colon"
     # (but traditionally does not include the loss function)
     def forward(self, x):
-        return self.w @ x
+        out = x @ self.w
+        return out
 
     # NOTE:
     # the torch.nn.Module class contains the following definition
@@ -142,8 +143,25 @@ err_D = lambda h: mean([ 1 if Y_test [i] * h(X_test [i,:]) < 0 else 0 for i in r
 # recall that both of these optimizers have the same update equations,
 # they just use a different value for the gradient;
 # by choosing our loss function below, we choose which algorithm will be employed;
-# there are many other optimizers implemented in torch as well
 optimizer = torch.optim.SGD(h.parameters(), lr=args.eta)
+
+# NOTE:
+# there are many other optimizers implemented in torch as well;
+# for a full list, see: https://pytorch.org/docs/stable/optim.html
+# uncommenting the line below will enable the Adam optimizer;
+# Adam and SGD are the two most popular optimizers used in practice;
+# for details of the adam optimizer, see: https://arxiv.org/abs/1412.6980
+'''
+optimizer = torch.optim.Adam(h.parameters(), lr=args.eta)
+'''
+
+# NOTE:
+# What's the difference between SGD and the other optimizers?
+# SGD has proofs bounding both the *generalization error* L_S(w_t) - L_D(w_t)
+# and the training error L_S(w_t) - L_S(w^*);
+# the other optimizers have proofs bounding only the training error L_S(w_t) - L_S(w^*),
+# and the generalization error can be arbitrarily bad
+# See: https://arxiv.org/abs/1705.08292
 
 # training loop
 for t in range(args.T):
@@ -155,10 +173,8 @@ for t in range(args.T):
         loss = L_S(h) + args.lambda_*reg(h)
     elif args.algorithm=='sgd':
         i = random.randint(0,args.m)
+        #i = y%args.m
         loss = logistic_loss(Y[i] * h(X[i])) + args.lambda_*reg(h)
-        '''
-        loss = logistic_loss(Y[t%args.m] * h(X[t%args.m,:])) + args.lambda_*reg(h)
-        '''
     loss.backward()
 
     # panic on nan
