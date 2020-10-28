@@ -180,10 +180,10 @@ Then Theorem 14.11 tells us that after performing $T$ iterations of SGD, we have
 where $W^* = \argmin f(W)$.
 Notice that there is no dependence on $k$ in this inequality!
 
+\newpage
 If we substitute $f(W)=L_D(W)+\lF{W}^2$ into Equation \ref{eq:f-bound} above,
 then we get
 \begin{equation}
-    \label{eq:f-bound}
     \E L_D(\bar W) - L_D(W^*) 
     \le \frac{4\rho^2}{\lambda T} ( 1 + \log T) + \tfrac\lambda2\lF{W^*}^2 - \tfrac\lambda2\lF{\bar W}^2
     \le \frac{4\rho^2}{\lambda T} ( 1 + \log T) + \frac{\lambda k B^2}{2}
