@@ -1,0 +1,294 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{natbib}
+\usepackage[inline]{enumitem}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{defn}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{fact}{Fact}
+
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\vcdim}{VCdim}
+\DeclareMathOperator{\E}{\mathbb E}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\softmax}{softmax}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+\newcommand{\epsapp}{\epsilon_{\text{app}}}
+\newcommand{\epsest}{\epsilon_{\text{est}}}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\aaa}{\mathbf a}
+\newcommand{\vv}{\mathbf v}
+\newcommand{\uu}{\mathbf u}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\dist}[2]{d_{{#1},{#2}}}
+
+\newcommand{\h}{\mathcal H}
+\newcommand{\D}{\mathcal D}
+\DeclareMathOperator*{\erm}{ERM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+\Huge
+Notes: Multivariate Classification with SGD
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{References}
+
+\begin{enumerate}
+    \item
+        The textbook covers multivariate classification in Chapter 17.
+    \item
+        \url{https://chrisyeh96.github.io/2018/06/11/logistic-regression.html}
+\end{enumerate}
+
+\section{Multivariate classification background}
+
+The softmax function is defined to be
+\begin{align}
+    \softmax &: \R^d \to \R^d \\
+    \softmax(\aaa)_i &= \frac {\exp(\aaa_i)}{\sum_{j=1}^d \exp(\aaa_j)}
+\end{align}
+the softmax function has the important property that it ``squashes'' its input vector into a probability distribution.
+
+The loss function used in multi-class classification is called the ``softmax cross entropy'' loss,
+and is the result of composing the softmax function above with the cross entropy
+(which is a way to measure the difference of probability distributions).
+
+Assume we are solving a multi-class classification problem with $k$ classes and $d$ input dimensions.
+The softmax cross entropy loss is given by
+\begin{equation}
+    \ell(W;(\x,y)) = - \log \frac {\exp(-\trans\w_y \x)}{\sum_{j=1}^k \exp(-\trans \w_j \x)}
+\end{equation}
+where for each class $i\in[k]$,
+$\w_i : \R^d$ is the parameter vector associated with class $i$;
+the variable $W : \R^{k \times d} = (\w_1; \w_2; ...; \w_k)$ is the full parameter matrix;
+$\x : \R^d$ is the feature vector;
+and $y \in [k]$ is the class label.
+
+\newpage
+\section{Loss function properties}
+
+\begin{fact}
+    The softmax cross entropy function $\loss$ is convex with respect to $W$.
+\end{fact}
+
+\begin{fact}
+    Assume that $\ltwo{\x}\le \rho$.
+    Then softmax cross entropy function $\loss$ is $\rho$-Lipschitz with respect to $W$.
+\end{fact}
+
+\begin{fact}
+    For each class $i \in [k]$, assume that $\ltwo{\w_i} \le B$.
+    Then $\lF{W} \le \sqrt kB$.
+\end{fact}
+    %\item 
+        %All data points in the dataset satisfy $\ltwo{\x} \le \rho$.
+        %This implies that the loss function $\ell(W; (\x,y))$ is $\rho$-Lipschitz with respect to $W$.
+%\end{enumerate}
+
+\noindent
+Theorem 14.8 of Shalev-Shwartz and Ben-David then states that if SGD is run for $T$ iterations to compute parameter estimate $\bar W$,
+then
+\begin{equation}
+    \E L_S(\bar W) - L_S(W^*) \le \frac {\sqrt kB\rho}{\sqrt T}
+\end{equation}
+where $W^* = \argmin L_S(W)$.
+
+Theorem 14.12 of Shalev-Shwartz and Ben-David then states that if SGD is run for $T$ iterations to compute parameter estimate $\bar W$,
+then
+\begin{equation}
+    \E L_D(\bar W) - L_D(W^*) \le \frac {\sqrt kB\rho}{\sqrt T}
+\end{equation}
+where $W^* = \argmin L_D(W)$.
+
+\newpage
+\noindent\emph{Page intentionally left blank for handwritten notes.}
+\newpage
+\section{L2 regularization}
+
+Recall that when we apply L2 regularization,
+we are minimizing the objective function
+\begin{equation}
+    f(W) = \tfrac 1 m \sum_{i=1}^m \loss(W; (\x_i,y_i)) + \tfrac\lambda2\lF{W}^2
+    .
+\end{equation}
+This function is $\lambda$-strongly convex in $W$.
+(Why?)
+
+\vspace{3in}
+\noindent
+Then Theorem 14.11 tells us that after performing $T$ iterations of SGD, we have that
+\begin{equation}
+    \label{eq:f-bound}
+    \E f(\bar W) - f(W^*) \le \frac{4\rho^2}{\lambda T} ( 1 + \log T)
+\end{equation}
+where $W^* = \argmin f(W)$.
+Notice that there is no dependence on $k$ in this inequality!
+
+If we substitute $f(W)=L_D(W)+\lF{W}^2$ into Equation \ref{eq:f-bound} above,
+then we get
+\begin{equation}
+    \label{eq:f-bound}
+    \E L_D(\bar W) - L_D(W^*) 
+    \le \frac{4\rho^2}{\lambda T} ( 1 + \log T) + \tfrac\lambda2\lF{W^*}^2 - \tfrac\lambda2\lF{\bar W}^2
+    \le \frac{4\rho^2}{\lambda T} ( 1 + \log T) + \frac{\lambda k B^2}{2}
+    .
+\end{equation}
+
+\newpage
+\section{What to do when $k$ is big?}
+
+A common way to reduce sample complexity when $k$ is large is to factor the parameter matrix as $W = VU$,
+where $V : \R ^ {k \times e}$, $U : \R^{e \times d}$, and $e<\!<\!k$.
+Then, each $\w_i = \vv_i U$, and the cross entropy softmax loss is
+\begin{equation}
+    \ell(VU;(\x,y)) = - \log \frac {\exp(-\trans\vv_y U \x)}{\sum_{j=1}^k \exp(-\trans \vv_j U \x)}
+    .
+\end{equation}
+
+%If $V$ is known a priori, then only the $U$ matrix must be learned,
+%and the sample complexity reduces from $O(k\sqrt{T})$ to $O(e/\sqrt{T})$.
+%Since $e <\!\!< k$ by assumption, this is a significant improvement.
+
+\begin{fact}
+    The softmax cross entropy function $\loss$ is convex with respect to $U$ and $V$.
+\end{fact}
+
+\begin{fact}
+    Assume that $\ltwo{\x}\le \rho$.
+    Then softmax cross entropy function $\loss$ is $\rho$-Lipschitz with respect to $U$ and $V$.
+\end{fact}
+
+\begin{fact}
+    \begin{enumerate*}[label=(\roman*)]
+        \item
+    For each class $i \in [k]$, assume that $\ltwo{\vv_i} \le 1$.
+    Then, $\lF{V} \le \sqrt k$.
+        \item
+    Let $\uu_i$ denote the $i$th column of $U$.
+    For each column $i \in [e]$, assume that $\ltwo{\uu_i} \le B$.
+    Then $\lF{U} \le \sqrt eB$.
+        %\item
+    %If a matrix $W$ can be factored into the product of matrices $VU$,
+    %and $W$ satisfies Fact 3,
+    %then $V$ and $U$ can be chosen to satisfy the facts above.
+    \end{enumerate*}
+\end{fact}
+
+\noindent
+Assume that $V$ is fixed and known in advance.
+Theorem 14.12 of Shalev-Shwartz and Ben-David then states that if SGD is run for $T$ iterations to compute parameter estimate $\bar U$,
+then
+\begin{equation}
+    \E L_D(V\bar U) - L_D(VU^*) \le \frac {\sqrt eB\rho}{\sqrt T}
+\end{equation}
+where $U^* = \argmin_U L_D(VU)$.
+(A similar result holds for $L_S$ based on Theorem 14.8.)
+
+Assume that $U$ is fixed and known in advance.
+Theorem 14.12 of Shalev-Shwartz and Ben-David then states that if SGD is run for $T$ iterations to compute parameter estimate $\bar U$,
+then
+\begin{equation}
+    \E L_D(\bar VU) - L_D(V^*U) \le \frac {\sqrt k\rho}{\sqrt T}
+\end{equation}
+where $V^* = \argmin_V L_D(VU)$.
+(A similar result holds for $L_S$ based on Theorem 14.8.)
+
+\newpage
+\section{Open Research Problem (very informal discussion)}
+
+The limitation of the previous technique is that the class labels must have a linear structure.
+In this section, we review how to take advantage of arbitrary metric structure.
+
+Let $\mathcal L$ be a metric space of labels,
+and $\dist i j$ be the distance between class labels $i$ and $j$.
+
+Build a ``cover tree'' from the class labels.
+Let $p_i$ denote the parent label for class $i$.
+Then we can rewrite that parameter vector for each class $i$ as
+\begin{equation}
+    \w_i = \vv_i + \w_{p_i}
+    .
+\end{equation}
+Then the goal is to learn the $\vv_i$ vectors instead of the $\w_i$ vectors.
+The matrix $V=(\vv_1,...,\vv_k)$ can be bounded to have size $\sqrt{\dim(\mathcal L)}B$.
+
+It then follows from Theorem 14.12 of Shalev-Shwartz and Ben-David that if SGD is run for $T$ iterations to compute parameter estimate $\bar W$,
+then
+\begin{equation}
+    \E L_D(\bar W) - L_D(W^*) \le \frac {\sqrt {\dim \mathcal L}B\rho}{\sqrt T}
+\end{equation}
+where $W^* = \argmin L_D(W)$.
+
+%\subsection{Goal}
+%
+%Some classes
+%
+%\begin{align}
+    %\Pr(Y = i | X) \approx \Pr(Y = j | X) \qquad\text{if}\qquad i \approx j
+%\end{align}
+%
+%\begin{align}
+    %&| \log\Pr(Y = a | X) -  \log\Pr(Y = b | X) |
+    %\\&= | \trans\w_a \x + \log \sum_j \exp(-\trans\w_j \x) - \trans\w_b - \log \sum_j \exp(-\trans\w_j \x) |
+    %\\&= | \trans\w_a \x - \trans\w_b \x |
+    %\\&= | (\trans\w_a - \trans\w_b ) \x |
+    %\\&\le | \trans\w_a - \trans\w_b | | \x |
+    %\\&\le \dist a b | \x |
+%\end{align}
+
+\end{document}
+
+
