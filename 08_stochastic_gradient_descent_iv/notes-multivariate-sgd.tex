@@ -205,13 +205,17 @@ Then, each $\w_i = \vv_i U$, and the cross entropy softmax loss is
 %and the sample complexity reduces from $O(k\sqrt{T})$ to $O(e/\sqrt{T})$.
 %Since $e <\!\!< k$ by assumption, this is a significant improvement.
 
+\noindent
+For each fact below, assume that $V$ is fixed.
+(That is, we are only learning $U$.)
+
 \begin{fact}
-    The softmax cross entropy function $\loss$ is convex with respect to $U$ and $V$.
+    The softmax cross entropy function $\loss$ is convex with respect to $U$.
 \end{fact}
 
 \begin{fact}
     Assume that $\ltwo{\x}\le \rho$.
-    Then softmax cross entropy function $\loss$ is $\rho$-Lipschitz with respect to $U$ and $V$.
+    Then softmax cross entropy function $\loss$ is $\rho$-Lipschitz with respect to $U$.
 \end{fact}
 
 \begin{fact}
@@ -240,14 +244,14 @@ then
 where $U^* = \argmin_U L_D(VU)$.
 (A similar result holds for $L_S$ based on Theorem 14.8.)
 
-Assume that $U$ is fixed and known in advance.
-Theorem 14.12 of Shalev-Shwartz and Ben-David then states that if SGD is run for $T$ iterations to compute parameter estimate $\bar U$,
-then
-\begin{equation}
-    \E L_D(\bar VU) - L_D(V^*U) \le \frac {\sqrt k\rho}{\sqrt T}
-\end{equation}
-where $V^* = \argmin_V L_D(VU)$.
-(A similar result holds for $L_S$ based on Theorem 14.8.)
+%Assume that $U$ is fixed and known in advance.
+%Theorem 14.12 of Shalev-Shwartz and Ben-David then states that if SGD is run for $T$ iterations to compute parameter estimate $\bar U$,
+%then
+%\begin{equation}
+    %\E L_D(\bar VU) - L_D(V^*U) \le \frac {\sqrt k\rho}{\sqrt T}
+%\end{equation}
+%where $V^* = \argmin_V L_D(VU)$.
+%(A similar result holds for $L_S$ based on Theorem 14.8.)
 
 \newpage
 \section{Open Research Problem (very informal discussion)}
