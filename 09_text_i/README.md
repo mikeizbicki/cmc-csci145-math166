@@ -1,9 +1,15 @@
-# Text: Part I
+# Text I: Transformers
 
 We will apply the theory we have learned so far to text classification tasks.
 In the first part, we will use the `transformers` library to generate features from text for us.
 
+Transformers is a technique from deep learning that is relatively easy to use, and gives state of the art classification accuracies.
+As we will see, it is also very resource intensive (both time and memory),
+and provides little insight into the data.
+
 ## Homework
+
+**Due:** Sunday, 8 Nov midnight
 
 The `train.py` file trains a model for predicting which congressional representative sent a tweet given only its text.
 You should download the training data from either:
