@@ -15,7 +15,7 @@ parser_hyperparam.add_argument('--e', type=int, default=2)
 parser_hyperparam.add_argument('--lambda', dest='lambda_', type=float, default=0.0)
 parser_hyperparam.add_argument('--optimizer',default='SGD')
 parser_hyperparam.add_argument('--batch_size',type=int,default=32)
-parser_hyperparam.add_argument('--feature_generator',default='albert-base-v2')
+parser_hyperparam.add_argument('--feature_generator',default='t5-small')
 
 parser_debug = parser.add_argument_group('debug')
 parser_debug.add_argument('--logdir', default='log')
@@ -71,7 +71,7 @@ logging.info('device='+str(device))
 if args.mode=='train':
     logdir = os.path.join(
         args.logdir,
-        'feature_generator='+args.feature_generator+',optimizer='+args.optimizer+',eta='+str(args.eta)+'batch_size='+str(args.batch_size)+',e='+str(args.e)+',lambda='+str(args.lambda_)
+        'feature_generator='+args.feature_generator.replace('/','-')+',optimizer='+args.optimizer+',eta='+str(args.eta)+'batch_size='+str(args.batch_size)+',e='+str(args.e)+',lambda='+str(args.lambda_)
         )
     try:
         os.makedirs(logdir)
@@ -153,7 +153,8 @@ feature_generator = transformers.AutoModel.from_pretrained(args.feature_generato
 def make_features(x):
     '''
     given a list of b strings as input,
-    return a tensor of shape [b,768] that represents the features of the strings
+    return a tensor of shape [b,feature_generator_dimensions] 
+    that represents the features of the strings
     '''
     encoding = tokenizer.batch_encode_plus(
         x,
@@ -163,10 +164,12 @@ def make_features(x):
         return_tensors = 'pt',
         )
     with torch.no_grad():
+        del encoding['token_type_ids']
         last_layer,embedding = feature_generator(**encoding) 
     last_layer.to(device)
     features = torch.mean(last_layer,dim=1)
     return features
+feature_generator_dimensions = make_features(['this is a test']).shape[1]
 
 # define the hypothesis class
 class FactoredLinear(torch.nn.Module):
@@ -176,7 +179,7 @@ class FactoredLinear(torch.nn.Module):
     '''
     def __init__(self):
         super().__init__()
-        self.linear1 = torch.nn.Linear(768,args.e)
+        self.linear1 = torch.nn.Linear(feature_generator_dimensions,args.e)
         self.linear2 = torch.nn.Linear(args.e,len(class_labels))
 
     def forward(self,x):
