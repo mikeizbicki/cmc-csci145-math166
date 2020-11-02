@@ -150,7 +150,7 @@ dataloader = DataLoader(Dataset(), batch_size=args.batch_size)
 tokenizer = transformers.AutoTokenizer.from_pretrained(args.feature_generator)
 feature_generator = transformers.AutoModel.from_pretrained(args.feature_generator)
 
-def make_features(x):
+def make_features_batch(x):
     '''
     given a list of b strings as input,
     return a tensor of shape [b,feature_generator_dimensions] 
@@ -169,7 +169,7 @@ def make_features(x):
     last_layer.to(device)
     features = torch.mean(last_layer,dim=1)
     return features
-feature_generator_dimensions = make_features(['this is a test']).shape[1]
+feature_generator_dimensions = make_features_batch(['this is a test']).shape[1]
 
 # define the hypothesis class
 class FactoredLinear(torch.nn.Module):
@@ -211,7 +211,7 @@ for t, batch in enumerate(dataloader):
     logging.info("t="+str(t))
 
     if args.mode=='feature_generation':
-        features = make_features(batch['text'])
+        features = make_features_batch(batch['text'])
         with open('features2.jsonl','x') as f:
             for i in range(args.batch_size):
                 data = json.dumps({
@@ -223,7 +223,7 @@ for t, batch in enumerate(dataloader):
 
     elif args.mode=='train':
         if 'features' not in batch:
-            batch['features'] = make_features(batch['text'])
+            batch['features'] = make_features_batch(batch['text'])
 
         # compute the derivative of h
         optimizer.zero_grad()
@@ -252,3 +252,4 @@ for t, batch in enumerate(dataloader):
         # implement this
         # HINT:
         # use the torch.topk function https://pytorch.org/docs/stable/generated/torch.topk.html
+        # print the shape of EVERY tensor you create
