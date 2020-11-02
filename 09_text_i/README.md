@@ -1,7 +1,7 @@
 # Text I: Transformers
 
 We will apply the theory we have learned so far to text classification tasks.
-In the first part, we will use the `transformers` library to generate features from text for us.
+In the first part, we will use the [transformers library](https://huggingface.co/transformers/) to generate features from text for us.
 
 Transformers is a technique from deep learning that is relatively easy to use, and gives state of the art classification accuracies.
 As we will see, it is also very resource intensive (both time and memory),
