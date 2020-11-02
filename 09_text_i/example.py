@@ -10,7 +10,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import torch
 import transformers
 
-# load the model
+# load the feature generators
 # NOTE:
 # see https://huggingface.co/transformers/pretrained_models.html for more examples
 #feature_generator = 'bert-base-uncased'
@@ -33,6 +33,7 @@ def make_features(x):
     features = torch.mean(last_layer,dim=1)
     return features
 
+# generate features
 features = make_features('this is a test')
 print("features.shape=",features.shape)
 
