@@ -250,3 +250,5 @@ for t, batch in enumerate(dataloader):
         # calculate accuracy@k
         # FIXME:
         # implement this
+        # HINT:
+        # use the torch.topk function https://pytorch.org/docs/stable/generated/torch.topk.html
