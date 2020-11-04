@@ -9,6 +9,10 @@
 \usepackage{natbib}
 \usepackage[inline]{enumitem}
 
+\usepackage{CJKutf8}
+%\usepackage[english,vietnamese]{babel}
+\usepackage[utf8]{vietnam} 
+
 \usepackage{color}
 \usepackage{colortbl}
 \definecolor{deepblue}{rgb}{0,0,0.5}
@@ -43,7 +47,7 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\softmax}{softmax}
 
-\newcommand{\I}{\mathbf I}
+%\newcommand{\I}{\mathbf I}
 \newcommand{\Q}{\mathbf Q}
 \newcommand{\p}{\mathbf P}
 \newcommand{\pb}{\bar {\p}}
@@ -68,7 +72,7 @@
 
 \newcommand{\dist}[2]{d_{{#1},{#2}}}
 
-\newcommand{\h}{\mathcal H}
+%\newcommand{\h}{\mathcal H}
 \newcommand{\D}{\mathcal D}
 \DeclareMathOperator*{\erm}{ERM}
 
@@ -103,8 +107,14 @@ Keep in mind the differences between bayes error, approximation error, and estim
 
 \section{Text}
 \begin{problem}
+    Why is text data difficult?
+\end{problem}
+
+\newpage
+\begin{problem}
     What is the difference between a \emph{distributed} encoding and a \emph{1-hot} encoding?
 \end{problem}
+\vspace{5in}
 
 \newpage
 \begin{problem}
@@ -122,14 +132,34 @@ Keep in mind the differences between bayes error, approximation error, and estim
             \vspace{3in}
         \item The synonym problem
             \vspace{3in}
-        \item The conjugation problem
-            \vspace{3in}
-        \item The tokenization problem
-            \vspace{3in}
         \item The punctuation problem
 
             See: \url{https://digitalsynopsis.com/tools/punctuation-marks-importance-rules-usage/}
-            \vspace{3in}
+            \vspace{1in}
+        \item The tokenization problem
+
+            {
+                \renewcommand{\arraystretch}{1.5}
+            \begin{tabular}{ll}
+                English & I love data mining \\
+                Spanish & Me encanta la minería de datos \\
+                Chinese & \begin{CJK}{UTF8}{bsmi}我喜歡數據挖掘\end{CJK} \\
+                Vietnamese & Tôi thích khai thác dữ liệu \\
+            \end{tabular}
+            }
+            \vspace{1in}
+        \item The compound word problem
+
+            {
+                \renewcommand{\arraystretch}{1.5}
+            \begin{tabular}{ll}
+                English & Danube steam ship company captain \\
+                German & Donaudampfschiffahrtsgesellschaftskapit \\
+            \end{tabular}
+            }
+            \vspace{1in}
+        \item The conjugation problem
+            \vspace{2in}
         \item The Unicode problem\textbf{S}
             
             See the video ``Unicode and Python: the absolute minimum you need to know'': \url{https://www.youtube.com/watch?v=oXVmZGN6plY}
