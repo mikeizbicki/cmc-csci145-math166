@@ -164,7 +164,8 @@ def make_features_batch(x):
         return_tensors = 'pt',
         )
     with torch.no_grad():
-        del encoding['token_type_ids']
+        if 'token_type_ids' in encoding:
+            del encoding['token_type_ids']
         last_layer,embedding = feature_generator(**encoding) 
     last_layer.to(device)
     features = torch.mean(last_layer,dim=1)
@@ -192,7 +193,10 @@ class FactoredLinear(torch.nn.Module):
         out = self.linear2(out)
         return out
 
-h = FactoredLinear()
+if args.e is None:
+    h = torch.nn.Linear(feature_generator_dimensions,len(class_labels))
+else:
+    h = FactoredLinear()
 h.to(device)
 
 # define our loss functions
