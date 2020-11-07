@@ -9,7 +9,7 @@ and provides little insight into the data.
 
 ## Homework
 
-**Due:** Sunday, 8 Nov midnight
+**Due:** Wednesday, 11 Nov midnight
 
 The `train.py` file trains a model for predicting which congressional representative sent a tweet given only its text.
 
