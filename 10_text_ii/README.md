@@ -136,7 +136,7 @@ It should have only a single run displayed with the smoothing parameter set to 0
 Upload the screenshot along with the hyperparameters you used to generate that run to sakai.
 The following is an example 100% submission:
 
-<img src=example-submission.png />
+<img src=example-submission-fixed.png />
 
 If you achieve the desired accuracy@1 and @3 scores, you will get full credit on the assignment,
 otherwise you will lose points depending on how far you fall short.
