@@ -349,7 +349,7 @@ for epoch in range(args.max_epochs):
 
     # write the accuracies to tensorboard
     for k in args.ks:
-        writer.add_scalar('test_acc/@'+str(k), test_acc[k]/test_dp, epoch)
+        writer.add_scalar('test_acc/@'+str(k), test_acc[k]/float(test_dp), epoch)
 
     # write class embeddings to tensorboard
     writer.add_embedding(
