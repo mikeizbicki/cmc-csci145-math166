@@ -1,0 +1,222 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{natbib}
+\usepackage[inline]{enumitem}
+
+\usepackage{CJKutf8}
+%\usepackage[english,vietnamese]{babel}
+\usepackage[utf8]{vietnam} 
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{defn}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{fact}{Fact}
+
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\vcdim}{VCdim}
+\DeclareMathOperator{\E}{\mathbb E}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\softmax}{softmax}
+
+%\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+\newcommand{\epsapp}{\epsilon_{\text{app}}}
+\newcommand{\epsest}{\epsilon_{\text{est}}}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\aaa}{\mathbf a}
+\newcommand{\vv}{\mathbf v}
+\newcommand{\uu}{\mathbf u}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\dist}[2]{d_{{#1},{#2}}}
+
+%\newcommand{\h}{\mathcal H}
+\newcommand{\D}{\mathcal D}
+\DeclareMathOperator*{\erm}{ERM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+\Huge
+Notes: word2vec 
+
+\Large
+\noindent
+    (and related distributed embeddings)
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+References:
+
+\begin{enumerate}
+    \item high level overview: \url{https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/}
+    \item details with math: \url{http://arxiv.org/abs/1402.3722v1}
+\end{enumerate}
+
+\noindent
+Related methods:
+
+\begin{enumerate}
+    \item fastText: \url{https://fasttext.cc}
+    \item doc2vec: \url{https://arxiv.org/abs/1405.4053}
+\end{enumerate}
+
+\noindent
+Applications:
+
+\begin{enumerate}
+    \item translating with word2vec \url{https://arxiv.org/abs/1309.4168}
+    \item gender bias: \url{http://wordbias.umiacs.umd.edu/}
+    \item racial bias: \url{https://www.pnas.org/content/115/16/E3635/tab-figures-data}
+    \item histwords: \url{https://nlp.stanford.edu/projects/histwords}
+    \item temporal word analogies: \url{https://www.aclweb.org/anthology/P17-2071}
+    \item political words: \url{https://arxiv.org/abs/1711.0560}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Word2Vec}
+\begin{problem}
+    What is a word analogy?
+\end{problem}
+\vspace{3in}
+
+\newpage
+\begin{problem}
+    What is the algorithm for solving word analogies?
+\end{problem}
+\vspace{5in}
+
+\begin{problem}
+    Why can 1-hot encoded vectors not be used for solving word analogies?
+\end{problem}
+
+\newpage
+\begin{problem}
+    Describe the following two word2vec learning problems:
+    \begin{enumerate}
+        \item continuous bag of words
+            \vspace{6in}
+        \item skipgram
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+    We saw in our previous notes that the softmax cross entryopy is the standard loss for multivariate classification problems.
+    The word2vec models do not use this loss function, however.
+    Instead, they use something called \emph{negative sampling}.
+
+    \begin{enumerate}
+        \item
+    Why can word2vec models not use the standard cross entropy loss function for classification?
+\vspace{3in}
+
+            \item
+    Describe the negative sampling loss function.
+    \end{enumerate}
+\end{problem}
+
+%\newpage
+%\begin{problem}
+    %How is Zipf's law related to word2vec models?
+%\end{problem}
+
+\newpage
+\begin{problem}
+    What are the hyperparameters for learning a word2vec model?
+    \begin{enumerate}
+        \item choice of input dataset
+            \vspace{3in}
+        \item how should words be tokenized?
+            \vspace{3in}
+        \item context window size ($c$)
+            \vspace{3in}
+        \item which word2vec model should we pick?
+            \vspace{3in}
+        \item vocabulary size ($v$)
+            \vspace{3in}
+        \item number of dimension ($d$)
+            \vspace{3in}
+        \item number of data points ($m$)
+            \vspace{3in}
+        \item learning rate ($\eta$)
+            \vspace{3in}
+        \item number of negative samples ($s$)
+            \vspace{3in}
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+    What is the relationship between neural networks/deep learning and word2vec?
+\end{problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Related models}
+\begin{problem}
+    What is the fastText model?
+\end{problem}
+
+\newpage
+\begin{problem}
+    What is the doc2text model?
+\end{problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Applications}
+\begin{problem}
+    Other than word analogies, what problems can word vectors solve?
+\end{problem}
+\end{document}
+
+
