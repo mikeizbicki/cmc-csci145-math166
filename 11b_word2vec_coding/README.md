@@ -9,7 +9,7 @@ but complete both extra credits,
 your final percentage will be 91%.
 
 **Due date:**
-~~Wednesday, 25 Nov~~ Sunday, 29 November at midnight
+~~Sunday, 29 November~~ Sunday, 6 December at midnight
 
 ## Task 1
 
