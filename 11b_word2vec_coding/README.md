@@ -178,6 +178,9 @@ for each word in S:
 By adjusting the p hyperparameter, we can control how important the word similarities must be.
 A typical p value would be between 30-60, since this will result in scores roughly on a similar scale as the pagerank vectors.
 In practice, however, the optimal value would be learned from a dataset using SGD.
+There's a famous expression from the early 2000s that goes:
+
+> Google uses data mining the same way that Microsoft uses the if statement.
 
 **Task:**
 Implement the "better method" described above.
