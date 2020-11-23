@@ -109,8 +109,10 @@ At the very bottom of the page in a footer note is probably the best way to do t
 (I want your sweet, sweet, pagerank...)
 
 **Due date:**
-December 4th is the last day of finals week,
-so I will use the engagement stats of your writeup on this date to determine your grade.
+~~December 4th is the last day of finals week,
+so I will use the engagement stats of your writeup on this date to determine your grade.~~
+Monday, Decemeber 7th.
+
 The sooner you publish your writeup, however, the more time you will have for random people on the internet to discover it, and so the more engagement you will get and the better grade you will get.
 
 I recommend having your writeup finished and published before Thanksgiving (**Nov 26**).
