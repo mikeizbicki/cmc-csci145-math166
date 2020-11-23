@@ -77,14 +77,14 @@ Of the four right-most columns that measure engagement with your writeup,
 whichever of those columns is highest,
 that's what your grade will be.
 
-| Project Grade | Course Grade (*) | Pageviews | Reddit Upvotes | HackerNews Upvotes | Retweets | Facebook Likes |
-| ------------- | ---------------- | --------- | -------------- | ------------------ | -------- | -------------- |
-| 20 / 20       | A+               | >5,000    | >200           | >100               | >200     | >200           |
-| 15 / 20       | A                | >3,000    | >150           | >75                | >150     | >150           |
-| 11 / 20       | A-               | >1,500    | >100           | >50                | >100     | >100           |
-| 8  / 20       | B+               | >1,000    | >50            | >35                | >50      | >50            |
-| 5  / 20       | B                | >500      | >25            | >25                | >25      | >25            |
-| 2  / 20       | B-               |           |                |                    |          |                |
+| Project Grade | Course Grade (*) | Pageviews | Reddit Upvotes | HackerNews Upvotes | Retweets | Facebook Likes | Gtihub Stars |
+| ------------- | ---------------- | --------- | -------------- | ------------------ | -------- | -------------- | ------------ |
+| 20 / 20       | A+               | >5,000    | >200           | >100               | >200     | >200           | >200         |
+| 15 / 20       | A                | >3,000    | >150           | >75                | >150     | >150           | >150         |
+| 11 / 20       | A-               | >1,500    | >100           | >50                | >100     | >100           | >100         |
+| 8  / 20       | B+               | >1,000    | >50            | >35                | >50      | >50            | >50          |
+| 5  / 20       | B                | >500      | >25            | >25                | >25      | >25            | >25          |
+| 2  / 20       | B-               |           |                |                    |          |                |              |
 
 (*) This is the grade you'd get in the course if your grade on the non-project portion of the course is 90%.
 
