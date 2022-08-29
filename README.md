@@ -17,7 +17,7 @@ Include these links in the right topic folders:
 -->
 
 <center>
-<img width='60%' src='img/machine_learning_2x.png' />
+<img width='400px' src='img/machine_learning_2x.png' />
 </center>
 
 Important links:
@@ -195,6 +195,8 @@ This is a **hard** class.
 
     Unfortunately, I can't remove the math from this class, and I can't make the class easier.
     Otherwise, you wouldn't be learning the material needed to pass a technical interview / get a good job / go to grad school.
+
+    <img src=math.webp />
 
 > **NOTE:**
 > In all of my other courses, I include required reading/watching tasks to learn about CS/DS culture.
