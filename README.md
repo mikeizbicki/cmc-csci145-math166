@@ -1,4 +1,20 @@
 # CSCI145 / MATH166: Data Mining
+<!--
+FIXME:
+Include these links in the right topic folders:
+
+1. Why I don't like notebooks https://www.youtube.com/watch?v=7jiPeIFXb6U
+
+1. NeurIPS keynote on software engineering in data mining: https://nips.cc/virtual/2020/public/invited_16166.html
+
+1 Tutorial on fairness: https://www.youtube.com/watch?v=jIXIuYdnyyk
+
+1. AUC/ROC curves https://www.youtube.com/watch?v=4jRBRDbJemM
+
+1. A cool fasttext application: https://mixedname.com/english_klingon_feminine_names
+
+1. cross-lingual embeddings: https://ruder.io/cross-lingual-embeddings/
+-->
 
 <center>
 <img width='60%' src='img/machine_learning_2x.png' />
@@ -9,17 +25,6 @@ Important links:
 1. [Data Mining vs Machine Learning vs Artificial Intelligence vs Statistics](https://stats.stackexchange.com/questions/5026/what-is-the-difference-between-data-mining-statistics-machine-learning-and-ai)
 1. [What do data scientists get payed?](https://www.levels.fyi/comp.html?track=Data%20Scientist)
 
-<!--
-FIXME:
-fairness tutorial
-https://www.youtube.com/watch?v=jIXIuYdnyyk
-
-AUC/ROC curves https://www.youtube.com/watch?v=4jRBRDbJemM
-
-Fasttext application:
-https://mixedname.com/english_klingon_feminine_names
--->
-
 ## About the Instructor
 
 |||
@@ -27,10 +32,18 @@ https://mixedname.com/english_klingon_feminine_names
 | Name | Mike Izbicki (call me Mike) |
 | Email | mizbicki@cmc.edu |
 | Office | Adams 216 |
-| Office Hours | MW 3:45-5:00 or by appointment ([see my schedule](https://outlook.office365.com/owa/calendar/45eb28fd4e4f45f4b0d120d17676d937@ClaremontMcKenna.edu/a46ebec5e46b4328abcb964af38795935165582125062542146/calendar.html)) |
+| Office Hours | TBD |
 | Webpage | https://izbicki.me |
 | Research | Machine Learning (see [izbicki.me/research.html](https://izbicki.me/research.html) for some past projects) |
-| Fun Facts | grew up in San Clemente, CA (1 hr south of Claremont)<br/>7 years in the navy, worked on nuclear submarines and at NSA<br/>left Navy as a [conscientious objector](https://www.nytimes.com/2011/02/23/nyregion/23objector.html)<br/>phd/postdoc at UC Riverside<br/>taught in DPRK |
+
+Fun facts:
+1. grew up in San Clemente (~1 hr south of Claremont)
+1. 7 years in the navy
+    1. nuclear submarine officer, personally converted >10g of uranium into pure energy
+    1. worked at National Security Agency (NSA)
+    1. left Navy as a [conscientious objector](https://www.nytimes.com/2011/02/23/nyregion/23objector.html)
+1. phd/postdoc at UC Riverside
+1. taught in [DPRK (i.e. North Korea)](https://pust.co)
 
 ## About the Course
 
@@ -47,20 +60,23 @@ https://mixedname.com/english_klingon_feminine_names
 **Learning Objectives:**
 
 1. Exposure to *research-level* data mining
-    1. Understand the latest algorithms
-    1. But algorithms get outdated fast,
-       and data mining practitioners must be able to read math
+    1. Understand the latest algorithms...
+       but algorithms get outdated fast.
+
+    1. The real goal is to teach you how to read research-level papers and math
 1. Major algorithms
     1. Eigen-methods for data mining
-    1. Logistic regression
+    1. Stochastic gradient descent
+        1. logistic regression
+        1. word2vec
+        1. deep learning (transformers, CNNs, etc.)
+    1. Focus on web/text mining examples
 1. Major concepts
     1. Bias/variance trade-off
     1. Regularization
-1. Major Theorems
-    1. The VC Dimension theorem
-    1. The SGD convergence theorem
-    1. (maybe) The Johnson-Lindenstrauss Lemma
-    1. (probably not) The Cramer-Rao bound and Fisher information
+    1. Theorems
+        1. VC Dimension theorem (fundamental theorem of statistical learning)
+        1. SGD convergence theorem
 1. Feature generation methods
     1. Text (English, non-English)
     1. Social media
@@ -76,21 +92,27 @@ https://mixedname.com/english_klingon_feminine_names
 <!-- FIXME -->
 1. linear algebra
     1. eigenvectors
-1. statistics
-    1. linear/logistic regression
-    1. (no class listed as a prereq in the catalog because there are more than 20 stats classes offered)
 1. computation
     1. big-o analysis
     1. git
     1. use python libraries
     1. generating plots
+1. statistics
+    1. super basic probability
+    1. knowledge of linear/logistic regression helpful
 
 **Textbook:**
 
-All resources are freely available online
+I will provide all the reference material for this class.
+You don't have to buy anything.
 
-1. Understanding Machine Learning: From Theory to Algorithms (freely available [here](https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/))
-1. lots of research papers (5-10)
+1. Lots of research papers / lecture notes
+
+1. *Learning from Data* by Yaser S. Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin
+
+1. *Understanding Machine Learning: From Theory to Algorithms* by Shai Shalev-Shwartz and Shai Ben-David
+
+    Freely available [from Shalev-Shwartz's website](https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/)
 
 <!--
 1. Christopher Bishop's *Pattern Recognition and Machine Learning*.  [Download a free pdf copy from Microsoft Research.](https://www.microsoft.com/en-us/research/people/cmbishop/prml-book/)
@@ -101,57 +123,111 @@ All resources are freely available online
 
 **Grades:**
 
-| Category              | Percent |
-| --------------------- | ------- |
-| Homework              | 80      |
-| Project               | 20      |
+| Category                          | Percent   | Approximate Date    |
+| --------------------------------- | --------- | ------------------- |
+| Projects                          | 30        | Every 2-3 weeks     |
+| Quizzes                           | 0         |                     |
+| Midterm 1 (Pagerank)              | 15        | Week 03             |
+| Midterm 2 (Learning from Data)    | 15        | Week 08             |
+| Midterm 3 (Text mining)           | 15        | Week 13             |
+| Final                             | 25        |                     |
 
-This will be a hard class, but a low-stress class.
+Projects:
+
+1. 5-7 projects
+1. Use scikit-learn and pytorch
+1. All of them must be completed on the lambda server (i.e. using ssh+bash+vim); server has 80 CPUs + 8 GPUs
+1. Some projects will need GPU access
+1. I'm expecting almost everyone will get full credit, and these will act as a "grade boost"
+
+<!--
+| Project: Search Engine I          | 5         | Week 2              |
+| Project: Statistical Learning I   | 5         |                     |
+| Project: Statistical Learning II  | 5         |                     |
+| Project: Transfer Learning        |           |                     | https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html
+| Project: Twitter                  | 5         |                     |
+| Project: Search Engine II         | 5         |                     |
+-->
+
+Quizzes:
+
+1. There will be 1 quiz per midterm testing definition memorization.
+1. I will give you the quiz before you take it.
+1. They are not worth any points,
+    but **you must get 100% on the quiz or you will fail the class**.
+1. Unlimited retakes, but each retake results in a -1% off your final grade.
+
+Midterms/final:
+
+1. No programming, only math
+1. Take home, untimed, open notes
+
+Final:
+
+1. Oral exam
+1. The purpose is to help prepare you for interviews.
+1. The last week of class will be dedicated to prep.
+1. The final grade can replace your lowest midterm grade, if that would improve your overall grade in the class.
+
+This is a **hard** class.
 
 1. The material is intrinsically hard
-    1. Very few people find linear algebra, statistics and computing to ALL be easy subjects
+    1. Very few people find linear algebra, statistics and programming to ALL be easy subjects, and this class combines them all
     1. There's a reason people who understand this material get paid $200k+ salaries at FAANG
 
-1. The course is low-stress because you have full control over what your grade will be:
-    1. You will grade all homeworks yourself
-        1. I will spot check your homeworks
-        1. If you want detailed feedback, ask and I will provide it
-        1. You should know when a proof/coding assignment is right/wrong
+1. You will have to read the required references.
+    Not all the material will be covered in lectures,
+    and that's intentional to force you to get practice reading research-level data mining text.
 
-    1. The project:
-        1. To get an A, you must somehow advance the state of human knowledge
-        1. May work individually or in a small team
-        1. Options:
-            1. Write an analysis of 2-3 research papers
-            1. Perform an interesting experiment
-        1. Publish your writeup online
-            1. Your grade is determined based on how many people read/share your writeup
-            1. This will be part of your "portfolio"
-            1. No one cares about your grades
+1. Comments from previous students:
+
+    1.  > Holy fucking shit this was a hard class.
+        > I had no idea there was so much god damned fucking math involved in a CS class.
+        > You should warn students about that.
+
+    1.  > I spent 20+ hours per week on this class, and still only got a B.
+        > The class is too hard.
+
+    Unfortunately, I can't remove the math from this class, and I can't make the class easier.
+    Otherwise, you wouldn't be learning the material needed to pass a technical interview / get a good job / go to grad school.
+
+> **NOTE:**
+> In all of my other courses, I include required reading/watching tasks to learn about CS/DS culture.
+> This course doesn't have these tasks because there is already a LOT of textbook reading that you will have to complete.
 
 **Late Work Policy:**
 
-You lose 20% on the assignment for each week late.
+You lose 20% on projects for each day late.
+It is still typically better to submit a correct assignment late than an incorrect one on time.
+
+If you collaborate with other students, 
+you get an automatic 2 day extension on any project.
 
 **Collaboration Policy:**
 
-There are no restrictions on collaboration in this class,
-and collaboration is highly encouraged.
+You are encouraged to discuss all labs and projects with other students,
+subject to the following constraints:
 
-**WARNING:**
-All material in this class is cumulative.
-If you work "too closely" with another student on an assignment,
-you won't understand how to complete subsequent assignments,
-and you will quickly fall behind.
-You should view collaboration as a way to improve your understanding,
-not as a way to do less work.
+1. you must be the person typing in all code for your assignments, and
+1. you must not copy another student's code.
 
-**You are ultimately responsible for ensuring you learn the material!**
+You may use any online resources you like as references.
 
+Basically, I'm trusting you all to be adults.
+You are ultimately responsible for ensuring you learn the material!
+So do what will help you learn best.
 
-## Schedule
+> **WARNING:**
+> All material in this class is cumulative.
+> If you work "too closely" with another student on an assignment,
+> you won't understand how to complete subsequent assignments,
+> and you will quickly fall behind.
+> You should view collaboration as a way to improve your understanding,
+> not as a way to do less work.
 
 <!--
+## Schedule
+
 | Homework              | Topic                                         |
 | --------------------- | --------------------------------------------- |
 | 1                     | Review                                        |
@@ -164,7 +240,6 @@ not as a way to do less work.
 | 8                     | SGD: implementation                           |
 | 9                     | Word2Vec                                      |
 | 11                    | Sentiment Analysis                            |
--->
 
 | Week | Date        | Topic                                                                |
 | ---- | ----------- | -------------------------------------------------------------------- |
@@ -189,12 +264,13 @@ not as a way to do less work.
 | 10   | Mon, Oct 26 | Word2Vec                                                             |
 | 10   | Wed, Oct 28 | Word2Vec                                                             |
 | 11   | Mon, Nov 2  | Word2Vec: FastText                                                   |
-| 11   | Wed, Nov 4  | Word2Vec: translation <!--https://ruder.io/cross-lingual-embeddings/--> |
+| 11   | Wed, Nov 4  | Word2Vec: translation  |
 | 12   | Mon, Nov 9  | Word2Vec: bias                                                       |
 | 12   | Wed, Nov 11 | Word2Vec: history                                                    |
 | 13   | Mon, Nov 16 | Other Applications                                                   |
 | 13   | Wed, Nov 18 | Other Applications                                                   |
 | 14   | Mon, Nov 23 | Other Applications                                                   |
+-->
 
 <!--
 | Week | Date | Topic | Assignment |
