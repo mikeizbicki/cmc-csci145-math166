@@ -32,7 +32,8 @@ Important links:
 | Name | Mike Izbicki (call me Mike) |
 | Email | mizbicki@cmc.edu |
 | Office | Adams 216 |
-| Office Hours | TBD |
+| Office Hours | See [Issue #69](https://github.com/mikeizbicki/cmc-csci145-math166/issues/69) |
+| Zoom | See [Issue #70](https://github.com/mikeizbicki/cmc-csci145-math166/issues/70) |
 | Webpage | https://izbicki.me |
 | Research | Machine Learning (see [izbicki.me/research.html](https://izbicki.me/research.html) for some past projects) |
 
@@ -63,7 +64,7 @@ Fun facts:
     1. Understand the latest algorithms...
        but algorithms get outdated fast.
 
-    1. The real goal is to teach you how to read research-level papers and math
+    1. The real goal is to teach you how to read research-level papers and math so that you can understand the techniques developed in 2032 for yourself.
 1. Major algorithms
     1. Eigen-methods for data mining
     1. Stochastic gradient descent
@@ -84,8 +85,7 @@ Fun facts:
 1. Ethical implications of data mining
 1. Apply data mining libraries (PyTorch, scikit-learn, GenSim, spaCy, etc.) 
     1. Teaching you how to use these libraries is NOT the primary goal of the course
-    1. Approximately 1/3 of the homeworks are programming related,
-       but these assignments are designed to help you understand the math
+    1. In-person class time will focus on the math, and I'm expecting you can figure out how to use the libraries on your own
 
 **Prerequisite knowledge:**
 
@@ -95,11 +95,10 @@ Fun facts:
 1. computation
     1. big-o analysis
     1. git
-    1. use python libraries
-    1. generating plots
+    1. download/use python libraries
 1. statistics
     1. super basic probability
-    1. knowledge of linear/logistic regression helpful
+    1. exposure to linear/logistic regression helpful but not required
 
 **Textbook:**
 
@@ -109,6 +108,10 @@ You don't have to buy anything.
 1. Lots of research papers / lecture notes
 
 1. *Learning from Data* by Yaser S. Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin
+
+    I am providing you all a free copy.
+    It is yours to keep forever if you'd like (or you can return it to me at the end of the semester and I'll pass it on to future students.
+    Feel free to highlight/take notes/etc in it as if it were your own book, because it is.
 
 1. *Understanding Machine Learning: From Theory to Algorithms* by Shai Shalev-Shwartz and Shai Ben-David
 
@@ -157,10 +160,10 @@ Quizzes:
     but **you must get 100% on the quiz or you will fail the class**.
 1. Unlimited retakes, but each retake results in a -1% off your final grade.
 
-Midterms/final:
+Midterms:
 
 1. No programming, only math
-1. Take home, untimed, open notes
+1. Take home, unlimited time, open note
 
 Final:
 
@@ -173,7 +176,9 @@ This is a **hard** class.
 
 1. The material is intrinsically hard
     1. Very few people find linear algebra, statistics and programming to ALL be easy subjects, and this class combines them all
-    1. There's a reason people who understand this material get paid $200k+ salaries at FAANG
+    1. There's a reason people who understand this material get paid big salaries at FAANG
+
+       This class should help you with machine learning questions for technical interviews
 
 1. You will have to read the required references.
     Not all the material will be covered in lectures,
