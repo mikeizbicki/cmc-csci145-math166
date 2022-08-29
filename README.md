@@ -57,7 +57,7 @@ Fun facts:
 
 **Learning Objectives:**
 
-1. See the [Jupyter notebook](intro.ipnyb)
+1. See the [Jupyter notebook](intro.ipynb)
 
 1. Exposure to *research-level* data mining
     1. Understand the latest algorithms...
