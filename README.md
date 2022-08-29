@@ -51,29 +51,28 @@ Fun facts:
 **General Information:**
 
 1. This is the theory course for CMC's Data Science major
-1. Combines linear algebra, statistics, and computation
 1. Prepare you for industry or graduate school
-1. See the [Jupyter notebook](intro.ipnyb)
+    1. Especially for machine learning technical interviews
+    1. No SQL in this course => that's CSCI133 Big Data
 
 **Learning Objectives:**
+
+1. See the [Jupyter notebook](intro.ipnyb)
 
 1. Exposure to *research-level* data mining
     1. Understand the latest algorithms...
        but algorithms get outdated fast.
 
-    1. The real goal is to teach you how to read research-level papers and math so that you can understand the techniques developed in 2032 for yourself.
-
-1. Major algorithms
-    1. Eigen-methods for data mining
-    1. Stochastic gradient descent
-        1. logistic regression
-        1. kernel methods
-        1. neural networks
-        1. word2vec
-        1. deep learning (transformers, CNNs, etc.)
-    1. Focus on text/web/social media examples
+    1. The real goal is to teach you how to read research-level papers and math so that you can understand future techniques by yourself
 
 1. Major concepts
+    1. Techniques
+        1. Eigen-methods for data mining
+        1. Logistic regression
+        1. Kernel methods
+        1. Neural networks
+        1. word2vec
+        1. Small amount of deep learning (transformers, CNNs, etc.)
     1. Math
         1. Bias/variance trade-off
         1. VC Dimension theorem (fundamental theorem of statistical learning)
@@ -81,10 +80,11 @@ Fun facts:
         1. Optimization algorithms (gradient descent, stochastic gradient descent, ADAM, etc.)
     1. Programming:
         1. Writing code that is easy to deploy
+    1. Focus on text/web/social media examples
 
 1. Ethical implications of data mining
    
-   Pet peeve: You can't understand the ethics if you don't understand the technical details
+   Pet peeve: You can't fully understand the ethics if you don't understand the technical details
 
 1. Apply data mining libraries (PyTorch, scikit-learn, GenSim, spaCy, etc.) 
     1. Teaching you how to use these libraries is NOT the primary goal of the course
@@ -111,7 +111,7 @@ You don't have to buy anything.
 1. *Learning from Data* by Yaser S. Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin
 
     I am providing you all a free copy.
-    It is yours to keep forever if you'd like (or you can return it to me at the end of the semester and I'll pass it on to future students.
+    It is yours to keep forever if you'd like (or you can return it to me at the end of the semester and I'll pass it on to future students).
     Feel free to highlight/take notes/etc in it as if it were your own book, because it is.
 
 1. *Understanding Machine Learning: From Theory to Algorithms* by Shai Shalev-Shwartz and Shai Ben-David
@@ -140,10 +140,10 @@ You don't have to buy anything.
 
 Projects:
 
-1. 5-7 projects
-1. Use scikit-learn and pytorch
-1. All of them must be completed on the lambda server (i.e. using ssh+bash+vim); server has 80 CPUs + 8 GPUs
-1. Some projects will need GPU access
+1. 4-7 projects
+1. All of them must be completed on the lambda server (i.e. using ssh+bash+vim)
+   
+   Lambda server has 80 CPUs + 8 GPUs
 1. I'm expecting almost everyone will get full credit, and these will act as a "grade boost"
 
 <!--
@@ -167,7 +167,7 @@ Midterms:
 
 1. No programming, only math
 1. Take home, unlimited time, open note
-1. Very hard exams. (Historically, average in the 70s.)
+1. Very hard exams. (Historically, average in the 70s.  No curve.)
 
 Final:
 
@@ -182,9 +182,8 @@ This is a **hard** class.
     1. Very few people find linear algebra, statistics and programming to ALL be easy subjects, and this class combines them all
     1. There's a reason people who understand this material get paid big salaries at FAANG
 
-       This class should help you with machine learning questions for technical interviews
-
 1. You will have to read the required references.
+
     Not all the material will be covered in lectures,
     and that's intentional to force you to get practice reading research-level data mining text.
 
@@ -195,7 +194,7 @@ This is a **hard** class.
         > You should warn students about that.
 
     1.  > I spent 20+ hours per week on this class, and still only got a B.
-        > The class is too hard.
+        > The class is too hard and you should make it easier.
 
     Unfortunately, I can't remove the math from this class, and I can't make the class easier.
     Otherwise, you wouldn't be learning the material needed to pass a technical interview / get a good job / go to grad school.
@@ -385,7 +384,7 @@ Peer and Self Assessment in Massive Online Classes
 
 ## Accommodations for Disabilities
 
-I've tried to design the course to be as accessible as possible for people with disabilities.
-If you need any further accommodations, please ask.
+I've tried to design the course to be as accessible as possible for all students.
+If you need any further accommodations---even if you don't have an officially recognized disability---please ask.
 
 I want you to succeed and I'll make every effort to ensure that you can.
