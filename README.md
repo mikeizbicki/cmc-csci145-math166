@@ -74,10 +74,13 @@ Fun facts:
     1. Focus on text/web/social media examples
 
 1. Major concepts
-    1. Bias/variance trade-off
-    1. VC Dimension theorem (fundamental theorem of statistical learning)
-    1. Regularization (L1, L2, elastic net, weight decay, early stopping, etc.)
-    1. Optimization algorithms (gradient descent, stochastic gradient descent, ADAM, etc.)
+    1. Math
+        1. Bias/variance trade-off
+        1. VC Dimension theorem (fundamental theorem of statistical learning)
+        1. Regularization (L1, L2, elastic net, weight decay, early stopping, etc.)
+        1. Optimization algorithms (gradient descent, stochastic gradient descent, ADAM, etc.)
+    1. Programming:
+        1. Writing code that is easy to deploy
 
 1. Ethical implications of data mining
    
