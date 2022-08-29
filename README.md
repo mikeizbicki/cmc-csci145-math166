@@ -53,6 +53,7 @@ Fun facts:
 1. This is the theory course for CMC's Data Science major
 1. Combines linear algebra, statistics, and computation
 1. Prepare you for industry or graduate school
+1. See the [Jupyter notebook](intro.ipnyb)
 
 **Learning Objectives:**
 
