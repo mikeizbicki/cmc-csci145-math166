@@ -62,24 +62,27 @@ Fun facts:
        but algorithms get outdated fast.
 
     1. The real goal is to teach you how to read research-level papers and math so that you can understand the techniques developed in 2032 for yourself.
+
 1. Major algorithms
     1. Eigen-methods for data mining
     1. Stochastic gradient descent
         1. logistic regression
+        1. kernel methods
+        1. neural networks
         1. word2vec
         1. deep learning (transformers, CNNs, etc.)
-    1. Focus on web/text mining examples
+    1. Focus on text/web/social media examples
+
 1. Major concepts
     1. Bias/variance trade-off
-    1. Regularization
-    1. Theorems
-        1. VC Dimension theorem (fundamental theorem of statistical learning)
-        1. SGD convergence theorem
-1. Feature generation methods
-    1. Text (English, non-English)
-    1. Social media
-    1. Kernels
+    1. VC Dimension theorem (fundamental theorem of statistical learning)
+    1. Regularization (L1, L2, elastic net, weight decay, early stopping, etc.)
+    1. Optimization algorithms (gradient descent, stochastic gradient descent, ADAM, etc.)
+
 1. Ethical implications of data mining
+   
+   Pet peeve: You can't understand the ethics if you don't understand the technical details
+
 1. Apply data mining libraries (PyTorch, scikit-learn, GenSim, spaCy, etc.) 
     1. Teaching you how to use these libraries is NOT the primary goal of the course
     1. In-person class time will focus on the math, and I'm expecting you can figure out how to use the libraries on your own
@@ -102,8 +105,6 @@ Fun facts:
 I will provide all the reference material for this class.
 You don't have to buy anything.
 
-1. Lots of research papers / lecture notes
-
 1. *Learning from Data* by Yaser S. Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin
 
     I am providing you all a free copy.
@@ -113,6 +114,8 @@ You don't have to buy anything.
 1. *Understanding Machine Learning: From Theory to Algorithms* by Shai Shalev-Shwartz and Shai Ben-David
 
     Freely available [from Shalev-Shwartz's website](https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/)
+
+1. Lots of research papers / lecture notes
 
 <!--
 1. Christopher Bishop's *Pattern Recognition and Machine Learning*.  [Download a free pdf copy from Microsoft Research.](https://www.microsoft.com/en-us/research/people/cmbishop/prml-book/)
@@ -161,6 +164,7 @@ Midterms:
 
 1. No programming, only math
 1. Take home, unlimited time, open note
+1. Very hard exams. (Historically, average in the 70s.)
 
 Final:
 
