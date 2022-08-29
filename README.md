@@ -17,7 +17,7 @@ Include these links in the right topic folders:
 -->
 
 <center>
-<img width='400px' src='img/machine_learning_2x.png' />
+<img width='400px' src='machine_learning_2x.png' />
 </center>
 
 Important links:
@@ -53,10 +53,6 @@ Fun facts:
 1. This is the theory course for CMC's Data Science major
 1. Combines linear algebra, statistics, and computation
 1. Prepare you for industry or graduate school
-
-<center>
-<img width='100%' src='img/ds-hierarchy.png' />
-</center>
 
 **Learning Objectives:**
 
