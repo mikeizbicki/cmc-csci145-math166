@@ -104,6 +104,14 @@ The eigenvalue video is the most important:
 
 \section{Big-O/$\Theta$/$\Omega$ Notation}
 
+You are likely familiar with asymptotic notation from your data structures class,
+where you used it to measure the time and space complexity of algorithms.
+In this class,
+we will also be measuring statistical complexity of algorithms.
+The statistical complexity will result in formulas a bit more complex than you have likely seen before,
+and so you will need to be intimately familiar with the formal definitions of asymptotic notation.
+There are many equivalent definitions, but in this class, we will use the following.
+
 \begin{defn}
     Let $f,g$ be (possibly multivariate) functions from $(\R^+)^d\to\R^+$,
     where $d>0$ is an integer that specifies the number of input variables.
@@ -218,6 +226,8 @@ The eigenvalue video is the most important:
 %\end{problem}
 
 \newpage
+The main advantage of asymptotic notation is that it lets us write complex formulas in simpler forms,
+focusing only on the ``most important'' parts.
 \begin{problem}
     Simplify the following expressions:
 
@@ -246,7 +256,7 @@ The eigenvalue video is the most important:
 
 The \emph{Basic Linear Algebra Subprogram} (BLAS) and \emph{Linear Algebra Package} (LAPACK) are the primary low-level tools of computational linear algebra.
 These high performance libraries are written in Assembly, C, Fortran, and CUDA.
-All programming languages (R, Python, Matlab, etc.) convert your code into basic BLAS/LAPACK function calls,
+All high level programming languages (R, Python, Matlab, Julia, etc.) convert your code into basic BLAS/LAPACK function calls,
 and rely on these libraries for good performance.
 
 There are many different versions of BLAS/LAPACK depending on:
@@ -508,7 +518,7 @@ Computationally, however, some choices of parentheses can be much better than ot
 \begin{problem}
 Recall that in PyTorch, only the first matrix in a matrix multiplication can be sparse,
 and the second must be dense.
-It is still possible to compute the product $ABC$ if one of the matrices is dense and the other two are sparse.
+It is still possible to compute the product $ABC$ if any one of the matrices is dense and the other two are sparse.
 For example, if $A$ and $B$ are sparse, then the parenthesization $A(BC)$ can be computed in PyTorch.
 How should you rewrite the multiplication $ABC$ so that it can be computed when both $A$ and $C$ are sparse?
 
@@ -620,7 +630,7 @@ For this set of notes, however, just assume that computing the top-$k$ eigenvect
         \item $A (\trans A A)^{-1}$
             \vspace{4in}
             \newpage
-        \item $\ltwo{A \trans A A \x + \lambda \x}^2$
+        \item $\lF{A \trans A A \x}^2$
             \vspace{4in}
             \newpage
         \item $\lF{(\lambda I + A) \x \trans \x}$

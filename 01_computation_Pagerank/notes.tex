@@ -27,6 +27,7 @@
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
 \newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
 \newcommand{\E}{\mathbb E}
 \newcommand{\R}{\mathbb R}
 \DeclareMathOperator{\nnz}{nnz}
@@ -54,6 +55,8 @@
 \newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
 \newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
 
+\newcommand{\ignore}[1]{}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
@@ -62,7 +65,7 @@
 \begin{center}
 {
 \Huge
-Notes: Pagerank
+Notes: Pagerank I
 }
 
 %\vspace{0.15in}
@@ -83,7 +86,7 @@ These new, more advanced algorithms use concepts like distributed computing or m
 but they all return the same basic result:
 the top eigenvalue of a special graph called the \emph{web graph}.
 
-\begin{problem}
+\begin{refr}
     (recommended)
     Matt Cutts was formerly the head of Google's web spam team,
     and now runs the United States Digital Service (a recently created branch of the US government).
@@ -91,24 +94,59 @@ the top eigenvalue of a special graph called the \emph{web graph}.
     \begin{quote}
     \url{https://www.youtube.com/watch?v=KyCYyoGusqs}
     \end{quote}
-\end{problem}
+\end{refr}
 
-\section{Definitions}
-
-\begin{problem}
+\begin{refr}
     Our primary text for this week is \emph{Deeper Inside Pagerank} by Langville and Meyers.
-    Read sections 1, 2, 3, 5.1, 6.1, 6.2, 9, 10.
+    It is available on the github repo or at
     \begin{quote}
     \url{https://galton.uchicago.edu/~lekheng/meetings/mathofranking/ref/langville.pdf}
     \end{quote}
-    Based on the reading, define the following terms:
+    You will be responsible for sections 1, 2, 3, 5.1, 6.1, 6.2.
+\end{refr}
+
+\newpage
+\section{Definitions}
+
+\begin{problem}
+    The reading uses the following terms,
+    but does not explicitly define them.
+    Use wikipedia to find definitions for these terms.
+
+    NOTE:
+    You are not responsible for exact, formal definitions of these terms.
+    You just need to be able to use and understand them in context.
+
+    NOTE:
+    It is common for data mining papers to not define common terms.
+    %(\emph{Deeper Inside Pagerank} is already 50+ pages!)
+    When I'm reading papers, I'm constantly having to look up definitions on wikipedia for these terms,
+    and the purpose of this problem is to get you practice with that.
+    One of the challenges of wikipedia is that there's a lot of information about each of these terms that may or may not be relevant to this class.
+    The main challenge of this problem is figuring out how to define these terms so that they help you understand the rest of this paper.
+    I therefore recommend not looking up these terms in wikipedia until you encounter them in the reading;
+    then provide definitions below that help you understand the reading.
+    %There's a lot of information on wikipedia,
+    %and you need to try to find the most relevant parts.
+
     \begin{enumerate}
         \item markov chain
-            \vspace{3in}
+            \vspace{2.5in}
         \item stationary vector
-            \vspace{2in}
+            \vspace{2.5in}
         \item stochastic matrix
-            \vspace{2in}
+            \vspace{2.5in}
+        \item spectral radius
+            \vspace{2.5in}
+        \item subdominant eigenvalue
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+    Reproduce the definitions from the reading of the following terms below.
+    (Your midterm quiz will be to reproduce these definitions exactly.)
+    \begin{enumerate}
         \item irreducible matrix
             \vspace{2in}
         \item primitive matrix
@@ -123,10 +161,10 @@ the top eigenvalue of a special graph called the \emph{web graph}.
             \vspace{2in}
         \item $\pr$
             \vspace{2in}
-        \item dangling nodes
+        \item $\mathbf v$ %personalization vector
             \vspace{2in}
-        \item personalization vector
-            \vspace{2in}
+        %\item dangling nodes
+            %\vspace{2in}
     \end{enumerate}
 \end{problem}
 
@@ -148,6 +186,38 @@ the top eigenvalue of a special graph called the \emph{web graph}.
 %\end{problem}
 
 \newpage
+\section{``Trivial'' Problems}
+The trivial problems in this section are designed to help you practice using the definitions above.
+%Assuming you fully understand the definitions,
+%all of these problems should be ``trivial''.
+
+NOTE:
+Mathematicians define the word ``trivial'' to mean that the problem follows directly from the definitions without needing any major insights.
+Trivial problems can still take a long time to solve, however, because it takes a long time to understand the definitions.
+Muggles think that ``trivial'' problems should be ``easy'' to solve,
+but that's only the case if you have a really strong understanding of the involved definitions.
+It's okay if these trivial problems do not feel easy.
+
+\begin{problem}
+    Give an example of:
+    \begin{enumerate}
+        \item a stochastic matrix
+            \vspace{4in}
+        \item a non-stochastic matrix
+            \vspace{4in}
+            \newpage
+        \item an irreducible matrix
+            \vspace{4in}
+        \item a reducible matrix
+            \vspace{4in}
+            \newpage
+        \item a primitive matrix
+            \vspace{4in}
+        \item a non-primitive matrix
+    \end{enumerate}
+\end{problem}
+
+\newpage
 \begin{problem}
     Answer the following questions.
     \begin{enumerate}
@@ -166,6 +236,14 @@ the top eigenvalue of a special graph called the \emph{web graph}.
 \newpage
 \begin{problem}
     Either prove or give a counterexample to the following claims.
+
+    NOTE:
+    Whenever I'm reading a data mining text, and I encounter a matrix, I always ask myself these sorts of questions about the matrix to ensure I understand what is going on.
+    The purpose of these questions here is to get you into a similar habit.
+
+    HINT:
+    Any claim which is true will have a ``trivial'' proof.
+    When looking for counterexamples, use the identity and zero matrices as building-blocks.
     \begin{enumerate}
         \item
             $\rank(\pbb) = 1$.
@@ -203,22 +281,23 @@ the top eigenvalue of a special graph called the \emph{web graph}.
             The largest eigenvector of $\pbb$ is simple.
             \vspace{4.5in}
 
-        \item
-            The eigenvectors of $\pbb$ are orthogonal.
-            \vspace{4.5in}
-
-        \item
-            The eigenvectors of $\pbb\trans\pbb$ are orthogonal.
-            \vspace{4.5in}
-
-        \item
-            The eigenvectors of $\trans\pbb\pbb$ are orthogonal.
-            \vspace{4.5in}
+        %\item
+            %The eigenvectors of $\pbb$ are orthogonal.
+            %\vspace{4.5in}
+%
+        %\item
+            %The eigenvectors of $\pbb\trans\pbb$ are orthogonal.
+            %\vspace{4.5in}
+%
+        %\item
+            %The eigenvectors of $\trans\pbb\pbb$ are orthogonal.
+            %\vspace{4.5in}
     \end{enumerate}
 \end{problem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\ignore{
 \newpage
 \section{Pagerank}
 
@@ -236,26 +315,26 @@ the top eigenvalue of a special graph called the \emph{web graph}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
-\begin{problem}
-    The beginning of Section 5 shows the following equivalent definitions for the pagerank vector $\pr$:
-    \begin{equation}
-        \trans \pr \pbb = \trans \pr
-        \qquad
-        \text{and}
-        \qquad
-        \trans \pr (\I - \pbb) = \trans{\bm 0}
-        .
-    \end{equation}
-    It should be obvious why these definitions of $\pr$ are equivalent. 
-    Less obvious (and not shown in the paper) is that
-    the following definition is also equivalent.
-    Prove this equivalence.
-
-    \begin{equation}
-        \pr = \argmax_{\w \in \R^d, \ltwo{\w} \le 1} \ltwo{\trans \w \pbb}
-    \end{equation}
-\end{problem}
+%\clearpage
+%\begin{problem}
+    %The beginning of Section 5 shows the following equivalent definitions for the pagerank vector $\pr$:
+    %\begin{equation}
+        %\trans \pr \pbb = \trans \pr
+        %\qquad
+        %\text{and}
+        %\qquad
+        %\trans \pr (\I - \pbb) = \trans{\bm 0}
+        %.
+    %\end{equation}
+    %It should be obvious why these definitions of $\pr$ are equivalent. 
+    %Less obvious (and not shown in the paper) is that
+    %the following definition is also equivalent.
+    %Prove this equivalence.
+%
+    %\begin{equation}
+        %\pr = \argmax_{\w \in \R^d, \ltwo{\w} \le 1} \ltwo{\trans \w \pbb}
+    %\end{equation}
+%\end{problem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -272,7 +351,7 @@ the top eigenvalue of a special graph called the \emph{web graph}.
             \begin{equation}
                 \x^{(k)T}
                 =
-                \alpha \x^{(k-1)T} \p + (\alpha \x^{(k-1)T} \mathbf a + (1-\alpha)) \mathbf v^T
+                \alpha \x^{(k-1)T} \p + \big(\alpha \x^{(k-1)T} \mathbf a + (1-\alpha)\big) \mathbf v^T
                 .
                 \label{eq:xk}
             \end{equation}
@@ -293,7 +372,12 @@ the top eigenvalue of a special graph called the \emph{web graph}.
                 \ltwo { \x^{(k)} - \x^{(k-1)} } \le \epsilon,
             \end{equation}
             where $\epsilon$ is a ``small'' number that controls how accurate we want our solution to be.
-            Compute a formula for $K$ as a function of $\epsilon$.
+            The expression $\ltwo { \x^{(k)} - \x^{(k-1)} }$ is often called the \emph{residual} of the iteration.
+
+            Compute a formula for the number of iterations $K$ required to achieve a residual less than $\epsilon$.
+
+            HINT:
+            See the discussion on page 346.
             \vspace{4in}
 
         \item
@@ -305,27 +389,29 @@ the top eigenvalue of a special graph called the \emph{web graph}.
             Repeat the calculations for the runtime of the power method in terms of the desired accuracy $\epsilon$.
             \vspace{4in}
 
-        \item
-            We say that an algorithm for computing the pagerank \emph{converges} if in the limit as the number of iterations goes to infinity, the algorithm returns the correct pagerank vector.
-            Have we shown that the power method converges?
-            Or are there conditions in which is will \emph{diverge} (i.e.\ not converge)?
-            \vspace{2in}
+        %\item
+            %We say that an algorithm for computing the pagerank \emph{converges} if in the limit as the number of iterations goes to infinity, the algorithm returns the correct pagerank vector.
+            %Have we shown that the power method converges?
+            %Or are there conditions in which is will \emph{diverge} (i.e.\ not converge)?
+            %\vspace{2in}
 
+            \newpage
         \item
             Why does it never make sense to store $\pr$ as a sparse vector?
             \vspace{2in}
 
+            \newpage
         \item
-            \label{prob:comp:k}
-            Prove the following statement or provide a counterexample.
+            Why is the following inequality ``almost always'' true:
             \begin{equation}
+                \label{eq:comp:k}
                 \ltwo{\x^{(k)}} < \ltwo{\x^{(k-1)}}
                 .
             \end{equation}
             \vspace{4in}
         \item
-            Based on the results of part \ref{prob:comp:k} above,
-            how should we adjust our implementation of the power method?
+            Based on Inequality \eqref{eq:comp:k} above,
+            how should we adjust our implementation of the power method to ensure numerical stability?
 
     \end{enumerate}
 \end{problem}
@@ -442,6 +528,7 @@ the top eigenvalue of a special graph called the \emph{web graph}.
 
     \end{enumerate}
 \end{problem}
+}
 
 \end{document}
 
