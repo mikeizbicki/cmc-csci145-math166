@@ -5,6 +5,10 @@ This website provides legal analysis on US national security issues.
 
 **Due date:** Sunday, 18 September at midnight
 
+**Computation:**
+This project has low computational requirements.
+You are not required to complete it on the lambda server (although you are welcome to if you'd like).
+
 ## Background
 
 **Data:**
