@@ -310,13 +310,19 @@ We'll be exploring this trade-off more formally in class over the rest of the se
 ## Task 2: the personalization vector
 
 The most interesting applications of pagerank involve the personalization vector.
+Implement the `WebGraph.make_personalization_vector` function so that it outputs a personalization vector tuned for the input query.
+The pseudocode for the function is:
+```
+for each index in the personalization vector:
+    get the url for the index (see the _url_to_index function)
+    check if the url satisfies the input query (see the url_satisfies_query function)
+    if so, set the corresponding index to one
+normalize the vector
+```
 
 **Part 1:**
 
-Implement the `WebGraph.make_personalization_vector` function.
-This function enables the `--personalization_vector_query` command line argument,
-which provides an alternative method for searching by doing the filtering on the personalization vector.
-
+The command line argument `--personalization_vector_query` will use the function you created above to augment your search with a custom personalization vector.
 If you've implemented the function correctly,
 you should get results similar to:
 ```
