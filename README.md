@@ -53,7 +53,7 @@ Fun facts:
 1. This is the theory course for CMC's Data Science major
 1. Prepare you for industry or graduate school
     1. Especially for machine learning technical interviews
-    1. No SQL in this course => that's CSCI133 Big Data
+    1. No SQL in this course => that's CSCI143 Big Data
 
 **Learning Objectives:**
 
