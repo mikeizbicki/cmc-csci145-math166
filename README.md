@@ -23,7 +23,7 @@ Include these links in the right topic folders:
 Important links:
 
 1. [Data Mining vs Machine Learning vs Artificial Intelligence vs Statistics](https://stats.stackexchange.com/questions/5026/what-is-the-difference-between-data-mining-statistics-machine-learning-and-ai)
-1. [What do data scientists get payed?](https://www.levels.fyi/comp.html?track=Data%20Scientist)
+1. [What do data scientists get paid?](https://www.levels.fyi/comp.html?track=Data%20Scientist)
 
 ## About the Instructor
 
@@ -57,7 +57,7 @@ Fun facts:
 
 **Learning Objectives:**
 
-1. See the [Jupyter notebook](intro.ipnyb)
+1. See the [Jupyter notebook](intro.ipynb)
 
 1. Exposure to *research-level* data mining
     1. Understand the latest algorithms...
