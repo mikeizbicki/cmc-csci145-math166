@@ -1,0 +1,363 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        \hl{\textbf{TRUE}}\hspace*{14pt}False
+    }{
+        True\hspace*{14pt}\hl{\textbf{FALSE}}
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+Notes: Pagerank III
+}
+
+\vspace{0.15in}
+\includegraphics[width=3in]{saint_curious_george}
+\vspace{-0.15in}
+
+%Due: Sunday, 6 Sep 2020 at midnight
+\end{center}
+
+\begin{center}
+%\includegraphics[width=\textwidth]{dilbert}
+\end{center}
+
+\section{Alternative Motivations}
+
+Pagerank can be used in many situations besides web ranking.
+In particular, if you can formalize your problem as somehow finding the ``most important'' nodes in a graph,
+then you can use pagerank.
+
+\begin{problem}
+    Describe how pagerank can be used for the following tasks.
+    \begin{enumerate}
+        \item 
+            You are in charge of advertising the new Apple iGadget.
+            You want to deliver free samples to social media influencers,
+            with the hope that they will write good reviews that cause many people to purchase the iGadget.
+            How do you select which people to give these free samples to?
+            \newpage
+        \item 
+            You are the director of the CIA and you want to kill terrorists.
+            How do you identify likely terrorists?
+
+
+            \vspace{8in}
+            NOTE:
+            Former CIA director Michael Hayden famously said ``We kill people based on metadata.''
+            This is exactly what he was referring to.
+            See:
+
+            %\begin{quote}
+            \url{https://www.justsecurity.org/10318/video-clip-director-nsa-cia-we-kill-people-based-metadata/}
+            %\end{quote}
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+    Create an example problem statement similar to the problem statements from Problem 1 above,
+    and describe how the problem can be solved using pagerank.
+\end{problem}
+
+%\newpage
+%\section{Alternative Analysis}
+%
+%\begin{problem}
+    %Previously, we analyzed the pagerank algorithm in terms of the residual $\ltwo{\x^{(k)} - \x^{(k-1}}$ since that is how the analysis was presented in the paper.
+    %A slightly more powerful analysis is to directly measure the error of our algorithm
+%\end{problem}
+
+\newpage
+\section{Alternative Algorithms}
+
+\begin{problem}
+    There are many algorithms for computing top eigenvectors,
+    and any of these algorithms can be used to compute the pagerank vector.
+    In this problem, we will investigate the \emph{exponentially accelerated power method} (EAPM).
+    This is a divide and conquer algorithm that can achieve the same accuracy $\epsilon$ as the power method with only a logarithmic number of iterations.
+
+    Recall that in the standard power method, at each iteration we perform the computation in Eq (5.1) from the text.
+    It is reproduced below:
+    \begin{equation}
+        \label{eq:pbb}
+        \x^{(k)T} = {\x^{(k-1)T}} \pbb
+        .
+    \end{equation}
+    Unraveling the recursion, we have that
+    \begin{equation}
+        \label{eq:pbbk}
+        \x^{(k)T} = {\x^{(0)T}} \pbb^k
+        .
+    \end{equation}
+    In the standard power method, we solve Eq \eqref{eq:pbbk} with a procedure involving $k$ matrix-vector operations.
+    The key idea of the EAPM is to ``reparenthesize'' these operations to instead solve $\log k$ matrix-matrix operations.
+
+
+    The output of the EAPM after $K$ iterations is the vector $\y^{(K)}$, which is defined as
+    \begin{equation}
+        \label{eq:exp:y}
+        \y^{(K)} = \frac{\x^{(0)} \Q_K}{\ltwo{\x^{(0)} \Q_K}}
+        ,
+    \end{equation}
+    where
+    \begin{equation}
+        \Q_k = 
+        \begin{cases}
+            \pbb & \text{if}~k=0 \\
+            \Q_{k-1} \Q_{k-1} & \text{otherwise} \\
+        \end{cases}
+        .
+    \end{equation}
+    In the standard power method, the matrix $\pbb$ is not stored explicitly;
+    we substitute the definition of $\pbb$ into Eq \eqref{eq:pbb} above and perform all calculations on the sparse $\p$ matrix.
+    In the EAPM, the $\pbb$ matrix is stored explicitly as a dense matrix,
+    and each $\Q_k$ is also stored as a dense matrix.
+
+    \begin{enumerate}
+        %\item
+            %Show that $\y^{(K)} = \x^{(2^K)}$.
+            %This equivalence is why the algorithm is ``exponentially accelerated.''
+%
+            %HINT: 
+            %Use induction to show that $Q_{K} = \pbb^{2^{K}}$.
+            %The result follows by combining this fact with \eqref{eq:exp:y} and Equation (5.1) in the paper.
+            %\vspace{3in}
+
+        \newpage
+        \item
+            What is the runtime of calculating $\Q_k$ given $\Q_{k-1}$? 
+            \vspace{4in}
+
+        \item 
+            What is the runtime of computing $\y^{(K)}$ in terms of $K$?
+            \vspace{3in}
+
+        \newpage
+        \item
+            As with the standard power method, we do not know the total number of iterations of the exponential power method in advance.
+            Instead, we iterate until the answer is ``good enough''.
+            For this problem, we will directly compare the distance between the $K$th iterate to the unknown pagerank vector,
+            and iterate until the following condition is satisfied:
+            \begin{equation}
+                \label{eq:exp:eps}
+                \ltwo{\y^{(K)}-\pr} \le \epsilon,
+            \end{equation}
+            where $\epsilon$ is a predetermined small constant value.
+            The \emph{Deeper Inside Pagerank} paper does not discuss the EAPM algorithm, so I have provided below a simple theorem (without proof) about its convergence rate.
+            \begin{theorem}
+                \label{thm:EAPM}
+                For all $K$, the EAPM satisfies
+                \begin{equation}
+                    \ltwo{\y^{(k)}-\pr} \le \alpha^{2^k}.
+                \end{equation}
+            \end{theorem}
+
+            Use Theorem \ref{thm:EAPM} above to compute the number of iterations $K$ required to achieve a target $\epsilon$ value.
+            %Bounding the number of iterations $K$ required to satisfy \eqref{eq:exp:eps} is a bit more technical than in the previous problem.
+            %You do not have to compute a bound on $K$ yourself,
+            %and may instead assume that 
+            %\begin{equation}
+                %\label{eq:exp:2}
+                %K = O\bigg( \log \frac{\log \epsilon}{\log \alpha} \bigg)
+            %\end{equation}
+            %satisfies \eqref{eq:exp:eps}.
+            %Notice that this number of iterations is logrithmic compared to the number of iterations in the standard power method,
+            %and this is where the name exponentially accelerated comes from.
+
+            %%You do not need to understand the technical details of the proof of \eqref{eq:exp:2},
+            %%but it is reproduced below for the curious.
+            %\begin{align}
+                %\ltwo{\y^{(k)} - \y^{(k-1)}}
+                %&= \ltwo{\x^{(2^k)} - \x^{2^{k-1}}} \\
+                %&= \ltwo{\sum_{i=2^{k-1}}^{2^k - 1} (\x^{(i+1)} - \x^{(i)})} \\
+                %&\le \sum_{i=2^{k-1}}^{2^k - 1} \ltwo{(\x^{(i+1)} - \x^{(i)})} \\
+                %&\le \sum_{i=2^{k-1}}^{2^k - 1} \alpha^i \\
+                %&\le 2^{k-1} \alpha^{2^{k-1}} \\
+                %%&\le \alpha^{2^{k-2}}
+                %&= O\bigg(\alpha^{2^{k-2}} \bigg)
+                %\label{eq:exp:align}
+            %\end{align}
+            %Next, we set the right hand side of \eqref{eq:exp:align} less than $\epsilon$,
+            %and solve for $k$.
+            %\begin{align}
+                %\alpha^{2^{k-2}} &\le \epsilon \\
+                %{2^{k-2}}\log \alpha &\le \log \epsilon \\
+                %{2^{k-2}} &\ge \frac{\log \epsilon}{\log \alpha} \\
+                %k-2 & \ge \log_2\frac{\log \epsilon}{\log \alpha} \\
+                %k & \ge 2 + \log_2\frac{\log \epsilon}{\log \alpha} \\
+                %k & = O\bigg(\log \frac{\log\epsilon}{\log \alpha} \bigg) 
+            %\end{align}
+
+        %\item
+
+            \vspace{3.5in}
+        \item
+            What is the runtime of computing $\y^{(K)}$ in terms of $\epsilon$?
+            \vspace{4.5in}
+
+        \newpage
+        %\item
+            %Under what conditions is the exponentially accelerated power method faster than the standard power method?
+            %\vspace{4in}
+%
+        %\item
+            %Under what conditions is it slower?
+            %\vspace{3in}
+%
+        %\newpage
+        %\item
+            %Why does it not make sense to use the exponentially accelerated power method to compute the pagerank vector?
+            %What bad thing would happen if $\p$ was stored as a sparse matrix and $\pbb$ was calculated from $\p$ as in the standard power method?
+            %\vspace{4in}
+%
+    \end{enumerate}
+\end{problem}
+
+\section{Review Questions}
+
+\begin{problem}
+    For each statement below,
+    circle \texttt{True} if the statement is known to be true,
+    \texttt{False} if the statement is known to be false,
+    and \texttt{Open} if the statement is not known to be either true or false.
+
+\begin{enumerate}
+    \item\TFQuestion{T}{Let $f(n) = 1/(1+n)$. Then $f = \Omega(n^{-2})$.}
+\item\TFQuestion{T}{Let $A$ and $B$ be $n\times n$ matrices. The optimal algorithm for computing the matrix product $AB$ has runtime $O(n^4)$.}
+\item\TFQuestion{O}{Let $A$ and $B$ be $n\times n$ matrices. The optimal algorithm for computing the matrix product $AB$ has runtime $\Theta(n^2 \log n)$.}
+\item\TFQuestion{O}{Let $A$ and $B$ be $n\times n$ matrices. The optimal algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2.1})$.}
+\item\TFQuestion{F}{Let $A$ and $B$ be $n\times n$ matrices. The optimal algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2})$.}
+\item\TFQuestion{F}{Let $A$ and $B$ be $n\times n$ matrices. The optimal algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2.5})$.}
+\item\TFQuestion{T}{Let $A$ be an $n \times n$ matrix and $k$ a natural number. Then the matrix exponential $A^k$ can be computed in time $O(n^{2.807}\log k)$.}
+\item\TFQuestion{O}{Let $A$ be an $n \times n$ matrix and $k$ a natural number. Then the matrix exponential $A^k$ can be computed in time $O(n^{2}\log n\log k)$.}
+\item\TFQuestion{T}{The matrix chain ordering problem can be solved in time $\theta(n)$.}
+\item\TFQuestion{T}{Computing $\trans\x\x$ is faster than computing $\x\trans\x$.}
+\item\TFQuestion{T}{There exist $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$ such that the product $AB$ satisfies $\nnz(AB) = O(1)$.}
+\item\TFQuestion{T}{For all $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$, the product $AB$ must satisfy $\nnz(AB) = O(1)$.}
+\item\TFQuestion{F}{There exist $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$ such that the product $AB$ satisfies $\nnz(AB) = \Omega(n)$.}
+\item\TFQuestion{F}{There exists an $n \times n$ matrix $A$ such that $\nnz(A) = \Omega(n^3)$.}
+\item\TFQuestion{T}{There exists an $n \times n$ matrix $A$ such that $\nnz(A) = O(n^3)$.}
+\item\TFQuestion{T}{Let $A$ be an $n\times n$ matrix that is both primitive and stochastic. Then $A$ has exactly one eigenvalue equal to 1.}
+\item\TFQuestion{T}{The pagerank vector $\pr$ can never have a 0 entry.}
+\item\TFQuestion{F}{The $\p$ matrix is primitive.}
+%\item\TFQuestion{F}{If $\nnz(\p) = n$, then $\nnz(\p\p) = n$.}
+\item\TFQuestion{T}{The $\pbb$ matrix is stochastic.}
+\item\TFQuestion{T}{For all graphs, $\nnz(\pbb) = 0$.}
+\item\TFQuestion{F}{For all graphs, the node with the largest in degree must have the highest pagerank.}
+\item\TFQuestion{F}{According to the \emph{Deeper Inside Pagerank} paper, the $\p$ matrix constructed from the web graph satisfies $\nnz(\p) = O(1)$.}
+\item\TFQuestion{F}{According to the \emph{Deeper Inside Pagerank} paper, Google uses a value of $\alpha=0.8$ when computing pagerank.}
+\item\TFQuestion{T}{The L1 norm of the pagerank vector must be equal to 1.  That is, $\lone{\pr} = 1$.}
+\item\TFQuestion{F}{The exponentially accelerated power method is faster than the standard power method for computing the pagerank of sparse graphs with many nodes.}
+\item\TFQuestion{T}{If the power method is taking too long to converge, then increasing the $\alpha$ hyperparameter will make the algorithm run faster.}
+\item\TFQuestion{F}{The number of iterations of the standard pagerank algorithm depends on the choice of personalization vector $\mathbf v$.}
+\item\TFQuestion{T}{Decreasing the $\alpha$ hyperparameter increases the effect of the personalization vector $\mathbf v$ on the computed pagerank.}
+\item\TFQuestion{T}{Decreasing the $\alpha$ hyperparameter will decrease the pagerank of the node with the highest pagerank.}
+\item\TFQuestion{T}{Decreasing the $\alpha$ hyperparameter will increase the pagerank of the node with the lowest pagerank.}
+\item\TFQuestion{F}{Increasing $\alpha$ decreases the subdominant eigenvalue of the $\pbb$ matrix.}
+\item\TFQuestion{F}{Increasing $\alpha$ is guaranteed to make power method require more iterations to converge to the same residual $\epsilon$.}
+\item\TFQuestion{F}{As the number of nodes $n$ in the graph increases (i.e.\ the dimensions of the $\p$ matrix increase), the number of iterations required by the power method will also increase.}
+\item\TFQuestion{F}{The runtime of a single iteration of the power method using Equation (5.1) increases as $\alpha$ increases.}
+\item\TFQuestion{F}{The runtime of a single iteration of the exponentially accelerated power method using Equation (5.1) increases as $\epsilon$ decreases.}
+\item\TFQuestion{T}{If $n$ is small, $\p$ is dense, and you require an extremely accurate estimate of the pagerank, then the exponentially accelerated power method will likely be faster than the standard power method.}
+\end{enumerate}
+\end{problem}
+
+\end{document}
+
+
+
