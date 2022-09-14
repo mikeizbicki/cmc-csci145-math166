@@ -154,8 +154,8 @@ class WebGraph():
                 if residual < epsilon:
                     break
 
-            x = x0.squeeze()
-            return x
+            #x = x0.squeeze()
+            return x.squeeze()
 
 
     def search(self, pi, query='', max_results=10):
