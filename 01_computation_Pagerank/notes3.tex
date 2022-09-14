@@ -102,7 +102,7 @@
 \begin{center}
 {
 \Huge
-Notes: Pagerank III
+    Notes: Pagerank III (the last one!)
 }
 
 \vspace{0.15in}
@@ -127,7 +127,7 @@ then you can use pagerank.
     \begin{enumerate}
         \item 
             You are in charge of advertising the new Apple iGadget.
-            You want to deliver free samples to social media influencers,
+            You want to deliver free samples to Twitter influencers,
             with the hope that they will write good reviews that cause many people to purchase the iGadget.
             How do you select which people to give these free samples to?
             \newpage
@@ -154,10 +154,10 @@ then you can use pagerank.
     and describe how the problem can be solved using pagerank.
 \end{problem}
 
-\newpage
-\begin{problem}
-    Describe a graph problem where it would NOT make sense to use pagerank.
-\end{problem}
+%\newpage
+%\begin{problem}
+    %Describe a graph problem where it would NOT make sense to use pagerank.
+%\end{problem}
 
 %\newpage
 %\section{Alternative Analysis}
@@ -168,7 +168,7 @@ then you can use pagerank.
 %\end{problem}
 
 \newpage
-\section{Alternative Algorithms}
+\section{A Faster Algorithm?}
 
 \begin{problem}
     There are many algorithms for computing top eigenvectors,
@@ -201,6 +201,7 @@ then you can use pagerank.
     \end{equation}
     where
     \begin{equation}
+        \label{eq:Qk}
         \Q_k = 
         \begin{cases}
             \pbb & \text{if}~k=0 \\
@@ -296,23 +297,24 @@ then you can use pagerank.
             \vspace{4.5in}
 
         \newpage
-        %\item
-            %Under what conditions is the exponentially accelerated power method faster than the standard power method?
-            %\vspace{4in}
-%
+        \item
+            Under what conditions is the exponentially accelerated power method faster or slower than the standard power method?
+            \vspace{4in}
+
         %\item
             %Under what conditions is it slower?
             %\vspace{3in}
-%
+
         %\newpage
-        %\item
-            %Why does it not make sense to use the exponentially accelerated power method to compute the pagerank vector?
-            %What bad thing would happen if $\p$ was stored as a sparse matrix and $\pbb$ was calculated from $\p$ as in the standard power method?
-            %\vspace{4in}
+        \item
+            Why does it not make sense to use the exponentially accelerated power method to compute the pagerank vector?
+            In particular, what bad thing would happen if $\p$ was stored as a sparse matrix, and we substitute the defintion of $\pbb$ in terms of $\p$ into Eq \ref{eq:Qk} above?
+            \vspace{4in}
 %
     \end{enumerate}
 \end{problem}
 
+\newpage
 \section{Review Questions}
 
 \begin{problem}
@@ -320,19 +322,20 @@ then you can use pagerank.
     circle \texttt{True} if the statement is known to be true,
     \texttt{False} if the statement is known to be false,
     and \texttt{Open} if the statement is not known to be either true or false.
+    Ensure that you pay careful attention to the formal definitions of asymptotic notation in your responses.
 
 \begin{enumerate}
     \item\TFQuestion{T}{Let $f(n) = 1/(1+n)$. Then $f = \Omega(n^{-2})$.}
-\item\TFQuestion{T}{Let $A$ and $B$ be $n\times n$ matrices. The optimal algorithm for computing the matrix product $AB$ has runtime $O(n^4)$.}
-\item\TFQuestion{O}{Let $A$ and $B$ be $n\times n$ matrices. The optimal algorithm for computing the matrix product $AB$ has runtime $\Theta(n^2 \log n)$.}
-\item\TFQuestion{O}{Let $A$ and $B$ be $n\times n$ matrices. The optimal algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2.1})$.}
-\item\TFQuestion{F}{Let $A$ and $B$ be $n\times n$ matrices. The optimal algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2})$.}
-\item\TFQuestion{F}{Let $A$ and $B$ be $n\times n$ matrices. The optimal algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2.5})$.}
+\item\TFQuestion{T}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $O(n^4)$.}
+\item\TFQuestion{O}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Theta(n^2 \log n)$.}
+\item\TFQuestion{O}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2.1})$.}
+\item\TFQuestion{F}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2})$.}
+\item\TFQuestion{F}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2.5})$.}
 \item\TFQuestion{T}{Let $A$ be an $n \times n$ matrix and $k$ a natural number. Then the matrix exponential $A^k$ can be computed in time $O(n^{2.807}\log k)$.}
 \item\TFQuestion{O}{Let $A$ be an $n \times n$ matrix and $k$ a natural number. Then the matrix exponential $A^k$ can be computed in time $O(n^{2}\log n\log k)$.}
-\item\TFQuestion{T}{The matrix chain ordering problem can be solved in time $\theta(n)$.}
+\item\TFQuestion{T}{The matrix chain ordering problem can be solved in time $\Theta(n)$.}
 \item\TFQuestion{T}{Computing $\trans\x\x$ is faster than computing $\x\trans\x$.}
-\item\TFQuestion{T}{There exist $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$ such that the product $AB$ satisfies $\nnz(AB) = O(1)$.}
+\item\TFQuestion{T}{For all $n\in\mathbb N$, there exist $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$ such that the product $AB$ satisfies $\nnz(AB) = O(1)$.}
 \item\TFQuestion{T}{For all $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$, the product $AB$ must satisfy $\nnz(AB) = O(1)$.}
 \item\TFQuestion{F}{There exist $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$ such that the product $AB$ satisfies $\nnz(AB) = \Omega(n)$.}
 \item\TFQuestion{F}{There exists an $n \times n$ matrix $A$ such that $\nnz(A) = \Omega(n^3)$.}
@@ -346,7 +349,7 @@ then you can use pagerank.
 \item\TFQuestion{F}{For all graphs, the node with the largest in degree must have the highest pagerank.}
 \item\TFQuestion{F}{According to the \emph{Deeper Inside Pagerank} paper, the $\p$ matrix constructed from the web graph satisfies $\nnz(\p) = O(1)$.}
 \item\TFQuestion{F}{According to the \emph{Deeper Inside Pagerank} paper, Google uses a value of $\alpha=0.8$ when computing pagerank.}
-\item\TFQuestion{T}{The L1 norm of the pagerank vector must be equal to 1.  That is, $\lone{\pr} = 1$.}
+\item\TFQuestion{T}{The L1 norm of the pagerank vector is always 1.  That is, $\lone{\pr} = 1$.}
 \item\TFQuestion{F}{The exponentially accelerated power method is faster than the standard power method for computing the pagerank of sparse graphs with many nodes.}
 \item\TFQuestion{T}{If the power method is taking too long to converge, then increasing the $\alpha$ hyperparameter will make the algorithm run faster.}
 \item\TFQuestion{F}{The number of iterations of the standard pagerank algorithm depends on the choice of personalization vector $\mathbf v$.}
