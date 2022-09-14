@@ -37,7 +37,7 @@ source,target
 As you can see, the graph is stored as a CSV file.
 The first line is a header,
 and each subsequent line stores a single edge in the graph.
-The first row contains the source node of the edge and the second row the target node.
+The first column contains the source node of the edge and the second column the target node.
 The file is assumed to be sorted alphabetically.
 
 The second data file `lawfareblog.csv.gz` contains the link structure for the lawfare blog.
