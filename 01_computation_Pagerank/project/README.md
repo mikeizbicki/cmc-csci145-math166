@@ -420,9 +420,9 @@ Your goal should be to discover what topics that www.lawfareblog.com considers t
    ```
    $ python3 pagerank.py --data=data/lawfareblog.csv.gz --search_query='corona'
 
-   $ python3 pagerank.py --data=data/lawfareblog.csv.gz --search_query='Trump'
+   $ python3 pagerank.py --data=data/lawfareblog.csv.gz --search_query='trump'
 
-   $ python3 pagerank.py --data=data/lawfareblog.csv.gz --search_query='Iran'
+   $ python3 pagerank.py --data=data/lawfareblog.csv.gz --search_query='iran'
    ```
 
    Task 1, part 3:
