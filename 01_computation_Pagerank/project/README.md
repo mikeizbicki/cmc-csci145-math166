@@ -453,7 +453,7 @@ Your goal should be to discover what topics that www.lawfareblog.com considers t
 1. Ensure that all your changes to the `pagerank.py` and `README.md` files are committed to your repo and pushed to github.
 
 1. Get at least 5 stars on your repo.
-   (You made trade stars with other students in the class.)
+   (You may trade stars with other students in the class.)
 
    > **NOTE:**
    > 
