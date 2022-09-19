@@ -318,7 +318,7 @@ Implement the `WebGraph.make_personalization_vector` function so that it outputs
 The pseudocode for the function is:
 ```
 for each index in the personalization vector:
-    get the url for the index (see the _url_to_index function)
+    get the url for the index (see the _index_to_url function)
     check if the url satisfies the input query (see the url_satisfies_query function)
     if so, set the corresponding index to one
 normalize the vector
