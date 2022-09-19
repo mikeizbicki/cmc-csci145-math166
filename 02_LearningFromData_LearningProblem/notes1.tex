@@ -1,0 +1,354 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\wstar}{{\w}^{*}}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+Chapter 1: The Learning Problem
+}
+
+%\vspace{0.15in}
+%Due: Sunday, 6 Sep 2020 at midnight
+\end{center}
+
+\begin{center}
+\includegraphics[width=\textwidth]{dilbert}
+\end{center}
+
+\ignore{
+Exercise 1.1, 1.2, 1.3, 1.5, 1.6
+
+Memorize the Hoefding Inequality
+
+Exercise 1.11?
+
+Exercise 1.12, 1.13?
+
+Problem 1.2?
+}
+
+
+\section{Overview}
+
+The first chapter of the book introduces
+\begin{enumerate}
+    \item basic notation, and
+    \item a learning model called the perceptron.
+\end{enumerate}
+We analyze the runtime properties of the perceptron in this chapter,
+and we'll analyze the statistical properties of the algorithm in Chapter 2.
+Then in Chapters 3-4, we'll look at more complicated learning algorithms.
+%Most students find chapter 2 to be the most difficult content to understand.
+
+
+The author provides lecture videos that go along with the book, which you may find helpful.
+They are located at
+%\begin{center}
+\url{https://www.youtube.com/watch?v=mbyG85GZ0PI}.
+%\end{center}
+
+\newpage
+\section{Section 1.1: Problem Setup}
+
+\begin{problem}
+    You are a bank and need an algorithm for determining whether to approve a credit loan application.
+    Describe the learning framework notation for this problem.
+    (See Section 1.1.1 in the textbook.)
+
+    NOTE: You should be able to do this for other applications as well.
+    See Exercise 1.1 for a list of alternative applications to practice with.
+\end{problem}
+
+\newpage
+\begin{problem}
+    This problem explores the perceptron hypothesis class.
+    \begin{enumerate}
+    \item
+    Define the Perceptron hypothesis class.
+    (See Section 1.1.2 in the textbook.)
+            \vspace{4in}
+
+    \item
+    Describe which features for the bank loan problem are likely to have high weights, and which features are likely to have low weights on a ``good'' perceptron hypothesis.
+
+    NOTE:
+        This is closely related to Exercise 1.2 in the book, which you should be able to complete on your own.
+
+        \newpage
+    \item
+    Show ``good'' and ``bad'' examples of hypotheses in the Perceptron hypothesis class in $d=2$ dimensions.
+    (See the discussion in Figure 1.3 and 3.1 in the textbook.)
+
+    %\item
+    %Show a sample data set for which the Perceptron hypothesis class will fail.
+    %(See the discussion in Figure 3.1 in the textbook; note that this is not in the first chapter.)
+
+            \vspace{4in}
+    \end{enumerate}
+\end{problem}
+
+%\begin{problem}
+    %Complete Exercise 1.2.
+%\end{problem}
+
+
+\newpage
+\begin{problem}
+    The Perceptron Learning Algorithm (PLA) is a procedure for selecting a particular hypothesis from the Perceptron hypothesis class.
+    \begin{enumerate}
+        \item State the PLA update rule, as found in Eq (1.3).
+            \vspace{4in}
+        \item Exercise 1.3 in the textbook is designed to help you get some intuition for why the PLA update rule is a good rule.
+            It has the following parts:
+            \begin{enumerate}
+                \item Show that $y(t)\trans\w(t)\x(t) < 0$.
+                    \vspace{4in}
+                \item Show that $y(t)\trans\w(t+1)\x(t) > y(t)\trans\w(t)\x(t)$.
+                    \vspace{4in}
+                \item As far as classifying $\x(t)$ is concerned, argue that the move from $\w(t)$ to $\w(t+1)$ is a move `in the right direction'.
+
+                    NOTE: See the Figure on the bottom of page 7 for a visual description of these results.
+                    \vspace{4in}
+            \end{enumerate}
+            \newpage
+        \item 
+            Problem 1.3 (at the end of the chapter) proves that the total number of iterations $t$ required for the PLA to converge to an optimal solution is bounded by
+%Problem 1.3
+%Prove that the PLA eventually converges to a linear separator for seperable data.
+%The following steps will guide you through the proof.
+            \begin{equation}
+                t \le \frac{R^2 \ltwo{\wstar}^2}{\rho^2},
+            \end{equation}
+            where $\wstar$ is an optimal hyperplane,
+    \begin{equation}
+        \rho = \min_{1\le n\le N} y_n(\trans\wstar\x_n)
+    %\end{equation}
+            \qquad\text{and}\qquad
+    %\begin{equation}
+        R = \max_{1\le n\le N} \ltwo{\x_n}.
+    \end{equation}
+            \begin{enumerate}
+                \item
+                    Illustrate the quantities above.
+    %Illustrate the optimal hyperplane $\wstar$,
+    %and the quantities
+    %See Problem 1.3 at the end of the chapter for a discussion of these formulas.
+    %If you're having trouble visualizing these quantities,
+    %complete Problem 1.2.
+
+                    \vspace{5in}
+                \item
+            What is the overall runtime of running the PLA to convergence?
+            \end{enumerate}
+
+            %\vspace{3in}
+            \newpage
+        \item
+            Describe some of the differences between our runtime analysis for the PLA and the Pagerank power method algorithm.
+
+        \end{enumerate}
+\end{problem}
+\newpage
+\begin{problem}
+    Based on the analysis above, draw two data sets that we expect PLA to have very different runtimes for, and explain which data set will be faster and which will be slower.
+\end{problem}
+
+\newpage
+\begin{problem}
+    %Preprocessing data points is a common
+    In order to speed up the runtime of PLA,
+    Alice is proposing several different variants of the algorithm.
+    %For each variant below, explain why the runtime i
+    For each variant below, explain whether it will have faster runtime convergence or not.
+    \begin{enumerate}
+        \item
+            % FIXME:
+            % Should we also add correctness changes to the PLA?
+            % e.g. add some modifications that DO make it faster, but also make the results different?
+            Alice proposes ``shrinking'' the data points by a factor of $\alpha$ so that $R$ will be smaller.
+            That is, she first creates new data points defined by
+            \begin{equation}
+                \x'_i = \frac{\x_i}{\alpha}
+            \end{equation}
+            and then runs the PLA on this new data set.
+            %Will the runtime of PLA on this modified data set be any faster?
+            %Her idea is that the new radius of the data set will be $R'=R/\alpha$, and so the runtime above will be reduced by a factor of $\alpha$.
+            %Why doesn't this transformation work?
+            \newpage
+
+        \item
+            %In order to speed up the runtime of PLA,
+            Alice proposes ``centering'' the data points so that $R$ will be smaller.
+            That is, she first creates new data points defined by
+            \begin{equation}
+                \x'_i = \x'_i - \bar\x
+            \end{equation}
+            where
+            \begin{equation}
+                \bar\x = \frac1N \sum_{i=1}^N \x_i,
+            \end{equation}
+            and then runs the PLA on this new data set.
+            %Will the runtime of PLA on this modified data set be any faster?
+        \newpage
+
+        \item
+            Alice notices that there is no unique value for $\wstar$ that defines the optimal separating hyperplane.
+            In particular, for every $\wstar$ that defines a separating hyperplane and every positive real number $\alpha$,
+            $\alpha\wstar$ also defines a separating hyperplane.
+            By setting $\alpha$ to be small and using $\alpha\wstar$ as the separating hyperplane in the runtime formulas,
+            Alice hopes to achieve a faster runtime.
+            Why won't this work?
+    \end{enumerate}
+\end{problem}
+
+\ignore{
+\newpage
+\section{Section 1.1.3: Learning vs Design}
+
+\begin{problem}
+You should complete Exercise 1.5 to get practice identifying when to use a learning approach to a problem, and when to use a ``design'' approach to a problem.
+\end{problem}
+
+\section{Section 1.2: Types of Learning}
+
+The textbook identifies 3 types of learning: supervised, reinforcement, and unsupervised.
+Pagerank is an example of an unsupervised algorithm (because we do not have ``labels'' about which nodes in the graph are the most important).
+The focus of the rest of this class will be on supervised methods.
+
+\begin{problem}
+    You need to be able to identify examples of the different learning types.
+    Exercise 1.6 will give you practice with this.
+\end{problem}
+
+\section{Section 1.3: Is Learning Feasible?}
+
+\begin{problem}
+    Complete Exercise 1.7.
+\end{problem}
+
+\begin{problem}
+    Define the
+    \begin{enumerate}
+        \item Hoeffding Inequality (page 19, Eq 1.4)
+        \item in-sample error (page 21)
+        \item out-of-sample error (page 21)
+        \item Eq 1.5
+        \item union bound (page 24)
+        \item Eq 1.6
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Complete Exercise 1.11.
+\end{problem}
+
+\begin{problem}
+    Complete Exercise 1.12.
+\end{problem}
+
+\section{Section 1.4: Error and Noise}
+
+\begin{problem}
+    Complete Exercise 1.13
+\end{problem}
+}
+
+\ignore{
+Problem 1.12
+
+Chapter 2
+
+Definition 2.1 dichotomies
+
+Definition 2.2 growth function
+
+Definition 2.3 break point
+
+Definition 2.5 VC dimension
+
+Exercise 2.4: VC dimension of PLA
+
+Theorem 2.5
+
+Exercise 2.5 substitute values into VC theorem
+
+Theorem 2.4 + Eq (2.9) + substitute into Theorem 2.5
+
+Figure 2.3: Error 
+
+Exercise 2.6
+
+Exercise 2.7 (do one in class)?
+
+Section 2.3: bias/variance
+
+Exercise 2.8 (proofs of gbar)
+
+Problem 2.1, 2.2, 2.3, 2.7, 2.8, 2.10?, 2.11, 2.12, 2.13?, 2.14?, 2.15, 2.16, 2.17, 2.18, 
+}
+
+\end{document}
+
+
