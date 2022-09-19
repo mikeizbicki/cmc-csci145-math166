@@ -281,7 +281,7 @@ but the modified graph does not have a large eigengap and so requires a small al
 Changing the value of alpha also gives us very different pagerank rankings.
 For example, 
 ```
-$ python3 pagerank_solution.py --data=data/lawfareblog.csv.gz --verbose --filter_ratio=0.2
+$ python3 pagerank.py --data=data/lawfareblog.csv.gz --verbose --filter_ratio=0.2
 INFO:root:rank=0 pagerank=3.4696e-01 url=www.lawfareblog.com/trump-asks-supreme-court-stay-congressional-subpeona-tax-returns
 INFO:root:rank=1 pagerank=2.9521e-01 url=www.lawfareblog.com/livestream-nov-21-impeachment-hearings-0
 INFO:root:rank=2 pagerank=2.9040e-01 url=www.lawfareblog.com/opening-statement-david-holmes
@@ -293,7 +293,7 @@ INFO:root:rank=7 pagerank=1.4957e-01 url=www.lawfareblog.com/todays-headlines-an
 INFO:root:rank=8 pagerank=1.4367e-01 url=www.lawfareblog.com/cyberlaw-podcast-mistrusting-google
 INFO:root:rank=9 pagerank=1.4240e-01 url=www.lawfareblog.com/lawfare-podcast-bonus-edition-gordon-sondland-vs-committee-no-bull
 
-$ python3 pagerank_solution.py --data=data/lawfareblog.csv.gz --verbose --filter_ratio=0.2 --alpha=0.99999
+$ python3 pagerank.py --data=data/lawfareblog.csv.gz --verbose --filter_ratio=0.2 --alpha=0.99999
 INFO:root:rank=0 pagerank=7.0149e-01 url=www.lawfareblog.com/covid-19-speech-and-surveillance-response
 INFO:root:rank=1 pagerank=7.0149e-01 url=www.lawfareblog.com/lawfare-live-covid-19-speech-and-surveillance
 INFO:root:rank=2 pagerank=1.0552e-01 url=www.lawfareblog.com/cost-using-zero-days
@@ -318,7 +318,7 @@ Implement the `WebGraph.make_personalization_vector` function so that it outputs
 The pseudocode for the function is:
 ```
 for each index in the personalization vector:
-    get the url for the index (see the _url_to_index function)
+    get the url for the index (see the _index_to_url function)
     check if the url satisfies the input query (see the url_satisfies_query function)
     if so, set the corresponding index to one
 normalize the vector
@@ -420,9 +420,9 @@ Your goal should be to discover what topics that www.lawfareblog.com considers t
    ```
    $ python3 pagerank.py --data=data/lawfareblog.csv.gz --search_query='corona'
 
-   $ python3 pagerank.py --data=data/lawfareblog.csv.gz --search_query='Trump'
+   $ python3 pagerank.py --data=data/lawfareblog.csv.gz --search_query='trump'
 
-   $ python3 pagerank.py --data=data/lawfareblog.csv.gz --search_query='Iran'
+   $ python3 pagerank.py --data=data/lawfareblog.csv.gz --search_query='iran'
    ```
 
    Task 1, part 3:
