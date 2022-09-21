@@ -351,13 +351,13 @@ then you can use pagerank.
 \item\TFQuestion{F}{According to the \emph{Deeper Inside Pagerank} paper, Google uses a value of $\alpha=0.8$ when computing pagerank.}
 \item\TFQuestion{T}{The L1 norm of the pagerank vector is always 1.  That is, $\lone{\pr} = 1$.}
 \item\TFQuestion{F}{The exponentially accelerated power method is faster than the standard power method for computing the pagerank of sparse graphs with many nodes.}
-\item\TFQuestion{T}{If the power method is taking too long to converge, then increasing the $\alpha$ hyperparameter will make the algorithm run faster.}
+\item\TFQuestion{F}{If the power method is taking too long to converge, then increasing the $\alpha$ hyperparameter will make the algorithm run faster.}
 \item\TFQuestion{F}{The number of iterations of the standard pagerank algorithm depends on the choice of personalization vector $\mathbf v$.}
 \item\TFQuestion{T}{Decreasing the $\alpha$ hyperparameter increases the effect of the personalization vector $\mathbf v$ on the computed pagerank.}
 \item\TFQuestion{T}{Decreasing the $\alpha$ hyperparameter will decrease the pagerank of the node with the highest pagerank.}
 \item\TFQuestion{T}{Decreasing the $\alpha$ hyperparameter will increase the pagerank of the node with the lowest pagerank.}
 \item\TFQuestion{F}{Increasing $\alpha$ decreases the subdominant eigenvalue of the $\pbb$ matrix.}
-\item\TFQuestion{F}{Increasing $\alpha$ is guaranteed to make power method require more iterations to converge to the same residual $\epsilon$.}
+\item\TFQuestion{T}{Increasing $\alpha$ is guaranteed to make power method require more iterations to converge to the same residual $\epsilon$.}
 \item\TFQuestion{F}{As the number of nodes $n$ in the graph increases (i.e.\ the dimensions of the $\p$ matrix increase), the number of iterations required by the power method will also increase.}
 \item\TFQuestion{F}{The runtime of a single iteration of the power method using Equation (5.1) increases as $\alpha$ increases.}
 \item\TFQuestion{F}{The runtime of a single iteration of the exponentially accelerated power method using Equation (5.1) increases as $\epsilon$ decreases.}
