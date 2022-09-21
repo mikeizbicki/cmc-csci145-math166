@@ -140,16 +140,41 @@ You should complete Exercise 1.5 to get practice identifying when to use a learn
             What does Hoefding's inequality say about the out-of-sample error?
             \vspace{6in}
 
-        \item Why is the Hoeffding inequality an example of a PAC learning bound?
-            \vspace{4in}
+        %\item Why is the Hoeffding inequality an example of a PAC learning bound?
+            %\vspace{4in}
 
         %\item You want to ``guarantee'' that the test error $\Etest$ is a good approximation of the true error $\Eout$.
             %Of course, you can't guarantee this, you can only make it ``probably'' true.
-            \newpage
-        \item How large of a test set do you need to guarantee with probability at least 0.99 that $|\Etest-\Eout| \le 0.01$?
-            \vspace{4in}
+    \end{enumerate}
+\end{problem}
+\newpage
+\begin{problem}
+    How large of a test set do you need to guarantee with probability at least 0.99 that $|\Etest-\Eout| \le 0.01$?
+\end{problem}
 
-        \item If you have a test set with 1000 samples, what is the probability that $|\Etest-\Eout| \le 0.01$?
+\newpage
+\begin{problem}
+    This problem explores the optimal way to size your test sets.
+    \begin{enumerate}
+        \item If you have a test set with 1000 samples, what bound does the Hoeffding inequality give on the probability that $|\Etest-\Eout| \le 0.01$?
+            \vspace{1.5in}
+
+        \item
+            Why is this bound ``trivial''?
+            \vspace{1.5in}
+
+        \item
+            What if you change the accuracy to $|\Etest-\Eout| \le 0.05$?
+            \vspace{1.5in}
+
+        \item
+            What if you use the original accuracy $|\Etest-\Eout| \le 0.01$ but use 10000 samples in your test set?
+            \vspace{1.5in}
+
+        \item
+            If we expect the accuracy of our learning algorithm to be close to 1 (i.e.\ we expect $|\Etest-\Eout|$ to be close to 0),
+            should we use a larger or a smaller test set than when we expect the accuracy to be close to 0.8 (i.e.\ we expect $\Etest-\Eout|$ to be close to 0.2)?
+            \vspace{1.5in}
     \end{enumerate}
 \end{problem}
 
