@@ -1,0 +1,419 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage[normalem]{ulem}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        %\hl{\textbf{TRUE}}\hspace*{14pt}False
+        \hl{\texttt{True}}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+    }{
+        \ifthenelse{\equal{#1}{F}}{
+        %True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \texttt{True}\hspace*{20pt}\hl{\texttt{False}}\hspace*{20pt}\texttt{Open}
+        }
+        {
+            \texttt{True}\hspace*{20pt}{\texttt{False}}\hspace*{20pt}\hl{\texttt{Open}}
+        }
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\printanswers
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+    Midterm 1
+}
+\end{center}
+
+\vspace{0.5in}
+\noindent
+\textbf{Printed Name:}
+
+\noindent
+\rule{\textwidth}{0.1pt}
+\vspace{0.25in}
+
+%Format:
+%
+    %The midterm will be worth 15 points.
+    %There will be 10 True / False / Open questions. Each correct answer will be worth 1 point, each incorrect answer will result in a -1 penalty, and each blank answer will result in 0 points.
+    %There will be 5 free response questions. These questions will follow the format of the questions in the notes packets.
+%
+    \noindent
+\textbf{Due date:}
+\begin{enumerate}
+    \item
+        The exam is due Monday 26 Sep at 8AM.
+
+    \item
+        You may submit it either on sakai electronically or by putting a physical copy under my door.
+\end{enumerate}
+
+\vspace{0.15in}
+\noindent
+\textbf{Rules:}
+\begin{enumerate}
+    \item
+        The exam is untimed.
+        You do not have to complete the exam in a single sitting.
+        You may pause and restart whenever you'd like.
+
+    \item
+    You may use any non-human resources that you like, including notes, books, internet articles, and computers.
+
+    \item
+    You are not allowed to discuss the exam in any way with any human until after the due date. This includes:
+        \begin{enumerate}
+            \item obviously bad behavior like copying answers, 
+            \item more banal behavior such as:
+                \begin{enumerate}
+                    \item telling your friend "Problem 6 was really hard" or 
+                    \item asking your friend "Have you completed the exam yet?"
+                \end{enumerate}
+        \end{enumerate}
+        
+        Even after you finish the exam, you may not discuss it.
+
+    \item
+    If you do have questions about the exam, you should email me the questions rather than posting to github.
+
+\end{enumerate}
+
+\vspace{0.15in}
+\noindent
+\textbf{Grading:}
+\begin{enumerate}
+    \item For the True/False/Open questions: Each correct answer will be awarded +1 point, each incorrect answer will result in a -1 point penalty, and each blank answer will result in 0 points.
+
+    \item All other problems are worth 1 point, with no penalty for incorrect answers.
+
+    \item There are 16 points possible on the exam.
+        Your final grade entered into sakai will be
+        \begin{equation*}
+            \min\{15, \text{the number of points earned}\}.
+        \end{equation*}
+
+    \item If you find a substantive error on the exam, then I will award you +1 bonus point.
+\end{enumerate}
+
+\vspace{0.15in}
+\noindent
+\textbf{Good luck :)}
+
+\newpage
+
+\begin{problem}
+    For each statement below,
+    circle \texttt{True} if the statement is known to be true,
+    \texttt{False} if the statement is known to be false,
+    and \texttt{Open} if the statement is not known to be either true or false.
+    Ensure that you pay careful attention to the formal definitions of asymptotic notation in your responses.
+
+\begin{enumerate}
+%\item\TFQuestion{T}{Let $f(n) = 1/(1+n)$. Then $f = \Omega(n^{-2})$.}
+    %\item\TFQuestion{T}{There exist $n\times n$ matrices $A$ and $B$ where $\nnz(AB) = 1$ and $\nnz(BA) = n^2$.}
+\item\TFQuestion{O}{Let $A$ and $B$ be dense $n\times n$ matrices. Then the fastest possible algorithm for computing the matrix product $AB$ has runtime $\Omega(n^2\log^2 n)$.}
+    \item\TFQuestion{T}{Let $A$ be a dense $n\times n$ matrix. Then the fastest possible algorithm for computing the matrix product $A^3$ has runtime $O(n^{3})$.}
+%\item\TFQuestion{O}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2.1})$.}
+%\item\TFQuestion{T}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2})$.}
+%\item\TFQuestion{F}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2.5})$.}
+%\item\TFQuestion{T}{Let $A$ be an $n \times n$ matrix and $k$ a natural number. Then the matrix exponential $A^k$ can be computed in time $O(n^{2.807}\log k)$.}
+%\item\TFQuestion{O}{Let $A$ be an $n \times n$ matrix and $k$ a natural number. Then the matrix exponential $A^k$ can be computed in time $O(n^{2}\log n\log k)$.}
+%\item\TFQuestion{O}{The matrix chain ordering problem can be solved in time $\Theta(n)$.}
+\item\TFQuestion{T}{Let $\x$ be a dense $n$-dimensional vector.  Then the fastest possible algorithm for computing the expression $\x\trans\x\x$ has runtime $\Theta(n)$.}
+%\item\TFQuestion{T}{For all $n\in\mathbb N$, there exist $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$ such that the product $AB$ satisfies $\nnz(AB) = O(1)$.}
+%\item\TFQuestion{T}{For all $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$, the product $AB$ must satisfy $\nnz(AB) = O(1)$.}
+%\item\TFQuestion{F}{There exist $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$ such that the product $AB$ satisfies $\nnz(AB) = \Omega(n)$.}
+%\item\TFQuestion{F}{There exists an $n \times n$ matrix $A$ such that $\nnz(A) = \Omega(n^3)$.}
+%\item\TFQuestion{T}{There exists an $n \times n$ matrix $A$ such that $\nnz(A) = O(n^3)$.}
+%\item\TFQuestion{T}{Let $A$ be an $n\times n$ matrix that is both primitive and stochastic. Then $A$ has exactly one eigenvalue equal to 1.}
+\item{\sout{\TFQuestion{F}{It is always true that $\ltwo{\pb} = \ltwo{\pbb}$.}}
+
+    (Everyone awarded +1 point for this problem, regardless of your answer.  It's true that the top eigenvalues for both matrices must be equal to 1 because they are both stochastic, but the L2 norm technically measures the top singular value rather than the top eigenvalue, and these need not be equal.)
+        }
+
+\item\TFQuestion{T}{Assume we are computing the pagerank of a graph with 10 nodes using $\alpha=0.85$.  Then it is possible for the L1 norm of the pagerank vector to be equal to 1.}
+%\item\TFQuestion{F}{The $\p$ matrix is primitive.}
+\item\TFQuestion{T}{There exists a valid $\p$ matrix such that $\nnz(\p) = n$ and $\nnz(\p\p) = n$.}
+\item\TFQuestion{F}{Every stochastic matrix is irreducible.}
+\item\TFQuestion{T}{$\nnz(\pbb) = O(n^3)$.}
+%\item\TFQuestion{F}{Assume that $\x$ is a stochastic vector satisfying $\x \ne \pi$. Then $\ltwo{\trans\x\pbb} < \ltwo{\x}$.}
+\item\TFQuestion{T}{It is possible for the $\pb$ matrix to be primitive.}
+\item\TFQuestion{F}{It is possible for the $\pbb$ matrix to have an eigenvalue $\lambda$ that is greater than $\alpha$ but less than 1; that is, an eigenvalue satisfying $1 > \lambda > \alpha$.}
+%\item\TFQuestion{T}{The $\pbb$ matrix is stochastic.}
+%\item\TFQuestion{T}{For all graphs, $\nnz(\pbb) = 0$.}
+%\item\TFQuestion{F}{For all graphs, the node with the largest in degree must have the highest pagerank.}
+%\item\TFQuestion{F}{According to the \emph{Deeper Inside Pagerank} paper, the $\p$ matrix constructed from the web graph satisfies $\nnz(\p) = O(1)$.}
+%\item\TFQuestion{F}{According to the \emph{Deeper Inside Pagerank} paper, Google uses a value of $\alpha=0.8$ when computing pagerank.}
+%\item\TFQuestion{T}{The L1 norm of the pagerank vector is always 1.  That is, $\lone{\pr} = 1$.}
+%\item\TFQuestion{F}{The exponentially accelerated power method is faster than the standard power method for computing the pagerank of sparse graphs with many nodes.}
+%\item\TFQuestion{T}{If the power method is taking too long to converge, then increasing the $\alpha$ hyperparameter will make the algorithm run faster.}
+%\item\TFQuestion{F}{The number of iterations of the standard pagerank algorithm depends on the choice of personalization vector $\mathbf v$.}
+%\item\TFQuestion{T}{Decreasing the $\alpha$ hyperparameter increases the effect of the personalization vector $\mathbf v$ on the computed pagerank.}
+%\item\TFQuestion{T}{Decreasing the $\alpha$ hyperparameter will decrease the pagerank of the node with the highest pagerank.}
+%\item\TFQuestion{T}{Decreasing the $\alpha$ hyperparameter will increase the pagerank of the node with the lowest pagerank.}
+%\item\TFQuestion{F}{Increasing $\alpha$ decreases the subdominant eigenvalue of the $\pbb$ matrix.}
+%\item\TFQuestion{F}{Increasing $\alpha$ is guaranteed to make power method require more iterations to converge to the same residual $\epsilon$.}
+%\item\TFQuestion{F}{As the number of nodes $n$ in the graph increases (i.e.\ the dimensions of the $\p$ matrix increase), the number of iterations required by the power method will also increase.}
+%\item\TFQuestion{F}{The runtime of a single iteration of the power method using Equation (5.1) increases as $\alpha$ increases.}
+%\item\TFQuestion{F}{The runtime of a single iteration of the exponentially accelerated power method using Equation (5.1) increases as $\epsilon$ decreases.}
+%\item\TFQuestion{T}{If $n$ is small, $\p$ is dense, and you require an extremely accurate estimate of the pagerank, then the exponentially accelerated power method will likely be faster than the standard power method.}
+\end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+Either prove or give a counterexample to the following claim: For any $n$-dimensional vector $\x$, it is true that $\ltwo{\trans\x\pbb} \le \ltwo{\x}$.
+\end{problem}
+\begin{solution}
+    The statement is FALSE, and I awarded full credit for any valid counterexample.
+    For example,
+    \begin{equation}
+        \trans\x = 
+        \begin{pmatrix}
+            1 & 1 & 1
+        \end{pmatrix}
+        \qquad\text{and}\qquad \pbb=
+        \begin{pmatrix}
+            0.5 & 0.25 & 0.25 \\
+            0.5 & 0.25 & 0.25 \\
+            0.5 & 0.25 & 0.25 \\
+        \end{pmatrix}
+    \end{equation}
+    results in $\ltwo{\x} = \sqrt{3} \approx 1.732$ and $\ltwo{\trans\x\pbb} \approx 1.837$.
+\end{solution}
+
+\begin{solution}
+    %\vspace{1in}
+    I also awarded full credit if you claimed that the answer was TRUE somehow due to $\pbb$ having a maximum eigenvalue of 1.
+    That is, if you stated something like:
+    %with the following justification:
+    %$\pbb$ has a maximum eigenvalue of 1,
+    %so
+    \begin{align}
+        \ltwo{\trans\x\pbb}
+        &\le
+        \ltwo{\x}\ltwo{\pbb} \\
+        &=
+        \ltwo{\x}
+    \end{align}
+    where the first step is true due to the properties of norms and the second step is true because $\ltwo{\pbb} = 1$.
+
+    Unfortunately, it is not true that $\ltwo{\pbb}=1$.
+    I misspoke in class when I said that the L2 norm of a matrix equals its top eigenvalue;
+    instead, it equals it's top \emph{singular value}.
+    The singular values of a matrix $A$ are defined to be the square root of the eigenvalues of $\trans A A$.
+    %I misunderstood
+    For real, symmetric matrices, the singular values and the eigenvalues are always the same;
+    otherwise, they do not have to be the same (as in the case of the $\pbb$ example above.
+
+
+    %it is not true that having a maximum eigenvalue of 1 is sufficient for for the steps above to be true.
+    %Instead, we need the maximum \emph{singular value} to be 1.
+    %The singular values are closely related to eigenvalues,
+    %but the maximum singular value of a stochastic matrix can be greater than 1 (as the counter example above shows).
+    %For many matrices, the singular values equal the eigenvalues,
+    %but it is not true in general that this will be the case for the $\pbb$ matrix.
+    %I believe I misspoke in class at some point and stated that the maximum eigenvalue being 1 implies that the above inequality,
+    %and so that is why I am offering full credit for the incorrect ``solution'' to this problem,
+    %and why I am giving everyone credit for problem 1.4 in the T/F/O questions.
+
+    If you said the answer was TRUE, and it looked to me like your justification was something like this, but you didn't explicitly state anywhere that the max eigenvalue is 1 or that $\ltwo{\pbb}=1$, then you got 0.5 points.
+\end{solution}
+
+\newpage
+\begin{problem}
+%Equation 5.1 shows the power method iteration for solving for $\pr$.
+%It is reproduced below
+    Recall that Equation (5.1) states that
+\begin{equation*}
+    \x^{(k)T}
+    =
+    \alpha \x^{(k-1)T} \p + \big(\alpha \x^{(k-1)T} \mathbf a + (1-\alpha)\big) \mathbf v^T
+    .
+    \label{eq:xk}
+\end{equation*}
+    %\begin{enumerate}
+        %\item
+            In class, we computed the runtime for a single iteration of Equation (5.1) assuming that $\p$ is sparse.
+What is the runtime of computing a single iteration if $\p$ is dense?
+            %\vspace{4in}
+%
+        %\item
+    \end{problem}
+    \begin{solution}
+        $O(n^2)$
+
+        If you didn't simplify the solution, you received +0.5
+    \end{solution}
+
+    \newpage
+    \begin{problem}
+        If $\p$ is dense (as in the previous problem), then what is the overall runtime for using the power method to compute an approximate pagerank vector with residual accuracy $\epsilon$?
+            %how many iterations are required to achieve residual accuracy
+            %\begin{equation*}
+               %\ltwo{\x^{(k)} - \x^{(k-1)}} \le \epsilon,
+            %\end{equation*}
+            %where $\epsilon$ is a ``small'' target accuracy satisfying $0 < \epsilon < 1$.
+    %\end{enumerate}
+\end{problem}
+    \begin{solution}
+        $O\bigg(\frac{\log\epsilon}{\log\alpha}n^2\bigg)$
+
+        If you didn't simplify the solution, you received +0.5
+
+        If you used the incorrect value from the previous solution, then you received +0.5
+    \end{solution}
+
+\newpage
+\begin{problem}
+    In practice, no one uses the EAPM to compute pagerank vectors.  Why?
+\end{problem}
+    \begin{solution}
+        The runtime for the EAPM is $O\big((\log \frac{\log\epsilon}{\log\alpha})n^3\big)$ compared to $O\big(\frac{\log\epsilon}{\log\alpha}(\nnz(P)+n)\big)$ for the standard PM.
+        The EAPM has better dependencies on $\epsilon$, but much worse dependencies on $n$.
+        In real-world problems, $\epsilon$ is always less than about $10^{-6}$, but $n$ can grow extremely large.
+        Therefore, we care about the dependence on $n$ much more than the dependence on $\epsilon$.
+    \end{solution}
+
+\newpage
+\begin{problem}
+    Let $A$ be an $n\times n$ dense matrix and $k$ be a positive integer.
+    Describe a procedure for computing $A^k$ in time $O(n^3\log k)$.
+\end{problem}
+    \begin{solution}
+        In class, we used the recursive formula
+        \begin{equation}
+        \label{eq:Qk}
+        \Q_k = 
+        \begin{cases}
+            \pbb & \text{if}~k=0 \\
+            \Q_{k-1} \Q_{k-1} & \text{otherwise} \\
+        \end{cases}
+        \end{equation}
+        to compute the $\pbb^k$ expression quickly in the EAPM, and any variation on this earned full credit.
+
+        Technically, the procedure above only works for values of $k$ that are powers of 2, and the question is asking for a procedure that works for any $k$.
+        The following recursion computes $A^k$ for all values of $k$:
+    \begin{equation}
+        \label{eq:Qk}
+        A^k = 
+        \begin{cases}
+            1 & \text{if}~k=0 \\
+            A \cdot (A^2)^{(k-1)/2} & \text{if $k$ is odd} \\
+            (A^2)^{k/2} & \text{if $k$ is even} \\
+            %\Q_{k-1} \Q_{k-1} & \text{otherwise} \\
+        \end{cases}
+        .
+%if n < 0  then return exp_by_squaring(1 / x, -n);
+%else if n = 0  then return  1;
+%else if n is even  then return exp_by_squaring(x * x,  n / 2);
+%else if n is odd  then return x * exp_by_squaring(x * x, (n - 1) / 2);
+%
+    \end{equation}
+    \end{solution}
+
+\newpage
+\begin{problem}
+    Describe a problem that can be solved using pagerank.
+    (This is similar to Problem 1 from the Pagerank III notes, but your example problem should be different than the ones we did in class.)
+\end{problem}
+\begin{solution}
+    Any remotely reasonable solution earned full credit.
+\end{solution}
+\end{document}
+
+
+
+
