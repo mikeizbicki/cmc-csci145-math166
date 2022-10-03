@@ -213,6 +213,14 @@ The integer $k$ is said to be a \emph{break point} for hypothesis class $\mathca
 \end{theorem}
 }
 
+\begin{defn}
+    The Vapnik-Chervonenkis dimension (VC dimension) of a hypothesis class $\mathcal H$, denoted by $\dvc(\mathcal H)$ or simply $\dvc$, is 
+    \begin{solution}
+        the largest value of $N$ for which $\mH(N) = 2^N$.
+        If $\mH(N) = 2^N$ for all $N$, then $\dvc = \infty$.
+    \end{solution}
+\end{defn}
+
 \begin{theorem}[VC generalization bound]
     For any tolerance $\delta>0$, we have that with probability at least $1-\delta,$
     \begin{solutionorbox}
