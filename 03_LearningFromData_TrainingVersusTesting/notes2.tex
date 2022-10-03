@@ -1,0 +1,267 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{stmaryrd}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{example}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{fact}{Fact}
+\newtheorem{refr}{References}
+\newtheorem{theorem}{Theorem}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\prob}{\mathbb P}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\wstar}{{\w}^{*}}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+%Chapter 1/2: The Learning Problem (III)
+Chapter 2: Training vs Testing (II)
+}
+\end{center}
+
+\begin{center}
+%\includegraphics[height=3in]{scooby}
+%~~~~~~~~~~
+%\includegraphics[height=3in]{ml}
+\end{center}
+
+
+\begin{problem}
+    What is the VC dimension of the following hypothesis classes?
+    (These hypothesis classes all come from either Example 2.2 on page 43-45 or the problems in the back of the chapter.)
+
+    \begin{enumerate}
+    \item
+        The set of positive rays in 1 dimension:
+        \begin{equation}
+            \HH{} = \bigg\{ x \mapsto \sign(x-a) : a \in \R \bigg\}
+        \end{equation}
+            \vspace{3in}
+
+    \item
+        The set of positive and negative rays in 1 dimension:
+        \begin{equation}
+            \HH{} = \bigg\{ x \mapsto \sigma\sign(x-a) : a \in \R, \sigma \in \{+1, -1\} \bigg\}
+        \end{equation}
+            \vspace{3in}
+
+    \item The set of positive intervals in 1 dimension:
+        \begin{equation}
+            \HH{} = \bigg\{ x \mapsto \big\llbracket a \le x \le b \big\rrbracket : a \in \R, b \in \R \bigg\}
+        \end{equation}
+\vspace{4in}
+
+    \item The set of positive and negative intervals in 1 dimension:
+        \begin{equation}
+            \HH{} = \bigg\{ x \mapsto \sigma \big\llbracket a \le x \le b \big\rrbracket : a \in \R, b \in \R, \sigma \in \{+1, -1\}  \bigg\}
+        \end{equation}
+\vspace{4in}
+
+    \item The set of centered spheres in $\R^d$:
+        \begin{equation}
+            \HH{} = \bigg\{ \x \mapsto \big\llbracket \ltwo{\x} \le \alpha \big\rrbracket : \alpha \in \R^+ \bigg\}
+        \end{equation}
+\vspace{4in}
+
+    \item The set of non-centered spheres in $\R^d$:
+        \begin{equation}
+            \HH{} = \bigg\{ \x \mapsto \big\llbracket \ltwo{\x - \mu} \le \alpha \big\rrbracket : \alpha \in \R^+, \mu \in \R^d \bigg\}
+        \end{equation}
+\vspace{4in}
+
+    \item The set of non-centered spheres in $\R^d$:
+        \begin{equation}
+            \HH{} = \bigg\{ \x \mapsto \big\llbracket \ltwo{\x - \mu} \le \alpha \big\rrbracket : \alpha \in \R^+, \mu \in \R^d \bigg\}
+        \end{equation}
+\vspace{4in}
+
+    \item Convex sets in 2 dimensions:
+        $\mathcal H$ is the set of all functions $h : \R^2 \to \{+1, -1\}$ that are positive inside some convex set and negative elsewhere.
+            (Recall that a set is convex if the line segment connecting any two points in the set lies entirely within the set.)
+\vspace{4in}
+
+    %\item The set of decision stumps:
+    %\begin{equation}
+    %\end{equation}
+    \end{enumerate}
+\end{problem}
+
+%\begin{problem}
+%Recall that the textbook uses $f$ to denote the \emph{true label function}, which can defined to be
+%\begin{equation}
+    %f = \argmin_{h \in \mathcal H^*} \Eout(h),
+%\end{equation}
+%where $\mathcal H^*$ is the union of all hypothesis classes.
+%\begin{enumerate}
+    %\item According to VC-theory, why does it not make sense to use $H^*$ as our hypothesis class?
+%\end{enumerate}
+%\end{problem}
+
+%\begin{problem}
+%\end{problem}
+
+%\begin{defn}
+    %The \emph{Bayes Optimal Predictor} $f$
+    %\begin{equation}
+        %f = \argmin_h \Eout(h)
+    %\end{equation}
+%\end{defn}
+
+%\newpage
+\begin{problem}
+    For each statement below, indicate whether it is true or false and explain why.
+    (The best possible explanation for true answers is a proof, and the best possible explanation for false answers is a counterexample.)
+    \begin{enumerate}
+        \item Let $f$ be the true labeling function.  Then for all data distributions, $\Eout(f) = 0$.
+            \vspace{3in}
+
+        \item Let $\mathcal H$ be the perceptron hypothesis class, and $g$ be the result of the PLA.
+            Also let $f$ be the true labeling function.
+            Then $\Eout(g) \ge \Eout(f)$.
+            \vspace{3in}
+
+            \newpage
+        \item Let $\mathcal H$ be the perceptron hypothesis class, and $g$ be the result of the PLA.
+            Also let $f$ be the true labeling function.
+            Then $\Ein(g) \ge \Ein(f)$.
+            \vspace{3in}
+
+        \item Let $f$ be the true labeling function.
+            There exists some hypothesis class $\mathcal H$
+            with hypothesis $g \in \mathcal H$ satisfying
+            $\Eout(g) < \Eout(f)$.
+            \vspace{3in}
+
+        \item If $\mathcal H$ is a finite hypothesis class, and $g$ is trained using the TEA algorithm, the it is always true that $|\Ein(g) - \Eout(g)| \le \Ein(g)$.
+            \vspace{3in}
+
+        \item Let $g$ be a hypothesis selected from some hypothesis class $\mathcal H$ with finite dimension.  Then it is possible for $\Ein(g)$ to be less than $\Eout(g)$.
+            \vspace{3in}
+
+        \item The VC dimension of every finite hypothesis class is finite.
+            \vspace{3in}
+        \item The VC dimension of every infinite hypothesis class is infinite.
+            \vspace{3in}
+        %\item There exists a hypothesis $h$ that has lower error than the Bayes Optimal Predictor.
+        \item If there exists a hypothesis $h$ such that $\min_{h} \Ein(h) = 0$,
+            then the VC dimension of $\mathcal H$ must be finite.
+            \vspace{3in}
+        %\item Let $\mathcal H$ be a finite hypothesis class of size $M$.
+            %Then $\mH = O(M)$.
+        \item
+            If $\mathcal H$ can shatter a set of size $N$, then $\dvc(\mathcal H) \ge N$.
+            \vspace{3in}
+        \item
+            For any hypothesis class $\mathcal H$, the value $\dvc(\mathcal H) + 1$ is a break point for $\mathcal H$.
+            \vspace{3in}
+        \item
+            If the hypothesis class $\mathcal H$ shatters some dataset of size $N$, then $\mH(N) = 2^N$.
+            \vspace{3in}
+        \item
+            There exists some hypothesis class $\mathcal H$ with growth function $\mH(N) = \Theta(2^{\sqrt{N}})$.
+            \vspace{3in}
+        \item
+            Let $\mathcal H$ be an arbitrary hypothesis class.
+            Then $\mH(N) = O(2^N)$.
+            \vspace{3in}
+        \item
+            Let $\mathcal H_1$ and $\mathcal H_2$ be hypothesis classes satisfying $\mathcal H_1 \subset \mathcal H_2$.
+            Then $\dvc(\mathcal H_1) \le \dvc(\mathcal H_2)$.
+            \vspace{3in}
+        \item
+            Let $\mathcal H_1$ and $\mathcal H_2$ be hypothesis classes satisfying $\dvc(\mathcal H_1) \le \dvc(\mathcal H_2)$.
+            Then $\mathcal H_1 \subset \mathcal H_2$.
+            \vspace{3in}
+        \item
+            Let $\mathcal H_1$ and $\mathcal H_2$ be hypothesis classes satisfying $\dvc(\mathcal H_1) = \dvc(\mathcal H_2)$.
+            Then $\mathcal H_1 = \mathcal H_2$.
+            \vspace{3in}
+        %\item
+            %If the input data is $d$ dimensional, then the VC dimension of every hypothesis class must be at least $d$.
+            %\vspace{3in}
+        %%\item
+            %%If the hypothesis class $\mathcal H$ shatters some dataset of size $N$, then $\mH(N) = 2^N$.
+        %\item Finite hypothesis classes of size $M$ can have VC dimension $O(1)$.
+            %\vspace{3in}
+    \end{enumerate}
+\end{problem}
+
+%\begin{problem}
+    %You
+%\end{problem}
+
+\end{document}
+
+
+
