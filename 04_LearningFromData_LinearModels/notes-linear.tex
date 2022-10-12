@@ -1,0 +1,399 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{booktabs}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{note}{Note}
+\newtheorem{example}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{fact}{Fact}
+\newtheorem{refr}{References}
+\newtheorem{theorem}{Theorem}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\prob}{\mathbb P}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\wstar}{{\w}^{*}}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+Chapter 3: Linear Models
+}
+\end{center}
+
+%\begin{defn}
+    %A loss function $\ell(\hat y, y)$ measures the cost of predicting $\hat y$ when the actual answer is $y$.
+%\end{defn}
+
+\section*{Motivation}
+
+%\begin{defn}
+Recall that a model is defined both by its hypothesis class $\HH{}$ and the training algorithm used to select a hypothesis from $\HH{}$ on a particular dataset.
+%The ``best possible'' training algorithm will compute the minimization
+A reasonable idea for a training algorithm is to select a hypothesis that minimizes the in-sample error:
+\begin{equation}
+    \label{eq:erm}
+    g = \argmin_{h\in\HH{}} \Ein(g).
+\end{equation}
+%The hypothesis described by this process above is often called the \emph{emperical risk minimizer} (ERM) because $\Ein$ is often called the \emph{emperical risk}.
+%
+    For finite hypothesis classes, we saw that the \emph{try everything algorithm} (TEA) can exactly compute the minimization in \eqref{eq:erm} in finite time.
+    Unfortunately, the TEA algorithm cannot be used on infinite hypothesis classes.
+
+    In this set of notes, we will study how to compute the minimization above for infinite classes.
+    %We follow a three step procedure:
+    %\begin{enumerate}
+        %\item We'll introduce new loss functions that are easy to work with.
+        %\item We'll describe how they statistically compare to the 0-1 loss we've already seen.
+        %\item We'll introduce algorithms for 
+    %\end{enumerate}
+%
+    %The high level idea is that we will introduce new loss functions that make it easy to solve the optimization in \eqref{eq:erm} above.
+    %Then we will describe how they relate statistically to the 0-1 loss we've already seen.
+
+\section*{Notation}
+
+\begin{defn}
+    A \emph{loss function} $\ell(\hat y, y)$ is a function that measures ``how bad'' the output of a hypothesis is.
+    The \emph{in-sample error} with respect to $\ell$ is defined to be
+    \begin{equation}
+        \label{eq:Ein}
+        \Ein^{\ell}(h) = \frac{1}{N} \sum_{i=1}^N \ell\big(h(\x_i), y_i\big)
+    \end{equation}
+    and the \emph{out-of-sample error} with respect to $\ell$ is
+    \begin{equation}
+        \label{eq:Eout}
+        \Eout^{\ell}(h) = \prob \ell\big(h(\x), y\big)
+        .
+    \end{equation}
+\end{defn}
+
+\begin{example}
+    The $\emph{0-1 loss}$ is defined to be
+    \begin{equation}
+        \label{eq:01}
+        \ell_{0-1}(\hat y, y) = \llbracket \hat y \ne y \rrbracket
+        .
+    \end{equation}
+    Substituting \eqref{eq:01} into \eqref{eq:Eout} and \eqref{eq:Ein} above yield the familiar definitions for $\Ein$ and $\Eout$ from Chapter 1.
+\end{example}
+
+\section*{The Squared Loss (Section 3.2)}
+
+\begin{example}
+    In a regression problem, the goal is to predict a real number instead of a binary class label.
+    That is, the output space is $\mathcal Y=\R$ instead of $\mathcal Y = \{+1, -1\}$.
+    A popular model for regression is \emph{ordinary least squares} (OLS), which uses the linear hypothesis class
+    \begin{equation}
+        \HH{} = \bigg\{ \x \mapsto \trans\w \x : \w \in \R^d \bigg\}.
+    \end{equation}
+    It is common to use the \emph{squared loss} when evaluating regression problems.
+    It is defined to be
+    \begin{equation}
+        \label{eq:l2loss}
+        \ell(\hat y, y) = (\hat y - y)^2
+        .
+    \end{equation}
+    Substituting \eqref{eq:l2loss} into \eqref{eq:Ein} gives the equation for the in-sample error
+    \begin{equation}
+        \Ein(h) 
+        = \frac{1}{N}\sum_{i=1}^N (\trans\x_i \w - y_i)^2
+        = \ltwo{X\w - Y}^2,
+    \end{equation}
+    where $X$ is a $N \times d$ matrix with $i$th row equal to $\x_i$ and $Y$ is the $d$ dimensional vector with $i$th position equal to $y_i$.
+\end{example}
+
+%\begin{problem}
+    %Under what conditions is this minimizer defined?
+%\end{problem}
+
+\newpage
+\begin{problem}
+    The OLS model is convenient because the hypothesis $g$ which minimizes $\Ein$ can be computed in closed form.
+    Show this computation.
+
+    HINT: WolframAlpha can't take matrix/vector derivatives.
+    But \url{https://www.matrixcalculus.org} can take these higher-order derivatives.
+    %\begin{equation}
+        %\hat \w = \argmin_{\w \in \R^d} \ltwo{X\w - Y}^2
+    %\end{equation}
+\end{problem}
+
+\newpage
+\begin{problem}
+    What is the runtime of computing the ERM for OLS?
+\end{problem}
+
+\vspace{4in}
+\begin{problem}
+    The VC dimension is undefined for the OLS problem.
+    Why?
+\end{problem}
+
+\vspace{3in}
+\begin{note}
+    The textbook bounds the generalization error of the squared loss in this section and Chapter 2.3.
+    These bounds are simpler than the VC dimension bounds to understand and prove.
+    We will not cover them in this course, however,
+    because they require knowledge of probability that is (unfortunately IMNSHO) not a pre-requisite for this course.
+    These bounds are often expected knowledge in technical machine learning interviews.
+\end{note}
+
+\newpage
+\begin{fact}
+The squared loss is essentially unique in having a closed form minimizer.
+Most other loss functions do not have closed form minimizers and require iterative procedures to solve.
+\end{fact}
+
+\section*{The 0-1 Loss (Section 3.1)}
+
+%\begin{example}
+What you need to know:
+\begin{enumerate}
+    \item
+    The 0-1 loss used by the perceptron has no closed form solution.
+    \item
+    In chapter 1, we introduced the PLA algorithm for computing a hypothesis $g$ that minimizes $\Ein$ only when the data is linearly separable.
+    When the data is not linearly separable, the PLA will never terminate.
+    (You should review the PLA algorithm and ensure you understand why.)
+
+    \item
+    In Section 3.1, the book introduces the \emph{pocket algorithm} for computing a hypothesis $g$ when the data is not linearly separable.
+    Unfortunately, this algorithm is not guaranteed to converge to a minimizer of $\Ein$.
+
+    \item
+    In general, minimizing the 0-1 loss is \emph{NP-hard}.
+
+\begin{fact}
+    The best algorithms that we have for solving NP-hard problems currently take exponential time.
+    In the case of minimizing the 0-1 loss, that means that the best known algorithms take time $\Omega((1+\epsilon)^d)$ where $\epsilon$ is a small constant greater than 0. 
+    Most people believe that minimizing the 0-1 loss cannot be done in sub-exponential time,
+    but we do not currently have a proof that this is the case.
+    Therefore, finding the optimal runtime for directly minimizing the 0-1 loss is an \textbf{open problem}.
+    There are no meaningful known lower bounds on the optimal runtime.
+
+    If you haven't studied NP-hard problems before, I strongly recommend you watch the video \url{https://www.youtube.com/watch?v=YX40hbAHx3s}.
+\end{fact}
+
+\end{enumerate}
+%\end{example}
+
+\section*{The Logistic Loss (Section 3.3)}
+
+Since the 0-1 loss cannot be efficiently optimized, our goal is to introduce new loss functions that are ``similar'' to the 0-1 loss but can be efficiently optimized.
+
+Recall that the 0-1 loss was previously defined to be
+\begin{equation}
+    \ell_{0-1}(\hat y, y) = \llbracket \hat y \ne y \rrbracket
+    %= -\sign(\hat y y)
+    .
+\end{equation}
+where $\hat y$ and $y$ are restricted to be in the set $\{-1, 1\}$.
+We can generalize this definition to allow the $\hat y$ variable to be any real number as follows
+\begin{equation}
+    \ell_{0-1}(\hat y, y)
+    =
+    \begin{cases}
+        0 & \text{if}~\hat y y > 0 \\
+        1 & \text{otherwise} \\
+    \end{cases}
+\end{equation}
+and these two definitions agree whenever they are both defined.
+
+\vspace{1in}
+The quantity $z = \hat y y$ appears commonly in classification losses, and so classification losses are commonly written as functions of a single variable.
+The 0-1 loss can be equivalently defined in this way as
+\begin{equation}
+    Q_{0-1}(z)
+    =
+    \begin{cases}
+        0 & \text{if}~z > 0 \\
+        1 & \text{otherwise} \\
+    \end{cases}
+\end{equation}
+
+\newpage
+\begin{defn}
+    A \emph{surrogate loss function} $\ell$ is any loss function that upper bounds the 0-1 loss.
+    That is,
+    %\begin{equation}
+        %\ell(\hat y, y) \ge \ell_{0-1}(\hat y, y)
+    %\end{equation}
+    %for all values of $\hat y$ and $y$,
+    %or equivalently
+    \begin{equation}
+        %\ell(\hat y, y) \ge \ell_{0-1}(\hat y, y)
+        Q(z) \ge Q_{0-1}(z)
+    \end{equation}
+    for all values of $z$.
+\end{defn}
+
+\begin{defn}
+    A loss function is \emph{convex} if the line segment between any two points on the graph of the function lies above the graph between the two points.
+\end{defn}
+
+\begin{defn}[informal]
+    The closer a loss function is to the 0-1 loss, the more \emph{robust to outliers} that loss function is.
+    The more robust a loss function is, the closer its minimizer will be to the hard-to-compute minimizer of the 0-1 loss.
+\end{defn}
+
+\vspace{1in}
+\begin{example}
+    Complete the table below, and draw each loss function.
+
+    \vspace{0.15in}
+    \renewcommand{\arraystretch}{2.5}
+    \begin{tabular}{llp{1in}p{1in}p{1in}}
+        \toprule
+        name & $Q(z)$ & surrogate? & convex? & robust?\\
+        \midrule
+        exponential loss & $\exp(-z)$ \\
+        squared loss & $(1-z)^2$ \\
+        logistic loss & $\log(1 + \exp(-z))$ \\
+        hinge loss & $\max\{0, 1-z\}$ \\
+        trimmed hinge loss & $\min\big\{2, \max\{0, 1-z\}\big\}$ \\
+        smooth 0-1 loss & $\tfrac{1}{2} + \arctan(-\alpha \cdot z)/\pi$ \\
+        \bottomrule
+    \end{tabular}
+    %\begin{tabular}{ll}
+        %\toprule
+        %name & $\ell(\hat y, y)$ \\
+        %\midrule
+        %squared loss & $(1-\hat y y)^2$ \\
+        %exponential loss & $\exp(-\hat y y)$ \\
+        %logistic loss & $\log(1 + \exp(-\hat y y))$ \\
+        %hinge loss & $\max\{0, 1-\hat y y\}$ \\
+        %trimmed hinge loss & $\min\big\{2, \max\{0, 1-\hat y y\}\big\}$ \\
+        %smooth 0-1 loss & $\tfrac{1}{2} + \arctan(-\alpha \cdot \hat y y)/\pi$ \\
+        %\bottomrule
+    %\end{tabular}
+\end{example}
+
+\newpage
+%\begin{problem}
+    %Draw the loss functions
+%\end{problem}
+
+\begin{fact}
+    Every surrogate loss function $\ell$ has the property that
+    \begin{equation}
+        \label{eq:upper}
+        \Ein^{\ell_{0-1}} \le \Ein^{\ell}
+    \end{equation}
+    and so we can use VC theory to get a generalization bound on the classification error for any model trained with a surrogate loss.
+    In particular, substituting \eqref{eq:upper} into the VC theorem gives
+    \begin{equation}
+        \label{eq:loss_ftsl}
+        \Eout^{\ell_{0-1}} \le \Ein^{\ell} + O\bigg(\sqrt{\frac{\dvc\log N}{N}}\bigg)
+    \end{equation}
+    with high probability.
+    In particular, \eqref{eq:loss_ftsl} holds for the logistic regression model (using the logistic loss) and the SVM model (using the hinge loss).
+\end{fact}
+
+\begin{note}
+    The textbook also discusses a probabilistic interpretation of the logistic loss.
+    Again, due to the course prereqs, we will not cover this interpretation,
+    but this is sometimes material that is asked about in technical interviews.
+\end{note}
+
+\section*{Optimizing the Surrogate Loss}
+
+Section 3.3.2 of the textbook has an ``intuitive'' overview of the gradient descent and stochastic gradient descent algorithms.
+This is not detailed enough, and so we will supplement with L\'eon Bottou's paper ``Large-Scale Machine Learning with Stochastic Gradient Descent.''
+
+%Paraskavedekatriaphobia
+
+%\newpage
+%
+%\begin{defn}
+%A \emph{linear hypothesis class} has the form
+%\begin{equation}
+    %\HH{} = \bigg\{ \x \mapsto \ell(\trans\x \w, y) : \w \in\R^{d} \bigg\}
+    %,
+%\end{equation}
+%where $\ell : \R\times\R \to \R$ is called the \emph{loss function}.
+%A \emph{linear model} is any model with a linear hypothesis class.
+%\end{defn}
+%
+%\begin{example}
+    %The perceptron is a linear model with
+    %\begin{equation}
+        %\ell(\hat y, y) = \llbracket \sign(\hat y) \ne y \rrbracket
+        %.
+    %\end{equation}
+%\end{example}
+
+\end{document}
+
+
+
