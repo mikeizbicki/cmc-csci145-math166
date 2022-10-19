@@ -162,17 +162,37 @@ Equation (6) states that the excess error $\mathcal E = E(\tilde f_n) - E(f^*)$ 
 \section*{Problems}
 
 \begin{problem}
-    You are training a logistic regression model using the polynomial feature map with a very high degree,
-    and you want your optimization accuracy $\rho$ to be extremely small.
-    Which optimization algorithm do you choose and why?
+    You are training a logistic regression model using the polynomial feature map with a very high degree and a small number of data points.
+    \begin{enumerate}
+        \item
+            Which optimization algorithm do you choose and why?
+            \vspace{4in}
+        \item
+            Does VC theory predict good or bad statistical performance?
+    \end{enumerate}
 \end{problem}
 
-\vspace{4in}
+%\vspace{4in}
+\newpage
 \begin{problem}
     You are training a logistic regression model.
     Your original dataset had a large number of features and few data points,
-    so you applied the PCA feature map to reduce the dimensions in order to ensure good generalization error.
-    Which optimization do you choose and why?
+    so you applied the PCA feature map to reduce the dimensions.
+    %in order to ensure good generalization error.
+
+    \begin{enumerate}
+        \item
+            Why does VC theory predict that applying the PCA feature map was a good idea?
+            \vspace{2in}
+        \item
+            Which optimization algorithm do you choose and why?
+            \vspace{2in}
+        \item
+            How does applying the PCA feature map influence the runtime of the optimization?
+            \vspace{2in}
+        \item
+            If the PCA feature map had poor empirical risk, which other feature map(s) might you try?
+    \end{enumerate}
 \end{problem}
 
 \newpage
@@ -206,8 +226,8 @@ Equation (6) states that the excess error $\mathcal E = E(\tilde f_n) - E(f^*)$ 
     \end{enumerate}
 \end{problem}
 
-\clearpage
-~
+%\clearpage
+%~
 \end{document}
 
 
