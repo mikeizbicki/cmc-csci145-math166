@@ -1,0 +1,214 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{stmaryrd}
+
+\usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{note}{Note}
+\newtheorem{example}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{fact}{Fact}
+\newtheorem{refr}{References}
+\newtheorem{theorem}{Theorem}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\prob}{\mathbb P}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\wstar}{{\w}^{*}}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+Notes: L\'eon Bottou's SGD Paper
+}
+\end{center}
+
+You are responsible for Sections 1-3 of Bottou's paper \emph{Large-Scale Machine Learning with Stochastic Gradient Descent}.
+
+\section*{Section 3.2, specialized for the logistic loss}
+
+Recall that in logistic regression, we use the logistic loss
+\begin{equation}
+    Q(z) = \log(1+\exp(-z))
+    ,
+\end{equation}
+where $z = \hat y y = \trans \x \w y$.
+
+\begin{enumerate}
+    \item
+        What is the gradient of the logistic loss (i.e.\ what is $\nabla_\w Q(z)$)?
+        Also, what is the shape of the result and what is the runtime of computing it?
+        \vspace{3in}
+
+    \item
+        What is the hessian of the logistic loss (i.e.\ what is $\nabla_\w^2 Q(z)$)?
+        Also, what is the shape of the result and what is the runtime of computing it?
+        \vspace{3in}
+\end{enumerate}
+
+\noindent
+Table 2 from the paper is reproduced below.
+Recall that all stated values are implicitly in big-O notation,
+and that the stated run times explicitly ignore dependencies on the number of dimensions $d$ and the cost of computing the $Q$ function.
+Use the information from the previous page to make the run times below more precise by including these dependencies.
+
+\vspace{0.15in}
+\begin{center}
+    \renewcommand*{\arraystretch}{3}
+    \begin{tabular}{lC{1in}C{1in}C{1in}C{1in}}
+    \toprule
+    & GD & 2GD & SGD & 2SGD \\
+    \midrule
+    Time per iteration: & $n$ & $n$ & 1 & 1 \\
+    Iterations to accuracy $\rho$: & $\log\tfrac 1 \rho$ & $\log\log\tfrac 1 \rho$ & $\tfrac1\rho$  & $\tfrac1\rho$  \\
+    Time to accuracy $\rho$: & $n\log\tfrac1\rho$ & $n\log\log\tfrac 1 \rho$ & $\tfrac 1\rho$ & $\tfrac 1\rho$ \\
+    Time to excess error $\mathcal E$: & $\tfrac 1 {\epsilon^{1/\alpha}} \log \tfrac 1\epsilon$ & $\tfrac1{\epsilon^{1/\alpha}}\log\tfrac 1 \epsilon \log\log \tfrac 1 \epsilon$ & $\tfrac 1 \epsilon$ & $\tfrac 1 \epsilon$ \\
+    \bottomrule
+\end{tabular}
+\end{center}
+
+\ignore{
+\section*{Section 2.1, 2.2}
+%\begin{problem}
+    Reproduce the update formulas for \emph{gradient descent} (GD) and \emph{stochastic gradient descent} (SGD) below.
+    This is Equations (2-5) in the reference.
+%\end{problem}
+
+\section*{Section 3.1}
+
+Equation (6) states that the excess error $\mathcal E = E(\tilde f_n) - E(f^*)$ can be decomposed in three terms:
+\begin{align*}
+    \mathcal E 
+    & = \bigg(E(f^*_{\mathcal F}) - E(f^*)\bigg)
+      + \bigg(E(f_n) - E(f^*_{\mathcal F})\bigg)
+      + \bigg(E(\tilde f_n) - E(f_n)\bigg)
+\end{align*}
+
+\section*{Section 3.2}
+}
+
+\newpage
+\section*{Problems}
+
+\begin{problem}
+    You are training a logistic regression model using the polynomial feature map with a very high degree,
+    and you want your optimization accuracy $\rho$ to be extremely small.
+    Which optimization algorithm do you choose and why?
+\end{problem}
+
+\vspace{4in}
+\begin{problem}
+    You are training a logistic regression model.
+    Your original dataset had a large number of features and few data points,
+    so you applied the PCA feature map to reduce the dimensions in order to ensure good generalization error.
+    Which optimization do you choose and why?
+\end{problem}
+
+\newpage
+\begin{problem}
+    You are working at a large social media company,
+    and your task is to use logistic regression to predict when a user will click on an ad.
+    Your dataset is very large.
+    The company has billions of users, and each user has thousands of interactions with ads, and so the number of data points you have is $N>10^{12}$.
+    But the number of feature dimension is relatively small, with $d=100$.
+
+    \begin{enumerate}
+        \item
+            Your boss suggests reducing the size of the dataset and using gradient descent to solve the problem.
+            Use VC theory to explain the resulting effect on the excess error of your problem.
+
+        \vspace{4in}
+        \item
+            Instead of using gradient descent on a sampled dataset, you could use stochastic gradient descent on the original dataset.
+            When would this be a good idea?
+
+        \vspace{4in}
+        \item
+            Your company offers a profit sharing bonus.
+            Whenever an employee discovers an algorithm for increasing ad revenue,
+            the employee receives 10\% of the resulting increased revenue over the next quarter.
+            Last quarter's ad revenue was 1 billion dollars.
+            Therefore increasing performance by only 0.1\% will result in the company making 1 million dollars more and a personal bonus of \$100,000.
+
+            Use VC theory to come up with a strategy to increase revenue.
+            How will your choice of optimization algorithm change for your new strategy?
+    \end{enumerate}
+\end{problem}
+
+\clearpage
+~
+\end{document}
+
+
+
