@@ -165,7 +165,7 @@
 
     \item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class.  Assume there exists some $h\in\mathcal H$ with $\Ein(h)=0$.  Then the PLA will terminate.}
 
-    \item\TFQuestion{F}{Let $\mathcal H$ be the perceptron hypothesis class.  Let $g_1\in\mathcal H$ be the output of the PLA and $g_2\in\mathcal H$ be the output of the pocket algorithm, and assume that both algorithms successfully terminate in finite time.  The VC theory predicts that $g_2$ will have better generalization error than $g_1$ with high probability.  }
+    \item\TFQuestion{F}{Let $\mathcal H$ be the perceptron hypothesis class.  Let $g_1\in\mathcal H$ be the output of the PLA and $g_2\in\mathcal H$ be the output of the pocket algorithm, and assume that both algorithms successfully terminate in finite time.  Then VC theory predicts that $g_2$ will have better generalization error than $g_1$ with high probability.  }
 
     \item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the 3rd degree polynomial feature map applied.  If you attempt to use the PLA to select a hypothesis $g\in\mathcal H$ and the algorithm terminates, then the PLA is also guaranteed to terminate if you use it to select a hypothesis from $\mathcal H_\Phi$.}
 
@@ -207,25 +207,25 @@
 
     \item\TFQuestion{F}{Let $\mathcal H$ be a hypothesis class.  If there exists a hypothesis $h\in\mathcal H$ such that $\Eout(h) = 0$, then the VC dimension of $\mathcal H$ must be finite.}
 
-    \item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes satisfying $\mathcal H_1 \subset \mathcal H_2$.  Then the approximation error of $\mathcal H_1$ is guaranteed to be less than or equal to the approximation error of $\mathcal H_2$.}
+    %\item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes satisfying $\mathcal H_1 \subset \mathcal H_2$.  Then the approximation error of $\mathcal H_1$ is guaranteed to be less than or equal to the approximation error of $\mathcal H_2$.}
 
-    \item \TFQuestion{T}{For every learning problem, the approximation error is less than or equal to the in-sample error.}
+    %\item \TFQuestion{T}{For every learning problem, the approximation error is less than or equal to the in-sample error.}
 
-    \item\TFQuestion{F}{You have a learning problem with a high approximation error.  VC theory predicts that increasing the number of data points will reduce the out-of-sample error.}
+    %\item\TFQuestion{F}{You have a learning problem with a high approximation error.  VC theory predicts that increasing the number of data points will reduce the out-of-sample error.}
 
-    \item\TFQuestion{T}{You have a learning problem with a high approximation error.  Applying the polynomial feature embedding with a high degree will decrease the approximation error.}
+    %\item\TFQuestion{T}{You have a learning problem with a high approximation error.  Applying the polynomial feature embedding with a high degree will decrease the approximation error.}
 
-    \item\TFQuestion{F}{You have a learning problem with a high approximation error.  Applying the random feature embedding with a low output degree will decrease the approximation error.}
+    %\item\TFQuestion{F}{You have a learning problem with a high approximation error.  Applying the random feature embedding with a low output degree will decrease the approximation error.}
 
-    \item\TFQuestion{T}{You have trained a logistic regression model that has high generalization error.  VC theory predicts that applying the PCA feature embedding with a low output dimension will reduce the generalization error.}
+    %\item\TFQuestion{T}{You have trained a logistic regression model that has high generalization error.  VC theory predicts that applying the PCA feature embedding with a low output dimension will reduce the generalization error.}
 
-    \item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the decision stump feature map.  VC theory predicts that the generalization error of $\mathcal H_\Phi$ will be better than the generalization error of $\mathcal H$.}
+    %\item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the decision stump feature map.  VC theory predicts that the generalization error of $\mathcal H_\Phi$ will be better than the generalization error of $\mathcal H$.}
 
-    \item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the decision stump feature map.  Let $g\in\mathcal H$ and $g_\Phi \in \mathcal H_\Phi$ be the emperical risk minimizers trained on a very large dataset.  VC theory predicts that $\Eout(g) < \Eout(g_\Phi)$.}
+    %\item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the decision stump feature map.  Let $g\in\mathcal H$ and $g_\Phi \in \mathcal H_\Phi$ be the emperical risk minimizers trained on a very large dataset.  VC theory predicts that $\Eout(g) < \Eout(g_\Phi)$.}
 
-    \item\TFQuestion{T}{The hinge loss is a surrogate loss function.}
+    %\item\TFQuestion{T}{The hinge loss is a surrogate loss function.}
 
-    \item\TFQuestion{F}{The trimmed hinge loss is convex.}
+    %\item\TFQuestion{F}{The trimmed hinge loss is convex.}
 
 \end{enumerate}
 \end{problem}
