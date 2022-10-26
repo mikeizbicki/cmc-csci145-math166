@@ -1,0 +1,324 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{note}{Note}
+\newtheorem{example}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{fact}{Fact}
+\newtheorem{refr}{References}
+\newtheorem{theorem}{Theorem}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\prob}{\mathbb P}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+\newcommand{\Eval}{E_{\text{val}}}
+\newcommand{\Eaug}{E_{\text{aug}}}
+\newcommand{\Dtrain}{\mathcal D_{\text{train}}}
+\newcommand{\Dval}{\mathcal D_{\text{val}}}
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\wstar}{{\w}^{*}}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+Chapter 4: Overfitting
+}
+\end{center}
+
+\section*{Section 4.1: When does overfitting occur?}
+
+\newpage
+\section*{Section 4.2: Regularization}
+
+%Recall that in ERM our goal is to compute
+%\begin{equation}
+    %g = \argmin_{h\in\mathcal H} \Ein(h)
+    %.
+%\end{equation}
+%We control generalization by changing the size of $\mathcal H$.
+%The textbook's Equation (4.1) provides a ``generic'' generalization formula like:
+%\begin{equation}
+    %\Eout(h) \le \Ein(h) + \Omega(h)
+    %.
+%\end{equation}
+
+%\subsection*{Section 4.1.1: Soft Order Constraints}
+\begin{defn}
+Optimization with a \emph{soft order constraint} is defined to be
+\begin{equation}
+    \label{eq:soc}
+    g = \argmin_{h\in\mathcal H} \Ein(h) \qquad \text{subject to}\qquad \Omega(h) \le C
+\end{equation}
+where $\Omega : \mathcal H \to \R$ is a \emph{regularization function} that penalizes ``complex'' hypotheses,
+    and $C : \R$ is a hyperparameter that determines how complex a function is allowed to be.
+\end{defn}
+
+\begin{example}
+    The \emph{L1 regularizer} is defined to be
+    \begin{equation}
+        \Omega(\w) = \lone{\w}
+        .
+    \end{equation}
+\end{example}
+
+\begin{example}
+    The \emph{L2 regularizer} is defined to be
+    \begin{equation}
+        \Omega(\w) = \ltwo{\w}^2
+        .
+    \end{equation}
+\end{example}
+
+\begin{example}
+    The \emph{elastic net} is defined to be
+    \begin{equation}
+        \Omega(\w) = \alpha \ltwo{\w}^2 + (1-\alpha) \lone{\w}
+    \end{equation}
+    where $\alpha \in [0,1]$.
+\end{example}
+
+%\subsection*{Section 4.2.2: Augmented Error}
+
+\newpage
+\begin{defn}
+Define the \emph{augmented error} to be
+\begin{equation}
+    \Eaug(h) = \Ein(h) + \lambda\Omega(h)
+    .
+\end{equation}
+    Then the \emph{augmented error minimization} problem is
+\begin{equation}
+    \label{eq:rlm}
+    g = \argmin_{h\in\mathcal H} \Eaug(h)
+    .
+\end{equation}
+\end{defn}
+
+\begin{theorem}
+    If $\lambda = \Theta(\tfrac 1C)$, then under reasonable conditions, optimizing the augmented error in Eq \eqref{eq:rlm} is equivalent to optimizing the soft order constraint in Eq \eqref{eq:soc}.
+\end{theorem}
+
+\begin{fact}
+    If $\Omega(h) \approx |\Ein(h) - \Eout(h)|$,
+    then $\Eaug \approx \Eout$,
+    and $g\approx f$.
+\end{fact}
+
+\vspace{1in}
+\noindent
+\renewcommand\arraystretch{5}
+\hspace{-0.5in}
+\begin{tabular}{lC{0.75in}C{0.75in}C{0.75in}C{0.75in}C{0.75in}C{0.75in}C{0.75in}}
+    \toprule
+     & \multicolumn{7}{c}{Effect of $\lambda\uparrow$ or $C\downarrow$} \\
+     \cmidrule{2-8}
+    Regularizer & $\Ein$ & $|\Eout-\Ein|$ & $\Eout$ & VCdim & $\nnz(\w)$ & time/iter & num iter \\
+    \midrule
+    L1 \\
+    L2 \\
+    Elastic Net \\
+    \bottomrule
+\end{tabular}
+
+\vspace{0.2in}
+\begin{fact}
+    Consider the hypothesis class of $k$-sparse halfspaces
+    \begin{equation}
+        \mathcal{H}_k = \bigg\{ \x \mapsto \sign(\trans\w\x) ~:~ \w\in\R^d,~\nnz(\w)=k \bigg\}
+        .
+    \end{equation}
+    The VC-dimension of $\mathcal{H}_k$ is $\Theta(k\log (d/k))$.
+    This hypothesis class cannot be optimized directly using any of the gradient descent algorithms because it is non-convex.
+\end{fact}
+
+\newpage
+\begin{problem}
+    You are training a logistic regression model with $N$ training data points of dimension $d$.
+    Do you expect the optimal value of $C$ and $\lambda$ to be large or small in the following circumstances?
+    \begin{enumerate}
+        \item $N > d$.
+            \vspace{3in}
+        \item $N < d$.
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+    You are training a logistic regression model with $N$ training data points of dimension $d$ using stochastic gradient descent.
+    How will the optimal values of $C$ and $\lambda$ change (increase/decrease/stay constant) in the following circumstances?
+    \begin{enumerate}
+        \item
+        You double the number of data points in the training dataset.
+            \vspace{3in}
+
+        \item
+        You double the number of data points in the test dataset.
+            \vspace{3in}
+
+        \item
+        You apply the 3rd degree polynomial kernel.
+            \vspace{3in}
+
+        \item
+        You apply the PCA kernel.
+            \vspace{3in}
+
+        %\item
+        %You modify every data point by multiplying it by an invertible $d\times d$ matrix.
+%
+        %\item
+        %You modify every data point by multiplying it by a low rank $d\times d$ matrix.
+
+        \item
+        You change the optimization algorithm from SGD to 2nd order gradient descent.
+            \vspace{3in}
+
+        \item
+        You double the number of dimensions of the training data.
+            \vspace{3in}
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+    In this problem you will derive a closed for solution to the ridge regression problem,
+    which is closely related to the OLS regression problem.
+Recall that OLS uses the linear hypothesis class
+\begin{equation}
+    \HH{} = \bigg\{ \x \mapsto \trans\w \x : \w \in \R^d \bigg\}
+\end{equation}
+and the squared loss
+\begin{equation}
+    \label{eq:l2loss}
+    \ell(\hat y, y) = (\hat y - y)^2
+\end{equation}
+so that the in-sample error is defined as
+\begin{equation}
+    \Ein(h) 
+    = \frac{1}{N}\sum_{i=1}^N (\trans\x_i \w - y_i)^2
+    = \ltwo{X\w - \y}^2,
+\end{equation}
+where $X$ is a $N \times d$ matrix with $i$th row equal to $\x_i$ and $\y$ is the $d$ dimensional vector with $i$th position equal to $y_i$.
+Finally, we computed the parameters for the OLS model by solving the equation
+    \begin{equation}
+        \label{eq:ols}
+        \hat\w^{\text{OLS}} = \argmin_{\w\in \R^d} \ltwo{X\w-\y}^2.
+    \end{equation}
+    The ridge regression model modifies Equation \eqref{eq:ols} above by adding L2 regularization to get
+\begin{equation}
+    \hat\w^{\text{ridge}} = \argmin_{\w\in \R^d} \ltwo{X\w-\y}^2 + \lambda\ltwo{\w}^2.
+\end{equation}
+    Your task is to derive a closed form solution for $\w^{\text{ridge}}$.
+
+\textit{NOTE:}
+This is a common interview question, and something that you should be able to do ``without thinking''.
+I happen to think it's a bad interview question in the sense that it doesn't directly measure what you'll be doing on the job (you're job isn't calculus).
+That said, the ability to solve this problem correlates pretty highly with having a detailed mathematical understanding of machine learning concepts that are practical on the job,
+and so ``lazy'' interviewers will ask this to get a sense of your math abilities.
+\end{problem}
+
+
+\newpage
+\begin{problem}[optional]
+Problems 4.8 and 4.17 in the textbook provide useful insights that commonly show up in technical interviews.
+These problems are ``optional'' in the sense that they will not show up on your midterm exam,
+but I still strongly recommend you at least look at them.
+\end{problem}
+
+%\begin{problem}
+    %% FIXME
+    %Recall that the gradient descent algorithm uses the update rule
+    %\begin{equation}
+        %\w^{(t+1)} = \w^{(t)} - \gamma \nabla\Ein(\w^{(t)}).
+    %\end{equation}
+%\end{problem}
+
+%\section*{Section 4.3: Validation + Model Selection}
+%
+%Recall that the training dataset is denoted $\mathcal D$ and has size $N$.
+%\begin{align}
+    %\Dtrain \\
+    %\Dval
+%\end{align}
+%
+%Equation 4.9 of the textbook states
+%\begin{equation*}
+    %\Eout(g^-) \le \Eval(g^-) + O(\tfrac1{\sqrt K}).
+%\end{equation*}
+
+\end{document}
+
+
+
