@@ -1,0 +1,266 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{note}{Note}
+\newtheorem{example}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{fact}{Fact}
+\newtheorem{refr}{References}
+\newtheorem{theorem}{Theorem}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\prob}{\mathbb P}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+\newcommand{\Etrain}{E_{\text{train}}}
+\newcommand{\Eval}{E_{\text{val}}}
+\newcommand{\Eaug}{E_{\text{aug}}}
+\newcommand{\Dtrain}{\mathcal D_{\text{train}}}
+\newcommand{\Dval}{\mathcal D_{\text{val}}}
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\wstar}{{\w}^{*}}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+Chapter 4.3: Validation / Model Selection
+}
+\end{center}
+
+%We paused our discussion about Chapter 4 (Overfitting) of the textbook in order to talk about more types of models (Model Zoo/Transfer Learning).
+%We now revisit Chapter 4
+
+Model selection is the processes of selecting the best hyperparameters for a learning problem.
+It is the most important step in real-world data mining tasks.
+
+One of the weaknesses of our textbook is that it does not discuss in detail very many models to select hyper-parameters for.
+So in order to have more interesting models to work with,
+we spent the last few lectures covering the ``Model Zoo'' and ``Transfer Learning'' topics.
+Now we return to Chapter 4.3 of the textbook.
+Previously we discussed Chapters 4.1-4.2 of the textbook on how regularization relates to overfitting.
+
+\section*{Section 4.3: Validation (+Review)}
+
+The motivating equation of Chapter 4 is
+\begin{equation}
+    \Eout(h) = \Ein(h) + \text{overfit penalty}.
+\end{equation}
+
+%\subsection*{Review: Regularization}
+
+\vspace{2in}
+
+\begin{defn}
+Optimization with a \emph{soft order constraint} is defined to be
+\begin{equation}
+    \label{eq:soc}
+    g = \argmin_{h\in\mathcal H} \Ein(h) \qquad \text{subject to}\qquad \Omega(h) \le C
+\end{equation}
+where $\Omega : \mathcal H \to \R$ is a \emph{regularization function} that penalizes ``complex'' hypotheses,
+    and $C : \R$ is a hyperparameter that determines how complex a function is allowed to be.
+\end{defn}
+
+\begin{defn}
+Define the \emph{augmented error} to be
+\begin{equation}
+    \Eaug(h) = \Ein(h) + \lambda\Omega(h)
+    .
+\end{equation}
+    Then the \emph{augmented error minimization} problem is
+\begin{equation}
+    \label{eq:rlm}
+    g = \argmin_{h\in\mathcal H} \Eaug(h)
+    .
+\end{equation}
+\end{defn}
+
+\begin{theorem}
+    If $\lambda = \Theta(\tfrac 1C)$, then under reasonable conditions, optimizing the augmented error in Eq \eqref{eq:rlm} is equivalent to optimizing the soft order constraint in Eq \eqref{eq:soc}.
+\end{theorem}
+
+\begin{fact}
+    If $\Omega(h) \approx |\Ein(h) - \Eout(h)|$,
+    then $\Eaug \approx \Eout$,
+    and $g\approx f$.
+\end{fact}
+
+\newpage
+\section*{Section 4.3.1: The Validation Set}
+
+%Recall that the dataset is denoted $\mathcal D$ and has size $N$.
+%\begin{align}
+    %\Dtrain \\
+    %\Dval
+%\end{align}
+
+Illustrate the validation set notation below.
+
+%Equation 4.9 of the textbook states
+%\begin{equation*}
+    %\Eout(g^-) \le \Eval(g^-) + O(\tfrac1{\sqrt K}).
+%\end{equation*}
+
+\vspace{3in}
+\noindent
+Equation 4.10 of the textbook states
+\begin{equation*}
+    \Eout(g) \le \Eout(g^-) \le \Eval(g^-) + O\bigg(\sqrt{\frac 1 {K}}\bigg)
+    .
+\end{equation*}
+
+\newpage
+\section*{Section 4.3.2: Model Selection}
+
+Illustrate the model selection notation below.
+
+\vspace{4in}
+
+Equation 4.12 from the textbook states 
+\begin{equation*}
+    \Eout(g_{m^*}) \le
+    \Eout(g^{-}_{m^*}) \le \Eval(g^-_{m^*}) + O\bigg(\sqrt{\frac{\log M}{K}}\bigg).
+\end{equation*}
+
+\newpage
+\section*{Section 4.3.3: Cross Validation}
+
+The textbook introduces the following un-numbered equation describing the role of $K$:
+\begin{equation*}
+    \Eout(g) \approx \Eout(g^-) \approx \Eval(g^-).
+\end{equation*}
+
+\vspace{3in}
+Illustrate the cross validation notation below.
+
+\newpage
+\section*{Problems}
+\begin{problem}
+    You are training a logistic regression model to determine whether an image contains a bee or an ant.
+    You have about 400 labeled images that have been randomly split into a training set of size 250 and a validation set of size 150.
+
+    \begin{enumerate}
+        \item 
+            You decide to train two models, one where the inputs to your model are the features generated by the ResNet18 feature map and another where the inputs to your model are the ResNet50 feature map.
+            Both feature maps generate the same number of features,
+            but the ResNet50 feature map internally has 50 hidden layers.
+
+            For both models, you train for 25 epochs with a step size of $10^{-3}$ and weight decay of $10^{-4}$.
+            You observe that $\Etrain$ for the ResNet18 feature map is 0.18 and $\Etrain$ for the ResNet50 feature map is 0.11.
+            Based on this observation, you conclude that the model based on ResNet50 will likely have lower $\Eout$ and you decide to use this as your final model.
+            You estimate $\Eout$ by calculating $\Eval$ for the ResNet50 model.
+            What can you say about the relationship between $\Eout$ and $\Eval$?
+
+            %What can you say about the relationship between ResNet50's $\Etrain$ and $\Eout$ values?
+
+            \vspace{3in}
+        \item
+            You decide to only use the ResNet18 feature map to train your model.
+            You train the model for 25 epochs using stochastic gradient descent.
+            After each epoch, you evaluate the model on the validation set.
+            Finally, you select the model that had the best validation error.
+            What can you say about the relationship between $\Eout$ and $\Eval$?
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+
+    \begin{enumerate}
+        \item 
+            \begin{equation}
+                \Etrain(g^-) \le \Ein(g^-)
+            \end{equation}
+        \item 
+            \begin{equation}
+                \Etrain(g) \le \Ein(g)
+            \end{equation}
+        \item 
+            \begin{equation}
+                \Etrain(g) \le \Etrain(g^-)
+            \end{equation}
+        \item 
+            \begin{equation}
+                \Ein(g) \le \Eval(g)
+            \end{equation}
+        \item 
+            \begin{equation}
+                \Eout(g) \le \Eval(g^-) + O(\sqrt{\log M/K})
+            \end{equation}
+    \end{enumerate}
+\end{problem}
+
+\end{document}
+
+
+
