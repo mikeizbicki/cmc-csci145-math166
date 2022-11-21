@@ -1,0 +1,280 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{booktabs}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{listings}
+\lstset{
+    basicstyle={\ttfamily}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{example}{Example}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{note}{Note}
+\newtheorem{defn}{Definition}
+\newtheorem{fact}{Fact}
+\newtheorem{refr}{References}
+\newtheorem{theorem}{Theorem}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\prob}{\mathbb P}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\wstar}{{\w}^{*}}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+Vowpal Wabbit
+}
+\end{center}
+
+%\begin{Notes}
+
+The purpose of these notes is to explain how Vowpal Wabbit works.
+You will need to apply these concepts to complete your next programming assignment and for the last midterm.
+
+\section{Concepts}
+What is \emph{one-hot encoding}?
+
+\vspace{4in}
+\noindent
+What is \emph{the hashing trick}?
+
+Reference: \url{https://booking.ai/dont-be-tricked-by-the-hashing-trick-192a6aae3087}
+
+\newpage
+\noindent
+What is \emph{progressive online validation}?
+
+\vspace{4in}
+\noindent
+How does Vowpal Wabbit use a \emph{validation set}?
+
+\newpage
+\section{Important Hyperparameters (command line options)}
+
+You will need to tune (some of) the options below in order to achieve good performance on your assignment.
+You can find more information about each of these hyperparameters either on the web-based documentation at
+
+    \vspace{0.1in}
+    \url{https://vowpalwabbit.org/docs/vowpal_wabbit/python/latest/command_line_args.html}
+
+    \vspace{0.1in}
+\noindent
+or by running the terminal command
+
+    \vspace{0.1in}
+    \lstinline{$ man vw}
+
+\subsection{Hypothesis Class / VC dimension}
+
+The following options modify the hypothesis class that you are trying to learn,
+and therefore affect your training and generalization error.
+These are the most import parameters to tune, and you should begin your assignment by tuning these parameters.
+
+    \vspace{1in}
+    \lstinline{--bit_precision}
+
+    \vspace{2in}
+    \lstinline{--hash_seed}
+
+    \vspace{2in}
+    \lstinline{--quadratic ::}
+
+    \vspace{2in}
+    \lstinline{--cubic ::}
+    
+    \vspace{2in}
+    \lstinline{--nn}
+    
+    \vspace{2in}
+    \lstinline{--ngrams}
+    
+    \vspace{2in}
+    \lstinline{--skips}
+    
+    \vspace{2in}
+    \lstinline{--feature_limit}
+    
+    \vspace{2in}
+    \lstinline{--l1}
+    
+    \vspace{2in}
+    \lstinline{--l2}
+    
+    \vspace{2in}
+    \lstinline{--no-bias-regularization}
+    \vspace{1in}
+
+    \newpage
+\subsection{Optimization}
+    The following parameters control the optimization process of your model,
+    and therefore control the optimization error.
+    I recommand adjusting these parameters only after you are happy with your hypothesis classs.
+
+    \vspace{0.5in}
+    \lstinline{--loss_function}
+
+    \vspace{1in}
+    \lstinline{--binary}
+
+    \vspace{1in}
+    \lstinline{--passes}
+
+    \vspace{1in}
+    \lstinline{--learning_rate}
+
+    \vspace{1in}
+    \lstinline{--random-weights}
+
+    \vspace{1in}
+    \lstinline{--early-terminate}
+
+    \vspace{1in}
+    \lstinline{--holdout_off}
+    \vspace{1in}
+
+\newpage
+\section{Problems}
+
+\begin{problem}
+    You have trained a vowpal wabbit model with the hyperparameters:
+        
+        \vspace{0.1in}
+        \lstinline{--bit_precision=22}
+
+        \lstinline{--l2=1e-3}
+
+        \lstinline{--quadratic ::}
+
+        \lstinline{--learning_rate=0.01}
+        \vspace{0.1in}
+    \noindent
+
+    \begin{enumerate}
+    \item
+        What is the VC dimension of your hypothesis class?
+
+            \vspace{3in}
+    \item
+        If you remove the \lstinline{--quadratic ::} hyperparameter and keep \lstinline{--bit_precision} constant,
+        how would you expect to change the \lstinline{--l2} hyperparameter in order to achieve similar generalization error?
+        (That is, should you increase it, decrease it, or keep it the same?)
+        Why?
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+    You have found that the optimal hyperparameters for a problem you are working on is
+        
+        \vspace{0.1in}
+        \lstinline{--bit_precision=12}
+
+        \lstinline{--l1=1e-3}
+
+        \lstinline{--passes=5}
+        \vspace{0.1in}
+
+    \noindent
+    If you acquire significantly more training data, how should you expect to adjust each of these hyperparameters?
+        (That is, should you increase them, decrease them, or keep them the same?)
+        Why?
+\end{problem}
+
+\vspace{3in}
+\begin{problem}
+    You have found that the optimal hyperparameters for a problem you are working on is
+        
+        \vspace{0.1in}
+        \lstinline{--bit_precision=28}
+
+        \lstinline{--ngrams=2}
+
+        \lstinline{--passes=20}
+
+        \lstinline{--learning_rate=0.01}
+        \vspace{0.1in}
+
+    \noindent
+    The average loss reported by \lstinline{vw} when training using these hyperparameters is
+
+    \vspace{0.1in}
+    \lstinline{average loss = 0.045916 h}
+
+    \vspace{0.1in}
+    \noindent
+    If you add the command line flag \lstinline{--holdout_off} when training the model, would you expect the average loss reported by \lstinline{vw} to increase, decrease, or stay the same?  
+\end{problem}
+\end{document}
+
+
+
