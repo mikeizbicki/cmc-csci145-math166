@@ -1,0 +1,189 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage[normalem]{ulem}
+\usepackage{stmaryrd}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{listings}
+\lstset{
+    basicstyle={\ttfamily}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        %\hl{\textbf{TRUE}}\hspace*{14pt}False
+        \hl{\texttt{True}}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+    }{
+        \ifthenelse{\equal{#1}{F}}{
+        %True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \texttt{True}\hspace*{20pt}\hl{\texttt{False}}\hspace*{20pt}\texttt{Open}
+        }
+        {
+            \texttt{True}\hspace*{20pt}{\texttt{False}}\hspace*{20pt}\hl{\texttt{Open}}
+        }
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+%\newcommand{\I}{\mathbf I}
+%\newcommand{\Q}{\mathbf Q}
+%\newcommand{\p}{\mathbf P}
+%\newcommand{\pb}{\bar {\p}}
+%\newcommand{\pbb}{\bar {\pb}}
+%\newcommand{\pr}{\bm \pi}
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\printanswers
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+    More Midterm 3 Practice Problems
+}
+\end{center}
+
+\begin{problem}
+    For each statement below,
+    circle \texttt{True} if the statement is known to be true,
+    \texttt{False} if the statement is known to be false,
+    and \texttt{Open} if the statement is not known to be either true or false.
+    Ensure that you pay careful attention to the formal definitions of asymptotic notation in your responses.
+
+\begin{enumerate}
+    \item\TFQuestion{F}{If your model is overfitting, then a reasonable strategy for improving performance is to increase the size of your VC dimension in order to make $\Ein$ smaller.}
+    \item\TFQuestion{T}{If your model is underfitting, then a reasonable strategy for improving performance is to increase the size of your VC dimension in order to make $\Ein$ smaller.}
+    \item\TFQuestion{T}{If your model has low in-sample error $\Ein$ but high generalization error $|\Ein-\Eout|$, then a reasonable strategy for improving performance is to increase the number of data points $N$ in the training set.}
+    \item\TFQuestion{F}{If your model is overfitting, then a reasonable strategy for improving performance is to increase the number of feature dimensions $d$ in the training set.}
+
+    \item\TFQuestion{T}{You have trained a logistic regression model with L2 regularization.  If your training set size $N$ increases, then the optimal soft order constraint regularization hyperparameter $C$ will also increase.}
+    \item\TFQuestion{F}{You have trained a logistic regression model with L1 regularization.  If your training set size $N$ increases, then the optimal augmented error regularization hyperparameter $\lambda$ will also increase.}
+    \item\TFQuestion{F}{You have trained a logistic regression model with L1 regularization.  If your number of feature dimensions $d$ increases, then the optimal soft order constraint regularization hyperparameter $C$ will also increase.}
+    \item\TFQuestion{T}{You have trained a logistic regression model with elastic net regularization.  If your number of feature dimensions $d$ increases, then the optimal augmented error regularization hyperparameter $\lambda$ will also increase.}
+    \item\TFQuestion{T}{When training a logistic regression model, if you want the weight vector to be sparse, then you should prefer L1 regularization to L2 regularization.}
+    \item\TFQuestion{F}{When training a logistic regression model using L2 regularization, increasing the value of the augmented error regularization hyperparameter $\lambda$ increases the VC dimension.}
+
+    \item\TFQuestion{T}{You have trained a logistic regression model with the PCA kernel and used a validation set to determine that the optimal output dimension $k$ is 200.  If your training set size $N$ increases, then VC theory predicts that the optimal value for $k$ will increase.}
+    \item\TFQuestion{T}{You have trained a MLP with the ReLU activation function and used a validation set to determine that the optimal number of layers is 5 and optimal width is 100.  If your training set size $N$ increases, and you keep the number of layers the same, then VC theory predicts that the optimal width of those layers will increase.}
+    \item\TFQuestion{F}{You have trained a boosted decision stump model and used a validation set to determine that the optimal number of base classifiers $T$ is 1000.  If instead of training a decision stump, you train a decision tree of depth 2, then the optimal number of base classifiers will increase.}
+
+    \item\TFQuestion{O}{The VC dimension of neural networks with the ReLU activation function is $\Theta(Ek\log(E))$, where $k$ and $E$ is as-defined in the notes.}
+    \item\TFQuestion{T}{The VC dimension of neural networks with the identity activation function is $O(dE)$.}
+
+    \item\TFQuestion{T}{Assume you are training a boosted decision stump model on a dataset with $N=10^6$ and $d=10^6$. Then in the limit as the number of base models $T$ approaches infinity, the training error is guaranteed to approach 0 for all possible datasets.}
+    \item\TFQuestion{F}{Assume you are training an SVM with the random features kernel with output dimension $d'$. Then in the limit as $d'$ approaches infinity, the training error is guaranteed to approach 0 for all possible datasets.}
+
+    \item\TFQuestion{T}{In vowpal wabbit, increasing the \lstinline{--bit_precision} hyperparameter increases the model's VC dimension.}
+    \item\TFQuestion{F}{In vowpal wabbit, increasing the \lstinline{--hash_seed} hyperparameter increases the model's VC dimension.}
+    \item\TFQuestion{F}{In vowpal wabbit, increasing the \lstinline{--ngrams} hyperparameter increases the model's VC dimension.}
+    %\item\TFQuestion{F}{In scikit-learn, the \lstinline{sklearn.neighbors.KNeighborsClassifier} with hyperparamater \lstinline{n_neighbors} set to 1 can achieve the Bayes error }
+    \item\TFQuestion{F}{In scikit-learn's \lstinline{sklearn.tree.DecisionTreeClassifier} model, increasing the value of the hyperparamater \lstinline{max_depth} increases the VC dimension.}
+    \item\TFQuestion{F}{You have trained a scikit-learn \lstinline{sklearn.tree.DecisionTreeClassifier} model, but it is underfitting.  VC theory predicts that increasing the value of \lstinline{min_samples_split} will be more likely to improve performance than decreasing this value.}
+    \item\TFQuestion{F}{You are training a scikit-learn \lstinline{sklearn.ensemble.AdaBoostClassifier} model with \lstinline{base_estimator} set to \lstinline{sklearn.tree.DecisionTreeClassifier}.  In order to keep the VC dimension of your model constant, if you increase the value of \lstinline{n_estimators} for the \lstinline{AdaBoostClassifier}, then you should also increase the value of \lstinline{max_depth} for the \lstinline{DecisionTreeClassifier}.}
+    \item\TFQuestion{T}{You are training a scikit-learn \lstinline{sklearn.ensemble.AdaBoostClassifier} model with \lstinline{base_estimator} set to \lstinline{sklearn.tree.DecisionTreeClassifier}.  In order to keep the VC dimension of your model constant, if you increase the value of \lstinline{min_samples_split} for the \lstinline{DecisionTreeClassifier} then you should also increase the value of \lstinline{n_estimators} for the \lstinline{AdaBoostClassifier}.}
+    \item\TFQuestion{F}{You are using transfer learning to train the final layer of a deep neural network for your specific task.  The \lstinline{ResNet50} model has 50 hidden layers and the \lstinline{ResNet18} model has only 18 hidden layers, and in both cases all layers have the same width.  VC theory predicts that if you use the \lstinline{ResNet50} model you will have a higher generalization error than if you use the \lstinline{ResNet18} model.}
+    \item\TFQuestion{F}{You are using transfer learning to train the final layer of a deep neural network for your specific task.  The \lstinline{VGG13} model has 13 hidden layers and the \lstinline{VGG19} model has 19 hidden layers, and in both cases all layers have the same width.  VC theory predicts that if you use the \lstinline{VGG13} model you will have a higher generalization error than if you use the \lstinline{VGG19} model.}
+\end{enumerate}
+\end{problem}
+\end{document}
+
+
+
+
