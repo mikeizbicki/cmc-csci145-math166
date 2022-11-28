@@ -148,10 +148,10 @@
     Ensure that you pay careful attention to the formal definitions of asymptotic notation in your responses.
 
 \begin{enumerate}
-    \item\TFQuestion{F}{If your model is overfitting, then a reasonable strategy for improving performance is to increase the size of your VC dimension in order to make $\Ein$ smaller.}
-    \item\TFQuestion{T}{If your model is underfitting, then a reasonable strategy for improving performance is to increase the size of your VC dimension in order to make $\Ein$ smaller.}
-    \item\TFQuestion{T}{If your model has low in-sample error $\Ein$ but high generalization error $|\Ein-\Eout|$, then a reasonable strategy for improving performance is to increase the number of data points $N$ in the training set.}
-    \item\TFQuestion{F}{If your model is overfitting, then a reasonable strategy for improving performance is to increase the number of feature dimensions $d$ in the training set.}
+    \item\TFQuestion{F}{If your model is overfitting, then VC theory predicts that you should increase the size of your VC dimension.}
+    \item\TFQuestion{T}{If your model is underfitting, VC theory predicts that you should increase the size of your VC dimension.}
+    \item\TFQuestion{T}{If you are training a logistic regression model that has low in-sample error $\Ein$ but high generalization error $|\Ein-\Eout|$, then VC theory predicts that increasing the number of data points $N$ in the training set will result in better performance than increasing the number of dimensions $d$.}
+    \item\TFQuestion{T}{If you are training a logistic regression model with the polynomial kernel that has high in-sample error $\Ein$ and low generalization error $|\Ein-\Eout|$, then VC theory predicts that increasing the degree of the kernel is more likely to improve performance than decreasing the degree of the kernel.}
 
     \item\TFQuestion{T}{You have trained a logistic regression model with L2 regularization.  If your training set size $N$ increases, then the optimal soft order constraint regularization hyperparameter $C$ will also increase.}
     \item\TFQuestion{F}{You have trained a logistic regression model with L1 regularization.  If your training set size $N$ increases, then the optimal augmented error regularization hyperparameter $\lambda$ will also increase.}
@@ -159,6 +159,7 @@
     \item\TFQuestion{T}{You have trained a logistic regression model with elastic net regularization.  If your number of feature dimensions $d$ increases, then the optimal augmented error regularization hyperparameter $\lambda$ will also increase.}
     \item\TFQuestion{T}{When training a logistic regression model, if you want the weight vector to be sparse, then you should prefer L1 regularization to L2 regularization.}
     \item\TFQuestion{F}{When training a logistic regression model using L2 regularization, increasing the value of the augmented error regularization hyperparameter $\lambda$ increases the VC dimension.}
+    \item\TFQuestion{F}{The elastic net regularization function cannot be applied with the polynomial kernel to a logistic regression model.}
 
     \item\TFQuestion{T}{You have trained a logistic regression model with the PCA kernel and used a validation set to determine that the optimal output dimension $k$ is 200.  If your training set size $N$ increases, then VC theory predicts that the optimal value for $k$ will increase.}
     \item\TFQuestion{T}{You have trained a MLP with the ReLU activation function and used a validation set to determine that the optimal number of layers is 5 and optimal width is 100.  If your training set size $N$ increases, and you keep the number of layers the same, then VC theory predicts that the optimal width of those layers will increase.}
