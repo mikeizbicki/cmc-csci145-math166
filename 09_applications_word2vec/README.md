@@ -130,8 +130,11 @@ and so models with fewer dimensions are more effective.
 
 For this assignment, you won't have to train your own model from scratch,
 and can instead use a pretrained model.
+You must select a model different from `glove-twitter-25`, since that's a particularly bad one.
+You won't be evaluated on how good of a model you select,
+but I encourage you to spend some time experimenting with different models to see what works well for this application.
 You can find a list of models built into gensim [here](https://github.com/RaRe-Technologies/gensim-data#models),
-and there's thousands of other open source models that people have released.
+and there's many other open source models that people have released.
 
 **Your Task:**
 
