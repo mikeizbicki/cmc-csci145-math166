@@ -240,6 +240,11 @@ You should hard-code this value to something that you think gives reasonable res
 > You won't have to do this.
 > It is hard to implement because this is a non-standard hypothesis class not found in libraries scikit-learn,
 > and acquiring reasonable training data is difficult for companies not already operating large-scale search engines.
+>
+> Google uses classification problems like this internally all over their search engine.
+> When Google was first founded, it was common to hear people saying "Google uses machine learning the way Microsoft uses the if statement."
+> Now all the major tech companies have machine learning problems like this internally that they are solving,
+> so people don't say this anymore.
 
 **Task:**
 
