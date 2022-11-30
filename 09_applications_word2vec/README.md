@@ -225,13 +225,21 @@ for each word in S:
     score += n * word_similarity**p
 ```
 By adjusting the p hyperparameter, we can control how important the word similarities must be.
-A typical p value would be between 30-60, since this will result in scores roughly on a similar scale as the pagerank vectors.
+A typical `p` value would be between 30-60, since this will result in scores roughly on a similar scale as the pagerank vectors.
 You should hard-code this value to something that you think gives reasonable results.
 
 > *NOTE:*
->
+> 
+> The optimal value for `p` will depend on the particular word embeddings you select.
 > In real world search engines, the optimal value would be learned from the data.
+> We would set up a classification problem where the output variable `Y` to be predicted is whether or not a user clicks on one of the links provided,
+> and the input variable `X` would be the search term.
+> The hypothesis class would be the pseudo-code you've written above with `p` as the only parameter to be learned.
+> Then you can use gradient descent to solve for `p`.
+>
 > You won't have to do this.
+> It is hard to implement because this is a non-standard hypothesis class not found in libraries scikit-learn,
+> and acquiring reasonable training data is difficult for companies not already operating large-scale search engines.
 
 **Task:**
 
