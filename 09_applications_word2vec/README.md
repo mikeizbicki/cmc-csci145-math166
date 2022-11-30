@@ -4,6 +4,8 @@
 
 You will extend your pagerank project from the beginning of the semester to search for "similar" words using word embeddings.
 
+This will help you see how the statistical theory we discussed for midterms 2-3 can be combined with the pagerank application of midterm 1.
+
 > *NOTE:*
 > I recommend using your solution to the original pagerank project as the basis for this project.
 > If you would prefer not to for whatever reason, however, the `pagerank.py` file in this folder is my solution to the original pagerank project.
@@ -112,12 +114,24 @@ For example, we can find words related to "weapons" by running the python code
 Notice that both the words "drones" and "targets" appear in this list of similar words.
 The list isn't perfect though... "hiv" doesn't seem very similar to "weapons" to me.
 
-Part of the problem is that I'm using a particularly poor model above.
+Part of the problem is that I'm using a particularly poor model above that has a relatively large out-of-sample error.
 The `glove-twitter-25` model is trained only on twitter data and has only 25 dimensions.
-Larger models trained on more data naturally provide better results.
+We've seen from our discussion about statistical learning theory that:
 
+1. Increasing the number of training data points will improve generalization error, but won't improve training error.
+
+1. Increasing the number of dimensions will improve training error but hurt generalization error.
+
+In practice, there is lots of data available for training word embeddings in English.
+State-of-the-art word embeddings are trained on multi-petabyte datasets of webpage crawls,
+and so they can have a very high dimension and still achieve low generalization error.
+For rarer languages, however, less training data is available,
+and so models with fewer dimensions are more effective.
+
+For this assignment, you won't have to train your own model from scratch,
+and can instead use a pretrained model.
 You can find a list of models built into gensim [here](https://github.com/RaRe-Technologies/gensim-data#models),
-and there's thousands of other open source models that people have released that can easily be incorporated as well.
+and there's thousands of other open source models that people have released.
 
 **Your Task:**
 
