@@ -1,0 +1,267 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage[normalem]{ulem}
+\usepackage{stmaryrd}
+\usepackage{booktabs}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{listings}
+\lstset{
+    basicstyle={\ttfamily}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        %\hl{\textbf{TRUE}}\hspace*{14pt}False
+        \hl{\texttt{True}}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+    }{
+        \ifthenelse{\equal{#1}{F}}{
+        %True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \texttt{True}\hspace*{20pt}\hl{\texttt{False}}\hspace*{20pt}\texttt{Open}
+        }
+        {
+            \texttt{True}\hspace*{20pt}{\texttt{False}}\hspace*{20pt}\hl{\texttt{Open}}
+        }
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\sign}{sign}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+\newcommand{\Eval}{E_{\text{val}}}
+\newcommand{\Eapp}{E_{\text{app}}}
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\printanswers
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+    Final Prep
+}
+\end{center}
+
+%\begin{problem}
+\noindent
+\textbf{Format:}
+\begin{enumerate}
+\item Your final exam will be an in-person 1-1 oral exam.
+There are two main reasons:
+\begin{enumerate}
+\item The oral exam will give you practice for technical interviews.
+\item Studies show that students get better grades on oral exams and retain knowledge longer.
+\end{enumerate}
+\item The exam will be worth 30 points (and replace your lowest midterm grade).
+\item My goal is for each exam to take about 30 minutes (but you are welcome to use the entire scheduled 60 minute block if you'd like).
+\item You may not reference any notes during the exam.
+\end{enumerate}
+
+\noindent
+\textbf{The Questions:}
+\begin{enumerate}
+\item There will be 4 questions from previous midterms:
+\begin{enumerate}
+\item 2 questions from the T/F/O section of midterm 1 and 2 questions from midterm 2.
+\item They will be randomly selected by rolling a 10-sided dice.
+
+\item Each worth 5 points
+\begin{enumerate}
+\item For full credit, you will have to state the correct answer to each question and \emph{explain why that answer is correct}.
+\item The explanation must explicitly define all of the terms you use that you were required to memorize for a quiz.
+\item I may ask short follow-up questions to ensure you understand the material.
+    For example,
+    \begin{enumerate}
+        \item On midterm 1, if the question is based on the $\p$ matrix, I might ask you ``would the answer still be the same if we used $\pbb$ instead?''  Or if the question uses the word ``irreducible'' I might ask you if it is still true if we change that to ``primitive.''
+        \item On midterm 2, I might ask you to change the hypothesis class of a question or change the kernel of a question.
+    \end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\item There will be one open-ended interview style question.
+    \begin{enumerate}
+        \item It is worth 10 points.
+        \item Everyone will have the same question:
+
+\noindent
+\textbf{Question.}
+Our company is building a content moderation system for a new social media platform.
+In order to do this, we are building a text classification model that outputs whether the input text is abusive or not.
+For simplicity, we plan on using a logistic regression model,
+but we're not yet sure what types of features we should use.
+We are considering two options: 1-hot encoding with feature hashing (with vowpal wabbit) or word2vec (with scikit-learn).
+Which would you choose and why?
+%\end{problem}
+
+Your answer must include:
+        \begin{enumerate}
+            \item a drawing of the model complexity curve
+            \item a discussion about where the two models in the question fall on the model complexity curve
+        \end{enumerate}
+
+\item
+    I will ask 1-2 followup questions that will depend on how you answer the previous question.
+    Potential followup questions include:
+    \begin{enumerate}
+        \item You mentioned VC dimension... what is that?
+        \item Explain which kernels you might want to use on this problem and why.
+        \item Are there other models you might recommend we use?
+        \item What would be the advantages/disadvantages of switching to a different model, like XXXX?
+        \item Explain how you would evaluate your model.  (For example, using a training/validation set.)
+        \item Define the different types of regularization and explain how they relate to your discussion.  (My expectation is that you would be able to define the soft order constraint and augmented error regularization methods.) 
+        \item Explain how a pagerank feature could be used in addition to the text feature to make the model more accurate.
+            Would this change your choice of model?
+    \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+
+\noindent
+\textbf{Tips:}
+\begin{enumerate}
+    \item You know exactly what the first question will be
+        (the open-ended question above).
+        \begin{enumerate}
+            \item Prepare in-advance what you want to say and write
+            \item Practice saying and writing your response in front of an audience.
+            \item This will ensure that you're off to a good start, and build your confidence for the remaining questions.
+        \end{enumerate}
+    \item Find excuses to pause and think
+        \begin{enumerate}
+            \item Read the question out loud
+            \item As you read, write down key information on the whiteboard
+            \item Find a keyword in the prompt that you know, and say something about that
+            \item Set down your whiteboard marker and pick up a different one
+            \item Bring a water bottle, and take a sip when you need to think
+            \item It's okay to say ``Hmmm.... let me think about that for a second...''
+                \begin{enumerate}
+                    \item say is a bit slowly for extra time
+                    \item don't stay silent for more than about 5 seconds or so before starting to think out loud
+                \end{enumerate}
+        \end{enumerate}
+    \item Boardsmanship
+            \begin{enumerate}
+                \item Not explicitly graded... but a good presentation will make it easier for me to find reasons to give you points.
+                \item Write something for every problem
+                \item Write slowly and clearly, start in the upper left hand corner of the board
+                \item Capital letters should be $\sim$ 3in tall; diagrams should be large
+                    \begin{enumerate}
+                        \item assume the interviewer has bad eyesight
+                    \end{enumerate}
+                \item Use colors to differentiate parts of your answer.  There are many ways to do that, but some ideas are:
+                    \begin{enumerate}
+                        \item Use 1 color for the information from the problem, different color for your solution
+                        \item Use multiple colors in any figures you draw
+                        \item If you have multiple definitions, use multiple a different color for each definition
+                    \end{enumerate}
+                \item Between problems, totally erase the whiteboard
+                \item (Ideally) talk while you write, and position your body so that the audience can hear you and see what you're writing
+                    \begin{enumerate}
+                        \item also okay to say ``I'm going to write for a bit and then explain what I've written''
+                        \item not good to just start writing without saying anything
+                    \end{enumerate}
+            \end{enumerate}
+        \item Content:
+            \begin{enumerate}
+                \item Ensure you have memorized the definitions from the quizzes
+            \end{enumerate}
+        \item Wednesday we will review the midterm3, but also have time for students to practice giving responses.  These won't be recorded.
+\end{enumerate}
+
+\end{document}
+
+
+
+
+
