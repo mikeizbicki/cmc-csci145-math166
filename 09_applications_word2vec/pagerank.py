@@ -143,8 +143,8 @@ class WebGraph():
         This function prints the top ranked urls that match the input query.
 
         NOTE:
-        For the Task 1 homework assignment, there is no need to modify this code.
-        For the Task 2 extra credit, then you would have to modify this code.
+        For the Task 1, there is no need to modify this code.
+        For the Task 2, then you would have to modify this code.
         '''
         n = self.P.shape[0]
         k = min(max_results,n)
