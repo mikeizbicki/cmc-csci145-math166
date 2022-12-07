@@ -247,6 +247,8 @@
     \end{equation}
     and so the model will only work will on problem with both a very low input feature dimension $d$ and a low Bayes error $\Eout(f)$.
 
+    \vspace{0.2in}
+    \noindent
     Common mistakes:
     \begin{enumerate}
         \item (-0.5) Correctly identified a hypothesis class, but did not describe a situation in which that hypothesis class would do well and why.
@@ -304,6 +306,8 @@
     %With feature hashing, adding more features will result in more collisions which could potentially make the in-sample error increase.
     %This increase in collisions, however, is likely to be offset by the decrease in collisions due to increasing bit precision.
 
+    \vspace{0.2in}
+    \noindent
 Common mistakes:
 \begin{enumerate}
     \item (-0.5) If you stated that ngrams affects the VC dimension
@@ -328,10 +332,12 @@ Common mistakes:
     we need a corresponding decrease in model complexity from regularization.
     Increasing lambda will add regularization and decrease model complexity, so the optimal $\lambda$ will likely be larger for the new model.
 
-    %Common mistakes:
-    %\begin{enumerate}
-        %\item (-0.5) No discussi
-    %\end{enumerate}
+    \vspace{0.2in}
+    \noindent
+    Common mistakes:
+    \begin{enumerate}
+        \item (-0.5) Getting the right answer but not explaining why
+    \end{enumerate}
 \end{solution}
 
 \newpage
@@ -349,10 +355,13 @@ Common mistakes:
     Increasing $\lambda$ reduces model complexity,
     so we should expect to increase $\alpha$.
 
+    \vspace{0.2in}
+    \noindent
     Common mistakes:
     \begin{enumerate}
         \item (-0.5) If you assumed that \lstinline{alpha} behaved like the soft order constraint regularization parameter $C$, but your reasoning was otherwise correct.
         \item (-0.25) Not enough detail
+        \item (no penalty) No discussion about the difference between the soft order constraint and augmented error regularization methods.
     \end{enumerate}
 \end{solution}
 
@@ -379,6 +388,16 @@ Common mistakes:
     When we increase the number of dimensions $d$ and $N$ at the same rate,
     the numerator will increase by $\log d \log N$, but the denominator will increase at the much faster rate of $N$.
     Therefore, we expect the generalization error to decrease.
+
+    \vspace{0.2in}
+    \noindent
+    Common mistakes:
+    \begin{enumerate}
+        \item (-1) Incorrect formula (or no formula) for bounding the $\dvc$ resulting in an incorrect discussion
+        \item (no penalty) Stating the correct formula and then stating $\dvc = O(T\log d)$ because the log factor ``doesn't matter''.
+            The intuition is correct, but the formalism is incorrect.
+            There is another version of asymptotic notation $\tilde O$ that ignores these log factors, and it is correct to say that $\dvc = \tilde O(T \log d)$.
+    \end{enumerate}
 \end{solution}
 
 \newpage
@@ -433,6 +452,9 @@ Finally, we computed the parameters for the OLS model by solving the equation
         &=
         \w
     \end{align}
+
+    \vspace{0.2in}
+    \noindent
     Common mistakes:
     \begin{enumerate}
         \item (-0.5) Incorrect use of left/right matrix multiplication or ordinary scalar division
