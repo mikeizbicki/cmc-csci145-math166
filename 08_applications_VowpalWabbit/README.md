@@ -76,7 +76,7 @@ The text after the `|` is the text of the tweet that has been processed to have 
 
 The training set consists of all tweets sent before 2022,
 and the test set consists of all tweets sent during 2022 (up to 20 November).
-It is common when working with social media data to split the traininng/test set by date;
+It is common when working with social media data to split the training/test set by date;
 this helps ensure that our model will generalize to new,
 upcoming years and isn't specialized to just a specific time period.
 
