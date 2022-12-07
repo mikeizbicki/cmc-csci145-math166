@@ -1,0 +1,446 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage[normalem]{ulem}
+\usepackage{stmaryrd}
+\usepackage{booktabs}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{listings}
+\lstset{
+    basicstyle={\ttfamily}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        %\hl{\textbf{TRUE}}\hspace*{14pt}False
+        \hl{\texttt{True}}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+    }{
+        \ifthenelse{\equal{#1}{F}}{
+        %True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \texttt{True}\hspace*{20pt}\hl{\texttt{False}}\hspace*{20pt}\texttt{Open}
+        }
+        {
+            \texttt{True}\hspace*{20pt}{\texttt{False}}\hspace*{20pt}\hl{\texttt{Open}}
+        }
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\sign}{sign}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+\newcommand{\Eval}{E_{\text{val}}}
+\newcommand{\Eapp}{E_{\text{app}}}
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\printanswers
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+    Midterm 3
+}
+\end{center}
+
+\vspace{0.5in}
+\noindent
+\textbf{Printed Name:}
+
+\noindent
+\rule{\textwidth}{0.1pt}
+\vspace{0.25in}
+
+%Format:
+%
+    %The midterm will be worth 15 points.
+    %There will be 10 True / False / Open questions. Each correct answer will be worth 1 point, each incorrect answer will result in a -1 penalty, and each blank answer will result in 0 points.
+    %There will be 5 free response questions. These questions will follow the format of the questions in the notes packets.
+%
+    \noindent
+\textbf{Due date:}
+\begin{enumerate}
+    \item
+        The exam is due Monday 5 Dec 8AM.
+
+    \item
+        You may submit it either on sakai electronically or by putting a physical copy under my door.
+\end{enumerate}
+
+\vspace{0.15in}
+\noindent
+\textbf{Rules:}
+\begin{enumerate}
+    \item
+        The exam is untimed.
+        You do not have to complete the exam in a single sitting.
+        You may pause and restart whenever you'd like.
+
+    \item
+    You may use any non-human resources that you like, including notes, books, internet articles, and computers.
+
+    \item
+    You are not allowed to discuss the exam in any way with any human until after the due date. This includes:
+        \begin{enumerate}
+            \item obviously bad behavior like copying answers, 
+            \item more banal behavior such as:
+                \begin{enumerate}
+                    \item telling your friend "Problem 6 was really hard" or 
+                    \item asking your friend "Have you completed the exam yet?"
+                \end{enumerate}
+        \end{enumerate}
+        
+        Even after you finish the exam, you may not discuss it.
+
+    \item
+    If you do have questions about the exam, you should email me the questions rather than posting to github.
+
+\end{enumerate}
+
+\vspace{0.15in}
+\noindent
+\textbf{Grading:}
+\begin{enumerate}
+    \item For the True/False/Open questions: Each correct answer will be awarded +1 point, each incorrect answer will result in a -1 point penalty, and each blank answer will result in 0 points.
+
+    \item All other problems are worth 1 point, with no penalty for incorrect answers.
+
+    \item There are 16 points possible on the exam.
+        Your final grade entered into sakai will be
+        \begin{equation*}
+            \min\{15, \text{the number of points earned}\}.
+        \end{equation*}
+
+    \item If you find a substantive error on the exam, then I will award you +1 bonus point.
+\end{enumerate}
+
+\vspace{0.15in}
+\noindent
+\textbf{Good luck :)}
+
+\newpage
+
+\begin{problem}
+    For each statement below,
+    circle \texttt{True} if the statement is known to be true,
+    \texttt{False} if the statement is known to be false,
+    and \texttt{Open} if the statement is not known to be either true or false.
+    Ensure that you pay careful attention to formal definitions in your responses.
+
+\begin{enumerate}
+    %\item\TFQuestion{F}{If $|\Ein-\Eout|$ is large and $\Ein$ is small, then VC theory predicts that you should increase the size of your VC dimension.}
+    \item\TFQuestion{T}{If $|\Ein-\Eval|$ is large and $\Ein$ is small, then VC theory predicts that you should decrease the size of your VC dimension.}
+    \item\TFQuestion{F}{If you are training a logistic regression model with the polynomial kernel that is overfitting, then VC theory predicts that increasing the degree of the kernel is more likely to improve performance than decreasing the degree of the kernel.}
+    \item\TFQuestion{F}{You have trained a logistic regression model with L2 regularization and the polynomial kernel of degree 3.  If you increase the degree of the polynomial kernel to 10, then the optimal soft order constraint regularization hyperparameter $C$ will also increase.}
+    \item\TFQuestion{T}{When training a neural network with the ReLU activation function and one hidden layer, increasing the width of the hidden layer will increase the generalization error.}
+    \item\TFQuestion{T}{You have a dataset with the number of features $d=10^6$.  You have trained a boosted SVM and used a validation set to determine that the optimal number of base classifiers $T$ is 1000.  If instead of using an SVM as the base model you use a decision stump, then VC theory predicts that you will need to increase the number of base classifiers $T$ in order to achieve the same generalization error.}
+    \item\TFQuestion{T}{The VC dimension of neural networks with the ReLU activation function is $\Omega(d)$, where $d$ is the number of input feature dimensions.}
+    \item\TFQuestion{T}{Assume you are training an SVM with the polynomial kernel on a dataset with $N=10^6$ and $d=10^6$.  You are not using any regularization, and you run the optimization long enough so that optimization error is 0.  Then in the limit as the degree of the polynomial approaches infinity, the training error is guaranteed to approach 0 for all possible datasets.}
+    \item\TFQuestion{F}{In vowpal wabbit, increasing the \lstinline{--l1} hyperparameter tends to increase the generalization error.}
+    \item\TFQuestion{F}{You have trained a scikit-learn \lstinline{sklearn.linear_model.LogisticRegression} model with default hyperparameters.  It has a high approximation error, low estimation error, and zero optimization error.  VC theory predicts that changing the \lstinline{solver} hyperparameter from the default of \lstinline{'lbfgs'} to \lstinline{'saga'} will improve performance.}
+    \item\TFQuestion{F}{You are using transfer learning to train the final layer of a deep neural network for your specific task.  The \lstinline{ResNet18} model has 18 hidden layers and the \lstinline{ResNet50} model has 50 hidden layers, and in both cases all layers have the same width.  VC theory predicts that if you use the \lstinline{ResNet50} model you will have a higher generalization error than if you use the \lstinline{ResNet18} model.}
+\end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+    Provide an example of a hypothesis class implemented by scikit learn with an infinite VC dimension.
+    Also, describe a learning problem where it makes sense to use this hypothesis class.
+\end{problem}
+\begin{solution}
+    The 1-nearest neighbor classifier.
+    A nearest neighbor hypothesis $h$ satisfies
+    \begin{equation}
+        \Eout(h) \le 2 \Eout(f) + 4 \sqrt{d}N^{-\frac{1}{d+1}}
+    \end{equation}
+    and so the model will only work will on problem with both a very low input feature dimension $d$ and a low Bayes error $\Eout(f)$.
+
+    Common mistakes:
+    \begin{enumerate}
+        \item (-0.5) Correctly identified a hypothesis class, but did not describe a situation in which that hypothesis class would do well and why.
+        \item (-0.25) Mention only low bayes error or only low dimensions
+        \item (-1) Saying that the SVM has an infinite VC dimension is false.
+            SVM has a finite VC dimension of $\Theta(d)$.
+            The SVM \emph{with a gaussian kernel and appropriate $\sigma$ value} can have an infinite VC dimension,
+            but it is the gaussian kernel that causes the infinite VC dimension and not the SVM.
+    \end{enumerate}
+\end{solution}
+
+\newpage
+\begin{problem}
+    You work at an online advertisement company that uses vowpal wabbit to determine which ads to display to which users.
+    You have trained a binary classification problem with hyperparameters
+
+        \vspace{0.1in}
+        \lstinline{--bit_precision=28}
+
+        \lstinline{--ngram=2}
+
+        \lstinline{--passes=20}
+
+        \lstinline{--learning_rate=0.01}
+        \vspace{0.1in}
+
+    \noindent
+    Describe the likely effect on in-sample and generalization errors if you change the value of \lstinline{--bit_precision} to \lstinline{22} and \lstinline{--ngram} to \lstinline{3} (while keeping all other hyperparameters constant).
+\end{problem}
+\begin{solution}
+    The VC dimension of the model is $2^{\text{bit precision}}$.
+    Since the bit precision is decreasing,
+    the VC dimension will also decrease,
+    resulting in decreased generalization error.
+    The ngram increasing has no effect on the VC dimension because the ngram feature map happens before feature hashing.
+
+    The training error will likely increase (although this is not guaranteed).
+    There are two effects that will push the training error up.
+    First, when the bit precision decreases, the number of hash collisions increases.
+    Second, when ngrams increases, the total number of features (before hashing) increases, which will also increase the number of hash  collisions.
+    There is one effect that will push the training error down.
+    Specifically, when ngrams increases, the number of features also increases, and it is possible that one of the new features is a particularly effective feature.
+    Since more effects are pushing the training error up and one down,
+    the training error is most likely to increase.
+    It is possible, however, to construct datasets where the training error will decrease, and there is no way to know for sure without actually running the models and testing.
+
+    For the purposes of grading, your answer on the generalization error needed to agree with mine exactly, but your answer on the training error did not as long as what you wrote was reasonable.
+    %The generalization error will increase because
+    %increasing bit precision will increase the VC dimension.
+    %Increasing ngram will have no effect on the VC dimension because the ngram kernel is applied before feature hashing.
+%
+    %The effects on the in-sample error are less clear, but it will likely go down.
+    %Increasing the bit precision will result in fewer hash collisions, and hash collisions are guaranteed to errors, so this is guaranteed to reduce $\Ein$.
+    %Increasing the value of ngram will give us more features to work with; in the absence of feature hashing this is guaranteed to make the in-sample error decrease.
+    %With feature hashing, adding more features will result in more collisions which could potentially make the in-sample error increase.
+    %This increase in collisions, however, is likely to be offset by the decrease in collisions due to increasing bit precision.
+
+Common mistakes:
+\begin{enumerate}
+    \item (-0.5) If you stated that ngrams affects the VC dimension
+    \item (-0.5 - 0.25) A weak discussion of $\Ein$, for example by not discussing hash collisions
+\end{enumerate}
+\end{solution}
+
+\newpage
+\begin{problem}
+    You have a dataset with $N=10^3$ training data points and $d=10^2$ feature dimensions.
+    You are training a logistic regression model using second order stochastic gradient descent,
+    and you are not computationally limited so you run the optimization long enough for the optimization error to be negligible.
+    You have evaluated the model on a separate validation set in order to determine that the PCA kernel with output dimension $d'=10$ and elastic net regularization with $\lambda=10^{-3}$ and $\alpha=0.1$ provide good performance.
+    Your boss wants you to simplify the training procedure by removing the PCA kernel feature map.
+    Assuming you keep $\alpha$ constant, how does VC theory predict that you should change $\lambda$?
+    That is, do you expect it to increase, decrease, or stay the same?
+    Why?
+\end{problem}
+\begin{solution}
+    Removing the PCA kernel will result in increasing the VC dimension, which corresponds to an increase in model complexity.
+    In order to keep generalization error constant,
+    we need a corresponding decrease in model complexity from regularization.
+    Increasing lambda will add regularization and decrease model complexity, so the optimal $\lambda$ will likely be larger for the new model.
+
+    %Common mistakes:
+    %\begin{enumerate}
+        %\item (-0.5) No discussi
+    %\end{enumerate}
+\end{solution}
+
+\newpage
+\begin{problem}
+    You have successfully trained a \lstinline{sklearn.neural_network.MLPClassifier} model and used a validation set to determine that the optimal hyperparameters are \lstinline{hidden_layer_sizes=[1000]} and \lstinline{alpha=0.0001}.
+    (All other hyperparameters are the default values.)
+    If you change the value of \lstinline{hidden_layer_sizes} to \lstinline{[10000]}, how would you expect to change the \lstinline{alpha} hyperparameter in order to achieve the same generalization error?
+    That is, do you expect it to increase, decrease, or stay the same?
+    Why?
+\end{problem}
+\begin{solution}
+    Increasing the size of the hidden layer increases the VC dimension and model complexity.
+    Therefore, we will need to adjust \lstinline{alpha} so that it adds regularization and decreases model complexity.
+    The MLPClassifer uses the augmented loss regularization methodology, and \lstinline{alpha} is equivalent to $\lambda$ in the textbook.
+    Increasing $\lambda$ reduces model complexity,
+    so we should expect to increase $\alpha$.
+
+    Common mistakes:
+    \begin{enumerate}
+        \item (-0.5) If you assumed that \lstinline{alpha} behaved like the soft order constraint regularization parameter $C$, but your reasoning was otherwise correct.
+        \item (-0.25) Not enough detail
+    \end{enumerate}
+\end{solution}
+
+\newpage
+\begin{problem}
+    You are training a boosted decision stump model on a dataset with $N=10^6$ and $d=10^6$,
+    and have found that the optimal number of decision stumps in the model is $T=10^3$.
+    If you increase the amount of the data to $N=10^9$ and the number of features to $d=10^9$, but keep the number of base models constant at $T=10^3$, does VC theory predict that the generalization error would increase, decrease, or stay the same?
+
+    To justify your answer, you should compute a tight upper bound on the VC dimension of the boosted decision stump hypothesis class and apply the fundamental theorem of statistical learning.
+\end{problem}
+\begin{solution}
+    Boosted models have a VC dimension of $O(T \dvc(B) \log (T \dvc(B)))$ where $\dvc(B)$ is the VC dimension of the base classifier.
+    Decision stumps have a VC dimension of $O(\log d)$.
+    Substituting, we have that our model's VC dimension is
+    \begin{equation}
+        \dvc = O(T \log(d) \log (T \log (d))))
+        .
+    \end{equation}
+    VC theory bounds the generalization error with the formula
+    \begin{equation}
+        |\Ein-\Eout| = O\bigg(\sqrt{\frac{\dvc \log N}{N}}\bigg).
+    \end{equation}
+    When we increase the number of dimensions $d$ and $N$ at the same rate,
+    the numerator will increase by $\log d \log N$, but the denominator will increase at the much faster rate of $N$.
+    Therefore, we expect the generalization error to decrease.
+\end{solution}
+
+\newpage
+\begin{problem}
+    In this problem you will derive a closed form solution to the ridge regression problem,
+    which is closely related to the OLS regression problem.
+Recall that OLS uses the linear hypothesis class
+\begin{equation}
+    \HH{} = \bigg\{ \x \mapsto \trans\w \x : \w \in \R^d \bigg\}
+\end{equation}
+and the squared loss
+\begin{equation}
+    \label{eq:l2loss}
+    \ell(\hat y, y) = (\hat y - y)^2
+\end{equation}
+so that the in-sample error is defined as
+\begin{equation}
+    \Ein(h) 
+    = \frac{1}{N}\sum_{i=1}^N (\trans\x_i \w - y_i)^2
+    = \ltwo{X\w - \y}^2,
+\end{equation}
+where $X$ is a $N \times d$ matrix with $i$th row equal to $\x_i$ and $\y$ is the $d$ dimensional vector with $i$th position equal to $y_i$.
+Finally, we computed the parameters for the OLS model by solving the equation
+    \begin{equation}
+        \label{eq:ols}
+        \hat\w^{\text{OLS}} = \argmin_{\w\in \R^d} \ltwo{X\w-\y}^2.
+    \end{equation}
+    The ridge regression model modifies Equation \eqref{eq:ols} above by adding L2 regularization to get
+\begin{equation}
+    \hat\w^{\text{ridge}} = \argmin_{\w\in \R^d} \ltwo{X\w-\y}^2 + \lambda\ltwo{\w}^2.
+\end{equation}
+    Your task is to derive a closed form solution for $\w^{\text{ridge}}$.
+
+\end{problem}
+\begin{solution}
+    To solve for $\hat\w^{\text{ridge}}$ we take the derivative of the expression inside the $\argmin$, set it equal to zero, and solve for $\w$:
+    \begin{align}
+        0
+        &= \frac d {d\w} \bigg(\ltwo{X\w - \y}^2 + \lambda\ltwo{\w}^2\bigg) \\
+        &= 2X^T(X\w-\y)+2\lambda\w
+        \\
+        &= 2X^TX\w-2X^T\y+2\lambda\w
+        \\
+        &= X^TX\w-X^T\y+\lambda\w
+        \\
+        X^T\y
+        &= X^TX\w + \lambda\w
+        \\
+        &= (X^TX+\lambda I)\w
+        \\
+        (X^TX+\lambda I)^{-1}X^T\y
+        &=
+        \w
+    \end{align}
+    Common mistakes:
+    \begin{enumerate}
+        \item (-0.5) Incorrect use of left/right matrix multiplication or ordinary scalar division
+    \end{enumerate}
+\end{solution}
+
+\end{document}
+
+
+
+
