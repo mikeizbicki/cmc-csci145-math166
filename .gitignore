@@ -5,6 +5,7 @@
 *.out
 *.fls
 *.fdb_latexmk
+.ipynb_checkpoints
 
 *.swo
 *.swp

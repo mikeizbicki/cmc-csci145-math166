@@ -25,7 +25,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \theoremstyle{definition}
+\newtheorem{advanced}{Optional Advanced Problem}
 \newtheorem{problem}{Problem}
+\newtheorem{note}{Note}
 \newtheorem{defn}{Definition}
 \newtheorem{example}{Example}
 \newcommand{\E}{\mathbb E}
@@ -83,7 +85,7 @@ These notes review the background material from linear algebra and data structur
 They focus on runtime concepts that you may not have covered in your previous classes,
 but should hopefully be easy to grasp.
 You are not required to complete and submit the problems in this packet,
-but the problems on the (open note) midterm will be very similar,
+but the problems on the midterm will be very similar,
 so I strongly recommend you complete all of these problems.
 
 \textbf{NOTE:}
@@ -252,29 +254,12 @@ focusing only on the ``most important'' parts.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
-\section{BLAS/LAPACK}
+\section{BLAS}
 
-The \emph{Basic Linear Algebra Subprogram} (BLAS) and \emph{Linear Algebra Package} (LAPACK) are the primary low-level tools of computational linear algebra.
-These high performance libraries are written in Assembly, C, Fortran, and CUDA.
-All high level programming languages (R, Python, Matlab, Julia, etc.) convert your code into basic BLAS/LAPACK function calls,
-and rely on these libraries for good performance.
-
-There are many different versions of BLAS/LAPACK depending on:
-\begin{enumerate}
-    \item The format of matrices (dense, sparse, diagonal, toplitz, etc.)
-    \item The computer architecture (Intel vs ARM, 8/16/32/64/128 bit, parallel CPUs, GPUs, clusters, etc.)
-\end{enumerate}
-In this class, we will be using the PyTorch library,
-and not directly interfacing with BLAS/LAPACK.
-PyTorch supports Dense and Sparse formats on both parallel CPU and CUDA architectures.
-
-It is still important to understand the high-level operations supported by BLAS/LAPACK in order to understand the performance of the code you write,
-but there are a LOT of details that we will not get into here.
-You can find the details of the BLAS/LAPACK APIs at
-\begin{quote}
-    \url{https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines/blas-routines/blas-level-1-routines-and-functions/cblas-asum.html#cblas-asum}
-\end{quote}
-but you will not need to reference this link at all.
+The \emph{Basic Linear Algebra Subprogram} (BLAS) is a standard interface for simple vector and matrix operations.
+BLAS libraries are written in low-level languages like Assembly, C, Fortran, and CUDA.
+PyTorch provides an ``easy to use'' interface to these BLAS operations.
+We will gloss over many technical details in these notes and focus on high-level asymptotic runtimes.
 
 \subsection{Notation}
 
@@ -284,36 +269,48 @@ and lower case italics letters $(n, m, o)$ to denote scalars.
 
 \subsection{Dense vs Sparse Matrices}
 
-A sparse matrix is any matrix with a large number of zero entries relative to the total number of entries.
+Mathematicians define a \emph{sparse matrix} to be any matrix with a large number of zero entries relative to the total number of entries,
+and a \emph{dense matrix} to be any matrix with few zeros.
 There is no strict cut-off here, but it's typical for a sparse matrix to have $< 1\%$ of its entries be zero.
-The \emph{sparsity} of a matrix is the total number of non-zero entries.
-We will be using $\nnz(A)$ to denote the sparsity of $A:\R^{m\times n}$.
+We will use the function $\nnz(A)$ to represent the total \emph{Number of Non Zero} values of the matrix $A:\R^{m\times n}$.
 
 \begin{problem}
-What is the sparsity of the following matrix?
+What is the $\nnz$ of the following matrices?
 
-\begin{equation}
-    A = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ 1 & 0 & 0 \end{pmatrix}
-\end{equation}
+%\begin{enumerate}
+    %\item
+\begin{align*}
+    A &= \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ -1 & 0 & 0 \end{pmatrix} & \nnz(A) = \\
+        \\
+    B &= \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{pmatrix} & \nnz(B) = \\
+        \\
+    C &= \begin{pmatrix} 0.0 & 0.1 & 0.2 \\ 0.3 & 0.4 & 0.5 \end{pmatrix} & \nnz(C) = \\
+\end{align*}
+%\end{enumerate}
+
 \end{problem}
 \vspace{4in}
 
-There are many data structures for storing sparse matrices,
-including:
-\begin{enumerate}
-    \item Dictionary of keys (DOK),
-    \item List of lists (LIL),
-    \item Coordinate list (COO),
-    \item Compressed sparse row (CSR, CRS or Yale format), and
-    \item Compressed sparse column (CSC or CCS).
-\end{enumerate}
-In this class, we will not cover the details of the different formats.
-Pytorch implements both the COO and CSR formats,
-and you are responsible for understanding when to use each of these formats.\footnote{
-    The documentation is at \url{https://pytorch.org/docs/stable/sparse.html}.
-}
-From here on out the notes always assume that a sparse matrix is stored in either COO or CSR format.
+%There are many data structures for storing sparse matrices.
+%These include:
+%\begin{enumerate}
+    %\item Dictionary of keys (DOK),
+    %\item List of lists (LIL),
+    %\item Coordinate list (COO),
+    %\item Compressed sparse row (CSR, CRS or Yale format), and
+    %\item Compressed sparse column (CSC or CCS).
+%\end{enumerate}
+%In this class, we will not cover the details of the different formats.
+%Pytorch implements both the COO and CSR formats,
+%and you are responsible for understanding when to use each of these formats.\footnote{
+    %The documentation is at \url{https://pytorch.org/docs/stable/sparse.html}.
+%}
+%From here on out the notes always assume that a sparse matrix is stored in either COO or CSR format.
+\begin{problem}
+    Describe data structures optimized for sparse and dense matrices.
+\end{problem}
 
+\newpage
 \subsection{Memory Usage}
 
 If $A$ is stored as a sparse matrix,
@@ -332,7 +329,13 @@ the memory usage is $\Theta(mn)$.
 \begin{problem}
     A computer has 8GB of RAM.
     What is the largest dense vector of 64bit floating point numbers that can fit in memory?
-    What about 32bit?
+    \vspace{4in}
+\end{problem}
+
+\begin{problem}
+    You have a dataset with $2^{10}$ columns and $2^{20}$ rows.
+    It is stored using 16bit floating point numbers.
+    How much memory does this dataset consume?
     \vspace{4in}
 \end{problem}
 
@@ -344,11 +347,11 @@ These include the dot product, vector norms, addition, and scalar multiplication
 
 These are fully implemented in PyTorch for both sparse and dense vectors.
 For dense vectors of length $n$, the runtime of all operations is $\Theta(n)$.
-For sparse vectors, all of operations of a single vector $\x$ take time $\Theta(\nnz(\x))$
+For sparse vectors, all operations of a single vector $\x$ take time $\Theta(\nnz(\x))$
 and all operations of two vectors $\x$ and $\y$ take time $\Theta(\nnz(\x)+\nnz(\y))$.
 
 \begin{problem}
-    What is the runtime of the following expressions:
+    What is the runtime of the following expressions?
     \begin{enumerate}
         \item $5 \cdot \x$
             \vspace{2in}
@@ -362,7 +365,8 @@ and all operations of two vectors $\x$ and $\y$ take time $\Theta(\nnz(\x)+\nnz(
 \end{problem}
 
 \begin{problem}
-    What is the formula for the following vector norms:
+    What is the formula for the following vector norms?
+    What is the runtime for computing these formula in both the sparse and dense case?
     \begin{enumerate}
         \item $\lone{\x}=$
             \vspace{2in}
@@ -370,11 +374,12 @@ and all operations of two vectors $\x$ and $\y$ take time $\Theta(\nnz(\x)+\nnz(
             \vspace{2in}
         \item $\linf{\x}=$
             \vspace{2in}
-        \item $\lp{\x}=$
-            \vspace{2in}
+        %\item $\lp{\x}=$
+            %\vspace{2in}
     \end{enumerate}
 \end{problem}
 
+\newpage
 \subsection{BLAS Level 2}
 
 BLAS Level 2 routines are for vector-matrix operations.
@@ -396,20 +401,20 @@ This is often referred to as a ``cubic'' runtime because when the multiplied mat
 and thus $m=n=o$,
 the runtime is $O(n^3)$.
 There are good algorithms that take potentially much less time than this,
-with the best known taking time $O(n^{2.373})$.
+with the best known taking time $O(n^{2.2.371552})$.
 No BLAS implementation that I know of actually implements this algorithm due to the very high constant factor,
 and Strassen's algorithm with runtime $\Theta(n^{\log_2 7})\approx\Theta(n^{2.807})$ is the most commonly used algorithm.
 Currently, we know that matrix multiplication takes at least time $\Omega(n^2\log n)$,
 and it is an open problem what the optimal runtime for matrix multiplication is.
 The following wikipedia link has more details:
 \begin{quote}
-\url{https://en.wikipedia.org/wiki/Matrix_multiplication#Computational_complexity}
+    \url{https://en.wikipedia.org/wiki/Computational_complexity_of_matrix_multiplication}
 \end{quote}
 
 For sparse matrices, PyTorch has only limited support for BLAS Level 2/3.
 In particular, PyTorch allows the first matrix to be either sparse or dense,
 but the second matrix must be dense.
-The runtime in the sparse case is $O(\nnz(A)no)$.
+The runtime in the sparse case is $\Theta(\nnz(A)o)$.
 The output is always a dense tensor.
 
 For both sparse and dense matrices,
@@ -418,9 +423,10 @@ The runtime of addition is linear in the memory usage of the vectors.
 %The library does not actually compute the transpose,
 %but just stores a flag that the matrix has been transposed.
 
-\newpage
+\begin{note}
 For the following problems, always assume that the dimensions match so that the expressions are well defined.
 You will have to specify the dimensions.
+\end{note}
 
 \begin{problem}
     What is the runtime of the following expressions?
@@ -428,17 +434,20 @@ You will have to specify the dimensions.
 
     \begin{enumerate}
         \item
+            $3A$
+            \vspace{2in}
+        \item
             $A + B$
             \vspace{2in}
         \item
             $AB$
-            \vspace{2in}
+            \vspace{3in}
         \item
             $A\x$
-            \vspace{2in}
+            \vspace{3in}
         \item
             $\x A$
-            \vspace{2in}
+            \vspace{3in}
     \end{enumerate}
 \end{problem}
 
@@ -469,7 +478,7 @@ You will have to specify the dimensions.
     Many systems that implement sparse matrices offer only limited support in the same way that PyTorch does.
     The reason is that the sparsity of the matrix product $AB$ is impossible to predict from the sparsity of just $A$ and $B$.
     In this problem, you will prove this fact by example.
-    Your task is to construct $m\times m$ matrices $A$ and $B$ such that
+    Your task is to construct a family of $m\times m$ matrices $A$ and $B$ such that
     \begin{equation}
         \nnz(AB) = O(1)
         \qquad
@@ -482,18 +491,18 @@ You will have to specify the dimensions.
     \vspace{3in}
 \end{problem}
 
-\newpage
-\begin{problem}
-    (Optional)
-    Strassen's algorithm is a famous divide and conquer algorithm for fast matrix multiplication.
-    It is the most commonly implemented algorithm in BLAS libraries because it has both good constant factors and good asymptotic performance.
-    Lookup this algorithm and understand why it works.
-    This is a problem that every computer science undergrad should do at some point in their undergrad career.
-\end{problem}
+%\newpage
+%\begin{note}
+    %Strassen's algorithm is a famous divide and conquer algorithm for fast matrix multiplication.
+    %It is the most commonly implemented algorithm in BLAS libraries because it has both good constant factors and good asymptotic performance.
+    %Lookup this algorithm and understand why it works.
+    %This is a problem that every computer science undergrad should do at some point in their undergrad career.
+%\end{note}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newpage
 \subsection{Matrix Chain Ordering Problem (MCOP)}
 
 Matrix multiplication is famously not commutative, but it is associative.
@@ -529,22 +538,23 @@ Hint: You can swap the order of matrix multiplications by using the fact that fo
 
 \newpage
 The \emph{Matrix Chain Ordering Problem} (MCOP) is the problem of finding the optimal ordering of parentheses for a given sequence of $n$ matrices.
-There is a classic dynamic programming solution to this problem that takes time $\Theta(n^3)$.\footnote{It's important to note that the $n$ here refers to the number of matrices, not the dimensions of any given matrices.}
+There is a classic dynamic programming solution to this problem that takes time $\Theta(n^3)$.
+%\footnote{It's important to note that the $n$ here refers to the number of matrices, not the dimensions of any given matrices.}
+(It's important to note that the $n$ here refers to the number of matrices, not the dimensions of any given matrices.)
 Many more complicated algorithms exist for solving MCOP,
 the best of which currently takes time $\Theta(n \log n)$.
-The best lower bound for MCOP is $\Omega(n)$,
+The best known lower bound for MCOP is $\Omega(n)$,
 and it is therefore an open problem whether MCOP can be solved in linear time.
 
 \textbf{Note:}
 The $\Theta$ and $\Omega$ notation above is correct.
-It should be obvious why these values are consistent with each other and do not contradict the definitions of $\Theta$ and $\Omega$.
-If it's not obvious to you, you should get this clarified.
+It should be ``obvious''\footnote{In mathematics, the word \emph{obvious} has a different meaning than ordinary English.  In mathematics, it means that the claim follows directly from the definitions.  It still might take you 20-30 minutes of thinking about the definitions to verify the claim, however.} why these values are consistent with each other and do not contradict the definitions of $\Theta$ and $\Omega$.
 
-\begin{problem}
-    (Optional)
-    Give the dynamic programming solution for MCOP.
-    This is a problem that every computer science undergrad should do at some point in their undergrad career.
-\end{problem}
+%\begin{problem}
+    %(Optional)
+    %Give the dynamic programming solution for MCOP.
+    %This is a problem that every computer science undergrad should do at some point in their undergrad career.
+%\end{problem}
 
 \begin{problem}
     \label{prob:8}
@@ -572,58 +582,60 @@ If it's not obvious to you, you should get this clarified.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
-\subsection{LAPACK}
-
-LAPACK provides more complex matrix operations than BLAS,
-and LAPACK functions are typically internally written in terms of BLAS operations.
-PyTorch has full support for dense matrices,
-and no support for sparse matrices.
+\section{Beyond BLAS}
 
 Let $A : \R^{n \times n}$.
-Then the matrix inverse $A^{-1}$ and matrix determinant $\determinant(A)$ can both be reduced to matrix multiplication problems.
-The runtime is therefore the same as matrix multiplication, which we talk about as $O(n^3)$ even though $O(n^{2.373})$ algorithms exist.
-The runtime of computing the top-$k$ eigenvectors and eigenvalues is $O(n^2k)$.
-
-\textbf{NOTE:}
+The matrix inverse $A^{-1}$ and matrix determinant $\determinant(A)$ can both be computed in time $O(n^3)$.
+There are asymptotically faster algorithms for computing these runtimes,
+but they are less important than the matrix multiplication algorithms.
+The runtime of computing the top-$k$ eigenvectors and eigenvalues is $O(kn^2)$.%
+\footnote{
 In the next set of notes, we will see that the pagerank technique is equivalent to computing the top eigenvalue of a matrix.
 We will then explore several algorithms for computing eigenvalues that have faster but more complex runtime expressions.
-For this set of notes, however, just assume that computing the top-$k$ eigenvectors takes time $O(n^2k)$ as stated above.
+For this set of notes, however, just assume that computing the top-$k$ eigenvectors takes time $O(kn^2)$ as stated above.
+}
 
-\begin{problem}
-    Let $\x : \R^n$
-    and 
-    $A : \R^{n\times n}$.
-    What is the formula for the following matrix norms?
-    (Note that the $\ltwo{\cdot}$ and $\lp{\cdot}$ norms are defined differently for matrices than vectors.)
-    \begin{enumerate}
-        \item $\ltwo{A}$
-            \vspace{2in}
-        \item $\lp{A}$
-            \vspace{2in}
-        \item $\lF{A}$
-            \vspace{2in}
-    \end{enumerate}
-\end{problem}
+For each of these operations, PyTorch has full support for dense matrices,
+but no support for sparse matrices.
 
-\newpage
-\begin{problem}
-    Use the formulas above to calculate the runtime of computing the following matrix norms.
-    \begin{enumerate}
-        \item $\ltwo{A}$
-            \vspace{4in}
-        \item $\lF{A}$
-            \vspace{4in}
-    \end{enumerate}
-    We do not have enough tools yet for calculating the runtime of generic $\lp{\cdot}$ norms,
-    and that's why I didn't ask you to provide that runtime.
-\end{problem}
-
-\newpage
+%\begin{problem}
+    %Let $\x : \R^n$
+    %and 
+    %$A : \R^{n\times n}$.
+    %What is the formula for the following matrix norms?
+    %(Note that the $\ltwo{\cdot}$ and $\lp{\cdot}$ norms are defined differently for matrices than vectors.)
+    %\begin{enumerate}
+        %\item $\ltwo{A}$
+            %\vspace{2in}
+        %\item $\lp{A}$
+            %\vspace{2in}
+        %\item $\lF{A}$
+            %\vspace{2in}
+    %\end{enumerate}
+%\end{problem}
+%
+%\newpage
+%\begin{problem}
+    %Use the formulas above to calculate the runtime of computing the following matrix norms.
+    %\begin{enumerate}
+        %\item $\ltwo{A}$
+            %\vspace{4in}
+        %\item $\lF{A}$
+            %\vspace{4in}
+    %\end{enumerate}
+    %We do not have enough tools yet for calculating the runtime of generic $\lp{\cdot}$ norms,
+    %and that's why I didn't ask you to provide that runtime.
+%\end{problem}
+%
+%\newpage
 \begin{problem}
     Let $A : \R^{m \times n}$, $\x : \R^n$, and $\lambda : \R$.
     Assume that $A$ and $\x$ are dense.
     What is the runtime for computing the following expressions?
     \begin{enumerate}
+        \item $A^{-1}\x$
+            \vspace{4in}
+            \newpage
         \item $(A \trans A)^{-1} A \x$
             \vspace{4in}
             \newpage
