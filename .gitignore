@@ -6,8 +6,10 @@
 *.fls
 *.fdb_latexmk
 .ipynb_checkpoints
+.ipynb_checkpoints.old
 
 *.swo
 *.swp
 
 amlbook.pdf
+venv

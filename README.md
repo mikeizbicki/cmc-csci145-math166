@@ -20,11 +20,6 @@ Include these links in the right topic folders:
 <img width='400px' src='machine_learning_2x.png' />
 </center>
 
-Important links:
-
-1. [Data Mining vs Machine Learning vs Artificial Intelligence vs Statistics](https://stats.stackexchange.com/questions/5026/what-is-the-difference-between-data-mining-statistics-machine-learning-and-ai)
-1. [What do data scientists get paid?](https://www.levels.fyi/comp.html?track=Data%20Scientist)
-
 ## About the Instructor
 
 |||
@@ -32,7 +27,7 @@ Important links:
 | Name | Mike Izbicki (call me Mike) |
 | Email | mizbicki@cmc.edu |
 | Office | Adams 216 |
-| Office Hours | See [Issue #69](https://github.com/mikeizbicki/cmc-csci145-math166/issues/69) |
+| Office Hours | TBA |
 | Zoom | See [Issue #70](https://github.com/mikeizbicki/cmc-csci145-math166/issues/70) |
 | Webpage | https://izbicki.me |
 | Research | Machine Learning (see [izbicki.me/research.html](https://izbicki.me/research.html) for some past projects) |
@@ -44,7 +39,7 @@ Fun facts:
     1. worked at National Security Agency (NSA)
     1. left Navy as a [conscientious objector](https://www.nytimes.com/2011/02/23/nyregion/23objector.html)
 1. phd/postdoc at UC Riverside
-1. taught in [DPRK (i.e. North Korea)](https://pust.co)
+1. taught in [DPRK](https://pust.co)
 
 ## About the Course
 
@@ -58,12 +53,6 @@ Fun facts:
 **Learning Objectives:**
 
 1. See the [Jupyter notebook](intro.ipynb)
-
-1. Exposure to *research-level* data mining
-    1. Understand the latest algorithms...
-       but algorithms get outdated fast.
-
-    1. The real goal is to teach you how to read research-level papers and math so that you can understand future techniques by yourself
 
 1. Major concepts
     1. Techniques
@@ -110,45 +99,41 @@ You don't have to buy anything.
 
 1. *Learning from Data* by Yaser S. Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin
 
+    <img src=img/book.jpg width=300px />
+
     I will provide you all a free copy.
     It is yours to keep forever if you'd like (or you can return it to me at the end of the semester and I'll pass it on to future students).
     Feel free to highlight/take notes/etc in it as if it were your own book, because it is.
 
 1. Lots of research papers / lecture notes
 
-<!--
-1. Christopher Bishop's *Pattern Recognition and Machine Learning*.  [Download a free pdf copy from Microsoft Research.](https://www.microsoft.com/en-us/research/people/cmbishop/prml-book/)
-1. Peterson's *The Matrix Cookbook* is a handy reference for multivariable calculus, and [you can download a free copy here](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf).
-1. Other articles as posted in the schedule below.
-1. Other popular (and freely available) data mining books include [Data Mining: Concepts and Techniques](http://myweb.sabanciuniv.edu/rdehkharghani/files/2016/02/The-Morgan-Kaufmann-Series-in-Data-Management-Systems-Jiawei-Han-Micheline-Kamber-Jian-Pei-Data-Mining.-Concepts-and-Techniques-3rd-Edition-Morgan-Kaufmann-2011.pdf) by Jiawei Han, Micheline Kamber and Jian Pei and [Data Mining](http://www.charuaggarwal.net/Data-Mining.htm) by Charu C. Aggarwal.  We probably won't use these books at all though.
--->
-
 **Grades:**
 
-| Category                          | Points        |                     |
-| --------------------------------- | ------------- | ------------------- |
-| Projects                          | `2**2`-`2**3` | every 2-3 weeks, 5 in total |
-| Quizzes                           | `2**2`-`2**3` | as needed           |
-| Midterm 1 (Pagerank)              | `2**5`        | (approximately) 23 Sep |
-| Midterm 2 (Learning from Data)    | `2**5`        | (approximately) 01 Nov |
-| Final                             | `2**7`        |                     |
+| Category                          | Points        |                               |
+| --------------------------------- | ------------- | ----------------------------- |
+| Projects                          | `2**2`-`2**3` | every 2-3 weeks, 5 in total   |
+| Quizzes                           | `2**2`-`2**3` | as needed                     |
+| Midterm 1 (Pagerank)              | `2**5`        | (approximately) 23 Sep        |
+| Midterm 2 (Learning from Data)    | `2**5`        | (approximately) 01 Nov        |
+| Final                             | `2**7`        |                               |
 
 *Late Work Policy:*
 
-You lose `2**(i-1)` points on every assignment,
-where `i` is the number of days late.
+1. You lose `2**(i-1)` points on every assignment,
+    where `i` is the number of days late.
 
-Do not expect partial credit for incomplete assignments.
-It is much better to submit a correct assignment late than an incorrect one on time.
+1. Do not expect partial credit for incomplete assignments.
+    It is much better to submit a correct assignment late than an incorrect one on time.
+
+1. I expect most people to get full credit on the assignments.
 
 *Exams:*
 
-1. Most of your grade will be exams
+1. Majority of your grade
 1. No programming, only math
-1. The format will be either:
-    1. Oral exam
-    1. Take home (unlimited time, open note)
-1. They are hard. (Historically, average in the 70s.  No curve.)
+1. Oral exam
+1. Final exam can replace all previous exams
+1. (Historic average in the 70s.  No curve.)
 
 _This is a **hard** class._
 
@@ -169,14 +154,15 @@ _This is a **hard** class._
 
         <img src=math.webp />
 
-    1.  > I spent 20+ hours per week on this class, and still only got a B.
-        > The class is too hard and you should make it easier.
-
     1.  > I got my job because of the data mining course.
         > Technical interviews were super easy after this class.
 
     Unfortunately, I can't remove the math from this class, and I can't make the class easier.
     Otherwise, you wouldn't be learning the material needed to pass a technical interview / get a good job / go to grad school.
+
+What do data scientists get paid?
+1. <https://www.levels.fyi/t/data-scientist?countryId=254>
+1. <https://www.bls.gov/ooh/math/data-scientists.htm>
 
 > **NOTE:**
 > In all of my other courses, I include required reading/watching tasks to learn about CS/DS culture.
@@ -195,14 +181,6 @@ You may use any online resources you like as references.
 Basically, I'm trusting you all to be adults.
 You are ultimately responsible for ensuring you learn the material!
 So do what will help you learn best.
-
-> **WARNING:**
-> All material in this class is cumulative.
-> If you work "too closely" with another student on an assignment,
-> you won't understand how to complete subsequent assignments,
-> and you will quickly fall behind.
-> You should view collaboration as a way to improve your understanding,
-> not as a way to do less work.
 
 ## Accommodations for Disabilities
 
