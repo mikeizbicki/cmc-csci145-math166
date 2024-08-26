@@ -121,13 +121,13 @@ This course is divided into three sections:
 
 | Category                          | Points        |                               |
 | --------------------------------- | ------------- | ----------------------------- |
-| Projects                          | `2**2`-`2**3` | every 2-3 weeks, 5 in total   |
+| Projects                          | `2**2`-`2**3` | between 4-7 projects   |
 | Quizzes                           | `2**2`-`2**3` | as needed                     |
 | Midterm 1 (Pagerank)              | `2**5`        | (approximately) 23 Sep        |
-| Midterm 2 (Learning from Data)    | `2**5`        | (approximately) 01 Nov        |
+| Midterm 2 (Machine Learning)      | `2**6`        | (approximately) 01 Nov        |
 | Final                             | `2**7`        |                               |
 
-*Late Work Policy:*
+*Projects:*
 
 1. You lose `2**(i-1)` points on every assignment,
     where `i` is the number of days late.
@@ -187,7 +187,7 @@ subject to the following constraints:
 1. you must be the person typing in all code for your assignments, and
 1. you must not copy another student's code.
 
-You may use any online resources you like as references.
+You may use any online resources you like (including ChatGPT) without restriction.
 
 Basically, I'm trusting you all to be adults.
 You are ultimately responsible for ensuring you learn the material!
