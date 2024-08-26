@@ -64,7 +64,7 @@ This course is divided into three sections:
 
     We will use the "Deeper Inside Pagerank" paper.
 
-    <img src=img/deeper-inside-pagerank.jpg />
+    <img src=img/deeper-inside-pagerank.png />
 
     You will learn:
     1. How to measure the runtime of data mining algorithms
