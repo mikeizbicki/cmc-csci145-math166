@@ -60,9 +60,7 @@ See the [introduction Jupyter notebook](intro.ipynb).
 
 This course is divided into three sections:
 
-1. *Pagerank*
-
-    We will use the "Deeper Inside Pagerank" paper.
+1. *Pagerank* - We will use the paper "Deeper Inside Pagerank".
 
     <img height=200px src=img/deeper-inside-pagerank.png />
 
@@ -70,14 +68,10 @@ This course is divided into three sections:
     1. How to use pagerank to find the most important items in a "network"
     1. Trade-offs in runtime and quality of results
 
-1. *Machine Learning*
-
-    We will cover everything in *Learning from Data* by Yaser S. Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin.
+1. *Machine Learning* - We will use the textbook *Learning from Data* by Yaser S. Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin.
+    (I will provide you a free copy to keep.)
 
     <img src=img/book.jpg height=200px />
-
-    > **NOTE:**
-    > I will provide you all a free copy.
 
     You will learn:
     1. Techniques
@@ -93,8 +87,7 @@ This course is divided into three sections:
         1. Regularization (L1, L2, elastic net, weight decay, early stopping, etc.)
         1. Optimization algorithms (gradient descent, stochastic gradient descent, ADAM, etc.)
 
-1. *Applications*
-
+1. *Applications* -
     We will use a variety of papers/blog posts.
     Focus on text/web/social media examples.
 
@@ -158,10 +151,16 @@ This course is divided into three sections:
     1. Very few people find linear algebra, statistics and programming to ALL be easy subjects, and this class combines them all.
     1. There's a reason people who understand this material get paid big salaries at FAANG.
 
+        What do data scientists get paid?
+        1. Generic data scientist (at FAANG): <https://www.levels.fyi/t/data-scientist?countryId=254>
+        1. Generic software engineer (at FAANG): <https://www.levels.fyi/t/software-engineer?countryId=254>
+        1. Machine learning engineer (**this class**): <https://www.levels.fyi/t/software-engineer/title/machine-learning-engineer?country=254>
+        1. Generic data scientist (at non-FAANG): <https://www.bls.gov/ooh/math/data-scientists.htm>
+
 1. You will have to read the required references.
 
     Not all the material will be covered in lectures,
-    and that's intentional to force you to get practice reading research-level data mining text.
+    and that's intentional to force you to get practice reading research-level data mining texts.
 
     > **NOTE:**
     > In all of my other courses, I include required reading/watching tasks to learn about CS/DS culture.
@@ -173,16 +172,12 @@ This course is divided into three sections:
         > I had no idea there was so much god damned fucking math involved in a CS class.
         > You should warn students about that.
 
-        Unfortunately, I can't remove the math from this class,
-        and I can't make the class easier.
-        Otherwise, you wouldn't be learning the material needed to pass a technical interview / get a good job / go to grad school.
-
     1.  > I got my job because of the data mining course.
-        > Technical interviews were super easy after this class.
+        > Technical interviews were super easy because of this class.
 
-        What do data scientists get paid?
-        1. <https://www.levels.fyi/t/data-scientist?countryId=254>
-        1. <https://www.bls.gov/ooh/math/data-scientists.htm>
+    Unfortunately, I can't remove the math from this class,
+    and I can't make the class easier.
+    Otherwise, you wouldn't be learning the material needed to pass a technical interview / get a good job / go to grad school.
 
 **Collaboration Policy:**
 
