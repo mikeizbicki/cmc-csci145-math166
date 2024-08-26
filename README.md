@@ -56,7 +56,7 @@ Fun facts:
 
 **Course Content:**
 
-See the [introduction Jupyter notebook](intro.ipynb)
+See the [introduction Jupyter notebook](intro.ipynb).
 
 This course is divided into three sections:
 
@@ -67,9 +67,8 @@ This course is divided into three sections:
     <img height=200px src=img/deeper-inside-pagerank.png />
 
     You will learn:
-    1. How to measure the runtime of data mining algorithms
-    1. Trade-offs in runtime and "accuracy"
-    1. How eigenvectors are used in data mining
+    1. How to use pagerank to find the most important items in a "network"
+    1. Trade-offs in runtime and quality of results
 
 1. *Machine Learning*
 
@@ -82,9 +81,12 @@ This course is divided into three sections:
 
     You will learn:
     1. Techniques
-        1. Logistic regression
-        1. Kernel methods
-        1. Neural networks
+        1. Logistic Regression
+        1. Decision Trees
+        1. Support Vector Machines
+        1. Kernel Methods
+        1. K-Nearest Neighbor
+        1. Neural Networks
     1. Math
         1. Bias/variance trade-off
         1. VC Dimension theorem (fundamental theorem of statistical learning)
@@ -96,25 +98,28 @@ This course is divided into three sections:
     We will use a variety of papers/blog posts.
     Focus on text/web/social media examples.
 
-**Other Notes:**
+**Other Topics:**
 
 1. Ethical implications of data mining
    
-   Pet peeve: You can't fully understand the ethics if you don't understand the technical details
+   Pet peeve:
+   You can't understand the ethics if you don't understand the technical details.
 
 1. Apply data mining libraries (PyTorch, scikit-learn, GenSim, spaCy, etc.) 
-    1. Teaching you how to use these libraries is NOT the primary goal of the course
-    1. In-person class time will focus on the math, and I'm expecting you can figure out how to use the libraries on your own
+    1. Teaching you how to use these libraries is NOT the primary goal of the course.
+    1. In-person class time will focus on the math,
+        and I'm expecting you can figure out how to use the libraries on your own.
 
 **Prerequisite knowledge:**
 
-<!-- FIXME -->
-1. linear algebra
-    1. eigenvectors
 1. computation
     1. big-o analysis
     1. git
     1. download/use python libraries
+1. linear algebra
+    1. eigenvectors
+    1. matrix rank
+    1. linear independence of vectors
 1. statistics
     1. super basic probability
     1. exposure to linear/logistic regression helpful but not required
@@ -143,11 +148,10 @@ This course is divided into three sections:
 
 1. Majority of your grade
 1. No programming, only math
-1. Oral exams, 1-1 in my office
-1. Final exam can replace all previous exams
+1. Oral format, 1-1 in my office
+1. Final exam can replace all previous exams if you do well
 
-
-**This is a hard class:**
+**This is a Hard Class:**
 
 1. The material is intrinsically hard.
 
