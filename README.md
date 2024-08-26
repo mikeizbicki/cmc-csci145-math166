@@ -32,8 +32,8 @@ Include these links in the right topic folders:
 | Email | mizbicki@cmc.edu |
 | Office | Adams 216 |
 | Office Hours | TBA |
-| Zoom | See [Issue #70](https://github.com/mikeizbicki/cmc-csci145-math166/issues/70) |
-| Webpage | https://izbicki.me |
+| Zoom | See [Issue #148](https://github.com/mikeizbicki/cmc-csci145-math166/issues/148) |
+| Webpage | <https://izbicki.me> |
 | Research | Machine Learning (see [izbicki.me/research.html](https://izbicki.me/research.html) for some past projects) |
 
 Fun facts:
