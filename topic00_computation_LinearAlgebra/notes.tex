@@ -81,13 +81,13 @@ Notes: Computational Linear Algebra
 
 \section{Introduction}
 
-This set of notes covers how to compute the runtimes of linear algebra expressions like
+This set of notes covers how to compute the runtimes of linear algebra expressions similar to
 \begin{equation}
 \lF{(\lambda I + A) \x \trans \x}
 .
 \end{equation}
-We will be doing these calculations throughout the course,
-and so it is necessary to master this material.
+We will be doing these calculations many times throughout the course,
+and so it is necessary to master this material to get a passing grade.
 
 \begin{note}
 If you find any errors in these notes (or any other class material),
@@ -101,10 +101,6 @@ Many students struggle in this course with basic linear algebra concepts like th
 If you would like more background on these topics, I recommend watching the 3blue1brown videos on linear algebra:
 \begin{quote}
     \url{https://www.3blue1brown.com/essence-of-linear-algebra-page}
-\end{quote}
-The eigenvalue video is the most important:
-\begin{quote}
-    \url{https://www.youtube.com/watch?v=PFDu9oVAE-g}
 \end{quote}
 \end{note}
 
@@ -340,6 +336,10 @@ the memory usage is $\Theta(mn)$.
 \end{problem}
 
 \newpage
+\begin{note}
+    You must be able to perform basic calculations about the exact amount of memory we expect dense matrices to consume.
+    For sparse matrices, you are only responsible for the asymptotic calculations.
+\end{note}
 \begin{problem}
     A computer has 8GB of RAM.
     What is the largest dense vector of 64bit floating point numbers that can fit in memory?
@@ -431,11 +431,13 @@ but the second matrix must be dense.
 The runtime in the sparse case is $\Theta(\nnz(A)o)$.
 The output is always a dense tensor.
 
-For both sparse and dense matrices,
-the runtime of computing the transpose is $\Theta(1)$.
-The runtime of addition is linear in the memory usage of the vectors.
-%The library does not actually compute the transpose,
-%but just stores a flag that the matrix has been transposed.
+The runtime of computing the transpose is $\Theta(1)$
+for both sparse and dense matrices.
+Libraries do not actually do any computation when you call a transpose function.
+They just store a flag that the matrix has been transposed,
+and so the rows/columns are read are dynamically swapped when performing a mathematical operation.
+
+The runtime of addition and scalar multiplication is linear in the memory usage of the affected matrices.
 
 \begin{note}
 For the following problems, always assume that the dimensions match so that the expressions are well defined.
@@ -448,20 +450,26 @@ You will have to specify the dimensions.
 
     \begin{enumerate}
         \item
-            $3A$
-            \vspace{2in}
-        \item
             $A + B$
-            \vspace{2in}
+            \vspace{1.5in}
+        \item
+            $A + \trans B$
+            \vspace{1.5in}
+        \item
+            $3A$
+            \vspace{1.5in}
         \item
             $AB$
-            \vspace{3in}
+            \vspace{1.5in}
+        \item
+            $A\trans B$
+            \vspace{1.5in}
         \item
             $A\x$
-            \vspace{3in}
+            \vspace{1.5in}
         \item
             $\x A$
-            \vspace{3in}
+            \vspace{1.5in}
     \end{enumerate}
 \end{problem}
 
@@ -489,8 +497,19 @@ You will have to specify the dimensions.
 
 \newpage
 \begin{problem}
-    Many systems that implement sparse matrices offer only limited support in the same way that PyTorch does.
+    Let $A$ be a sparse matrix, and $B$ be a dense matrix.
+        Then the matrix product $AB$ can be computed directly in PyTorch,
+        but the matrix product $BA$ cannot be computed directly because the first matrix is not sparse.
+        It is nevertheless still possible to compute $BA$ by rewriting the expression so that a sparse matrix appears on the left hand side of a matrix multiplication.
+        How?
+\end{problem}
+\vspace{4in}
+
+\begin{problem}
+    Recall that in PyTorch---and many other linear algebra libraries---only the first matrix in a matrix multiplication can be sparse,
+    and the second must be dense.
     The reason is that the sparsity of the matrix product $AB$ is impossible to predict from the sparsity of just $A$ and $B$.
+
     In this problem, you will prove this fact by example.
     Your task is to construct a family of $m\times m$ matrices $A$ and $B$ such that
     \begin{equation}
@@ -538,19 +557,19 @@ Computationally, however, some choices of parentheses can be much better than ot
 \end{problem}
 
 \newpage
-\begin{problem}
-Recall that in PyTorch, only the first matrix in a matrix multiplication can be sparse,
-and the second must be dense.
-It is still possible to compute the product $ABC$ if any one of the matrices is dense and the other two are sparse.
-For example, if $A$ and $B$ are sparse, then the parenthesization $A(BC)$ can be computed in PyTorch.
-How should you rewrite the multiplication $ABC$ so that it can be computed when both $A$ and $C$ are sparse?
 
-    \vspace{0.1in}
-\noindent
+\begin{problem}
+Recall that in PyTorch---and many other linear algebra libraries---only the first matrix in a matrix multiplication can be sparse,
+and the second must be dense.
+
+Let $A$ and $C$ be sparse matrices, and $B$ be a dense matrix.
+How can we compute the product $ABC$?\footnote{
 Hint: You can swap the order of matrix multiplications by using the fact that for any two matrices $X$ and $Y$, $XY = \trans{(\trans Y \trans X)}$.
+    }
 \end{problem}
 
 \newpage
+\begin{note}
 The \emph{Matrix Chain Ordering Problem} (MCOP) is the problem of finding the optimal ordering of parentheses for a given sequence of $n$ matrices.
 There is a classic dynamic programming solution to this problem that takes time $\Theta(n^3)$.
 %\footnote{It's important to note that the $n$ here refers to the number of matrices, not the dimensions of any given matrices.}
@@ -559,10 +578,12 @@ Many more complicated algorithms exist for solving MCOP,
 the best of which currently takes time $\Theta(n \log n)$.
 The best known lower bound for MCOP is $\Omega(n)$,
 and it is therefore an open problem whether MCOP can be solved in linear time.
+%\end{note}
 
-\textbf{Note:}
+%\begin{note}
 The $\Theta$ and $\Omega$ notation above is correct.
 It should be ``obvious''\footnote{In mathematics, the word \emph{obvious} has a different meaning than ordinary English.  In mathematics, it means that the claim follows directly from the definitions.  It still might take you 20-30 minutes of thinking about the definitions to verify the claim, however.} why these values are consistent with each other and do not contradict the definitions of $\Theta$ and $\Omega$.
+\end{note}
 
 %\begin{problem}
     %(Optional)
