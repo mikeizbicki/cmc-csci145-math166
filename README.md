@@ -16,9 +16,13 @@ Include these links in the right topic folders:
 1. cross-lingual embeddings: https://ruder.io/cross-lingual-embeddings/
 -->
 
+<img src=img/math.webp width=600px />
+
+<!--
 <center>
-<img width='400px' src='machine_learning_2x.png' />
+<img width='400px' src='img/machine_learning_2x.png' />
 </center>
+-->
 
 ## About the Instructor
 
@@ -50,26 +54,49 @@ Fun facts:
     1. Especially for machine learning technical interviews
     1. No SQL in this course => that's CSCI143 Big Data
 
-**Learning Objectives:**
+**Course Content:**
 
-1. See the [Jupyter notebook](intro.ipynb)
+See the [introduction Jupyter notebook](intro.ipynb)
 
-1. Major concepts
+This course is divided into three sections:
+
+1. *Pagerank*
+
+    We will use the "Deeper Inside Pagerank" paper.
+
+    <img src=img/deeper-inside-pagerank.jpg />
+
+    You will learn:
+    1. How to measure the runtime of data mining algorithms
+    1. Trade-offs in runtime and "accuracy"
+    1. How eigenvectors are used in data mining
+
+1. *Machine Learning*
+
+    We will cover everything in *Learning from Data* by Yaser S. Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin.
+
+    <img src=img/book.jpg width=200px />
+
+    > **NOTE:**
+    > I will provide you all a free copy.
+
+    You will learn:
     1. Techniques
-        1. Eigen-methods for data mining
         1. Logistic regression
         1. Kernel methods
         1. Neural networks
-        1. word2vec
-        1. Small amount of deep learning (transformers, CNNs, etc.)
     1. Math
         1. Bias/variance trade-off
         1. VC Dimension theorem (fundamental theorem of statistical learning)
         1. Regularization (L1, L2, elastic net, weight decay, early stopping, etc.)
         1. Optimization algorithms (gradient descent, stochastic gradient descent, ADAM, etc.)
-    1. Programming:
-        1. Writing code that is easy to deploy
-    1. Focus on text/web/social media examples
+
+1. *Applications*
+
+    We will use a variety of papers/blog posts.
+    Focus on text/web/social media examples.
+
+**Other Notes:**
 
 1. Ethical implications of data mining
    
@@ -91,21 +118,6 @@ Fun facts:
 1. statistics
     1. super basic probability
     1. exposure to linear/logistic regression helpful but not required
-
-**Textbook:**
-
-I will provide all the reference material for this class.
-You don't have to buy anything.
-
-1. *Learning from Data* by Yaser S. Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin
-
-    <img src=img/book.jpg width=300px />
-
-    I will provide you all a free copy.
-    It is yours to keep forever if you'd like (or you can return it to me at the end of the semester and I'll pass it on to future students).
-    Feel free to highlight/take notes/etc in it as if it were your own book, because it is.
-
-1. Lots of research papers / lecture notes
 
 **Grades:**
 
@@ -131,20 +143,25 @@ You don't have to buy anything.
 
 1. Majority of your grade
 1. No programming, only math
-1. Oral exam
+1. Oral exams, 1-1 in my office
 1. Final exam can replace all previous exams
-1. (Historic average in the 70s.  No curve.)
 
-_This is a **hard** class._
 
-1. The material is intrinsically hard
-    1. Very few people find linear algebra, statistics and programming to ALL be easy subjects, and this class combines them all
-    1. There's a reason people who understand this material get paid big salaries at FAANG
+**This is a hard class:**
+
+1. The material is intrinsically hard.
+
+    1. Very few people find linear algebra, statistics and programming to ALL be easy subjects, and this class combines them all.
+    1. There's a reason people who understand this material get paid big salaries at FAANG.
 
 1. You will have to read the required references.
 
     Not all the material will be covered in lectures,
     and that's intentional to force you to get practice reading research-level data mining text.
+
+    > **NOTE:**
+    > In all of my other courses, I include required reading/watching tasks to learn about CS/DS culture.
+    > This course doesn't have these tasks because there is already a LOT of textbook reading that you will have to complete.
 
 1. Comments from previous students:
 
@@ -152,21 +169,16 @@ _This is a **hard** class._
         > I had no idea there was so much god damned fucking math involved in a CS class.
         > You should warn students about that.
 
-        <img src=math.webp />
+        Unfortunately, I can't remove the math from this class,
+        and I can't make the class easier.
+        Otherwise, you wouldn't be learning the material needed to pass a technical interview / get a good job / go to grad school.
 
     1.  > I got my job because of the data mining course.
         > Technical interviews were super easy after this class.
 
-    Unfortunately, I can't remove the math from this class, and I can't make the class easier.
-    Otherwise, you wouldn't be learning the material needed to pass a technical interview / get a good job / go to grad school.
-
-What do data scientists get paid?
-1. <https://www.levels.fyi/t/data-scientist?countryId=254>
-1. <https://www.bls.gov/ooh/math/data-scientists.htm>
-
-> **NOTE:**
-> In all of my other courses, I include required reading/watching tasks to learn about CS/DS culture.
-> This course doesn't have these tasks because there is already a LOT of textbook reading that you will have to complete.
+        What do data scientists get paid?
+        1. <https://www.levels.fyi/t/data-scientist?countryId=254>
+        1. <https://www.bls.gov/ooh/math/data-scientists.htm>
 
 **Collaboration Policy:**
 

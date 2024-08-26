@@ -81,19 +81,22 @@ Notes: Computational Linear Algebra
 
 \section{Introduction}
 
-These notes review the background material from linear algebra and data structures needed to understand data mining.
-They focus on runtime concepts that you may not have covered in your previous classes,
-but should hopefully be easy to grasp.
-You are not required to complete and submit the problems in this packet,
-but the problems on the midterm will be very similar,
-so I strongly recommend you complete all of these problems.
+This set of notes covers how to compute the runtimes of linear algebra expressions like
+\begin{equation}
+\lF{(\lambda I + A) \x \trans \x}
+.
+\end{equation}
+We will be doing these calculations throughout the course,
+and so it is necessary to master this material.
 
-\textbf{NOTE:}
+\begin{note}
 If you find any errors in these notes (or any other class material),
 you can get extra credit by submitting a pull request to github fixing the error.
+\end{note}
 
-\section{Linear Algebra Basics}
+%\section{Linear Algebra Review}
 
+\begin{note}
 Many students struggle in this course with basic linear algebra concepts like the rank of a matrix and eigenvalues.
 If you would like more background on these topics, I recommend watching the 3blue1brown videos on linear algebra:
 \begin{quote}
@@ -103,6 +106,7 @@ The eigenvalue video is the most important:
 \begin{quote}
     \url{https://www.youtube.com/watch?v=PFDu9oVAE-g}
 \end{quote}
+\end{note}
 
 \section{Big-O/$\Theta$/$\Omega$ Notation}
 
@@ -130,6 +134,12 @@ There are many equivalent definitions, but in this class, we will use the follow
 
 
 \newpage
+\begin{note}
+You are not required to complete and submit the problems in this packet,
+but the problems on the quizzes/exams will be very similar,
+so I strongly recommend you complete all of these problems.
+\end{note}
+
 \begin{problem}
     Complete each equation below by adding the symbol $O$ if $f=O(g)$, $\Omega$ if $f=\Omega(g)$, or $\Theta$ if $f=\Theta(g)$.  
     The first row is completed for you as an example.
@@ -185,9 +195,11 @@ There are many equivalent definitions, but in this class, we will use the follow
     \hline
     & $ab$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $\Omega(b)$ &  &\\
     \arrayrulecolor{gray}\hline
+    & $a + b$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $ab$ &  &\\
+    \arrayrulecolor{gray}\hline
     & $a^2b$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $ab^2$ &  &\\
     \arrayrulecolor{gray}\hline
-    & $a\log b$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $a^b$ &  &\\
+    & $a\log b$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $a \log^2 b$ &  &\\
     \arrayrulecolor{gray}\hline
     & $a^2bc^3$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $a^2b^2c^3$ &  &\\
     \arrayrulecolor{gray}\hline
@@ -195,11 +207,11 @@ There are many equivalent definitions, but in this class, we will use the follow
     \arrayrulecolor{gray}\hline
     & $\frac ab$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $(\frac a b)^2$ &  &\\
     \arrayrulecolor{gray}\hline
-    & $a^b$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $b^a$ &  &\\
+    & $\frac{ab}{c}$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $\frac{a}{c}$ &  &\\
     \arrayrulecolor{gray}\hline
-    & $a^b$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $(\log a)^c$ &  &\\
+    & $\frac{a}{bc}$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $\frac{a}{c^2}$ &  &\\
     \arrayrulecolor{gray}\hline
-    & $a^b$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $(1+c)^a$ &  &\\
+    & $\frac{a+b+c}{c}$ & ~\hspace{0.5in}~$=$~\hspace{0.5in}~  & $\frac{a+b}{c}$ &  &\\
     \arrayrulecolor{gray}\hline
 
     %& $O(1)$ & or & $O(n)$ & or & equal\\
@@ -228,8 +240,10 @@ There are many equivalent definitions, but in this class, we will use the follow
 %\end{problem}
 
 \newpage
+\begin{note}
 The main advantage of asymptotic notation is that it lets us write complex formulas in simpler forms,
 focusing only on the ``most important'' parts.
+\end{note}
 \begin{problem}
     Simplify the following expressions:
 
