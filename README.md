@@ -64,7 +64,7 @@ This course is divided into three sections:
 
     We will use the "Deeper Inside Pagerank" paper.
 
-    <img src=img/deeper-inside-pagerank.png />
+    <img height=200px src=img/deeper-inside-pagerank.png />
 
     You will learn:
     1. How to measure the runtime of data mining algorithms
@@ -75,7 +75,7 @@ This course is divided into three sections:
 
     We will cover everything in *Learning from Data* by Yaser S. Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin.
 
-    <img src=img/book.jpg width=200px />
+    <img src=img/book.jpg height=200px />
 
     > **NOTE:**
     > I will provide you all a free copy.
