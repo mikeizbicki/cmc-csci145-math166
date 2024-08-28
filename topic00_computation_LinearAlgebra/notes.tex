@@ -366,6 +366,7 @@ and all operations of two vectors $\x$ and $\y$ take time $\Theta(\nnz(\x)+\nnz(
 
 \begin{problem}
     What is the runtime of the following expressions?
+    You should report the answer for every possible combination of sparse/dense vectors.
     \begin{enumerate}
         \item $5 \cdot \x$
             \vspace{2in}
@@ -415,7 +416,7 @@ This is often referred to as a ``cubic'' runtime because when the multiplied mat
 and thus $m=n=o$,
 the runtime is $O(n^3)$.
 There are good algorithms that take potentially much less time than this,
-with the best known taking time $O(n^{2.2.371552})$.
+with the best known taking time $O(n^{2.371552})$.
 No BLAS implementation that I know of actually implements this algorithm due to the very high constant factor,
 and Strassen's algorithm with runtime $\Theta(n^{\log_2 7})\approx\Theta(n^{2.807})$ is the most commonly used algorithm.
 Currently, we know that matrix multiplication takes at least time $\Omega(n^2\log n)$,
@@ -434,8 +435,8 @@ The output is always a dense tensor.
 The runtime of computing the transpose is $\Theta(1)$
 for both sparse and dense matrices.
 Libraries do not actually do any computation when you call a transpose function.
-They just store a flag that the matrix has been transposed,
-and so the rows/columns are read are dynamically swapped when performing a mathematical operation.
+They just store a flag that the matrix has been transposed;
+then, when performing a mathematical operation, the memory is read in the transposed order.
 
 The runtime of addition and scalar multiplication is linear in the memory usage of the affected matrices.
 
