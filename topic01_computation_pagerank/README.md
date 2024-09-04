@@ -8,7 +8,9 @@ Quiz next Monday (9 Sep):
 
 1. Covers all material from topic00.
 
-1. Format described in the `topic00_practice_quiz.pdf` file.
+1. Format described in the file `topic00_practice_quiz.pdf`.
+
+1. Solutions in the file `topic00_practice_quiz_solutions.pdf`.
 
 1. You will have the first 10 minutes of class.
 
