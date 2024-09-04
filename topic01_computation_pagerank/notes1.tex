@@ -28,6 +28,7 @@
 \newtheorem{problem}{Problem}
 \newtheorem{defn}{Definition}
 \newtheorem{refr}{References}
+\newtheorem{note}{Note}
 \newcommand{\E}{\mathbb E}
 \newcommand{\R}{\mathbb R}
 \DeclareMathOperator{\nnz}{nnz}
@@ -78,13 +79,28 @@ Notes: Pagerank I
 
 \section{Background}
 
-Pagerank is one of the primary tools used by search engines to return good search results.
-This set of notes covers some basic algorithms for computing the pagerank.
+Pagerank is one of the most popular data mining techniques.
+It was made famous by the founders of Google (Larry Page and Sergey Brin),
+who used pagerank to improve the quality of results returned by search engines.
+Today, pagerank is also used in most fields that involve data.
+For example, it has been used to filter spam from social media,
+predict the behavior of drugs without clinical trials,
+detect intrusions into computer networks,
+and discover bugs in software.
+Search engines have significantly since Google first introduced pagerank over 20 years ago,
+but pagerank remains an integral part of how search engines work.
+
+This sequence of notes covers some basic algorithms for computing the pagerank.
 I emphasize basic because there are literally hundreds of different algorithms that have been developed,
 and researchers are still developing new algorithms.
-These new, more advanced algorithms use concepts like distributed computing or more advanced math to improve their runtime,
-but they all return the same basic result:
+These new, more advanced algorithms use concepts like distributed computing or more advanced math to improve their runtime.
+All of these algorithms return the same basic result---
 the top eigenvalue of a special graph called the \emph{web graph}.
+
+We will see how various design choices lead to a trade-off in computational accuracy versus speed.
+We will also explore an algorithm design pattern called \emph{divide and conquer} for making algorithms faster.
+This will prepare you for the next portion of this course based off of the \emph{Learning from Data} textbook,
+which will combine the concepts with statistics.
 
 \begin{refr}
     (recommended)
@@ -105,47 +121,33 @@ the top eigenvalue of a special graph called the \emph{web graph}.
     You will be responsible for sections 1, 2, 3, 5.1, 6.1, 6.2.
 \end{refr}
 
+%\begin{problem}
+    %(optional)
+    %Pagerank has many applications outside of web search,
+    %and this problem gives you some additional reading that explores these problems at a high level.
+%
+    %Read the case study on Twitter's WTF system.
+    %And yes, that's it's real name.
+    %\begin{quote}
+    %\url{https://dl.acm.org/doi/10.1145/2488388.2488433}
+    %\end{quote}
+    %For more applications of pagerank outside of web search, read section 4 of ``Pagerank Beyond the Web.''
+    %\begin{quote}
+    %\url{https://arxiv.org/abs/1407.5107}
+    %\end{quote}
+%\end{problem}
+
 \newpage
 \section{Definitions}
 
+\begin{note}
+    You will have a closed-note quiz on Problem \ref{problem:def} below.
+    For the quiz, I will print out these two sheets of paper exactly as they are in the notes,
+    and you will have to fill out the definitions.
+\end{note}
 \begin{problem}
-    The reading uses the following terms,
-    but does not explicitly define them.
-    Use wikipedia to find definitions for these terms.
-
-    NOTE:
-    You are not responsible for exact, formal definitions of these terms.
-    You just need to be able to use and understand them in context.
-
-    NOTE:
-    It is common for data mining papers to not define common terms.
-    %(\emph{Deeper Inside Pagerank} is already 50+ pages!)
-    When I'm reading papers, I'm constantly having to look up definitions on wikipedia for these terms,
-    and the purpose of this problem is to get you practice with that.
-    One of the challenges of wikipedia is that there's a lot of information about each of these terms that may or may not be relevant to this class.
-    The main challenge of this problem is figuring out how to define these terms so that they help you understand the rest of this paper.
-    I therefore recommend not looking up these terms in wikipedia until you encounter them in the reading;
-    then provide definitions below that help you understand the reading.
-    %There's a lot of information on wikipedia,
-    %and you need to try to find the most relevant parts.
-
-    \begin{enumerate}
-        \item markov chain
-            \vspace{2.5in}
-        \item stationary vector
-            \vspace{2.5in}
-        \item stochastic matrix
-            \vspace{2.5in}
-        \item spectral radius
-            \vspace{2.5in}
-        \item subdominant eigenvalue
-    \end{enumerate}
-\end{problem}
-
-\newpage
-\begin{problem}
+    \label{problem:def}
     Reproduce the definitions from the reading of the following terms below.
-    (Your midterm quiz will be to reproduce these definitions exactly.)
     \begin{enumerate}
         \item irreducible matrix
             \vspace{2in}
@@ -168,22 +170,37 @@ the top eigenvalue of a special graph called the \emph{web graph}.
     \end{enumerate}
 \end{problem}
 
+\newpage
+\begin{problem}
+    The reading uses the following terms,
+    but does not explicitly define them.
+    Use wikipedia to find definitions for these terms.
 
-%\begin{problem}
-    %(optional)
-    %Pagerank has many applications outside of web search,
-    %and this problem gives you some additional reading that explores these problems at a high level.
-%
-    %Read the case study on Twitter's WTF system.
-    %And yes, that's it's real name.
-    %\begin{quote}
-    %\url{https://dl.acm.org/doi/10.1145/2488388.2488433}
-    %\end{quote}
-    %For more applications of pagerank outside of web search, read section 4 of ``Pagerank Beyond the Web.''
-    %\begin{quote}
-    %\url{https://arxiv.org/abs/1407.5107}
-    %\end{quote}
-%\end{problem}
+    You will not be tested on the exact, formal definitions of these terms.
+    You just need to be able to use and understand them in context.
+
+It is common for data mining papers to not define common terms.
+%(\emph{Deeper Inside Pagerank} is already 50+ pages!)
+When I'm reading papers, I'm constantly having to look up definitions on wikipedia for these terms in order to understand the paper.
+One of the challenges of wikipedia is that there's a lot of information about each of these terms that may or may not be relevant.
+The main challenge of this problem is figuring out how to define these terms so that they help you understand the rest of this paper.
+I therefore recommend not looking up these terms in wikipedia until you encounter them in the reading;
+then provide definitions below that help you understand the reading.
+%There's a lot of information on wikipedia,
+%and you need to try to find the most relevant parts.
+
+    \begin{enumerate}
+        \item markov chain
+            \vspace{2.5in}
+        \item stationary vector
+            \vspace{2.5in}
+        \item stochastic matrix
+            \vspace{2.5in}
+        \item spectral radius
+            \vspace{2.5in}
+        \item subdominant eigenvalue
+    \end{enumerate}
+\end{problem}
 
 \newpage
 \section{``Trivial'' Problems}
@@ -191,20 +208,26 @@ The trivial problems in this section are designed to help you practice using the
 %Assuming you fully understand the definitions,
 %all of these problems should be ``trivial''.
 
-NOTE:
-Mathematicians define the word ``trivial'' to mean that the problem follows directly from the definitions without needing any major insights.
-Trivial problems can still take a long time to solve, however, because it takes a long time to understand the definitions.
-Muggles think that ``trivial'' problems should be ``easy'' to solve,
+\begin{note}
+Mathematicians define a problem to be \emph{trivial} if the solution follows directly from the definitions without needing any major insights.
+Trivial problems can still take a long time to solve, however, because understanding the definitions is hard.
+Muggles%
+\footnote{In the \emph{Harry Potter} books, \emph{muggles} are people who cannot use magic.
+I call non-mathematicians/non-computer scientists muggles because they see the sorts of things we do in this class as ``magic''.}
+think that ``trivial'' problems should be ``easy'' to solve,
 but that's only the case if you have a really strong understanding of the involved definitions.
 It's okay if these trivial problems do not feel easy.
+\end{note}
 
 \begin{problem}
     Give an example of:
     \begin{enumerate}
         \item a stochastic matrix
-            \vspace{4in}
+            \vspace{3in}
         \item a non-stochastic matrix
-            \vspace{4in}
+            \vspace{3in}
+
+            ~
             \newpage
         \item an irreducible matrix
             \vspace{4in}
@@ -218,6 +241,12 @@ It's okay if these trivial problems do not feel easy.
 \end{problem}
 
 \newpage
+\begin{note}
+Whenever I'm reading a data mining text,
+and I encounter a matrix,
+    I always ask myself what sorts of properties the matrix might have.
+The purpose of the questions below is to help get you into a similar habit.
+\end{note}
 \begin{problem}
     Answer the following questions.
     \begin{enumerate}
@@ -234,12 +263,9 @@ It's okay if these trivial problems do not feel easy.
 \end{problem}
 
 \newpage
+
 \begin{problem}
     Either prove or give a counterexample to the following claims.
-
-    NOTE:
-    Whenever I'm reading a data mining text, and I encounter a matrix, I always ask myself these sorts of questions about the matrix to ensure I understand what is going on.
-    The purpose of these questions here is to get you into a similar habit.
 
     HINT:
     Any claim which is true will have a ``trivial'' proof.
@@ -269,8 +295,9 @@ It's okay if these trivial problems do not feel easy.
 
         \item
             The largest eigenvector of $\p$ is simple.
-            Recall that a simple eigenvalue has multiplicity 1.
-            That is, there is exactly 1 eigenvector with the same eigenvalue.
+
+            (Recall that a \emph{simple} eigenvalue has multiplicity 1.
+            That is, there is exactly 1 eigenvector with the same eigenvalue.)
             \vspace{4.5in}
 
         \item

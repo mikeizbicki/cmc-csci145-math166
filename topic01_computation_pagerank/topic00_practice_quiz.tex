@@ -1,0 +1,161 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        \hl{\textbf{TRUE}}\hspace*{14pt}False
+    }{
+        True\hspace*{14pt}\hl{\textbf{FALSE}}
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{note}{Note}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+    Practice Quiz: Computational Linear Algebra
+}
+\end{center}
+
+\begin{note}
+Your real quiz will have 4 problems following the format below.
+You will be allowed to use any hand written or electronic reference material that you would like,
+including websites like wolfram alpha and chatgpt.
+The only restriction is that you will not be able to communicate with other students.
+
+HINT:
+Ensure that you pay careful attention to the formal definitions of asymptotic notation in your responses.
+\end{note}
+
+\begin{problem}
+    For each statement below,
+    circle \texttt{True} if the statement is known to be true,
+    \texttt{False} if the statement is known to be false,
+    and \texttt{Open} if the statement reduces to an open problem.
+    You will receive +1 point for each correct answer,
+    -1 point for each incorrect anwser,
+    and 0 points for each blank answer.
+
+
+\begin{enumerate}
+    \item\TFQuestion{T}{Let $f(n) = 1/(1+n)$. Then $f = \Omega(n^{-2})$.}
+    \item\TFQuestion{T}{Let $f(n) = n^3 + 1/n$. Then $f = \Omega(n^{3})$.}
+    \item\TFQuestion{T}{Let $f(n) = 1/n$. Then $f = \Omega(n^{-2})$.}
+    \item\TFQuestion{F}{Let $f(n) = 2^n$. Then $f = \Theta(3^n)$.}
+    \item\TFQuestion{T}{Let $f(a,b) = 5a^2 + 3ab$. Then $f = O(a^2b)$.}
+    \item\TFQuestion{T}{Let $f(a,b) = 5a^2 + 3ab$. Then $f = O(a^2 + ab)$.}
+\item\TFQuestion{T}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $O(n^4)$.}
+\item\TFQuestion{O}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Theta(n^2 \log n)$.}
+\item\TFQuestion{O}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2.1})$.}
+\item\TFQuestion{T}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2})$.}
+\item\TFQuestion{F}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $\Omega(n^{2.5})$.}
+\item\TFQuestion{O}{The matrix chain ordering problem can be solved in time $\Theta(n)$.}
+\item\TFQuestion{T}{Computing $\trans\x\x$ is faster than computing $\x\trans\x$.}
+\item\TFQuestion{T}{There exists a family of $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$ such that the product $AB$ satisfies $\nnz(AB) = O(1)$.}
+\item\TFQuestion{F}{There exists a family of $n \times n$ matrices $A$ and $B$ with $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$ such that the product $AB$ satisfies $\nnz(AB) = \Omega(n)$.}
+\item\TFQuestion{T}{Let $A$ and $B$ be arbitrary $n\times n$ matrices satisfying $\nnz(A) = O(1)$ and $\nnz(B) = O(1)$. Then the product $AB$ must satisfy $\nnz(AB) = O(1)$.}
+\item\TFQuestion{T}{Let $A$ and $B$ be arbitrary $n\times n$ matrices satisfying $\nnz(A) = \Omega(n)$ and $\nnz(B) = \Omega(1)$. Then the product $AB$ must satisfy $\nnz(AB) = O(n^2)$.}
+\item\TFQuestion{F}{Let $A$ be an $n\times n$ matrix.  Then $\nnz(A) = \Omega(n^3)$.}
+\item\TFQuestion{T}{Let $A$ be an $n\times n$ matrix.  Then $\nnz(A) = O(n^3)$.}
+\item\TFQuestion{T}{Let $A:n\times n$ and $\x:n$, then the best possible runtime of computing $(A\trans A)^{-1}\x$ is $\Omega(n^2)$.}
+\item\TFQuestion{T}{Let $\x:n$, then the best possible runtime of computing $\x\trans \x \x\trans \x$ is $O(n^2)$.}
+\item\TFQuestion{T}{Let $\x:n$, then the best possible runtime of computing $\x\trans \x \x\trans \x$ is $\Theta(n)$.}
+\item\TFQuestion{F}{Let $A:a\times b$ and $\x:b$, then the best possible runtime of computing $\lF{A\x}^2$ is $\Omega(n^3)$.}
+\end{enumerate}
+\end{problem}
+
+\end{document}
+
+
+
+

@@ -6,6 +6,7 @@
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{bm}
+\usepackage{wrapfig}
 
 \usepackage{color}
 \usepackage{colortbl}
@@ -68,6 +69,7 @@
 Notes: Pagerank II
 }
 
+
 %\vspace{0.15in}
 %Due: Sunday, 6 Sep 2020 at midnight
 \end{center}
@@ -78,14 +80,27 @@ Notes: Pagerank II
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conceptual}
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \vspace{-0.6in}
+\includegraphics[width=0.9\linewidth]{trivial}
+\end{wrapfigure}
+
+\section{Conceptual Understanding}
+
+The ``trivial'' problems in the previous notes packet were designed to help you understand ``what'' the definitions say.
+The following problems are designed to help you understand ``why'' the definition of pagerank is defined the way it is.
+We do this by exploring the strengths and weaknesses both of pagerank and other possible methods of ranking nodes.
+
+The problems below are ``less trivial'' than the problems in the previous notes packet,
+but are still ``fairly trivial''.
+
 
 %\begin{problem}
 %\end{problem}
 %
 %\newpage
 \begin{problem}
-    The purpose of the pagerank vector $\pr$ is to provide a ranking of of how important a node is.
+    Recall that the purpose of the pagerank vector $\pr$ is to provide a ranking of of how important a node is.
     There are many alternative ways to provide such a ranking.
     One simple alternative is to rank nodes by their in-degree.
     For ``typical'' graphs, the in-degree ranking and the pagerank ranking will be similar,
@@ -106,7 +121,7 @@ Notes: Pagerank II
             Two nodes in a graph cannot have the same pagerank value.
             \newpage
         \item
-            Assume that all nodes in the graph have an in-degree of 2 and an out-degree of 2.
+            Assume that all nodes in the graph have an in-degree of 2.
             Then all nodes will have the same pagerank.
             \newpage
     \end{enumerate}
