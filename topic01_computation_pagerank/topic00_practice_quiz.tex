@@ -37,9 +37,16 @@
 \newcommand*{\TrueFalse}[1]{%
 \ifprintanswers
     \ifthenelse{\equal{#1}{T}}{%
-        \hl{\textbf{TRUE}}\hspace*{14pt}False
+        %\hl{\textbf{TRUE}}\hspace*{14pt}False
+        \hl{\texttt{True}}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
     }{
-        True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \ifthenelse{\equal{#1}{F}}{
+        %True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \texttt{True}\hspace*{20pt}\hl{\texttt{False}}\hspace*{20pt}\texttt{Open}
+        }
+        {
+            \texttt{True}\hspace*{20pt}{\texttt{False}}\hspace*{20pt}\hl{\texttt{Open}}
+        }
     }
 \else
     \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
@@ -97,6 +104,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%\printanswers
 \begin{document}
 
 

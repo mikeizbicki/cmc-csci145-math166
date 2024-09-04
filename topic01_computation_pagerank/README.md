@@ -6,7 +6,9 @@ Before Monday (9 Sep):
 
 Quiz next Monday (9 Sep):
 
-1. Covers all material in the 
+1. Covers all material from topic00.
+
+1. Format described in the `topic00_practice_quiz.pdf` file.
 
 1. You will have the first 10 minutes of class.
 
