@@ -18,6 +18,8 @@ Quiz next Monday (9 Sep):
    
    * I'll be in the classroom >10 minutes early, you can start when you arrive.
 
+**Update 9 Sep:**
+
 Quiz this Wednesday (11 Sep):
 
 1. Problem 1 from the notes.
