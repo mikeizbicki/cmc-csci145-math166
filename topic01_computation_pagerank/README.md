@@ -30,6 +30,6 @@ Quiz this Wednesday (11 Sep):
 
 1. My answer key is in the `quiz-key.pdf` file.
 
-1. Worth 4 points, -2 points for each incorrect definition.
+1. Worth 4 points, -1 points for each incorrect definition.
     1. Can't go negative.
     1. Your answer doesn't have to be word-for-word exactly the same as mine, but it must be "mathematically equivalent".
