@@ -1,0 +1,171 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        %\hl{\textbf{TRUE}}\hspace*{14pt}False
+        \hl{\texttt{True}}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+    }{
+        \ifthenelse{\equal{#1}{F}}{
+        %True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \texttt{True}\hspace*{20pt}\hl{\texttt{False}}\hspace*{20pt}\texttt{Open}
+        }
+        {
+            \texttt{True}\hspace*{20pt}{\texttt{False}}\hspace*{20pt}\hl{\texttt{Open}}
+        }
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{note}{Note}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\printanswers
+\begin{document}
+
+\begin{center}
+    {
+\Large
+    Quiz: Computational Linear Algebra
+
+    \vspace{0.1in}
+}
+\end{center}
+
+%\vspace{0.15in}
+%\noindent
+%\textbf{Total Score:} ~~~~~~~~~~~~~~~/$2^2$
+
+\vspace{0.2in}
+\noindent
+\textbf{Printed Name:}
+
+\noindent
+\rule{\textwidth}{0.1pt}
+\vspace{0.15in}
+
+\noindent
+\textbf{Quiz rules:}
+\begin{enumerate}
+    \item You MAY use:
+        \begin{enumerate}
+            \item any notes (handwritten, printed, or electronic),
+            \item any computer programs (including websites like WolframAlpha or ChatGPT), and
+            \item any additional scratch paper.
+        \end{enumerate}
+    \item You MAY NOT communicate with another student.
+    \item If you finish the quiz early, stay seated.
+        I will collect all the quizzes at the same time.
+\end{enumerate}
+
+
+\begin{problem}
+    For each statement below,
+    circle \texttt{True} if the statement is known to be true,
+    \texttt{False} if the statement is known to be false,
+    and \texttt{Open} if the statement reduces to an open problem.
+    You will receive +1 point for each correct answer,
+    \textbf{-0.5 points for each incorrect anwser},\footnote{
+    I've reduced the penalty for incorrect answers.
+    The reduced penalty will still discourage guessing without penalizing minor mistakes as much.
+    }
+    and 0 points for each blank answer.
+
+\begin{enumerate}
+    %\item\TFQuestion{T}{Let $f(n) = 1/n$. Then $f = O(1/\sqrt{n})$.}
+    \item\TFQuestion{T}{Let $f(a, b) = 5a^2b + 4ab + 3ab^2 + 2a + b$. Then $f = O(a^2b + ab^2)$.}
+\item\TFQuestion{T}{Let $A$ and $B$ be $n\times n$ matrices. The fastest algorithm for computing the matrix product $AB$ has runtime $O(n^2)$.}
+\item\TFQuestion{T}{Let $A:n\times n$.  Then the best possible runtime of computing the expression $A(\trans A A)^{-1}$ is $O(n^2)$.}
+\item\TFQuestion{T}{Let $A:n\times n$ and $\x:n$.  Further let $\lambda$ be a real number and $I$ the $n\times n$ identity matrix.  Then the best possible runtime of computing the expression $\lF{(\lambda I + A) \x\trans\x}$ is $O(n^2)$.}
+\end{enumerate}
+\end{problem}
+
+\end{document}
+
+
+
+
