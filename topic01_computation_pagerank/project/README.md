@@ -316,7 +316,7 @@ and all current solutions rely on careful human tuning and still have lots of fa
 
 **Part 4:**
 
-Recall from the reading that the runtime of pagerank depends heavily on the eigengap of the $\bar\bar P$ matrix,
+Recall from the reading that the runtime of pagerank depends heavily on the eigengap of the $\bar{\bar P}$ matrix,
 and that this eigengap is bounded by the alpha parameter.
 
 Run the following four commands:
