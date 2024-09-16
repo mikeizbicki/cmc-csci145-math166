@@ -18,7 +18,8 @@ You should be able to complete it on your own laptops.
 Do whatever will help you learn,
 but be an adult.
 You may talk to other students and use Google/ChatGPT.
-Recall that you will have an in-person oral exam on this material.
+Recall that you will have an in-person oral exam on this material and the exam is worth many more points.
+The main purpose of this project is to help prepare you for the exam.
 
 ## Background
 
