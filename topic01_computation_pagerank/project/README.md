@@ -2,12 +2,19 @@
 
 In this project, you will create a simple search engine for the website <https://www.lawfareblog.com>.
 This website provides legal analysis on US national security issues.
+You will use pagerank to return only the most important results from this website in your search engine.
 
 **Due date:** Sunday, 22 September at midnight
 
 **Computation:**
 This project has low computational requirements.
 You should be able to complete it on your own laptops.
+
+**Collaboration Policy:**
+Do whatever will help you learn,
+but be an adult.
+You may talk to other students and use Google/ChatGPT.
+Recall that you will have an in-person oral exam on this material.
 
 ## Background
 
@@ -53,6 +60,17 @@ source,target
 > 5,4
 > 6,4
 > ```
+>
+> There are many terminal commands throughout these instructions.
+> If you haven't used the terminal before, and so these commands are unfamiliar, that's okay.
+> I'd be happy to explain them in office hours,
+> or there are many tutors in the QCL available who can help.
+> (There are no tutors for this class specifically, but anyone who has taken CSCI046 or CSCI133 with me will be able to help with the terminal.)
+>
+> Furthermore, you don't "need" to understand the terminal commands in detail,
+> since you are not required to run these commands or to create your own.
+> The important part is to understand the English language description of what the commands are doing,
+> and to understand that this is just how I computed what the English language text is describing.
 
 As you can see, the graph is stored as a CSV file.
 The first line is a header,
@@ -289,7 +307,7 @@ When Google calculates their $P$ matrix for the web,
 they use a similar (but much more complicated) process to modify the $P$ matrix in order to reduce spam results.
 The exact formula they use is a jealously guarded secret that they update continuously.
 
-In the case above, notice that we have accidentally removed the blog's most popular article (<www.lawfareblog.com/snowden-revelations>).
+In the case above, notice that we have accidentally removed the blog's most popular article (<https://www.lawfareblog.com/snowden-revelations>).
 The blog editors believed that Snowden's revelations about NSA spying are so important that they directly put a link to the article on the menu.
 So every single webpage in the domain links to the Snowden article,
 and our "anti-spam" `--filter-ratio` argument removed this article from the list.
