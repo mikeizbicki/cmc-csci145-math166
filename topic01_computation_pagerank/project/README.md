@@ -6,7 +6,7 @@ You will use pagerank to return only the most important results from this websit
 
 **Due date:** Sunday, 22 September at midnight
 
-**Late Policy:** You lose $2^(i-1)$ points, where i is the number of days late.
+**Late Policy:** You lose $2^{(i-1)}$ points, where i is the number of days late.
 
 <!--
 **Computation:**
