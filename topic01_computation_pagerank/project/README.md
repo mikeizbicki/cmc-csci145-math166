@@ -6,9 +6,13 @@ You will use pagerank to return only the most important results from this websit
 
 **Due date:** Sunday, 22 September at midnight
 
+**Late Policy:** You lose $2^(i-1)$ points, where i is the number of days late.
+
+<!--
 **Computation:**
 This project has low computational requirements.
 You should be able to complete it on your own laptops.
+-->
 
 **Collaboration Policy:**
 Do whatever will help you learn,
