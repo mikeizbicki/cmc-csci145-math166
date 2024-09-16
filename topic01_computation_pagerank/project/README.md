@@ -83,11 +83,11 @@ We can use the following command to count the total number of links in the file:
 $ zcat data/lawfareblog.csv.gz | wc -l
 1610789
 ```
-Since every link corresponds to a non-zero entry in the `P` matrix,
-this is also the value of `nnz(P)`.
+Since every link corresponds to a non-zero entry in the $P$ matrix,
+this is also the value of $\text{nnz}(P)$.
 (Technically, we should subtract 1 from this value since the `wc -l` command also counts the header line, not just the data lines.)
 
-To get the dimensions of `P`, we need to count the total number of nodes in the graph.
+To get the dimensions of $P$, we need to count the total number of nodes in the graph.
 The following command achieves this by: decompressing the file, extracting the first column, removing all duplicate lines, then counting the results.
 ```
 $ zcat data/lawfareblog.csv.gz | cut -f1 -d, | uniq | wc -l
@@ -119,7 +119,16 @@ Your task in this assignment will be to fix these calculations in order to have 
 
 ## Task 1: the power method
 
-Implement the `WebGraph.power_method` function in `pagerank.py` for computing the pagerank vector by fixing the `FIXME` annotation.
+Implement the `WebGraph.power_method` function in `pagerank.py` for computing the pagerank vector by fixing the [`FIXME: Task 1` annotation](https://github.com/mikeizbicki/cmc-csci145-math166/blob/81ed5d2b75f5bc23b8de93805c29321ab431ed9b/topic01_computation_pagerank/project/pagerank.py#L144).
+
+> **NOTE:**
+> The power method is the only data mining algorithm you will implement in class.
+> You are implementing it because there are no standard library implementations available.
+> Why?
+> 1. The runtime is heavily dependent on the data structures used to store the graph data.
+>    Different applications will need to use different data structures.
+> 1. It is "trivial" to implement.
+>    My solution to this homework is <10 lines of code.
 
 **Part 1:**
 
@@ -161,12 +170,20 @@ INFO:root:rank=3 pagerank=2.3175e-01 url=2
 INFO:root:rank=4 pagerank=1.8590e-01 url=3
 INFO:root:rank=5 pagerank=1.6917e-01 url=1
 ```
-Yours likely won't be identical (due to weird floating point issues), but it should be similar.
+Yours likely won't be identical (due to minor implementation details and weird floating point issues), but it should be similar.
 In particular, the ranking of the nodes/urls should be the same order.
 
 > **NOTE:**
 > The `--verbose` flag causes all of the lines beginning with `DEBUG` to be printed.
 > By default, only lines beginning with `INFO` are printed.
+
+> **NOTE:**
+> There are no automated test cases to pass for this assignment.
+> Test cases for algorithms involving floating point computations are hard to write and understand.
+> Minor-seeming implementations details can have large impacts on the final result.
+> These software engineering issues are beyond the scope of this class.
+>
+> Instructions for how I will grade your homework are contained in the [submission section](#submission) at the end of this document.
 
 **Part 2:**
 
@@ -218,7 +235,7 @@ INFO:root:rank=9 pagerank=1.1463e-03 url=www.lawfareblog.com/israel-iran-syria-c
 
 **Part 3:**
 
-The webgraph of lawfareblog.com (i.e. the `P` matrix) naturally contains a lot of structure.
+The webgraph of lawfareblog.com (i.e. the $P$ matrix) naturally contains a lot of structure.
 For example, essentially all pages on the domain have links to the root page <https://lawfareblog.com/> and other "non-article" pages like <https://www.lawfareblog.com/topics> and <https://www.lawfareblog.com/subscribe-lawfare>.
 These pages therefore have a large pagerank.
 We can get a list of the pages with the largest pagerank by running
@@ -241,7 +258,7 @@ Most of these pages are not very interesting, however, because they are not arti
 and usually when we are performing a web search, we only want articles.
 
 This raises the question: How can we find the most important articles filtering out the non-article pages?
-The answer is to modify the `P` matrix by removing all links to non-article pages.
+The answer is to modify the $P$ matrix by removing all links to non-article pages.
 
 This raises another question: How do we know if a link is a non-article page?
 Unfortunately, this is a hard question to answer with 100% accuracy,
@@ -268,8 +285,8 @@ INFO:root:rank=9 pagerank=1.4240e-01 url=www.lawfareblog.com/lawfare-podcast-bon
 ```
 Notice that the urls in this list look much more like articles than the urls in the previous list.
 
-When Google calculates their `P` matrix for the web,
-they use a similar (but much more complicated) process to modify the `P` matrix in order to reduce spam results.
+When Google calculates their $P$ matrix for the web,
+they use a similar (but much more complicated) process to modify the $P$ matrix in order to reduce spam results.
 The exact formula they use is a jealously guarded secret that they update continuously.
 
 In the case above, notice that we have accidentally removed the blog's most popular article (<www.lawfareblog.com/snowden-revelations>).
@@ -281,7 +298,7 @@ and all current solutions rely on careful human tuning and still have lots of fa
 
 **Part 4:**
 
-Recall from the reading that the runtime of pagerank depends heavily on the eigengap of the `\bar\bar P` matrix,
+Recall from the reading that the runtime of pagerank depends heavily on the eigengap of the $\bar\bar P$ matrix,
 and that this eigengap is bounded by the alpha parameter.
 
 Run the following four commands:
@@ -295,7 +312,7 @@ You should notice that the last command takes considerably more iterations to co
 (My code takes 685 iterations for this call, and about 10 iterations for all the others.)
 
 This raises the question: Why does the second command (with the `--alpha` option but without the `--filter_ratio`) option not take a long time to run?
-The answer is that the `P` graph for <https://www.lawfareblog.com> naturally has a large eigengap and so is fast to compute for all alpha values,
+The answer is that the $P$ graph for <https://www.lawfareblog.com> naturally has a large eigengap and so is fast to compute for all alpha values,
 but the modified graph does not have a large eigengap and so requires a small alpha for fast convergence.
 
 Changing the value of alpha also gives us very different pagerank rankings.
