@@ -40,7 +40,7 @@ Quiz this Wednesday (11 Sep):
 
 We will begin covering new material this Wednesday (and all next week).
 
-Project posted in the `project` folder.
+Project posted in the [`project`](./project) folder.
 
 Midterm Exam
 1. Recall: most of your grade is based on exams
