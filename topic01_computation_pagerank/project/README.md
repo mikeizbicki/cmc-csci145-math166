@@ -3,11 +3,11 @@
 In this project, you will create a simple search engine for the website <https://www.lawfareblog.com>.
 This website provides legal analysis on US national security issues.
 
-**Due date:** Sunday, 18 September at midnight
+**Due date:** Sunday, 22 September at midnight
 
 **Computation:**
 This project has low computational requirements.
-You are not required to complete it on the lambda server (although you are welcome to if you'd like).
+You should be able to complete it on your own laptops.
 
 ## Background
 
@@ -33,6 +33,26 @@ source,target
 
 > **Recall:**
 > The `cat` terminal command outputs the contents of a file to stdout, and the `zcat` command first decompressed a gzipped file and then outputs the decompressed contents.
+>
+> In python, we can use the built-in `gzip` module to access gzipped files.
+> The following python code is equivalent to the bash code above:
+>
+> ```
+> >>> import gzip
+> >>> fin = gzip.open('data/small.csv.gz', mode='rt')
+> >>> print(fin.read())
+> source,target
+> 1,2
+> 1,3
+> 3,1
+> 3,2
+> 3,5
+> 4,5
+> 4,6
+> 5,6
+> 5,4
+> 6,4
+> ```
 
 As you can see, the graph is stored as a CSV file.
 The first line is a header,
