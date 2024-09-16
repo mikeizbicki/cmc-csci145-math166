@@ -476,8 +476,11 @@ Your goal should be to discover what topics that www.lawfareblog.com considers t
 ## Submission
 
 1. Create a new repo on github (not a fork of this repo).
+    Ensure that all of the project files are copied from this folder into your new repo.
 
-1. Run the following commands, and paste their output into the code blocks below.
+1. As you complete the tasks above:
+    Run the corresponding commands below, and paste their output into the code blocks.
+    Please ensure correct markdown formatting.
    
    Task 1, part 1:
    ```
