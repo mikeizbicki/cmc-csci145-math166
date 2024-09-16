@@ -43,6 +43,7 @@ We will begin covering new material this Wednesday (and all next week).
 Project posted in the `project` folder.
 
 Midterm Exam
+1. Recall: most of your grade is based on exams
 1. Signup at <https://docs.google.com/spreadsheets/d/1XeV2M45Iqzum_zDt1I2UzqPB364WgSKhy-krocrDFy4/edit>
 1. Format:
     1. Timeslots are for 30 minutes, the exam should take 20 minutes.
