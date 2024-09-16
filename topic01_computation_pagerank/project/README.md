@@ -363,6 +363,13 @@ INFO:root:rank=9 pagerank=1.6020e-02 url=www.lawfareblog.com/water-wars-sinking-
 
 Which of these rankings is better is entirely subjective,
 and the only way to know if you have the "best" alpha for your application is to try several variations and see what is best.
+
+> **NOTE:**
+> It should be "obvious" to you that large alpha values imply that the structure of the webgraph has more influence on the final result,
+> and small alpha values ignore the structure of the webgraph.
+> Recall that the word "obvious" means that it follows directly from the definition,
+> but you may still need to sit and meditate on the definition for a long period of time.
+
 If large alphas are good for your application, you can see that there is a trade-off between quality answers and algorithmic runtime.
 We'll be exploring this trade-off more formally in class over the rest of the semester.
 
@@ -450,6 +457,7 @@ You can see that there are many urls about concepts that are obviously related l
 but this algorithm also finds articles about Chinese propaganda and Trump's policy decisions.
 Both of these articles are highly relevant to coronavirus discussions,
 but a simple keyword search for corona or related terms would not find these articles.
+The vast majority of industry data mining work is finding clever uses of standard algorithms.
 
 <!--
 **Part 3:**
@@ -529,4 +537,8 @@ Your goal should be to discover what topics that www.lawfareblog.com considers t
 
 1. Submit the url of your repo to sakai.
 
-   Each part is worth 2 points, for 12 points overall.
+   The assignment is worth 8 points.
+   1. There are 6 parts to the output above.  (4 in Task1 and 2 in Task2.)
+   1. Each part that you get incorrect will result in -2 points.  (But you cannot go negative.)
+   1. Another way of phrasing this is that the first 2 parts you complete are not worth any points,
+      but each part after that is worth 2 points.
