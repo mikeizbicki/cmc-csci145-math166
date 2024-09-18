@@ -27,6 +27,7 @@
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
 \newtheorem{defn}{Definition}
+\newtheorem{note}{Note}
 \newtheorem{refr}{References}
 \newcommand{\E}{\mathbb E}
 \newcommand{\R}{\mathbb R}
@@ -94,7 +95,7 @@ Problem 1.2?
 
 The first chapter of the book introduces
 \begin{enumerate}
-    \item basic notation, and
+    \item basic notation for machine learning, and
     \item a learning model called the perceptron.
 \end{enumerate}
 We analyze the runtime properties of the perceptron in this chapter,
@@ -102,12 +103,45 @@ and we'll analyze the statistical properties of the algorithm in Chapter 2.
 Then in Chapters 3-4, we'll look at more complicated learning algorithms.
 %Most students find chapter 2 to be the most difficult content to understand.
 
+\begin{note}
+I have personally purchased for you all a physical copy of this textbook to emphasize the importance of reading.
+You will not do well in this course if you do not read the textbook.
+You should read each chapter at least once before we cover it in class,
+and once after we cover it in class.
+These notes packets follow the textbook very closely,
+and I have annotated most of the problems with the corresponding sections in the textbook where you can find their solutions.
 
+This textbook likely contains material that is much harder than the material you have encountered in previous math courses.
+I have selected it because it is the only undergraduate-focused textbook that actually covers the math behind why machine learning works.
+All other textbooks are focused on graduate students and significantly more ``dense.''
+That said, this textbook is still quite dense.
+A reading pace of 5 pages per hour would be fast.
+You may have to reread certain sections several times, and that is normal.
+\end{note}
+
+\begin{note}
 The author provides lecture videos that go along with the book, which you may find helpful.
 They are located at
-%\begin{center}
+\begin{center}
 \url{https://www.youtube.com/watch?v=mbyG85GZ0PI}.
-%\end{center}
+\end{center}
+%The author's general approach is a more ``traditional computer science'' approach to this material.
+%That is, he presents a variety
+The author has a very different emphasis than I do.
+He focuses more on algorithm implementation details and proofs of theorems,
+I focus more on understanding when to use each algorithm and when to apply the theorems.
+\end{note}
+
+\begin{note}
+The first part of this course (on computational linear algebra and pagerank) is all background knowledge required for this textbook.
+The details of the pagerank algorithm will not be needed for this book,
+but an understanding of (1) the runtimes of linear algebra computations and (2) basic concepts like linear independence, rank, and eigenvectors are all assumed.
+Part of the reason we began with the study of pagerank is that it helped you review those concepts in preparation for this book.
+The textbook will add probability/statistics onto this background knowledge,
+but most students find the probability/statistics to be much easier than the linear algebra.
+(And probability and statistics are not prerequisites for this course.)
+\end{note}
+
 
 \newpage
 \section{Section 1.1: Problem Setup}
@@ -115,7 +149,7 @@ They are located at
 \begin{problem}
     You are a bank and need an algorithm for determining whether to approve a credit loan application.
     Describe the learning framework notation for this problem.
-    (See Section 1.1.1 in the textbook.)
+    (See Section 1.1.1 and Figure 1.2 in the textbook.)
 
     NOTE: You should be able to do this for other applications as well.
     See Exercise 1.1 for a list of alternative applications to practice with.
@@ -131,13 +165,6 @@ They are located at
             \vspace{4in}
 
     \item
-    Describe which features for the bank loan problem are likely to have high weights, and which features are likely to have low weights on a ``good'' perceptron hypothesis.
-
-    NOTE:
-        This is closely related to Exercise 1.2 in the book, which you should be able to complete on your own.
-
-        \newpage
-    \item
     Show ``good'' and ``bad'' examples of hypotheses in the Perceptron hypothesis class in $d=2$ dimensions.
     (See the discussion in Figure 1.3 and 3.1 in the textbook.)
 
@@ -146,6 +173,14 @@ They are located at
     %(See the discussion in Figure 3.1 in the textbook; note that this is not in the first chapter.)
 
             \vspace{4in}
+
+    \item
+    Describe which features for the bank loan problem are likely to have high weights, and which features are likely to have low weights on a ``good'' perceptron hypothesis.
+
+    NOTE:
+        This is closely related to Exercise 1.2 in the book, which you should be able to complete on your own.
+
+        \newpage
     \end{enumerate}
 \end{problem}
 
@@ -157,6 +192,7 @@ They are located at
 \newpage
 \begin{problem}
     The Perceptron Learning Algorithm (PLA) is a procedure for selecting a particular hypothesis from the Perceptron hypothesis class.
+    This problem is designed to help you understand the PLA.
     \begin{enumerate}
         \item State the PLA update rule, as found in Eq (1.3).
             \vspace{4in}
@@ -200,13 +236,17 @@ They are located at
     %If you're having trouble visualizing these quantities,
     %complete Problem 1.2.
 
-                    \vspace{5in}
+                    \vspace{4in}
+            %\newpage
+                %\item
+                    %How are $\rho$ and $R$ likely to change as the number of feature dimensions change?
+                    %\vspace{4in}
                 \item
             What is the overall runtime of running the PLA to convergence?
             \end{enumerate}
 
-            %\vspace{3in}
-            \newpage
+            \vspace{4in}
+            %\newpage
         \item
             Describe some of the differences between our runtime analysis for the PLA and the Pagerank power method algorithm.
 
