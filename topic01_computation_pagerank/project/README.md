@@ -4,7 +4,7 @@ In this project, you will create a simple search engine for the website <https:/
 This website provides legal analysis on US national security issues.
 You will use pagerank to return only the most important results from this website in your search engine.
 
-**Due date:** Sunday, 22 September at midnight
+**Due date:** Sunday, ~~22~~ 29 September at midnight
 
 **Late Policy:** You lose $2^{(i-1)}$ points, where i is the number of days late.
 
