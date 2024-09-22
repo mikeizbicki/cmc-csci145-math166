@@ -70,7 +70,7 @@ class WebGraph():
         i = torch.LongTensor(indices).t()
         v = torch.FloatTensor(values)
         n = len(self.url_dict)
-        self.P = torch.sparse.FloatTensor(i, v, torch.Size([n,n]))
+        self.P = torch.sparse_coo_tensor(i, v, torch.Size([n,n]))
         self.index_dict = {v: k for k, v in self.url_dict.items()}
     
 
