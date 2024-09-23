@@ -30,3 +30,15 @@ For next week:
 1. I am open to having a dedicated office hours this Friday for midterm prep.
 
     To get this: I need someone to post a github issue, and at least 3 other students to confirm on github that they would attend.
+
+**Monday 2024-09-23:**
+
+1. I am open to offering extra exam-prep office hours tomorrow (Tuesday) from 11am-12pm.
+
+    For me to do this, I need a github issue posted asking for it and at least 3 other students replaying that they will attend.
+
+1. Don't forget to practice on the whiteboad!
+
+1. We will go at a "slow" pace today, since everyone is preoccupied with pagerank/exam stuff.
+
+1. I will draw on blank pages not part of the notes.
