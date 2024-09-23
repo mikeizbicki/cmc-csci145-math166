@@ -35,7 +35,7 @@ For next week:
 
 1. I am open to offering extra exam-prep office hours tomorrow (Tuesday) from 11am-12pm.
 
-    For me to do this, I need a github issue posted asking for it and at least 3 other students replaying that they will attend.
+    For me to do this, I need a github issue posted asking for it and at least 3 other students replying that they will attend.
 
 1. Don't forget to practice on the whiteboad!
 
