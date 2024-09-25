@@ -1,0 +1,189 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{etoolbox}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+\usepackage{listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{example}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{fact}{Fact}
+\newtheorem{refr}{References}
+\newtheorem{theorem}{Theorem}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\prob}{\mathbb P}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+\newcommand{\Ntest}{N_{\text{test}}}
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\wstar}{{\w}^{*}}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+\renewcommand{\solutiontitle}{}
+%\AfterEndEnvironment{solutionorbox}{
+    %\ifprintanswers\vspace{\stretch{1}}
+    %\fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\printanswers
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+Quiz: Chapter 1 definitions
+}
+\end{center}
+
+\begin{center}
+%\includegraphics[height=3in]{scooby}
+%~~~~~~~~~~
+%\includegraphics[height=3in]{ml}
+\end{center}
+
+\begin{defn}
+    The \emph{perceptron hypothesis class} is defined to be
+    \begin{solutionorbox}[1.7in]
+        \begin{equation*}
+        \mathcal H = \bigg\{ \x \mapsto \sign(\trans\w \x) : \w \in \R^d \bigg\},
+        \end{equation*}
+        where
+        \begin{equation*}
+        \sign(a) =
+            \begin{cases}
+                +1 & \text{if~} a>0 \\
+                -1 & \text{if~} a<0
+                .
+        \end{cases}
+        \end{equation*}
+    \end{solutionorbox}
+\end{defn}
+
+\begin{defn}
+    The \emph{in-sample error} is defined to be
+    \begin{solutionorbox}[1.7in]
+    \begin{equation*}
+        \Ein(h) = \frac1N \sum_{i=1}^N \llbracket h(\x_i) \ne y_i \rrbracket
+        .
+    \end{equation*}
+    \end{solutionorbox}
+\end{defn}
+
+\begin{defn}
+    The \emph{out-of-sample error} is defined to be
+    \begin{solutionorbox}[1.7in]
+    \begin{equation*}
+        \Eout(h) = \prob\big(h(\x) \ne y\big)
+        .
+    \end{equation*}
+    \end{solutionorbox}
+\end{defn}
+
+\begin{defn}
+    The \emph{test error} is defined to be
+    \begin{solutionorbox}[1.7in]
+    \begin{equation*}
+    \Etest(h) 
+    =
+    \
+    \frac1{\Ntest} \sum_{i=1}^{\Ntest} \llbracket h(\x_i) \ne y_i \rrbracket
+        .
+    \end{equation*}
+    \end{solutionorbox}
+\end{defn}
+
+\begin{defn}
+    The \emph{generalization error} of a hypothesis $g$ is defined to be
+    \begin{solutionorbox}[1.7in]
+    $$
+        |\Ein(g) - \Eout(g)|.
+    $$
+    \end{solutionorbox}
+\end{defn}
+
+\begin{defn}
+    The \emph{true label function} is defined to be
+    \begin{solutionorbox}[1.7in]
+    \begin{equation*}
+        f = \argmin_{h \in \mathcal H^*} \Eout(h),
+    \end{equation*}
+    where $\mathcal H^*$ is the union of all hypothesis classes.
+    \end{solutionorbox}
+\end{defn}
+
+\begin{defn}
+    The \emph{true error} (also called the \emph{bayes error}) is defined to be
+    \begin{solutionorbox}[1.7in]
+    \begin{equation*}
+        \Eout(f).
+    \end{equation*}
+    \end{solutionorbox}
+\end{defn}
+
+\end{document}
+
+
+
