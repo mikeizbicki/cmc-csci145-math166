@@ -42,3 +42,11 @@ For next week:
 1. We will go at a "slow" pace today, since everyone is preoccupied with pagerank/exam stuff.
 
 1. I will draw on blank pages not part of the notes.
+
+**Wednesday 2024-09-25:**
+
+1. Quiz on chapter 1 definitions next Wednesday 2 Oct.
+    1. Same format as last time: 10 minutes in class to complete, but come as early as you would like for more time.
+    1. See `quiz.pdf` for the problems, and `quiz-key.pdf` for the solutions.
+
+1. RECALL: pagerank programming assignment due this Sunday at midnight.
