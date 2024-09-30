@@ -52,15 +52,15 @@ Grading rubric:
 
     1. Not explaining that PM/EAPM calculates the top eigenvector, which is the pagerank
 
-        (always describe an algorithm's WHAT/WHY before HOW)
+        You should:
+        1. always describe an algorithm's WHAT/WHY before HOW
+        1. start big picture; then go into details
 
     1. Not knowing / being able to derive the runtimes    
 
         The runtime per iteration is not enough; you needed the overall runtime, for example:
 
-        $$
-        O(\frac{\log \epsilon}{\log \alpha} \text{nnz}(P))
-        $$
+        $O\bigg(\frac{\log \epsilon}{\log \alpha} \text{nnz}(P)\bigg)$
 
     1. Not knowing typical values / ranges for all values in the formula and **why they are typical**
 
