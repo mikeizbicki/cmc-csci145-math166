@@ -2,7 +2,7 @@
 
 ## Midterm 1: Pagerank
 
-<img src=img/2024midterm1.png />
+<img src=img/2024fall-midterm1.png />
 
 Why oral exams?
 1. Mimic technical interviews
