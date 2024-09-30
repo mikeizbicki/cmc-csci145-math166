@@ -18,25 +18,25 @@ Common bad habits:
 1. not technically correct language
     1. Incorrect: $\alpha$ is a **random** value
 
-        Correct: "$\alpha$ is an **arbitrary** value"
+        Correct: $\alpha$ is an **arbitrary** value
 
-    1. Incorrect: "Matrix vector multiplication is $O(n^3)$"
+    1. Incorrect: Matrix vector multiplication is $O(n^3)$
 
-        Correct: "**The runtime** of matrix vector multiplication is $O(n^3)$"
+        Correct: **The runtime** of matrix vector multiplication is $O(n^3)$
 
-    1. Incorrect: "$\bar {\bar P}$ is **defined** to have top eigenvalue 1"
+    1. Incorrect: $\bar {\bar P}$ is **defined** to have top eigenvalue 1
 
-        Correct: "$\bar {\bar P}$ is **defined** to be $\alpha \bar P + (1-\alpha) \mathbb e^T \mathbb v$."
+        Correct: $\bar {\bar P}$ is **defined** to be $\alpha \bar P + (1-\alpha) \mathbb e^T \mathbb v$.
 
-        Correct: "One **property** of $\bar {\bar P}$ is that it has top eigenvalue 1."
+        Correct: One **property** of $\bar {\bar P}$ is that it has top eigenvalue 1.
 
-    1. Incorrect: "The power method **helps us calculate** the top eigenvector."
+    1. Incorrect: The power method **helps us calculate** the top eigenvector.
 
-        Correct: "The power method **calculates** the top eigenvector.
+        Correct: The power method **calculates** the top eigenvector.
 
-    1. Incorrect: "$O(n^3)$ grows **exponentially**"
+    1. Incorrect: $O(n^3)$ grows **exponentially**
     
-        Correct: "$O(n^3)$ grows **polynomially**; $O(3^n)$ grows exponentially"
+        Correct: $O(n^3)$ grows **polynomially**; $O(3^n)$ grows exponentially
 1. No points removed for these mistakes
     1. but they are very annoying
     1. you will not pass a technical interview with these mistakes
