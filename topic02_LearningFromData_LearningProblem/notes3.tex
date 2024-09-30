@@ -30,6 +30,7 @@
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
 \newtheorem{defn}{Definition}
+\newtheorem{note}{Note}
 \newtheorem{refr}{References}
 \newtheorem{theorem}{Theorem}
 \newcommand{\E}{\mathbb E}
@@ -96,9 +97,9 @@ Between Chapters 1 and 2
 Chapter 2 of the textbook starts discussing the statistical properties of learning algorithms.
 Unfortunately, the textbook material jumps in difficulty a LOT between chapters 1 and 2.
 The purpose of these notes is to help ``fill the gap.''
-In particular, the textbook introduces the idea of \emph{generalization bounds} using infinite hypothesis classes in chapter 2.
-Infinite hypothesis classes are fairly abstract and can be a bit tricky to understand;
-so we'll start by looking at finite hypothesis classes,
+In particular, the textbook introduces the idea of \emph{generalization bounds} and \emph{infinite hypothesis classes} in chapter 2.
+Infinite hypothesis classes are fairly abstract and can be a bit tricky to understand.
+This set of notes introduces generalization bounds for \emph{finite hypothesis classes},
 which are more concrete and easier to understand.
 
 %\section{PAC Learning}
@@ -108,13 +109,24 @@ which are more concrete and easier to understand.
 %In these notes, we will explore some simple, finite hypothesis classes and the simple TEA learning algorithm.
 
 \begin{problem}
-    For each hypothesis class below, draw a picture of what a ``typical'' hypothesis looks like and write the number of elements in the hypothesis class.
+    For each hypothesis class below, draw a picture of what a ``typical'' hypothesis looks like and write the number of elements $M$ in the hypothesis class.
 \begin{align*}
     \HH{binary} &= \bigg\{ \x \mapsto +1, \x \mapsto -1 \bigg\}\\
+    \vspace{3in}
+    \\ \\ \\ \\ \\ \\ \\ \\
     \HH{axis} &= \bigg\{ \x \mapsto \sign(x_i) : i \in [d] \bigg\} \\
+    \vspace{3in}
+    \\ \\ \\ \\ \\ \\ \\ \\
     \HH{axis2} &= \bigg\{ \x \mapsto \sigma\sign(x_i) : \sigma \in\{+1, -1\}, i \in [d] \bigg\} \\
-    \HH{multiaxis2} &= \bigg\{ \x \mapsto \sum_{j=1}^d \sigma_j \sign(x_j) : \sigma_i \in \{+1, -1\}, i \in [d] \bigg\}  \\
-    \HH{multiaxis3} &= \bigg\{ \x \mapsto \sum_{j=1}^d \sigma_j \sign(x_j) : \sigma_i \in \{+1, 0, -1\}, i \in [d] \bigg\}  \\
+    \vspace{3in}
+\end{align*}
+    \begin{align*}
+    %\HH{axis3} &= \bigg\{ \x \mapsto \sigma\sign(x_i) : \sigma \in\{+1, 0, -1\}, i \in [d] \bigg\} \\
+    %\HH{multiaxis2} &= \bigg\{ \x \mapsto \sum_{j=1}^d \sigma_j \sign(x_j) : \mathbf \sigma \in \{+1, -1\}^d \bigg\}  \\
+    \HH{multiaxis2} &= \bigg\{ \x \mapsto \sign\bigg(\sum_{j=1}^d \sigma_j \sign(x_j) \bigg) : \sigma_i \in \{+1, -1\}, i \in [d] \bigg\}  \\
+    \\ \\ \\ \\ \\ \\ \\ \\
+    \\ \\ \\ \\ \\ \\ \\ \\
+    \HH{multiaxis3} &= \bigg\{ \x \mapsto \sign\bigg(\sum_{j=1}^d \sigma_j \sign(x_j) \bigg): \sigma_i \in \{+1, 0, -1\}, i \in [d] \bigg\}  \\
     %\HH{L2-4} &= \bigg\{ \x \mapsto \big\llbracket\ltwo{\x} \ge \alpha \big\rrbracket: \alpha \in \{1, 2, 3, 4\} \bigg\}\\
     %\HH{L1-4} &= \bigg\{ \x \mapsto \big\llbracket \lone{\x} \ge \alpha \big\rrbracket: \alpha \in \{1, 2, 3, 4\} \bigg\}\\
     %\HH{Lp-a} &= \bigg\{ \x \mapsto \big\llbracket \lp{\x} \ge \alpha \big\rrbracket: \alpha \in [a] \bigg\}\\
@@ -146,15 +158,22 @@ which are more concrete and easier to understand.
     What is the runtime of the TEA algorithm?
 \end{problem}
 
+\vspace{3in}
+\begin{problem}
+    Why does it not make sense to run the TEA algorithm on the perceptron hypothesis class?
+
+    HINT: This problem is ``trivial'' in the sense that it follows immediately from definitions and the runtime bound above.
+\end{problem}
+
 \newpage
 \noindent
 %Equation (2.1) in the textbook states the following theorem.
-Page 40 in the textbook defines the following terms and equations.
+%Page 40 in the textbook defines the following terms and equations.
 
-\begin{defn}
-    The \emph{generalization error} of a hypothesis $g$ is defined to be
-    $|\Ein(g) - \Eout(g)|$.
-\end{defn}
+%\begin{defn}
+    %Recall that the \emph{generalization error} of a hypothesis $g$ is defined to be
+    %$|\Ein(g) - \Eout(g)|$.
+%\end{defn}
 
 \begin{theorem}[Finite Hypothesis Class Generalization]
     %Equation (1.6) in the textbook states that for any hypothesis class $\mathcal H$ with $M$ entries
@@ -173,7 +192,7 @@ Page 40 in the textbook defines the following terms and equations.
 \end{theorem}
 %\begin{proof}
 \noindent
-    \emph{Proof on pages 23-24 of the textbook.}
+    \emph{Proof on pages 40-41 of the textbook.  It is an immediate consequence of the Hoeffding inequality and the union bound.  Observe the similarities/differences between the equations above and the Hoeffding inequality; this should help you memorize both results.}
 %\end{proof}
 
 \vspace{3in}
@@ -192,7 +211,7 @@ Page 40 in the textbook defines the following terms and equations.
     Your particular application requires that your final model have a generalization error less than 0.1 with probability at least 0.99.
     \begin{enumerate}
         \item
-    Which of the finite hypothesis classes above can you select?
+    Which of the finite hypothesis classes are guaranteed to meet your generalization requirements according to the FHCG Theorem?
 
             \vspace{4in}
 \item
@@ -213,11 +232,6 @@ Page 40 in the textbook defines the following terms and equations.
     %\end{equation}
 %\end{theorem}
 
-%\begin{problem}
-    %In practice, computers implement IEEE754 floating point arrithmetic rather than real number arithematic.
-    %This means that all hypothesis classes (that are used in practice) are actually finite.
-%\end{problem}
-
 \newpage
 \begin{problem}
     Given two finite hypothesis classes $\HH{1}$ and $\HH{2}$, we can construct a third hypothesis class
@@ -237,11 +251,100 @@ Page 40 in the textbook defines the following terms and equations.
 \end{problem}
 
 \newpage
-\section{Practical Problems}
 \begin{problem}
-    You are working on a project for a major streaming service WEBFILMS.
-    WEBFILMS has clients in most countries around the world.
+    Recall that the Perceptron hypothesis class is defined as
+    \begin{equation}
+        %\Hperceptron
+        %\Hperceptron = 
+        \HH{perceptron} = 
+        \bigg\{ \x \mapsto \sign(\trans\w \x) : \w \in \R^d \bigg\}.
+    \end{equation}
+    In practice, computers cannot efficiently implement arbitrary precision real number arithmetic,
+    and so all perceptron implementations use a finite precision approximation.%
+    \footnote{
+    Python (and most other programming languages) natively use 64bit IEEE754 floating point numbers.
+    Modern CPUs have native support for 32 bit floating numbers as well,
+    and they are often used in numeric computations because they are about twice as fast because there are half as many bits that need to be computed.
+    Recently, NVIDIA has begun supporting 16bit, 8bit, and even 4bit floating point numbers.
+    These "low precision reals" are most commonly used to speed up computations or reduce memory requirements,
+    but this problem shows that these low precision reals can also result in statistical improvements in the generalization error.
+    The use of low precision floating point numbers is often called \emph{quantization}.
+    }
+    Let $b$ be the total number of bits of precision used to represent a real number.
+
+    \begin{enumerate}
+        \item
+    Write a generalization bound for the finite precision version of the perceptron in terms of $b$, $d$, and $N$.
+
+    \item
+        \vspace{3in}
+        Based on your bound above, if you double the bits of precision $b$, how much more data $N$ will you need to achieve the same generalization error?
+
+            %\vspace{4in}
+            %\newpage
+    %\item
+        %Assume the data is linearly separable, so that the PLA is guaranteed to converge.
+        %Under what conditions will the TEA algorithm be faster for learning a finite precision perceptron model than the PLA?
+    \end{enumerate}
+
 \end{problem}
+
+
+%\newpage
+%\section{Practical Problems}
+%\begin{problem}
+    %You are working on a project for a major streaming service WEBFILMS.
+    %WEBFILMS has customers in most countries around the world,
+    %Your task 
+%\end{problem}
+
+\newpage
+\begin{problem}
+    Dimensionality reduction is a common technique for improving the computational and statistical performance of an algorithm.
+    One simple form of dimensionality reduction is to multiply all the datapoints by a random matrix.
+    Formally, let $A : d' \times d$ be a random matrix where each entry is sampled from the uniform distribution on $[-1, 1]$.
+    Then each new data point $\x'$ is the $d'$ dimensional vector defined to be
+    \begin{equation}
+        \x' = A\x.
+        %\x' = \frac{A\x}{\sqrt d}.
+    \end{equation}
+    %The $\sqrt{d}$ in the denominator ensures that $\ltwo{\x'} \approx \ltwo{\x}$.
+    %(The norm of the data doesn't affect any of the algorithms we've seen so far,
+    %but it is still good practice to keep the norm the same.)
+
+\begin{enumerate}
+\item
+Complete the table below describing the effect of this transform on the runtime and generalization error of our finite hypothesis classes.
+
+        \vspace{-0.3in}
+\renewcommand{\arraystretch}{5}
+\begin{tabular}{p{2in}p{2in}p{2in}}
+    hypothesis class & runtime of TEA & generalization error \\
+    \hline
+    $\HH{binary}$ \\
+    $\HH{axis}$ \\
+    $\HH{axis2}$ \\
+    $\HH{multiaxis2}$ \\
+    $\HH{multiaxis3}$ \\
+    \hline
+\end{tabular}
+
+\vspace{0.2in}
+\item
+Above, you should see either a linear or exponential improvement in all cases.
+Why does it not make sense to always perform this dimensionality reduction with a very small $d'$?
+(That is, what important quantity not shown in the table above will get worse as $d'$ gets smaller?)
+\end{enumerate}
+\end{problem}
+
+%\newpage
+%\begin{problem}
+    %WEBFILMS is a major movie streaming service.
+    %They have customers in over one hundred countries,
+    %and serve content in over one hundred languages.
+    %One of the challenges that WEBFILMS faces is selecting which language settings to use when a customer decides to watch a movie.
+%\end{problem}
+
 
 \end{document}
 

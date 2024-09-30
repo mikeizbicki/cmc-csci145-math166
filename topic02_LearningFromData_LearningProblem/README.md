@@ -50,3 +50,5 @@ For next week:
     1. See `quiz.pdf` for the problems, and `quiz-key.pdf` for the solutions.
 
 1. RECALL: pagerank programming assignment due this Sunday at midnight.
+
+**Monday 2024-09-30:**
