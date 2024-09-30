@@ -26,7 +26,7 @@ Common bad habits:
 
         Incorrect: $P$ is $O(n)$
 
-        Correct: $\text{nnz}(P) is $O(n)$
+        Correct: **The number of non zeros** of $P$ is $O(n)$
 
     1. Incorrect: $\bar {\bar P}$ is **defined** to have top eigenvalue 1
 
