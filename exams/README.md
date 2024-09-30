@@ -139,11 +139,13 @@ Grading rubric:
 
         1. If you know something, say it!
 
-    1. USE THE WHITEBOARD
+    1. USE THE WHITEBOARD EFFECTIVELY
 
         If you don't put things on the board, I can't:
         1. understand what you mean and give you credit
         1. ask follow up questions
+
+        This requires practice!
 
 Recall:
 1. Final grade will replace midterm grade if better.
