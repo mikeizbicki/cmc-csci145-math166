@@ -53,10 +53,11 @@ For next week:
 
 **Monday 2024-09-30:**
 
-1. See the [midterm exam postmortem](https://github.com/mikeizbicki/cmc-csci145-math166/tree/2024fall/exams)
-
 1. RECALL: quiz this Wednesday on definitions
 
-1. Not on the quiz from chapter 1: Hoeffding, margin, radius, perceptron convergence rate
+    1. Not on the quiz from chapter 1: Hoeffding, margin, radius, perceptron convergence rate
 
-    These will be on chapter 2 memorization quiz
+    1. These will be on chapter 2 memorization quiz
+
+1. See the [midterm exam postmortem](https://github.com/mikeizbicki/cmc-csci145-math166/tree/2024fall/exams)
+
