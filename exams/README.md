@@ -115,7 +115,7 @@ Grading rubric:
         My expectation: You demonstrate knowledge sufficient to get hired at FAANG.
 
     1. Answer questions at the "right level"
-        1. This requires a good "astheics"
+        1. This requires a good "aesthetics"
            
            Explain interesting things, gloss over boring things
 
