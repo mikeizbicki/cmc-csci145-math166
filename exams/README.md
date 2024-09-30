@@ -137,7 +137,7 @@ Grading rubric:
 
         1. You are responsible for demonstrating the knowledge
 
-            Don't wait for the interviewer to ask
+        1. If you know something, say it!
 
     1. USE THE WHITEBOARD
 
@@ -150,4 +150,15 @@ Recall:
 
 Extra Credit:
 1. You may earn +1 points ec for each letter grade below A.
-    (A B can get +1, a C +2, D +3, and F +4.)
+
+    (B can get +1, C +2, D +3, F +4.)
+
+1. You get 1 point of extra credit for each hour you spend whiteboarding problems with another student in this class.
+
+   1. Do it in pairs, alternating who is writing on the whiteboard and who is listening / asking questions.
+
+   1. Two students will both get 1 point of EC for the same hour.
+
+   1. Each point must be with a different student. 
+
+1. To claim the EC, send me an email with the names of the students and a short (1-2 sentence) explanation of what you covered.
