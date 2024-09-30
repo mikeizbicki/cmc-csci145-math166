@@ -64,10 +64,16 @@ Grading rubric:
 
     1. Not knowing typical values / ranges for all values in the formula and **why they are typical**
 
-        1. $\epsilon \in [10^{-3}, 10^{-6}]$ and google used $10^{-6}$; why?
+        For example:
+
+        1. $\epsilon \in [10^{-3}, 10^{-6}]$ and google used $10^{-6}$
+
+            why?
             1. we don't care about exact values of eigenvector, just the ranking of values
             1. $\epsilon$ smaller results in too slow convergence
-        1. $\text{nnz}(P) = O(n)$; why?
+        1. $\text{nnz}(P) = O(n)$
+
+            why?
             1. true in the web domain only
 
                 (people commonly said true of all sparse matrices)
