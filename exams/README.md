@@ -24,6 +24,10 @@ Common bad habits:
 
         Correct: **The runtime** of matrix multiplication is $O(n^3)$
 
+        Incorrect: $P$ is $O(n)$
+
+        Correct: $\text{nnz}(P) is $O(n)$
+
     1. Incorrect: $\bar {\bar P}$ is **defined** to have top eigenvalue 1
 
         Correct: $\bar {\bar P}$ is **defined** to be $\alpha \bar P + (1-\alpha) \mathbb e^T \mathbb v$.
