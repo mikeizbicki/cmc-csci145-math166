@@ -20,9 +20,9 @@ Common bad habits:
 
         Correct: $\alpha$ is an **arbitrary** value
 
-    1. Incorrect: Matrix vector multiplication is $O(n^3)$
+    1. Incorrect: Matrix multiplication is $O(n^3)$
 
-        Correct: **The runtime** of matrix vector multiplication is $O(n^3)$
+        Correct: **The runtime** of matrix multiplication is $O(n^3)$
 
     1. Incorrect: $\bar {\bar P}$ is **defined** to have top eigenvalue 1
 
