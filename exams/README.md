@@ -76,7 +76,7 @@ Grading rubric:
             why?
             1. true in the web domain only
 
-                (people commonly said true of all sparse matrices)
+                (people commonly said true of all sparse matrices, which is wrong)
             1. because each webpage has only small number of links
 
         1. RECALL: I can't cover all these small details in class
@@ -111,6 +111,9 @@ Grading rubric:
 
 1. Bigger picture mistakes:
     1. Most "low grades" were due to a "mismatch of expectations"
+
+        My expectation: You demonstrate knowledge sufficient to get hired at FAANG.
+
     1. Answer questions at the "right level"
         1. This requires a good "astheics"
            
