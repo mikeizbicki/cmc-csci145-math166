@@ -2,7 +2,7 @@
 
 ## Midterm 1: Pagerank
 
-<img src=img/2024fall-midterm1.png />
+<img width=400px src=img/2024fall-midterm1.png />
 
 Why oral exams?
 1. Mimic technical interviews
@@ -11,10 +11,12 @@ Why oral exams?
 Common bad habits:
 1. bad "pronunciation"
     1. $\epsilon$ is "epsilon" not "ee"
+
+        (in our particular case, "error" or "residual" would be appropriate)
     1. $\mathbb x^{(k)}$ is NOT "x to the kth power"
     1. $\bar P$ is "P bar", $P'$ is "P prime", and $\hat P$ is "P hat"
 1. not technically correct language
-    1. Incorrect: "$\alpha$ is a **random** value"
+    1. Incorrect: $\alpha$ is a **random** value
 
         Correct: "$\alpha$ is an **arbitrary** value"
 
