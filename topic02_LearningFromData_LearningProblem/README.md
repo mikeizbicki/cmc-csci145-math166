@@ -63,6 +63,8 @@ For next week:
 
 **Wednesday 2024-10-02:**
 
+1. pagerank assignment graded and entered in sakai
+
 1. Homework posted in the `finite_hypothesis_classes` folder.
 
     **Due:** Sunday ~~6 Oct~~ Oct 13 @ midnight
