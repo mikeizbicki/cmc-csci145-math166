@@ -61,3 +61,11 @@ For next week:
 
 1. See the [midterm exam postmortem](https://github.com/mikeizbicki/cmc-csci145-math166/tree/2024fall/exams)
 
+**Wednesday 2024-10-02:**
+
+1. Homework posted in the `finite_hypothesis_classes` folder.
+
+    **Due:** Sunday 6 Oct
+
+1. Quiz based on `quiz2-practice.pdf` next Wednesday 9 Oct.
+    4 T/F/O problems.
