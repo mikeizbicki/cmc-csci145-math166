@@ -174,23 +174,26 @@ You are responsible for everything else.
         m_{\mathcal H}(N) = \max_{\x_1,...,\x_N\in\mathcal X} \big| \mathcal H(\x_1, ..., \x_N) \big|.
     \end{equation}
 \end{defn}
-\begin{example}
+\begin{problem}
     [Example 2.1, page 43]
     Let $\mathcal H$ be the perceptron hypothesis class in 2 dimensions.
     What is $\mH(3)$ and $\mH(4)$?
-\end{example}
+\end{problem}
 \vspace{2in}
 
-\begin{fact}
+\newpage
+\begin{problem}
+    Either prove the following statement, or find a counterexample:
     For all datasets and all hypothesis classes,
     %\begin{equation}
         $
         \mH(N) \le 2^N.
         $
     %\end{equation}
-\end{fact}
-\vspace{2in}
+\end{problem}
+%\vspace{2in}
 
+\newpage
 \begin{defn}
     We say that a hypothesis class $\mathcal H$ can \emph{shatter} a dataset $\x_1, ..., \x_N$ if any of the following equivalent statements are true:
     \begin{enumerate}
@@ -204,11 +207,11 @@ You are responsible for everything else.
     If no data set of size $k$ can be shattered by $\mathcal H$, then $k$ is said to be a \emph{break point} for $\mathcal H$.
 \end{defn}
 
-\vspace{6in}
-\begin{problem}
-    Example 2.2 in the textbook (43-45) contains many more examples of computing the growth function.
-    You should work through and understand all of these examples.
-\end{problem}
+%\vspace{6in}
+%\begin{problem}
+    %Example 2.2 in the textbook (43-45) contains many more examples of computing the growth function.
+    %You should work through and understand all of these examples.
+%\end{problem}
 \newpage
 
 %\begin{fact}
@@ -267,7 +270,8 @@ You are responsible for everything else.
     \end{equation}
 \end{fact}
 
-\vspace{3in}
+%\vspace{3in}
+\newpage
 \begin{theorem}[VC generalization bound]
     For any tolerance $\delta>0$, we have that with probability at least $1-\delta,$
     \begin{equation}
@@ -279,6 +283,7 @@ You are responsible for everything else.
         \Eout 
         \le \Ein + \sqrt{\frac8N \log\frac{4(2N)^\dvc + 1}{\delta}} 
         = O\left(\sqrt{\frac{\dvc\log N - \log\delta}{N}}\right).
+        %= \tilde O\left(\sqrt{\frac{\dvc - \log\delta}{N}}\right).
     \end{align}
 
 \end{theorem}
