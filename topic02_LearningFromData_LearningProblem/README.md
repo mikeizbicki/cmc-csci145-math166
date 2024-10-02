@@ -69,3 +69,5 @@ For next week:
 
 1. Quiz based on `quiz2-practice.pdf` next Wednesday 9 Oct.
     4 T/F/O problems.
+
+    Same format as last multiple choice quiz: open note / computer / internet / ChatGPT / everything that is not a human.
