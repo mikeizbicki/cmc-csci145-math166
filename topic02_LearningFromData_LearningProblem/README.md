@@ -65,7 +65,7 @@ For next week:
 
 1. Homework posted in the `finite_hypothesis_classes` folder.
 
-    **Due:** Sunday 6 Oct @ midnight
+    **Due:** Sunday ~~6 Oct~~ Oct 13 @ midnight
 
 1. Quiz based on `quiz2-practice.pdf` next Wednesday 9 Oct.
     4 T/F/O problems.
