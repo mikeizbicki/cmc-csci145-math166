@@ -115,7 +115,7 @@ Grading rubric:
         My expectation: You demonstrate knowledge sufficient to get hired at FAANG.
 
     1. Answer questions at the "right level"
-        1. This requires a good "astheics"
+        1. This requires a good "aesthetics"
            
            Explain interesting things, gloss over boring things
 
@@ -123,7 +123,7 @@ Grading rubric:
 
             <img width=400px src=img/midterm1-toomuch.png />
 
-            For the runtime of an equation, don't show me all the detailed arithmatic; just show me the runtime
+            For the runtime of an equation, don't show me all the detailed arithmetic; just show me the runtime
 
             <img width=400px src=img/midterm1-justright.png />
 
