@@ -31,6 +31,7 @@
 \newtheorem{problem}{Problem}
 \newtheorem{example}{Example}
 \newtheorem{defn}{Definition}
+\newtheorem{note}{Note}
 \newtheorem{fact}{Fact}
 \newtheorem{refr}{References}
 \newtheorem{theorem}{Theorem}
@@ -103,15 +104,29 @@ The Finite Hypothesis Class Generalization (FHCG) Theorem from the previous lect
     \Eout \le \Ein + O\bigg(\sqrt{\frac{\log M - \log\delta}{N}}\bigg)
     .
 \end{equation}
-This bound is not useful for infinite hypothesis classes.
-The goal of this chapter is to replace the dependence on $M$ above with a dependence on the ``VC dimension'' ($\dvc$)
+This bound is not useful for infinite hypothesis classes because the resulting bound is trivial.
+
+The goal of this chapter is to introduce a new way to measure the ``size'' of a hypothesis class called the \emph{VC dimension} ($\dvc$).
+It turns out that many infinite hypothesis classes have finite VC dimension,
+and the \emph{fundamental theorem of machine learning} states
 \begin{equation}
     \Eout \le \Ein + O\bigg(\sqrt{\frac{\dvc - \log\delta}{N}}\bigg)
     .
 \end{equation}
-We will not prove this result.
-But in order to use this result in practice,
-we must define the VC dimension and be able to calculate the VC dimension of our hypothesis classes.
+Proving the above bound is rather technical.
+The textbook proves the slightly weaker bound
+\begin{equation}
+    \Eout \le \Ein + O\bigg(\sqrt{\frac{\dvc\log N - \log\delta}{N}}\bigg)
+    .
+\end{equation}
+There are unfortunately a lot of technical details needed to understand the VC dimension.
+This chapter is the most mathematically difficult part of this course.
+
+\begin{note}
+The textbook contains sections labeled ``safe skip'' that contain the full proof of the theorem above.
+You are not responsible for the ``safely skippable'' portions of the chapter.
+You are responsible for everything else.
+\end{note}
 
 \newpage
 \section*{Section 2.1.1 Effective Number of Hypotheses}
@@ -159,6 +174,13 @@ we must define the VC dimension and be able to calculate the VC dimension of our
         m_{\mathcal H}(N) = \max_{\x_1,...,\x_N\in\mathcal X} \big| \mathcal H(\x_1, ..., \x_N) \big|.
     \end{equation}
 \end{defn}
+\begin{example}
+    [Example 2.1, page 43]
+    Let $\mathcal H$ be the perceptron hypothesis class in 2 dimensions.
+    What is $\mH(3)$ and $\mH(4)$?
+\end{example}
+\vspace{2in}
+
 \begin{fact}
     For all datasets and all hypothesis classes,
     %\begin{equation}
@@ -167,7 +189,7 @@ we must define the VC dimension and be able to calculate the VC dimension of our
         $
     %\end{equation}
 \end{fact}
-%\vspace{2in}
+\vspace{2in}
 
 \begin{defn}
     We say that a hypothesis class $\mathcal H$ can \emph{shatter} a dataset $\x_1, ..., \x_N$ if any of the following equivalent statements are true:
@@ -181,12 +203,6 @@ we must define the VC dimension and be able to calculate the VC dimension of our
 \begin{defn}
     If no data set of size $k$ can be shattered by $\mathcal H$, then $k$ is said to be a \emph{break point} for $\mathcal H$.
 \end{defn}
-
-\begin{example}
-    [Example 2.1, page 43]
-    Let $\mathcal H$ be the perceptron hypothesis class in 2 dimensions.
-    What is $\mH(3)$ and $\mH(4)$?
-\end{example}
 
 \vspace{6in}
 \begin{problem}
@@ -273,6 +289,7 @@ we must define the VC dimension and be able to calculate the VC dimension of our
 \end{problem}
 
 \newpage
+\section*{Application (not in textbook)}
 \begin{problem}
     You are a bank using the perceptron to learn a formula for whether or not to issue a loan.
     \begin{enumerate}
