@@ -123,7 +123,7 @@ Grading rubric:
 
             <img width=400px src=img/midterm1-toomuch.png />
 
-            For the runtime of an equation, don't show me all the detailed arithmatic; just show me the runtime
+            For the runtime of an equation, don't show me all the detailed arithmetic; just show me the runtime
 
             <img width=400px src=img/midterm1-justright.png />
 
