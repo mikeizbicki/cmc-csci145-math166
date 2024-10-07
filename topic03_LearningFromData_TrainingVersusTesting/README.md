@@ -8,7 +8,7 @@ Upcoming assignments:
 
 1. Definitions quiz based on `quiz.pdf` ~Monday 14 Oct~ Wednesday 16 Oct.
 
-1. T/F/O quiz on chapter 2 (practice problems TBA) Monday 18 Oct.
+1. ~T/F/O quiz on chapter 2 (practice problems TBA) Wednesday 16 Oct.~ Sometime later
 
 > **WARNING:**
 > Chapter 2 is hard, so it is easy to fall behind right now.
