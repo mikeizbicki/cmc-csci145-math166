@@ -8,6 +8,7 @@
 \usepackage{bm}
 \usepackage{stmaryrd}
 \usepackage{booktabs}
+\usepackage{tikz}
 
 \usepackage{color}
 \usepackage{colortbl}
@@ -89,6 +90,13 @@
 \Huge
 Chapter 3: Linear Models
 }
+
+    \vspace{0.05in}
+{
+\Large
+Sections 3.1-3.3
+    (Temporarily skipping Section 2.3.)
+}
 \end{center}
 
 %\begin{defn}
@@ -103,7 +111,7 @@ Recall that a model is defined both by its hypothesis class $\HH{}$ and the trai
 A reasonable idea for a training algorithm is to select a hypothesis that minimizes the in-sample error:
 \begin{equation}
     \label{eq:erm}
-    g = \argmin_{h\in\HH{}} \Ein(g).
+    g = \argmin_{h\in\HH{}} \Ein(h).
 \end{equation}
 %The hypothesis described by this process above is often called the \emph{emperical risk minimizer} (ERM) because $\Ein$ is often called the \emph{emperical risk}.
 %
@@ -122,6 +130,18 @@ A reasonable idea for a training algorithm is to select a hypothesis that minimi
     %Then we will describe how they relate statistically to the 0-1 loss we've already seen.
 
 \section*{Notation}
+
+\begin{note}
+The textbook has slightly sloppy notation in this chapter.
+The purpose of this sloppiness is to try to make the material more approachable by omitting certain dependencies.
+I have found that this confuses students, however, and so am providing a less sloppy version of the notation below.
+Either versions of these notations are acceptable on exams.
+\end{note}
+
+\begin{note}
+Sections 2.2.4 and 2.3 from the previous chapter is also related to the notation below.
+It should be read before Section 3.
+\end{note}
 
 \begin{defn}
     A \emph{loss function} $\ell(\hat y, y)$ is a function that measures ``how bad'' the output of a hypothesis is.
@@ -148,6 +168,7 @@ A reasonable idea for a training algorithm is to select a hypothesis that minimi
     Substituting \eqref{eq:01} into \eqref{eq:Eout} and \eqref{eq:Ein} above yield the familiar definitions for $\Ein$ and $\Eout$ from Chapter 1.
 \end{example}
 
+\newpage
 \section*{The Squared Loss (Section 3.2)}
 
 \begin{example}
@@ -177,7 +198,7 @@ A reasonable idea for a training algorithm is to select a hypothesis that minimi
     %Under what conditions is this minimizer defined?
 %\end{problem}
 
-\newpage
+%\newpage
 \begin{problem}
     The OLS model is convenient because the hypothesis $g$ which minimizes $\Ein$ can be computed in closed form.
     Show this computation.
@@ -194,25 +215,35 @@ A reasonable idea for a training algorithm is to select a hypothesis that minimi
     What is the runtime of computing the ERM for OLS?
 \end{problem}
 
+%\newpage
 \vspace{4in}
+%\section*{Section 2.3: Approximation-Generalization Tradeoff}
 \begin{problem}
     The VC dimension is undefined for the OLS problem.
     Why?
 \end{problem}
 
-\vspace{3in}
-\begin{note}
-    The textbook bounds the generalization error of the squared loss in this section and Chapter 2.3.
-    These bounds are simpler than the VC dimension bounds to understand and prove.
-    We will not cover them in this course, however,
-    because they require knowledge of probability that is (unfortunately IMNSHO) not a pre-requisite for this course.
-    These bounds are often expected knowledge in technical machine learning interviews.
-\end{note}
+%\vspace{4in}
+%\begin{problem}
+    %Define the \emph{bias} end \emph{variance}
+    %\begin{align*}
+        %\text{bias}(\x) & = (\bar g - f(x))^2 \\
+    %\end{align*}
+%\end{problem}
+
+%\vspace{3in}
+%\begin{note}
+    %The textbook bounds the generalization error of the squared loss in this section and Chapter 2.3.
+    %These bounds are simpler than the VC dimension bounds to understand and prove.
+    %We will not cover them in this course, however,
+    %because they require knowledge of probability that is (unfortunately IMNSHO) not a pre-requisite for this course.
+    %These bounds are often expected knowledge in technical machine learning interviews.
+%\end{note}
 
 \newpage
 \begin{fact}
 The squared loss is essentially unique in having a closed form minimizer.
-Most other loss functions do not have closed form minimizers and require iterative procedures to solve.
+Most other loss functions (and all other loss functions used in practuce) do not have closed form minimizers and require iterative procedures to solve.
 \end{fact}
 
 \section*{The 0-1 Loss (Section 3.1)}
@@ -230,6 +261,7 @@ What you need to know:
     \item
     In Section 3.1, the book introduces the \emph{pocket algorithm} for computing a hypothesis $g$ when the data is not linearly separable.
     Unfortunately, this algorithm is not guaranteed to converge to a minimizer of $\Ein$.
+    You should be able to explain why.
 
     \item
     In general, minimizing the 0-1 loss is \emph{NP-hard}.
@@ -248,6 +280,7 @@ What you need to know:
 \end{enumerate}
 %\end{example}
 
+\newpage
 \section*{The Logistic Loss (Section 3.3)}
 
 Since the 0-1 loss cannot be efficiently optimized, our goal is to introduce new loss functions that are ``similar'' to the 0-1 loss but can be efficiently optimized.
@@ -270,7 +303,35 @@ We can generalize this definition to allow the $\hat y$ variable to be any real 
 \end{equation}
 and these two definitions agree whenever they are both defined.
 
-\vspace{1in}
+\begin{tikzpicture}
+\draw[<->, thick] (-8,0) -- (8,0) node[right] {};
+\draw[->, thick] (0,-1) -- (0,7) node[above] {};
+
+\foreach \x in {-3,0,3, 6, -6} {
+    \draw[dashed] (\x,-1) -- (\x,7);
+}
+\foreach \y in {0,3,6} {
+    \draw[dashed] (-8,\y) -- (8,\y);
+}
+\end{tikzpicture}
+
+\vspace{0.1in}
+\begin{tikzpicture}
+\draw[<->, thick] (-8,0) -- (8,0) node[right] {};
+\draw[->, thick] (0,-1) -- (0,7) node[above] {};
+
+\foreach \x in {-3,0,3, 6, -6} {
+    \draw[dashed] (\x,-1) -- (\x,7);
+}
+\foreach \y in {0,3,6} {
+    \draw[dashed] (-8,\y) -- (8,\y);
+}
+\end{tikzpicture}
+
+
+%\vspace{1in}
+\newpage
+\begin{defn}
 The quantity $z = \hat y y$ appears commonly in classification losses, and so classification losses are commonly written as functions of a single variable.
 The 0-1 loss can be equivalently defined in this way as
 \begin{equation}
@@ -281,8 +342,8 @@ The 0-1 loss can be equivalently defined in this way as
         1 & \text{otherwise} \\
     \end{cases}
 \end{equation}
+\end{defn}
 
-\newpage
 \begin{defn}
     A \emph{surrogate loss function} $\ell$ is any loss function that upper bounds the 0-1 loss.
     That is,
@@ -291,31 +352,31 @@ The 0-1 loss can be equivalently defined in this way as
     %\end{equation}
     %for all values of $\hat y$ and $y$,
     %or equivalently
-    \begin{equation}
+    %\begin{equation}
         %\ell(\hat y, y) \ge \ell_{0-1}(\hat y, y)
-        Q(z) \ge Q_{0-1}(z)
-    \end{equation}
+        $Q(z) \ge Q_{0-1}(z)$
+    %\end{equation}
     for all values of $z$.
 \end{defn}
 
-\begin{defn}
+\begin{defn}[informal]
     A loss function is \emph{convex} if the line segment between any two points on the graph of the function lies above the graph between the two points.
 \end{defn}
 
 \begin{defn}[informal]
-    The closer a loss function is to the 0-1 loss, the more \emph{robust to outliers} that loss function is.
-    The more robust a loss function is, the closer its minimizer will be to the hard-to-compute minimizer of the 0-1 loss.
+    The closer a loss function is to the 0-1 loss, the more \emph{robust} that loss function is.
+    The more robust a loss function is, the closer its minimizer will be to the hard-to-compute minimizer of the 0-1 loss and the less influence ``outliers'' will have on the loss.
 \end{defn}
 
-\vspace{1in}
-\begin{example}
+%\vspace{1in}
+\begin{problem}
     Complete the table below, and draw each loss function.
 
     \vspace{0.15in}
     \renewcommand{\arraystretch}{2.5}
     \begin{tabular}{llp{1in}p{1in}p{1in}}
         \toprule
-        name & $Q(z)$ & surrogate? & convex? & robust?\\
+        loss name & $Q(z)$ & surrogate? & convex? & robust?\\
         \midrule
         exponential loss & $\exp(-z)$ \\
         squared loss & $(1-z)^2$ \\
@@ -337,61 +398,58 @@ The 0-1 loss can be equivalently defined in this way as
         %smooth 0-1 loss & $\tfrac{1}{2} + \arctan(-\alpha \cdot \hat y y)/\pi$ \\
         %\bottomrule
     %\end{tabular}
-\end{example}
+\end{problem}
+\begin{tikzpicture}
+\draw[<->, thick] (-8,0) -- (8,0) node[right] {};
+\draw[->, thick] (0,-1) -- (0,7) node[above] {};
+
+\foreach \x in {-3,0,3, 6, -6} {
+    \draw[dashed] (\x,-1) -- (\x,7);
+}
+\foreach \y in {0,3,6} {
+    \draw[dashed] (-8,\y) -- (8,\y);
+}
+
+\end{tikzpicture}
 
 \newpage
 %\begin{problem}
     %Draw the loss functions
 %\end{problem}
 
-\begin{fact}
-    Every surrogate loss function $\ell$ has the property that
-    \begin{equation}
-        \label{eq:upper}
-        \Ein^{\ell_{0-1}} \le \Ein^{\ell}
-    \end{equation}
-    and so we can use VC theory to get a generalization bound on the classification error for any model trained with a surrogate loss.
-    In particular, substituting \eqref{eq:upper} into the VC theorem gives
-    \begin{equation}
-        \label{eq:loss_ftsl}
-        \Eout^{\ell_{0-1}} \le \Ein^{\ell} + O\bigg(\sqrt{\frac{\dvc\log N}{N}}\bigg)
-    \end{equation}
-    with high probability.
-    In particular, \eqref{eq:loss_ftsl} holds for the logistic regression model (using the logistic loss) and the SVM model (using the hinge loss).
-\end{fact}
+\begin{problem}
+    Let $\ell$ be a surrogate loss function for $\ell_{0-1}$.
+    Derive a VC generalization bound for the generalization error $\Eout^{\ell_{0-1}} - \Ein^{\ell}$.
+\end{problem}
 
-\begin{note}
-    The textbook also discusses a probabilistic interpretation of the logistic loss.
-    Again, due to the course prereqs, we will not cover this interpretation,
-    but this is sometimes material that is asked about in technical interviews.
-\end{note}
-
-\section*{Optimizing the Surrogate Loss}
-
-Section 3.3.2 of the textbook has an ``intuitive'' overview of the gradient descent and stochastic gradient descent algorithms.
-This is not detailed enough, and so we will supplement with L\'eon Bottou's paper ``Large-Scale Machine Learning with Stochastic Gradient Descent.''
-
-%Paraskavedekatriaphobia
-
-%\newpage
-%
-%\begin{defn}
-%A \emph{linear hypothesis class} has the form
-%\begin{equation}
-    %\HH{} = \bigg\{ \x \mapsto \ell(\trans\x \w, y) : \w \in\R^{d} \bigg\}
-    %,
-%\end{equation}
-%where $\ell : \R\times\R \to \R$ is called the \emph{loss function}.
-%A \emph{linear model} is any model with a linear hypothesis class.
-%\end{defn}
-%
-%\begin{example}
-    %The perceptron is a linear model with
+%\begin{fact}
+    %Every surrogate loss function $\ell$ has the property that
     %\begin{equation}
-        %\ell(\hat y, y) = \llbracket \sign(\hat y) \ne y \rrbracket
-        %.
+        %\label{eq:upper}
+        %\Ein^{\ell_{0-1}} \le \Ein^{\ell}
     %\end{equation}
-%\end{example}
+    %and so we can use VC theory to get a generalization bound on the classification error for any model trained with a surrogate loss.
+    %In particular, substituting \eqref{eq:upper} into the VC theorem gives
+    %\begin{equation}
+        %\label{eq:loss_ftsl}
+        %\Eout^{\ell_{0-1}} \le \Ein^{\ell} + O\bigg(\sqrt{\frac{\dvc\log N}{N}}\bigg)
+    %\end{equation}
+    %with high probability.
+    %In particular, \eqref{eq:loss_ftsl} holds for the logistic regression model (using the logistic loss) and the SVM model (using the hinge loss).
+%\end{fact}
+%
+%%\begin{note}
+    %%The textbook also discusses a probabilistic interpretation of the logistic loss.
+    %%Again, due to the course prereqs, we will not cover this interpretation,
+    %%but this is sometimes material that is asked about in technical interviews.
+%%\end{note}
+%
+%\section*{Optimizing the Surrogate Loss}
+%
+%Section 3.3.2 of the textbook has an ``intuitive'' overview of the gradient descent and stochastic gradient descent algorithms.
+%This is not detailed enough, and so we will supplement with L\'eon Bottou's paper ``Large-Scale Machine Learning with Stochastic Gradient Descent.''
+%
+%Paraskavedekatriaphobia
 
 \end{document}
 
