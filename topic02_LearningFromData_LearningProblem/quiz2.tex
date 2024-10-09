@@ -1,0 +1,282 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage[normalem]{ulem}
+\usepackage{stmaryrd}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        %\hl{\textbf{TRUE}}\hspace*{14pt}False
+        \hl{\texttt{True}}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+    }{
+        \ifthenelse{\equal{#1}{F}}{
+        %True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \texttt{True}\hspace*{20pt}\hl{\texttt{False}}\hspace*{20pt}\texttt{Open}
+        }
+        {
+            \texttt{True}\hspace*{20pt}{\texttt{False}}\hspace*{20pt}\hl{\texttt{Open}}
+        }
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+%\newcommand{\I}{\mathbf I}
+%\newcommand{\Q}{\mathbf Q}
+%\newcommand{\p}{\mathbf P}
+%\newcommand{\pb}{\bar {\p}}
+%\newcommand{\pbb}{\bar {\pb}}
+%\newcommand{\pr}{\bm \pi}
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\printanswers
+
+\begin{document}
+
+
+\begin{center}
+    {
+\Large
+    Quiz: Chapter 1
+
+    \vspace{0.1in}
+}
+\end{center}
+
+%\vspace{0.15in}
+%\noindent
+%\textbf{Total Score:} ~~~~~~~~~~~~~~~/$2^2$
+
+\vspace{0.2in}
+\noindent
+\textbf{Printed Name:}
+
+\noindent
+\rule{\textwidth}{0.1pt}
+\vspace{0.15in}
+
+\noindent
+\textbf{Quiz rules:}
+\begin{enumerate}
+    \item You MAY use:
+        \begin{enumerate}
+            \item any notes (handwritten, printed, or electronic),
+            \item any computer programs (including websites like WolframAlpha or ChatGPT), and
+            \item any additional scratch paper.
+        \end{enumerate}
+    \item You MAY NOT communicate with another student.
+    \item If you finish the quiz early, stay seated.
+        I will collect all the quizzes at the same time.
+\end{enumerate}
+
+
+\begin{problem}
+    For each statement below,
+    circle \texttt{True} if the statement is known to be true,
+    \texttt{False} if the statement is known to be false,
+    and \texttt{Open} if the statement reduces to an open problem.
+    You will receive +1 point for each correct answer,
+    \textbf{-0.5 points for each incorrect answer},%\footnote{
+    %I've reduced the penalty for incorrect answers.
+    %The reduced penalty will still discourage guessing without penalizing minor mistakes as much.
+    %}
+    and 0 points for each blank answer.
+
+
+\begin{enumerate}
+    %\item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class.  Assume there exists some $h\in\mathcal H$ with $\Eout(h)=0$.  Then after a finite number of iterations, the PLA is guaranteed to output a hypothesis $g$ satisfying $\Ein(g) = 0$.}
+
+    %\item\TFQuestion{F}{Let $\mathcal H$ be the perceptron hypothesis class.  Assume there exists some $h\in\mathcal H$ with $\Ein(h)=0$.  Then after a finite number of iterations, the PLA is guaranteed to output a hypothesis $g$ satisfying $\Eout(g) = 0$.}
+%
+    %\item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class.  Assume there exists some $h\in\mathcal H$ with $\Ein(h)=0$.  Then the PLA will terminate.}
+%
+    %\item\TFQuestion{F}{Let $\mathcal H$ be a hypothesis class.  If there exists a hypothesis $h\in\mathcal H$ such that $\Eout(h) = 0$, then $\mathcal H$ must be finite.}
+
+    %\item\TFQuestion{F}{Let $\mathcal H$ be the perceptron hypothesis class.  Let $g_1\in\mathcal H$ be the output of the PLA and $g_2\in\mathcal H$ be the output of the pocket algorithm, and assume that both algorithms successfully terminate in finite time.  Then VC theory predicts that $g_2$ will have better generalization error than $g_1$ with high probability.  }
+
+    %\item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the 3rd degree polynomial feature map applied.  If you attempt to use the PLA to select a hypothesis $g\in\mathcal H$ and the algorithm terminates, then the PLA is also guaranteed to terminate if you use it to select a hypothesis from $\mathcal H_\Phi$.}
+
+    %\item\TFQuestion{T}{If your dataset is linearly separable, then the PLA is guaranteed to terminate.}
+
+    %\item\TFQuestion{T}{If your dataset is not linearly separable, then the pocket algorithm is guaranteed to terminate.}
+
+    %\item\TFQuestion{F}{Let $\mathcal H$ be the perceptron hypothesis class and let $g\in\mathcal H$ be the output of the pocket algorithm.  Then the Hoeffding inequality can be used to bound the generalization error of $g$ (i.e.\ the Hoeffding inequality can be used to bound $|\Ein(g)-\Eout(g)|$).}
+
+    %\item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes with $\dvc(H_1) > \dvc(H_2)$.  Let $g_1\in H_1$  and $g_2\in H_2$.  Hoeffding's inequality predicts that $|\Etest(g_1) - \Eout(g_1)|$ is less than $|\Etest(g_2) - \Eout(g_2)|$.}
+
+    %\item\TFQuestion{F}{
+            %Let
+        %$$
+    %\HH{axis2} = \bigg\{ \x \mapsto \sigma\sign(x_i) : \sigma \in\{+1, -1\}, i \in [d] \bigg\},
+        %$$
+        %and
+        %$$
+    %\HH{axis} = \bigg\{ \x \mapsto \sign(x_i) : i \in [d] \bigg\},
+        %$$
+        %Let $g_{\text{axis2}} \in \HH{axis2}$ and $g_{\text{binary}}\in\HH{binary}$ be the outputs of the TEA algorithm on their respective hypothesis classes.
+        %Then for all datasets, $\Ein(g_{\text{axis2}}) \le \Ein(g_{\text{binary}})$.
+        %}
+
+    \item\TFQuestion{F}{
+        Let $g_{\text{axis2}} \in \HH{axis2}$ be the output of the TEA algorithm and $f$ be the true labeling function.
+        Then the following inequality is guaranteed to hold: $\Eout(f) \le \Eout(g_{\text{axis2}})$.
+        }
+
+    %\item\TFQuestion{F}{Let
+        %$$
+    %\HH{axis2} = \bigg\{ \x \mapsto \sigma\sign(x_i) : \sigma \in\{+1, -1\}, i \in [d] \bigg\},
+        %$$
+        %and
+        %$$
+    %\HH{L2-4} = \bigg\{ \x \mapsto \big\llbracket\ltwo{\x} \ge \alpha \big\rrbracket: \alpha \in \{1, 2, 3, 4\} \bigg\}.
+        %$$
+        %Let $g_{\text{axis2}} \in \HH{axis2}$ and $g_{\text{L2-4}}\in\HH{L2-4}$ be the outputs of the TEA algorithm on their respective hypothesis classes.
+        %Then for $d > 100$, the following inequality is guaranteed to hold: $\Ein(g_{\text{axis2}}) \le \Ein(g_\text{L2-4})$.
+        %}
+%
+    %\item\TFQuestion{T}{Let
+        %$$
+    %\HH{axis2} = \bigg\{ \x \mapsto \sigma\sign(x_i) : \sigma \in\{+1, -1\}, i \in [d] \bigg\},
+        %$$
+        %and
+        %$$
+    %\HH{L2-4} = \bigg\{ \x \mapsto \big\llbracket\ltwo{\x} \ge \alpha \big\rrbracket: \alpha \in \{1, 2, 3, 4\} \bigg\}.
+        %$$
+        %Let $g_{\text{axis2}} \in \HH{axis2}$ and $g_{\text{L2-4}}\in\HH{L2-4}$ be the outputs of the TEA algorithm on their respective hypothesis classes.
+        %Then for learning problems with large $d$, the finite hypothesis class generalization theorem predicts that $g_{\text{L2-4}}$ will have better generalization accuracy than $g_{\text{axis2}}$ with high probability.
+        %}
+
+    \item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two finite hypothesis classes satisfying $\mathcal H_1 \subseteq \mathcal H_2$.  Let $g_1$ be the result of the TEA algorithm on $\mathcal H_1$ and $g_2$ be the result of TEA on $\mathcal H_2$. Then for all training and test sets, the following inequality is guaranteed to hold: $\Etest(g_1) \le \Etest(g_2)$.}
+
+    %\item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes satisfying $\mathcal H_1 \subset \mathcal H_2$.  Let $g_1$ be the result of the TEA algorithm on $\mathcal H_1$ and $g_2$ be the result of TEA on $\mathcal H_2$. Then Hoeffding's inequality predicts that with high probability, $\Etest(g_1) \le \Etest(g_2)$.}
+%
+    %\item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes satisfying $\mathcal H_1 \subset \mathcal H_2$.  Let $g_1$ be the result of the TEA algorithm on $\mathcal H_1$ and $g_2$ be the result of TEA on $\mathcal H_2$. Then the finite hypothesis class generalization theorem predicts that with high probability, $\Eout(g_1) \le \Eout(g_2)$.}
+%
+    %\item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes satisfying $\mathcal H_1 \subset \mathcal H_2$.  Let $g_1$ be the result of the TEA algorithm on $\mathcal H_1$ and $g_2$ be the result of TEA on $\mathcal H_2$. Then the finite hypothesis class generalization theorem predicts that with high probability, $\Eout(g_1) \le \Eout(g_2)$.}
+
+    \item\TFQuestion{T}{For all $d > 100$, we have that $|\HH{axis2}| < |\HH{multiaxis2}|$.}
+
+    %\item\TFQuestion{F}{For all $d > 100$, we have that $\HH{binary} \subseteq \HH{axis}$.}
+
+    \item\TFQuestion{F}{Let $g_{\text{axis2}}$ be the result of running TEA on $\HH{axis2}$, $g_{\text{multiaxis2}}$ be the result of running TEA on $\HH{multiaxis2}$, and $g_{\text{union}}$ be the result of running TEA on $\HH{union} = \HH{axis2} \cup \HH{multiaxis2}$.  Then we have that for all datasets, $$\Ein(g_{\text{union}}) \le \Ein(g_{\text{axis2}})$$
+        and $$\Ein(g_{\text{union}}) \le \Ein(g_{\text{multiaxis2}}).$$}
+
+    %\item \TFQuestion{T}{For every learning problem, the approximation error is less than or equal to the in-sample error.}
+
+    %\item\TFQuestion{F}{You have a learning problem with a high approximation error.  VC theory predicts that increasing the number of data points will reduce the out-of-sample error.}
+
+    %\item\TFQuestion{T}{You have a learning problem with a high approximation error.  Applying the polynomial feature embedding with a high degree will decrease the approximation error.}
+
+    %\item\TFQuestion{F}{You have a learning problem with a high approximation error.  Applying the random feature embedding with a low output degree will decrease the approximation error.}
+
+    %\item\TFQuestion{T}{You have trained a logistic regression model that has high generalization error.  VC theory predicts that applying the PCA feature embedding with a low output dimension will reduce the generalization error.}
+
+    %\item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the decision stump feature map.  VC theory predicts that the generalization error of $\mathcal H_\Phi$ will be better than the generalization error of $\mathcal H$.}
+
+    %\item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the decision stump feature map.  Let $g\in\mathcal H$ and $g_\Phi \in \mathcal H_\Phi$ be the emperical risk minimizers trained on a very large dataset.  VC theory predicts that $\Eout(g) < \Eout(g_\Phi)$.}
+
+    %\item\TFQuestion{T}{The hinge loss is a surrogate loss function.}
+
+    %\item\TFQuestion{F}{The trimmed hinge loss is convex.}
+
+\end{enumerate}
+\end{problem}
+\end{document}
+
+
+
+
