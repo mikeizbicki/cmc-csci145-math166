@@ -14,3 +14,11 @@ Upcoming assignments:
 > Chapter 2 is hard, so it is easy to fall behind right now.
 > The remaining material is easier,
 > but it requires good mastery of chapter 2.
+
+**Wednesday 2024-10-09:**
+
+1. Notes 2, Problem 3:
+    1. Exercise 2.4 of textbook.
+    1. For proof of VC dimension of perceptron, see <https://home.work.caltech.edu/library/072.html>
+
+1. Enjoy fall break :)
