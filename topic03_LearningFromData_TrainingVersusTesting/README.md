@@ -4,7 +4,7 @@ Upcoming assignments:
 
 1. T/F/O quiz on chapter 1 (based `topic01/quiz2-practice.pdf`) Wednesday 9 Oct.
 
-1. `finite_hypothesis_classes` jupyter notebook Sunday 13 Oct @ midnight.
+1. `finite_hypothesis_classes` jupyter notebook ~~Sunday 13 Oct~~ Tuesday 15 Oct @ midnight.
 
 1. Definitions quiz based on `quiz.pdf` ~Monday 14 Oct~ Wednesday 16 Oct.
 
