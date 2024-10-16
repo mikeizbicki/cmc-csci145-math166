@@ -1,0 +1,262 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage[normalem]{ulem}
+\usepackage{stmaryrd}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        %\hl{\textbf{TRUE}}\hspace*{14pt}False
+        \hl{\texttt{True}}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+    }{
+        \ifthenelse{\equal{#1}{F}}{
+        %True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \texttt{True}\hspace*{20pt}\hl{\texttt{False}}\hspace*{20pt}\texttt{Open}
+        }
+        {
+            \texttt{True}\hspace*{20pt}{\texttt{False}}\hspace*{20pt}\hl{\texttt{Open}}
+        }
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+%\newcommand{\I}{\mathbf I}
+%\newcommand{\Q}{\mathbf Q}
+%\newcommand{\p}{\mathbf P}
+%\newcommand{\pb}{\bar {\p}}
+%\newcommand{\pbb}{\bar {\pb}}
+%\newcommand{\pr}{\bm \pi}
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\printanswers
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+    Chapter 2 Quiz Practice Problems
+}
+\end{center}
+
+%\vspace{0.5in}
+%\noindent
+%\textbf{Printed Name:}
+%
+%\noindent
+%\rule{\textwidth}{0.1pt}
+%\vspace{0.25in}
+
+\begin{problem}
+    For each statement below,
+    circle \texttt{True} if the statement is known to be true,
+    \texttt{False} if the statement is known to be false,
+    and \texttt{Open} if the statement is not known to be either true or false.
+
+\begin{enumerate}
+    \item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes with $\dvc(H_1) > \dvc(H_2)$.  Let $g_1\in H_1$  and $g_2\in H_2$.  Hoeffding's inequality predicts that $|\Etest(g_1) - \Eout(g_1)|$ is less than $|\Etest(g_2) - \Eout(g_2)|$.}
+
+    \item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes with $\dvc(H_1) > \dvc(H_2)$.  Then $\mathcal H_2 \subseteq \mathcal H_1$.}
+
+    \item\TFQuestion{T}{Let $g$ be a hypothesis in the set of positive rays in 1 dimension.  As the number of data points $N$ goes to infinity, the generalization error is guaranteed to go to zero.}
+
+    \item\TFQuestion{F}{Let $g$ be a hypothesis in the set of convex sets in 2 dimensions.  As the number of data points $N$ goes to infinity, the generalization error is guaranteed to go to zero.}
+
+    %\item\TFQuestion{F}{Define the set of centered spheres in $\R^d$ as
+        %\begin{equation}
+            %\HH{} = \bigg\{ \x \mapsto \big\llbracket \ltwo{\x} \le \alpha \big\rrbracket : \alpha \in \R^+ \bigg\}
+            %.
+        %\end{equation}
+        %Let $g$ be a hypothesis in $\HH{}$.
+        %As the number of dimensions $d$ goes to infinity, the generalization error also goes to infinity.
+        %}
+
+    \item\TFQuestion{T}{Let
+        $$
+    \HH{axis2} = \bigg\{ \x \mapsto \sigma\sign(x_i) : \sigma \in\{+1, -1\}, i \in [d] \bigg\},
+        $$
+        and
+        $$
+    \HH{circles} = \bigg\{ \x \mapsto \big\llbracket\ltwo{\x} \ge \alpha \big\rrbracket: \alpha \in \mathbb R^d \bigg\}.
+        $$
+        For $d>100$, we have that $\dvc(\HH{axis2}) > \dvc(\HH{circles})$.
+        }
+
+    \item\TFQuestion{F}{Let $\mathcal H$ be a finite hypothesis class with size $M$.  Then $\dvc(\mathcal H) = \Theta(\log(M))$.}
+
+    \item\TFQuestion{T}{The VC dimension of finite hypothesis classes can never be $\infty$.}
+
+    \item\TFQuestion{F}{The VC dimension of infinite hypothesis classes can never be $\infty$.}
+
+    \item\TFQuestion{F}{Let $\mathcal H$ be a hypothesis class.  If there exists a hypothesis $h\in\mathcal H$ such that $\Eout(h) = 0$, then the VC dimension of $\mathcal H$ must be finite.}
+
+        \newpage
+    \item\TFQuestion{F}{Let $\mathcal H$ be a hypothesis class and $\mathcal X$ a dataset with $N$ points.  If $\mathcal H$ cannot shatter $\mathcal X$, then it must be the case that $\dvc(\mathcal H) \le N$.}
+
+    \item\TFQuestion{T}{Let $\mathcal H$ be a hypothesis class and $\mathcal X$ a dataset with $N$ points.  If $\mathcal H$ can shatter $\mathcal X$, then it must be the case that $\dvc(\mathcal H) \ge N$.}
+
+    \item\TFQuestion{T}{Let $\mathcal H$ be a hypothesis class and $\mathcal X$ a dataset with $N$ points.  If $\mathcal H$ can shatter $\mathcal X$, then it must be the case that $\mH(N) \ge N$.}
+
+    \item\TFQuestion{F}{Let $\mathcal H$ be a hypothesis class and $\mathcal X$ a dataset with $N$ points.  If $\mathcal H$ cannot shatter $\mathcal X$, then it must be the case that $\mH(N) \le N$.}
+
+    \item\TFQuestion{F}{Let $\mathcal H$ be a hypothesis class and $\mathcal X$ a dataset with $N$ points.  If $\mH(N) = 2^N$, then it must be the case that $\mathcal H$ can shatter $\mathcal X$.}
+
+    \item\TFQuestion{F}{
+            There exists some hypothesis class $\mathcal H$ with growth function $\mH(N) = \Theta(2^{\sqrt{N}})$.
+        }
+
+    \item\TFQuestion{F}{
+        Let $\mathcal{H}$ be a hypothesis class with $\mH(N) = 2^N$ for all $N$.
+        Let $g\in\mathcal{H}$ be a hypothesis.
+        Then as the number of training data points $N$ goes to infinity,
+        the generalization error of $g$ goes to 0.
+        }
+
+    \item\TFQuestion{T}{
+        Let $\mathcal{H}$ be a hypothesis class with $\mH(N) = \Theta(N^{20})$.
+        Let $g\in\mathcal{H}$ be a hypothesis.
+        Then as the number of training data points $N$ goes to infinity,
+        the generalization error of $g$ goes to 0.
+        }
+
+    \item\TFQuestion{T}{
+            For every hypothesis class $\mathcal{H}$, $\mH(N) = O(2^N)$.
+        }
+
+    \item\TFQuestion{F}{
+            For every hypothesis class $\mathcal{H}$, $\mH(N) = \Omega(2^N)$.
+        }
+
+    \item\TFQuestion{T}{
+            If $\mH(N) < 2^N$, then $N$ is a breakpoint for $\mathcal H$.
+        }
+
+    \item\TFQuestion{T}{
+            If $\mH(N) < 2^N$, then $N+1$ is a breakpoint for $\mathcal H$.
+        }
+
+    %\item\TFQuestion{T}{Let $\mathcal H_1$ be the set of positive rays in one dimension, and $\mathcal H_2$ be the set of positive and negative rays in one dimension.
+        %Then $m_{\mathcal H_1}(N) \le m_{\mathcal H_2}(N)$ for all $N$.}
+    %\item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes satisfying $\mathcal H_1 \subset \mathcal H_2$.  Then the approximation error of $\mathcal H_1$ is guaranteed to be less than or equal to the approximation error of $\mathcal H_2$.}
+
+    %\item \TFQuestion{T}{For every learning problem, the approximation error is less than or equal to the in-sample error.}
+
+    %\item\TFQuestion{F}{You have a learning problem with a high approximation error.  VC theory predicts that increasing the number of data points will reduce the out-of-sample error.}
+
+    %\item\TFQuestion{T}{You have a learning problem with a high approximation error.  Applying the polynomial feature embedding with a high degree will decrease the approximation error.}
+
+    %\item\TFQuestion{F}{You have a learning problem with a high approximation error.  Applying the random feature embedding with a low output degree will decrease the approximation error.}
+
+    %\item\TFQuestion{T}{You have trained a logistic regression model that has high generalization error.  VC theory predicts that applying the PCA feature embedding with a low output dimension will reduce the generalization error.}
+
+    %\item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the decision stump feature map.  VC theory predicts that the generalization error of $\mathcal H_\Phi$ will be better than the generalization error of $\mathcal H$.}
+
+    %\item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the decision stump feature map.  Let $g\in\mathcal H$ and $g_\Phi \in \mathcal H_\Phi$ be the emperical risk minimizers trained on a very large dataset.  VC theory predicts that $\Eout(g) < \Eout(g_\Phi)$.}
+
+    %\item\TFQuestion{T}{The hinge loss is a surrogate loss function.}
+
+    %\item\TFQuestion{F}{The trimmed hinge loss is convex.}
+
+\end{enumerate}
+\end{problem}
+\end{document}
+
+
+
+
