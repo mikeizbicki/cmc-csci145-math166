@@ -18,8 +18,10 @@
 
     1. Three more notes packets.
 
-1. Pacing goal:
+1. Other administrative stuff:
 
     1. Chapter 3 quiz 30 Oct.
 
     1. 30 Oct will be dedicated review day for midterm.
+
+    1. Programming Homework for chapter 3 due 3 Nov.
