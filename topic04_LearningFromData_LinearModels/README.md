@@ -6,6 +6,12 @@
 
     Practice problems at <https://github.com/mikeizbicki/cmc-csci145-math166/blob/2024fall/topic03_LearningFromData_TrainingVersusTesting/quiz2-practice.pdf>
 
+    Worth double points:
+
+    1. Still 4 problems.
+
+    1. +2 for correct answer, -1 for incorrect answer, 0 for blank.
+
 1. Chapter 3 is the last chapter before the midterm.
 
     1. Midterm will be first week of November (4-8).
