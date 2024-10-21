@@ -25,3 +25,10 @@
     1. 30 Oct will be dedicated review day for midterm.
 
     1. Programming Homework for chapter 3 due 3 Nov.
+
+**Mon 21 Oct:**
+
+1. Midterm update:
+    1. The midterm will cover: Chapter 1, Chapter 2 (sections 2.1-2.2 only), Chapter 3 (Section 3.4 only)
+    1. `notes-linear.pdf` and `future/notes-optimization.pdf` will not be on the midterm exam
+    1. only `notes-features.pdf` from this section will be on the exam
