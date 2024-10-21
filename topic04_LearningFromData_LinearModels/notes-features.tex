@@ -93,18 +93,29 @@ Chapter 3.4: Non-linear Transformations
 
 \section*{Overview}
 
+In this section, we will see how to build non-linear models out of linear models.
+This will allow us to easily construct models with different VC dimensions that are appropriate for our datasets.
+
+\vspace{0.15in}
+\includegraphics[width=3in]{layers}
+
+\vspace{0.15in}
+\begin{defn}
+    Define a \emph{feature transform} as it relates to the perceptron hypothesis class.
+\end{defn}
+\ignore{
 Recall that the perceptron hypothesis class is defined to be
 \begin{equation}
     \HH{} = \bigg\{ \x \to \sign(\trans\w\x) : \w \in \R^d \bigg\},
 \end{equation}
 and it has VC dimension $\Theta(d)$, which controls the generalization error.
 Feature transforms are one of our primary tools for generating new hypothesis classes with different statistical properties.
-%A feature map is a function $\Phi : d \to d'$
+%A feature map is a function $\Phi : d \to 	\tilde d$
 %Feature transforms are a tool for manipulating the VC dimension of a hypothesis class.
 %\begin{defn}
     \begin{defn}
-    A \emph{feature transform} (or \emph{feature map}) is a function $\Phi : \R^d \to \R^{d'}$ that we apply to our data points before passing them to our model.
-        We call the domain of $\Phi$ (i.e.\ $\R^d$) the \emph{original data space} and the range of $\Phi$ (i.e.\ $\R^{d'}$) the \emph{feature space}.
+    A \emph{feature transform} (or \emph{feature map}) is a function $\Phi : \R^d \to \R^{	\tilde d}$ that we apply to our data points before passing them to our model.
+        We call the domain of $\Phi$ (i.e.\ $\R^d$) the \emph{original data space} and the range of $\Phi$ (i.e.\ $\R^{	\tilde d}$) the \emph{feature space}.
     \end{defn}
     \begin{note}
         A \emph{kernel} is a type of function closely related to feature transforms that are used for speeding up certain types of calculations.
@@ -113,29 +124,16 @@ Feature transforms are one of our primary tools for generating new hypothesis cl
     \end{note}
     We can use these feature transforms to create new hypothesis classes based on the perceptron hypothesis class:
 \begin{equation}
-    \HH{$\Phi$} = \bigg\{ \x \to \sign(\trans\w\Phi(\x)) : \w \in \R^{d'} \bigg\}.
+    \HH{$\Phi$} = \bigg\{ \x \to \sign(\trans\w\Phi(\x)) : \w \in \R^{	\tilde d} \bigg\}.
 \end{equation}
 Our choice of feature transform will have a profound impact on the statistical properties of the resulting hypothesis class.
 
-\begin{example}
-    The simplest motivation for feature transforms is that a dataset that is not linearly separable in the original data space may be linearly separable in the feature space.
-    (The examples below are closely related, but not identical, to the textbook examples in Figures 3.5 and 3.6.)
-    \begin{enumerate}
-        \item \url{https://www.youtube.com/watch?v=3liCbRZPrZA}
-            \vspace{2in}
-            \newpage
-        \item \url{https://www.youtube.com/watch?v=ndNE8he7Nnk}
-            \vspace{2in}
-
-    \end{enumerate}
-            %Explain this phenomenon in terms of VC theory.
-\end{example}
-
-\vspace{6in}
+%\vspace{6in}
 \begin{note}
     Feature maps with the perceptron hypothesis class are state-of-the-art for MANY applications.
     Essentially, deep learning is best for vision (always), text (sometimes), and feature maps are the best for everything else.
 \end{note}
+    }
 
 \newpage
 \section*{Generic Feature Transforms}
@@ -155,10 +153,23 @@ Our choice of feature transform will have a profound impact on the statistical p
         \Phi_3(\x) = (x_1, x_2, x_1^2, x_2^2, x_1x_2, x_1^3, x_2^3, x_1^2x_2, x_1x_2^2)
         .
     \end{equation}
+            %Explain this phenomenon in terms of VC theory.
+
     \begin{enumerate}
         \item
             How does the choice of $Q$ affect $\Ein$?
-            \vspace{3in}
+            \vspace{6in}
+
+        The following two links visualize this transformation.
+        The first link is closely related to the examples in Figures 3.5 and 3.6;
+            the second link is an entirely separate example.
+        \begin{enumerate}
+            \item \url{https://www.youtube.com/watch?v=3liCbRZPrZA}
+                %\vspace{2in}
+                %\newpage
+            \item \url{https://www.youtube.com/watch?v=ndNE8he7Nnk}
+                %\vspace{2in}
+        \end{enumerate}
 
         \item
             What is the \emph{universal approximation property}?
@@ -166,8 +177,8 @@ Our choice of feature transform will have a profound impact on the statistical p
 
             \newpage
         \item
-        The VC dimension of the hypothesis space $\HH{$\Phi$}$ equals $d'$.
-        What is a formula for $d'$ (and thus the VC dimension) based on $k$ and $d$?
+        The VC dimension of the hypothesis space $\HH{$\Phi$}$ equals $	\tilde d$.
+        What is a formula for $	\tilde d$ (and thus the VC dimension) based on $k$ and $d$?
             \vspace{4in}
 
         % (Q + d \choose d) - 1
@@ -191,21 +202,23 @@ Our choice of feature transform will have a profound impact on the statistical p
     \begin{equation}
         \Phi(\x) = \trans\x A
     \end{equation}
-    where $A$ is a $d\times d'$ matrix with the $i$th column equal to the $i$th eigenvector of $\trans X X$,
+    where $A$ is a $d\times 	\tilde d$ matrix with the $i$th column equal to the $i$th eigenvector of $\trans X X$,
     and $X : N \times d$ is the matrix of all data vectors.
     The $A$ matrix is constructed this way because this selects a subspace with ``maximum variance''.
 
-    (NOTE: Most explanations of PCA focus on why this choice of matrix maximizes the variance and ignore the statistical properties of PCA.
-    What actually matters in practice are these statistical properties, and so that's what we'll focus on here.
-    Sometimes, machine learning technical interviewers will ask about why the eigenvalues maximize the variance, and so while you don't need to know that for this class, it is worth reviewing before interviewing.  For an explanation, see stackoverflow: \url{https://stats.stackexchange.com/a/140579/16243}.
+    NOTE:
     For a cool example with ``eigenfaces'', see the scikit-learn documentation:
     \url{https://scikit-learn.org/stable/auto_examples/applications/plot_face_recognition.html}.
-    )
+    
+    NOTE: Most explanations of PCA focus on why this choice of matrix maximizes the variance and ignore the statistical properties of classifiers created with PCA features.
+    What actually matters in practice are these statistical properties, and so that's what we'll focus on here.
+    Sometimes, machine learning technical interviewers will ask about why the eigenvalues maximize the variance, and so while you don't need to know that for this class (and it is not covered in the textbook), it is worth reviewing before interviewing.
+    For an explanation, see stackoverflow: \url{https://stats.stackexchange.com/a/140579/16243}.
 
     \begin{enumerate}
-    \item How does $k$ affect $\Ein$?
+    \item How does $\tilde d$ affect $\Ein$?
         \vspace{3in}
-    \item How does $k$ affect the VC dimension (and thus the generalization error)?
+    \item How does $\tilde d$ affect the VC dimension (and thus the generalization error)?
         \vspace{3in}
     \end{enumerate}
 \end{problem}
@@ -217,7 +230,7 @@ Our choice of feature transform will have a profound impact on the statistical p
     \begin{equation}
         \Phi(\x) = \trans\x A
     \end{equation}
-    where $A$ is a random $d\times d'$ matrix.
+    where $A$ is a random $d\times 	\tilde d$ matrix.
     Any distribution can be used to select the entries of the $A$ matrix, but some common choices are the uniform distribution over $(-1,1)$ or the standard gaussian distribution with mean 0 and variance 1.
 
     The hypothesis class $\HH{$\Phi$}$ (i.e.\ random features with the perceptron hypothesis class) is often called the \emph{random kitchen sink}.
@@ -227,7 +240,7 @@ Our choice of feature transform will have a profound impact on the statistical p
 
     \begin{enumerate}
         \item
-            How does $\Ein$ vary with $d'$?
+            How does $\Ein$ vary with $	\tilde d$?
             \vspace{3in}
 
         \item
@@ -236,15 +249,16 @@ Our choice of feature transform will have a profound impact on the statistical p
 
             \newpage
         \item
-            What is the VC dimension if $d' \le d$?
-            \vspace{3in}
+            What is the VC dimension if $	\tilde d \le d$?
+            \vspace{4in}
 
         \item
-            What is the VC dimension if $d' > d$?
+            What is the VC dimension if $	\tilde d > d$?
             \vspace{3in}
 
+            \newpage
         \item
-            Under what conditions would you want to use the random feature map?
+            Under what conditions would you want to use the random feature map or PCA?
     \end{enumerate}
 \end{problem}
 
@@ -277,7 +291,7 @@ Our choice of feature transform will have a profound impact on the statistical p
 \begin{problem}
     Many features are ``discrete''.
     That is, they have a fixed number of values where the value has little semantic meaning.
-    For example, marital status can be encoded in a column with the following semantics:
+    For example, marital status in the famous German Credit dataset\footnote{\url{http://archive.ics.uci.edu/dataset/144/statlog+german+credit+data}} is encoded as a column with the following semantics:
 
     \vspace{0.15in}
     \begin{tabular}{ll}
@@ -301,7 +315,7 @@ Our choice of feature transform will have a profound impact on the statistical p
     \begin{enumerate}
         \item 
             If the discrete column has $c$ possible values,
-            then the feature space has $d' = d + c - 1$ columns.
+            then the feature space has $	\tilde d = d + c - 1$ columns.
             What is the VC dimension of $\HH{$\Phi$}$?
             \vspace{1.5in}
 
@@ -310,7 +324,7 @@ Our choice of feature transform will have a profound impact on the statistical p
             For example, $c$ might be the city that a person was born in, and there are millions of cities in the world.
             \begin{enumerate}
             \item From a VC perspective, why is this a problem?
-                \vspace{2in}
+                \vspace{1.5in}
             \item How can we fix this problem?
             \end{enumerate}
     \end{enumerate}
