@@ -37,6 +37,8 @@
 
 1. Homework posted in the `project` folder.
 
+    **Due:** Sunday 2 Nov @ midnight
+
     You should:
 
     1. Run all the cells in the notebook.
@@ -47,6 +49,4 @@
 
     1. Create a new github repo with your modified notebook.
         Upload the repo to sakai.
-
-    **Due:** Sunday 2 Nov @ midnight
 
