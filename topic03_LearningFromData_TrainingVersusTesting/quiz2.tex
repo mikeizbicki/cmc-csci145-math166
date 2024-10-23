@@ -1,0 +1,199 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage[normalem]{ulem}
+\usepackage{stmaryrd}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        %\hl{\textbf{TRUE}}\hspace*{14pt}False
+        \hl{\texttt{True}}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+    }{
+        \ifthenelse{\equal{#1}{F}}{
+        %True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \texttt{True}\hspace*{20pt}\hl{\texttt{False}}\hspace*{20pt}\texttt{Open}
+        }
+        {
+            \texttt{True}\hspace*{20pt}{\texttt{False}}\hspace*{20pt}\hl{\texttt{Open}}
+        }
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+%\newcommand{\I}{\mathbf I}
+%\newcommand{\Q}{\mathbf Q}
+%\newcommand{\p}{\mathbf P}
+%\newcommand{\pb}{\bar {\p}}
+%\newcommand{\pbb}{\bar {\pb}}
+%\newcommand{\pr}{\bm \pi}
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\printanswers
+
+\begin{document}
+
+\begin{center}
+    {
+\Large
+    Quiz: Chapter 2
+
+    \vspace{0.1in}
+}
+\end{center}
+
+%\vspace{0.15in}
+%\noindent
+%\textbf{Total Score:} ~~~~~~~~~~~~~~~/$2^2$
+
+\vspace{0.2in}
+\noindent
+\textbf{Printed Name:}
+
+\noindent
+\rule{\textwidth}{0.1pt}
+\vspace{0.15in}
+
+\noindent
+\textbf{Quiz rules:}
+\begin{enumerate}
+    \item You MAY use:
+        \begin{enumerate}
+            \item any notes (handwritten, printed, or electronic),
+            \item any computer programs (including websites like WolframAlpha or ChatGPT), and
+            \item any additional scratch paper.
+        \end{enumerate}
+    \item You MAY NOT communicate with another student.
+    \item If you finish the quiz early, stay seated.
+        I will collect all the quizzes at the same time.
+\end{enumerate}
+
+\begin{problem}
+    For each statement below,
+    circle \texttt{True} if the statement is known to be true,
+    \texttt{False} if the statement is known to be false,
+    and \texttt{Open} if the statement is not known to be either true or false.
+    You will receive +2 point for each correct answer,
+    \textbf{-1 points for each incorrect answer},
+    and 0 points for each blank answer.
+
+\begin{enumerate}
+    \item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes with $\mathcal H_2 \subseteq \mathcal H_1$. Then $\dvc(\mathcal H_1) \ge \dvc(\mathcal H_2)$.}
+
+    \item\TFQuestion{F}{Let $\mathcal H_1$ and $\mathcal H_2$ be two hypothesis classes with $\dvc(\mathcal H_1) \ge \dvc(\mathcal H_2)$.
+        Then if $\mathcal H_1$ can shatter some dataset $X$,
+        then it is guaranteed that $\mathcal H_2$ will also be able to shatter that same dataset.}
+
+    \item\TFQuestion{F}{Let $\mathcal H$ be a hypothesis class and $X$ a dataset of size $N$.
+        If $\mathcal H$ cannot shatter $X$, then $m_{\mathcal H}(N)$ must be strictly less than $2^N$.
+        }
+
+    \item\TFQuestion{T}{Define the hypothesis class of concentric circles as
+        $$
+    \HH{circles} = \bigg\{ \x \mapsto \big\llbracket\ltwo{\x} \ge \alpha \big\rrbracket: \alpha \in \mathbb R \bigg\}.
+        $$
+        If $d\ge100$, then 5 is guaranteed to be a breakpoint for $\HH{circles}$.
+        }
+
+
+\end{enumerate}
+\end{problem}
+\end{document}
+
+
+
+
