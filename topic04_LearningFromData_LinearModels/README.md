@@ -37,5 +37,16 @@
 
 1. Homework posted in the `project` folder.
 
+    You should:
+
+    1. Run all the cells in the notebook.
+        (This could take 10-30 minutes.)
+
+    1. There are a handful of questions in different sections of the notebook.
+        Read through the notebook and answer the questions by modifying the notebook directly.
+
+    1. Create a new github repo with your modified notebook.
+        Upload the repo to sakai.
+
     **Due:** Sunday 2 Nov @ midnight
 
