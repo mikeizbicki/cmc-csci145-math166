@@ -37,7 +37,7 @@
 
 1. Homework posted in the `project` folder.
 
-    **Due:** Sunday 2 Nov @ midnight
+    **Due:** Sunday 3 Nov @ midnight
 
     You should:
 
