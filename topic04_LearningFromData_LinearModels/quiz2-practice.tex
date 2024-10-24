@@ -1,0 +1,203 @@
+\documentclass[10pt]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage[normalem]{ulem}
+\usepackage{stmaryrd}
+
+\usepackage{color}
+\usepackage{colortbl}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{gray}{rgb}{0.7,0.7,0.7}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = black, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor    = blue  %Colour of citations
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\hl}[1]{\colorbox{yellow}{#1}}
+
+\newcommand*{\answerLong}[2]{
+    \ifprintanswers{\hl{#1}}
+\else{#2}
+\fi
+}
+
+\newcommand*{\answer}[1]{\answerLong{#1}{~}}
+
+\newcommand*{\TrueFalse}[1]{%
+\ifprintanswers
+    \ifthenelse{\equal{#1}{T}}{%
+        %\hl{\textbf{TRUE}}\hspace*{14pt}False
+        \hl{\texttt{True}}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+    }{
+        \ifthenelse{\equal{#1}{F}}{
+        %True\hspace*{14pt}\hl{\textbf{FALSE}}
+        \texttt{True}\hspace*{20pt}\hl{\texttt{False}}\hspace*{20pt}\texttt{Open}
+        }
+        {
+            \texttt{True}\hspace*{20pt}{\texttt{False}}\hspace*{20pt}\hl{\texttt{Open}}
+        }
+    }
+\else
+    \texttt{True}\hspace*{20pt}\texttt{False}\hspace*{20pt}\texttt{Open}
+\fi
+} 
+%% The following code is based on an answer by Gonzalo Medina
+%% https://tex.stackexchange.com/a/13106/39194
+\newlength\TFlengthA
+\newlength\TFlengthB
+\settowidth\TFlengthA{\hspace*{1.8in}}
+\newcommand\TFQuestion[2]{%
+    \setlength\TFlengthB{\linewidth}
+    \addtolength\TFlengthB{-\TFlengthA}
+    \noindent
+    \parbox[t]{\TFlengthA}{\TrueFalse{#1}}\parbox[t]{\TFlengthB}{#2}
+    \vspace{0.25in}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{refr}{References}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\nnz}{nnz}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\I}{\mathbf I}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\p}{\mathbf P}
+\newcommand{\pb}{\bar {\p}}
+\newcommand{\pbb}{\bar {\pb}}
+\newcommand{\pr}{\bm \pi}
+
+\newcommand{\trans}[1]{{#1}^{T}}
+\newcommand{\loss}{\ell}
+\newcommand{\w}{\mathbf w}
+\newcommand{\x}{\mathbf x}
+\newcommand{\y}{\mathbf y}
+\newcommand{\lone}[1]{{\lVert {#1} \rVert}_1}
+\newcommand{\ltwo}[1]{{\lVert {#1} \rVert}_2}
+\newcommand{\lp}[1]{{\lVert {#1} \rVert}_p}
+\newcommand{\linf}[1]{{\lVert {#1} \rVert}_\infty}
+\newcommand{\lF}[1]{{\lVert {#1} \rVert}_F}
+
+\newcommand{\Ein}{E_{\text{in}}}
+\newcommand{\Eout}{E_{\text{out}}}
+\newcommand{\Etest}{E_{\text{test}}}
+%\newcommand{\I}{\mathbf I}
+%\newcommand{\Q}{\mathbf Q}
+%\newcommand{\p}{\mathbf P}
+%\newcommand{\pb}{\bar {\p}}
+%\newcommand{\pbb}{\bar {\pb}}
+%\newcommand{\pr}{\bm \pi}
+\newcommand{\mH}{m_{\mathcal H}}
+\newcommand{\dvc}{{d_{\text{VC}}}}
+\newcommand{\HH}[1]{\mathcal H_{\text{#1}}}
+\newcommand{\Hbinary}{\HH_{\text{binary}}}
+\newcommand{\Haxis}{\HH_{\text{axis}}}
+\newcommand{\Hperceptron}{\HH_{\text{perceptron}}}
+
+
+\newcommand{\ignore}[1]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\printanswers
+
+\begin{document}
+
+
+\begin{center}
+{
+\Huge
+    Chapter 3 Quiz Practice Problems
+}
+\end{center}
+
+\begin{problem}
+    For each statement below,
+    circle \texttt{True} if the statement is known to be true,
+    \texttt{False} if the statement is known to be false,
+    and \texttt{Open} if the statement is not known to be either true or false.
+
+\begin{enumerate}
+    \item\TFQuestion{T}{You have trained a perceptron model that has high generalization error.  VC theory predicts that applying the PCA feature embedding with a low output dimension will reduce the generalization error with high probability.}
+
+    \item\TFQuestion{F}{You have trained a perceptron model that has high in sample error.  VC theory predicts that applying the PCA feature embedding with a low output dimension will reduce the in sample error with high probability.}
+
+    \item\TFQuestion{T}{Let $\HH{perceptron}$ be the perceptron hypothesis class and let $\HH{stump}$ be the decision stump hypothesis class.  VC theory predicts that the generalization error of $\HH{stump}$ will be lower than the generalization error of $\HH{perceptron}$ with high probability.}
+
+    \item\TFQuestion{T}{Let $\mathcal H_{\tilde d}$ be the perceptron hypothesis class with the PCA feature map of dimension $\tilde d$. If $k$ is a breakpoint for $\mathcal H_{1}$, then $k$ will also be a breakpoint for $\mathcal H_{2}$.}
+
+    \item\TFQuestion{T}{Let $\mathcal H_{Q}$ be the perceptron hypothesis class with the polynomial feature map of degree $Q$. If $k$ is a breakpoint for $\mathcal H_{1}$, then $k$ will also be a breakpoint for $\mathcal H_{2}$.}
+
+    \item\TFQuestion{F}{VC theory predicts that when using the perceptron hypothesis class, centering your data points results in a better generalization error with high probability.}
+
+    %\item\TFQuestion{T}{Let $\mathcal H_{\tilde d}$ be the perceptron hypothesis class with the PCA feature map of dimension $\tilde d$.  You have trained an empirical risk minimizer $g_5$ on $\mathcal H_{5}$ and discovered it has a high in sample error and a low generalization error.  VC theory predicts that the empirical risk minimizer $g_6$ of the hypothesis class $\mathcal H{6}$ will have a lower}
+
+    \item\TFQuestion{F}{Let $\HH{perceptron}$ be the perceptron hypothesis class and let $\HH{stump}$ be the decision stump hypothesis class.  Let $g_{\text{perceptron}}\in\HH{perceptron}$ and $g_{\text{stump}} \in \HH{stump}$ be the empirical risk minimizers.  VC theory predicts that $\Eout(g_{\text{stump}}) \le \Eout(g_{\text{perceptron}})$ with high probability.}
+
+    \item\TFQuestion{T}{Let $\mathcal H$ be the perceptron hypothesis class and let $\mathcal H_\Phi$ be the perceptron hypothesis class with the polynomial feature map of degree 2.  Let $g\in\mathcal H$ and $g_\Phi \in \mathcal H_\Phi$ be the empirical risk minimizers trained on a very large dataset.  Then we are guaranteed that $\Ein(g) \ge \Ein(g_\Phi)$.}
+
+    \item\TFQuestion{F}{Let $g_{\text{axis2}} \in\mathcal H_{\text{axis2}}$ be the empirical risk minimizer for the $\HH{axis2}$ hypothesis class and $g_{\text{stump}} \in \HH{stump}$ be the empirical risk minimizer for the decision stump hypothesis class.  Then we are guaranteed that $\Ein(g_{\text{axis2}}) \le \Ein(g_{\text{stump}})$.}
+
+    \item\TFQuestion{T}{Let $X$ be a dataset shattered by the perceptron hypothesis class.  Then $X$ is guaranteed to also be shattered by the perceptron hypothesis class with the polynomial feature map of degree 7.}
+
+    \item\TFQuestion{F}{Let $X$ be a dataset shattered by the perceptron hypothesis class.  Then $X$ is guaranteed to also be shattered by the decision stump hypothesis class.}
+
+    \item\TFQuestion{T}{Let $X$ be a dataset shattered by the decision stump hypothesis class.  Then $X$ is guaranteed to also be shattered by the perceptron hypothesis class with polynomial feature map of degree 2.}
+
+    \item\TFQuestion{T}{There exists a dataset of size $N=2$ in $d=2$ dimensions that can be shattered by the perceptron hypothesis class but cannot be shattered by the $\HH{axis2}$ hypothesis class.}
+
+    \item\TFQuestion{F}{There exists a dataset of size $N=2$ in $d=2$ dimensions that can be shattered by the perceptron hypothesis class but cannot be shattered by the decision stump hypothesis class.}
+
+    \item\TFQuestion{F}{Define the hypothesis class of concentric circles with the feature map $\Phi$ as
+        $$
+        \HH{circles,$\Phi$} = \bigg\{ \x \mapsto \big\llbracket\ltwo{\Phi(\x)} \ge \alpha \big\rrbracket: \alpha \in \mathbb R \bigg\}.
+        $$
+        You have trained an empirical risk minimizer on this hypothesis class using the polynomial feature map of degree $Q=20$;
+        the resulting hypothesis has high generalization error.
+        VC theory predicts that reducing the degree of the polynomial to $Q=2$ will also reduce the generalization error with high probability.
+        }
+
+    \item\TFQuestion{T}{Define the $\HH{axis2}$ hypothesis class with the feature map $\Phi: d \to \tilde d$ as
+        $$
+        \HH{axis2,$\Phi$} = \bigg\{ \x \mapsto \sigma\sign(\phi(\x)_i) : \sigma \in\{+1, -1\}, i \in [\tilde d] \bigg\}.
+        $$
+        You have trained an empirical risk minimizer on this hypothesis class using the polynomial feature map of degree $Q=20$;
+        the resulting hypothesis has high generalization error.
+        VC theory predicts that reducing the degree of the polynomial to $Q=2$ will also reduce the generalization error with high probability.
+        }
+
+    %\item\TFQuestion{F}{The PCA feature map can be used to increase the VC dimension of a hypothesis class.
+        %}
+
+
+\end{enumerate}
+\end{problem}
+\end{document}
+
+
+
+
