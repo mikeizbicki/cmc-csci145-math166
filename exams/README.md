@@ -12,7 +12,7 @@ Common bad habits:
         $\chi$ is pronounced "chi"/"kai" (not used in this class)
 
 1. not technically correct language
-    1. Incorrect: In sample error greater than generalization error means **most likely** overfitting.
+    1. Incorrect: In sample error greater than generalization error means **most likely** underfitting.
 
         > **NOTE:**
         > This is true by definition.
@@ -34,11 +34,11 @@ Common bad habits:
 
 Common concepts people misunderstood:
 
-1. $N = d_{VC}$ is only a guideline, not a theorem
+1. $N = 10d_{VC}$ is only a guideline, not a theorem
 
     Only relationship between $E_{in}$ and generalization error determines whether you are over/underfitting.
 
-1. $d_{VC} \downarrow$ does not guarantee $E_{in} \downarrow$;
+1. $d_{VC} \downarrow$ does not guarantee $E_{in} \uparrow$;
 
     Only the subset relationship guarantees a relation between in sample error.
 
