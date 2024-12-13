@@ -12,7 +12,7 @@ Common bad habits:
         $\chi$ is pronounced "chi"/"kai" (not used in this class)
 
 1. not technically correct language
-    1. Incorrect: In sample error greater than generalization error means **most likely** overfitting.
+    1. Incorrect: In sample error smaller than generalization error means **most likely** overfitting.
 
         > **NOTE:**
         > This is true by definition.
